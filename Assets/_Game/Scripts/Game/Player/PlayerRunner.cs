@@ -7,24 +7,16 @@ namespace _Game.Scripts.Player
 {
     public class PlayerRunner : MonoBehaviour
     {
-        public static PlayerRunner playerRunner;
-        [SerializeField] public float movementSpeed = 10;
+        [SerializeField] private float movementSpeed = 10;
         [SerializeField] private float rotationSpeed = 10;
         [SerializeField] private float boundHorMax = 9.6f;
         [SerializeField] private float boundHorMin = 9.6f;
         [SerializeField] private float maxRotationDegree = 20f;
         [SerializeField] private Rigidbody rb;
-        private float currentSpeed;
+        
         private Vector3 startPos;
-        private Rigidbody _theRb;
-
-        void Awake()
-        {
-            SetRigidbody();
-            playerRunner = this;
-            currentSpeed = movementSpeed;
-        }
-
+        private float xAngle;//Todo bunlardan kurtul
+        private float yAngle;
         private void OnEnable()
         {
             GetStartPosition();
@@ -34,30 +26,22 @@ namespace _Game.Scripts.Player
         {
             ResetStartPosition();
         }
-
-        public float GetSpeed() => currentSpeed;
-        private void ResetStartPosition()
-        {
-            transform.position = startPos;
-        }
-
-        private void GetStartPosition()
-        {
-            startPos = transform.position;
-        }
-
-        private void SetRigidbody()
-        {
-            _theRb = rb;
-        }
-
         private void FixedUpdate()
         {
             Rotate(Input.GetAxis("Vertical"),Input.GetAxis("Horizontal"));
             Movement();
         }
-
-        private float xAngle=0;
+        private void Movement()
+        {
+            var pos = transform.position + transform.forward ;
+            pos.x = Mathf.Clamp(pos.x, boundHorMin, boundHorMax);
+            pos.y = Math.Clamp(pos.y, 0.5f, 100);
+            transform.position=Vector3.MoveTowards(transform.position,pos, movementSpeed * Time.deltaTime);
+        }
+        private void Rotate(float rotateXTo,float rotateYTo)
+        {
+           transform.rotation=Quaternion.Euler(UpDownAngle(rotateXTo), LeftRightAngle(rotateYTo), 0);
+        }
         private float UpDownAngle(float rotateTo)
         {
             float yPos = transform.position.y;
@@ -78,13 +62,6 @@ namespace _Game.Scripts.Player
             return xAngle;
 
         }
-
-        
-        private void Rotate(float rotateXTo,float rotateYTo)
-        {
-            _theRb.MoveRotation(Quaternion.Euler(UpDownAngle(rotateXTo), LeftRightAngle(rotateYTo), 0));
-        }
-        private float yAngle = 0;
         private float LeftRightAngle(float rotateTo)
         {
             rotateTo = Math.Clamp(rotateTo, -1, 1);
@@ -115,14 +92,16 @@ namespace _Game.Scripts.Player
             }
             return angle;
         }
-        private void Movement()
-        {
-            var pos = transform.position + transform.forward * movementSpeed * Time.deltaTime;
-            pos.x = Mathf.Clamp(pos.x, boundHorMin, boundHorMax);
-            pos.y = Math.Clamp(pos.y, 0.5f, 100);
-            _theRb.MovePosition(pos);
-        }
         
+        private void ResetStartPosition()
+        {
+            transform.position = startPos;
+        }
+
+        private void GetStartPosition()
+        {
+            startPos = transform.position;
+        }
         
     }
 }

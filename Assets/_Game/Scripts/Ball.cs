@@ -7,20 +7,15 @@ namespace _Game.Scripts
     {
         [SerializeField] private Transform follow;
         [SerializeField] private float rotateSpeed=2f;
-        [SerializeField] private Rigidbody _theRb;
-        [SerializeField] private float timeMultiple = 10f;
 
-        public void InitializeBall(Transform follow)
-        {
-            this.follow = follow;
-        }
-
-        private float currentTime=0;
         void FixedUpdate()
         {
             SetPosition();
         }
-
+        public void InitializeBall(Transform follow)
+        {
+            this.follow = follow;
+        }
         private void SetPosition()
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, follow.rotation, rotateSpeed * Time.deltaTime);
