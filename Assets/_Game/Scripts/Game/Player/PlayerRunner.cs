@@ -7,19 +7,22 @@ namespace _Game.Scripts.Player
 {
     public class PlayerRunner : MonoBehaviour
     {
-        //[SerializeField] private FloatingJoystick joystick;
+        public static PlayerRunner playerRunner;
         [SerializeField] public float movementSpeed = 10;
         [SerializeField] private float rotationSpeed = 10;
         [SerializeField] private float boundHorMax = 9.6f;
         [SerializeField] private float boundHorMin = 9.6f;
         [SerializeField] private float maxRotationDegree = 20f;
         [SerializeField] private Rigidbody rb;
+        private float currentSpeed;
         private Vector3 startPos;
         private Rigidbody _theRb;
 
         void Awake()
         {
             SetRigidbody();
+            playerRunner = this;
+            currentSpeed = movementSpeed;
         }
 
         private void OnEnable()
@@ -32,6 +35,7 @@ namespace _Game.Scripts.Player
             ResetStartPosition();
         }
 
+        public float GetSpeed() => currentSpeed;
         private void ResetStartPosition()
         {
             transform.position = startPos;
@@ -49,12 +53,12 @@ namespace _Game.Scripts.Player
 
         private void FixedUpdate()
         {
-            RotateY(Input.GetAxis("Vertical"),Input.GetAxis("Horizontal"));
+            Rotate(Input.GetAxis("Vertical"),Input.GetAxis("Horizontal"));
             Movement();
         }
 
         private float xAngle=0;
-        private float Altitude(float rotateTo)
+        private float UpDownAngle(float rotateTo)
         {
             float yPos = transform.position.y;
             if (yPos == 0.5f && xAngle > 0)
@@ -76,32 +80,41 @@ namespace _Game.Scripts.Player
         }
 
         
-        private void RotateY(float rotateXTo,float rotateYTo)
+        private void Rotate(float rotateXTo,float rotateYTo)
         {
-            _theRb.MoveRotation(Quaternion.Euler(Altitude(rotateXTo), RotateAngle(rotateYTo), 0));
+            _theRb.MoveRotation(Quaternion.Euler(UpDownAngle(rotateXTo), LeftRightAngle(rotateYTo), 0));
         }
         private float yAngle = 0;
-        private float RotateAngle(float rotateTo)
+        private float LeftRightAngle(float rotateTo)
         {
+            rotateTo = Math.Clamp(rotateTo, -1, 1);
             float xPos = transform.position.x;
             if ((xPos == boundHorMax && rotateTo>0)||(xPos == boundHorMin&&rotateTo<0)) rotateTo = 0;
             if (rotateTo != 0)
             {
                 yAngle=Math.Clamp(yAngle+rotationSpeed*rotateTo*Time.deltaTime,-maxRotationDegree, maxRotationDegree);
             }
-            else if (yAngle > 0)
+            else
             {
-                yAngle -= rotationSpeed*Time.deltaTime;
-                if (yAngle < 0) yAngle = 0;
+                yAngle = RotateToOriginal(yAngle, rotationSpeed);
             }
-            else if (yAngle < 0)
-            {
-                yAngle += rotationSpeed*Time.deltaTime;
-                if (yAngle > 0) yAngle = 0;
-            }
+            
             return yAngle;
         }
-
+        private float RotateToOriginal(float angle,float speed)
+        {
+            if (angle > 0)
+            {
+                angle -= speed*Time.deltaTime;
+                if (angle < 0) angle = 0;
+            }
+            else if (angle < 0)
+            {
+                angle += speed*Time.deltaTime;
+                if (angle > 0) angle = 0;
+            }
+            return angle;
+        }
         private void Movement()
         {
             var pos = transform.position + transform.forward * movementSpeed * Time.deltaTime;

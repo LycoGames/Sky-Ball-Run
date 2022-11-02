@@ -6,19 +6,27 @@ namespace _Game.Scripts
     public class Ball : MonoBehaviour
     {
         [SerializeField] private Transform follow;
-        [SerializeField] private float followSpeed=10f;
+        [SerializeField] private float rotateSpeed=2f;
         [SerializeField] private Rigidbody _theRb;
+        [SerializeField] private float timeMultiple = 10f;
 
         public void InitializeBall(Transform follow)
         {
             this.follow = follow;
         }
-        void Update()
+
+        private float currentTime=0;
+        void FixedUpdate()
         {
-            _theRb.MoveRotation(follow.rotation);
-            Vector3 newPos = follow.position - (transform.forward /followSpeed);
+            SetPosition();
+        }
+
+        private void SetPosition()
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, follow.rotation, rotateSpeed * Time.deltaTime);
+            Vector3 newPos = follow.position - (follow.forward / 2);
             newPos.x = Mathf.Clamp(newPos.x, -8.5f, 8.5f);
-            _theRb.MovePosition(newPos);
+            transform.position = newPos;
         }
     }
 }

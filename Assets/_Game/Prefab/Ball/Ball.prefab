@@ -128,5 +128,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow: {fileID: 0}
-  followSpeed: 100
+  rotateSpeed: 20
   _theRb: {fileID: 4544383669042015657}

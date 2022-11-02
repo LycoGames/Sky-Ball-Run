@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1616683871}
 --- !u!1 &256034879
 GameObject:
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1344290752}
 --- !u!1 &263262631
 GameObject:
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1859584813}
 --- !u!1 &303078862
 GameObject:
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 539101794}
 --- !u!1 &315077108
 GameObject:
@@ -452,7 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 595884068}
 --- !u!1 &317978152
 GameObject:
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1173338910}
 --- !u!1 &414896495
 GameObject:
@@ -738,7 +738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 478454639}
 --- !u!1 &539101793
 GameObject:
@@ -849,7 +849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1373550037}
 --- !u!1 &675806569
 GameObject:
@@ -1062,7 +1062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1881471498}
 --- !u!1 &776654699
 GameObject:
@@ -1109,7 +1109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 2079830483}
 --- !u!1 &800485094
 GameObject:
@@ -1156,7 +1156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1570615862}
 --- !u!1 &850648787
 GameObject:
@@ -1275,7 +1275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1887299619}
 --- !u!1 &916620399
 GameObject:
@@ -1386,7 +1386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 924366902}
 --- !u!1 &963194225
 GameObject:
@@ -1531,7 +1531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1059286558}
 --- !u!1 &982715649
 GameObject:
@@ -1578,7 +1578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1961661078}
 --- !u!1 &1035310154
 GameObject:
@@ -1625,7 +1625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 705600033}
 --- !u!1 &1049829115
 GameObject:
@@ -1672,7 +1672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 481326267}
 --- !u!1 &1059286557
 GameObject:
@@ -1751,7 +1751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 507500972}
 --- !u!1 &1125412568
 GameObject:
@@ -1798,7 +1798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 271117440}
 --- !u!1 &1137545433
 GameObject:
@@ -1845,7 +1845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 518535030}
 --- !u!1 &1137604326
 GameObject:
@@ -1892,7 +1892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1530646911}
 --- !u!1 &1151935970
 GameObject:
@@ -1939,7 +1939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 414896496}
 --- !u!1 &1173338909
 GameObject:
@@ -2018,7 +2018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 424189825}
 --- !u!1 &1228872102
 GameObject:
@@ -2097,7 +2097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1458505493}
 --- !u!1001 &1235687360
 PrefabInstance:
@@ -2205,7 +2205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1317734709}
 --- !u!1 &1272410583
 GameObject:
@@ -2252,7 +2252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1920021521}
 --- !u!1 &1274465110
 GameObject:
@@ -2299,7 +2299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1228872103}
 --- !u!1 &1317734708
 GameObject:
@@ -2378,7 +2378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1503712164}
 --- !u!1 &1344290751
 GameObject:
@@ -2617,7 +2617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 164600180}
 --- !u!1 &1599538082
 GameObject:
@@ -2664,7 +2664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1872128812}
 --- !u!1 &1616683870
 GameObject:
@@ -2743,7 +2743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 916620400}
 --- !u!1 &1699880820
 GameObject:
@@ -2895,7 +2895,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd21e947bf1315a469557fd477ba54e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 5
   movementSpeed: 35
   rotationSpeed: 50
   boundHorMax: 6
@@ -2961,7 +2960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1864831232}
 --- !u!1 &1832328179
 GameObject:
@@ -3080,7 +3079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 263262632}
 --- !u!1 &1864831231
 GameObject:
@@ -3304,7 +3303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 850648788}
 --- !u!4 &1922222840
 Transform:
@@ -3438,7 +3437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1699880821}
 --- !u!1 &2079830482
 GameObject:
@@ -3517,5 +3516,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 4544383669042015656, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
-  ballCount: 15
+  ballCount: 50
   follow: {fileID: 1873550038}
