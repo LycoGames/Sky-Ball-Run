@@ -12,7 +12,7 @@ namespace _Game.Scripts
             for (int i = 0; i < ballCount; i++)
             {
                 Ball createdBall=Instantiate(ball);
-                createdBall.InitializeBall(follow);
+               // createdBall.InitializeBall(follow);
                 follow = createdBall.transform;
             }
         }
