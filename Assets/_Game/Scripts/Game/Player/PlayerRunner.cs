@@ -7,7 +7,7 @@ namespace _Game.Scripts.Player
 {
     public class PlayerRunner : MonoBehaviour
     {
-        [SerializeField] private float movementSpeed = 10;
+         [SerializeField] private float movementSpeed = 10;
         [SerializeField] private float rotationSpeed = 10;
         [SerializeField] private float boundHorMax = 9.6f;
         [SerializeField] private float boundHorMin = 9.6f;
