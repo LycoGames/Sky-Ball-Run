@@ -880,9 +880,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followed: {fileID: 2709147162005373307, guid: a52f8fdf10a85ff40a01107f9a520075, type: 3}
   distance: 0.5
+  startBall: 20
   minRow: 5
-  minColumn: 3
-  minColumnAndRow: 3
+  minColumn: 5
+  minColumnAndRow: 5
   maxRow: 15
   maxColumn: 8
   maxColumnAndRow: 5

@@ -10,6 +10,7 @@ namespace _Game.Scripts
     {
         [SerializeField] private Followed followed;
         [SerializeField] private float distance;
+        [SerializeField] private int startBall;
         [SerializeField] private int minRow;
         [SerializeField] private int minColumn;
         [SerializeField] private int minColumnAndRow;
@@ -52,7 +53,7 @@ namespace _Game.Scripts
 
         private void Start()
         {
-            AddBall();
+            for(int i=0;i<startBall;i++)AddBall();
         }
 
         private void OnTriggerEnter(Collider other)
