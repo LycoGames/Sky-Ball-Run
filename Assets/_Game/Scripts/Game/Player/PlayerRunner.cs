@@ -1,14 +1,13 @@
 using System;
-using System.Collections;
-using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
-namespace _Game.Scripts.Player
+namespace _Game.Scripts.Game.Player
 {
     public class PlayerRunner : MonoBehaviour
     {
-         [SerializeField] private float movementSpeed = 10;
-        [SerializeField] private float rotationSpeed = 10;
+        [SerializeField] private float movementSpeed = 10;
+        [SerializeField] private float rotationYSpeed = 10;
+        [SerializeField] private float rotationXSpeed = 10;
         [SerializeField] private float boundHorMax = 9.6f;
         [SerializeField] private float boundHorMin = 9.6f;
         [SerializeField] private float maxRotationDegree = 20f;
@@ -31,6 +30,12 @@ namespace _Game.Scripts.Player
             Rotate(Input.GetAxis("Vertical"),Input.GetAxis("Horizontal"));
             Movement();
         }
+
+        public void SetBounds(float max, float min)
+        {
+            boundHorMax = max;
+            boundHorMin = min;
+        }
         private void Movement()
         {
             var pos = transform.position + transform.forward ;
@@ -47,16 +52,16 @@ namespace _Game.Scripts.Player
             float yPos = transform.position.y;
             if (yPos == 0.5f && xAngle > 0)
             {
-                xAngle -= rotationSpeed * Time.deltaTime;
+                xAngle -= rotationXSpeed * Time.deltaTime;
                 if (xAngle < 0) xAngle = 0;
             }
             else if (rotateTo > 0)
             {
-                xAngle -= rotateTo * rotationSpeed * Time.deltaTime;
+                xAngle = Math.Clamp( xAngle-rotationXSpeed * Time.deltaTime,-45f,45f);
             }
             else if(yPos>0.5f)
             {
-                xAngle += rotationSpeed * Time.deltaTime;
+                xAngle =Math.Clamp( xAngle+rotationXSpeed * Time.deltaTime,-45f,45f);
             }
 
             return xAngle;
@@ -69,11 +74,11 @@ namespace _Game.Scripts.Player
             if ((xPos == boundHorMax && rotateTo>0)||(xPos == boundHorMin&&rotateTo<0)) rotateTo = 0;
             if (rotateTo != 0)
             {
-                yAngle=Math.Clamp(yAngle+rotationSpeed*rotateTo*Time.deltaTime,-maxRotationDegree, maxRotationDegree);
+                yAngle=Math.Clamp(yAngle+rotationYSpeed*rotateTo*Time.deltaTime,-maxRotationDegree, maxRotationDegree);
             }
             else
             {
-                yAngle = RotateToOriginal(yAngle, rotationSpeed);
+                yAngle = RotateToOriginal(yAngle, rotationYSpeed);
             }
             
             return yAngle;

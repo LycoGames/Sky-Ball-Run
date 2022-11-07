@@ -1,8 +1,7 @@
-using System;
 using TMPro;
 using UnityEngine;
 
-namespace Game.UserInterfaces.InGame
+namespace _Game.Scripts.Game.UserInterfaces.InGame
 {
     public class PlayerInGameUI : MonoBehaviour
     {

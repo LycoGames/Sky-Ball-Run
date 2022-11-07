@@ -1,10 +1,10 @@
-using Base.Component;
-using Base.State;
-using Game.Components;
-using Game.Enums;
-using Game.UserInterfaces.Main;
+using _Game.Scripts.Base.Component;
+using _Game.Scripts.Base.State;
+using _Game.Scripts.Game.Components;
+using _Game.Scripts.Game.Enums;
+using _Game.Scripts.Game.UserInterfaces.Main;
 
-namespace Game.States.Main
+namespace _Game.Scripts.Game.States.Main
 {
     public class PrepareGameState : StateMachine, IRequestable, IChangeable
     {

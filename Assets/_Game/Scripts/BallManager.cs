@@ -1,123 +1,162 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.Game.Player;
 using UnityEngine;
 
 namespace _Game.Scripts
 {
     public class BallManager : MonoBehaviour
     {
-        public static BallManager ballManager;
-        [SerializeField] public Ball ball;
-        [SerializeField] private float floorDistance;
+        [SerializeField] private Followed followed;
+        [SerializeField] private float distance;
+        [SerializeField] private int minRow;
+        [SerializeField] private int minColumn;
+        [SerializeField] private int minColumnAndRow;
+        private int currentRow;
+        private int currentColumn;
+        private int currentColumnAndRow;
         [SerializeField] private int maxRow;
         [SerializeField] private int maxColumn;
-        [SerializeField] private int maxFloor;
-        [SerializeField] private Floor floor;
-        [SerializeField] private int firstSpawnBallCount = 50;
-        private Dictionary<bool, List<Floor>> floorsList = new Dictionary<bool, List<Floor>>();
-        private int currentFloor;
-        private int totalBallCount;
+        [SerializeField] private int maxColumnAndRow;
+        [SerializeField] private PlayerRunner playerRunner;
+        [SerializeField] private float boundHorMax = 9.6f;
+        [SerializeField] private float boundHorMin = 9.6f;
 
-        public int GetMaxRow() => maxRow;
-        public int GetMaxColumn() => maxColumn;
+        private List<Followed> activeFollowedList=new List<Followed>();
+        private List<Followed> deactiveFollowedList=new List<Followed>();
+        private int activeCount;
 
-        void Awake()
+        private void Awake()
         {
-            ballManager = this;
-            InitiliazeFloorList();
-            InitiliazeFloors(maxFloor);
-            InitiliazeFirstFloor();
+            SetIndexs();
+            InitiliazeFollowedList();
         }
 
-        void Start()
+        private void SetIndexs()
         {
-            SpawnBallByCount(firstSpawnBallCount);
+            currentColumn = minColumn;
+            currentRow = minRow;
+            currentColumnAndRow = minColumnAndRow;
         }
 
-        public void AddColumn()
+        private void InitiliazeFollowedList()
         {
-            maxFloor++;
-            InitiliazeFloors(1);
-            SpawnBallByCount(maxColumn*maxRow);
-
-        }
-        public void SpawnBallByCount(int ballCount)
-        {
-            for (int i = 0; i < ballCount; i++) AddBall();
+            for (int i = 0; i < currentColumnAndRow - activeFollowedList.Count; i++)
+            {
+                Followed followed = Instantiate(this.followed, transform);
+                followed.Initiliaze(currentColumn, currentColumn, this);
+                deactiveFollowedList.Add(followed);
+            }
         }
 
-        public void EnableFloor(Floor floor)
+        private void Start()
         {
-            floorsList[true].Add(floor);
-            floorsList[false].Remove(floor);
-            RePositioning();
+            AddBall();
         }
 
-        public void DisableFloor(Floor floor)
+        private void OnTriggerEnter(Collider other)
         {
-            floorsList[true].Remove(floor);
-            floorsList[false].Add(floor);
-            RePositioning();
+            if (other.TryGetComponent(out ICollectable collectable))
+            {
+                collectable.OnHit(this);
+            }
         }
 
-        public void RemoveBall()
+        public void MultiplyUpper()
         {
-            totalBallCount--;
+            int totalBallCount=0;
+            foreach (Followed followed in activeFollowedList)
+            {
+                totalBallCount += followed.GetBallCount();
+            }
+            AddBalls(totalBallCount);
+        }
+
+        public void MultiplyBack()
+        {
+            int totalBallCount=0;
+            foreach (Followed followed in activeFollowedList)
+            {
+                totalBallCount += followed.GetBallCount();
+                currentRow = Mathf.Clamp(currentRow * 2, minRow, maxRow);
+                followed.Initiliaze(currentColumn,currentRow,this);
+            }
+            AddBalls(totalBallCount);
+        }
+
+        public void MultiplyRight()
+        {
+            int totalBallCount=0;
+            foreach (Followed followed in activeFollowedList)
+            {
+                totalBallCount += followed.GetBallCount();
+            }
+            currentColumnAndRow=activeFollowedList.Count*2>currentColumnAndRow?activeFollowedList.Count*2:currentColumnAndRow;
+            currentColumnAndRow = Math.Clamp(currentColumnAndRow, minColumnAndRow, maxColumnAndRow);
+            InitiliazeFollowedList();
+            AddBalls(totalBallCount);
+        }
+        
+        public void AddBalls(int ballCount)
+        {
+            for(;ballCount>0;ballCount--)AddBall();
         }
 
         public void AddBall()
         {
-            if (totalBallCount >= maxColumn * maxFloor * maxRow) return;
-            if (floorsList[true].Count <= currentFloor)
+            if (activeCount < currentColumnAndRow)
             {
-                if (!floorsList[false].Any()) return;
-                EnableFloor(floorsList[false][0]);
+                AddFollowed();
+                activeFollowedList[activeCount-1].AddBall();
+                RepositioningFollowed();
             }
-            if(!floorsList[true][currentFloor].AddBall())
+            else
             {
-                currentFloor++;
-                if (currentFloor >= maxFloor) currentFloor = 0;
-                AddBall();
-                return;
-            }
-            totalBallCount++;
-        }
-
-
-        private void Initiliaze()
-        {
-            InitiliazeFloorList();
-            InitiliazeFirstFloor();
-        }
-
-        private void InitiliazeFirstFloor()
-        {
-            EnableFloor(floorsList[false][0]);
-        }
-
-        private void InitiliazeFloorList()
-        {
-            floorsList.Add(false, new List<Floor>());
-            floorsList.Add(true, new List<Floor>());
-        }
-
-        private void InitiliazeFloors(int floorCount)
-        {
-            for (int i = 0; i < floorCount; i++)
-            {
-                floorsList[false].Add(Instantiate(floor, transform));
-                floorsList[false][i].Initiliaze();
+                Followed smallestFollowed=activeFollowedList[activeCount-1];
+                for (int i = activeCount - 2; i >= 0; i--)
+                {
+                    if (smallestFollowed.GetBallCount() >= activeFollowedList[i].GetBallCount())
+                        smallestFollowed = activeFollowedList[i];
+                }
+                smallestFollowed.AddBall();
             }
         }
-
-        private void RePositioning()
+        public void RemoveFollowed(Followed followed)
         {
-            float yPos = 0;
-            foreach (Floor floor in floorsList[true])
-            {
-                floor.transform.localPosition = new Vector3(0, yPos, 0);
-                yPos += floorDistance;
-            }
+            if(activeCount<=0)return;
+            currentColumn--;
+            currentColumn = Math.Clamp(currentColumn, minColumnAndRow, maxColumnAndRow);
+            activeCount--;
+            deactiveFollowedList.Add(followed);
+            activeFollowedList.Remove(followed);
+            RepositioningFollowed();
         }
+        
+        private void AddFollowed()
+        {
+            if (!deactiveFollowedList.Any()) return;
+            activeCount++;
+            activeFollowedList.Add(deactiveFollowedList[0]);
+            deactiveFollowedList.RemoveAt(0);
+            RepositioningFollowed();
+            
+        }
+
+        private void RepositioningFollowed()
+        {
+            float xPos = (activeCount / 2) * -distance;
+            xPos -= activeCount % 2 == 0 && activeCount>1 ?  distance / 2:0;
+            playerRunner.SetBounds(boundHorMax+xPos,boundHorMin-xPos);
+            for (int i = 0; i < activeCount; i++)
+            {
+                Vector3 pos = activeFollowedList[i].transform.localPosition ;
+                pos.x = xPos;
+                activeFollowedList[i].transform.localPosition = pos;
+                xPos += distance;
+            }
+            
+        }
+
     }
 }

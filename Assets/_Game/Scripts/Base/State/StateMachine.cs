@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-namespace Base.State
+namespace _Game.Scripts.Base.State
 {
     public abstract class StateMachine
     {

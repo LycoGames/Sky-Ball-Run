@@ -1,12 +1,11 @@
-using Base.Component;
-using Base.State;
-using Game.Enums;
-using Game.States.InGame;
-using Game.States.Main;
-using Game.States.Splash;
-using UnityEngine;
+using _Game.Scripts.Base.Component;
+using _Game.Scripts.Base.State;
+using _Game.Scripts.Game.Enums;
+using _Game.Scripts.Game.States.InGame;
+using _Game.Scripts.Game.States.Main;
+using _Game.Scripts.Game.States.Splash;
 
-namespace Game.States
+namespace _Game.Scripts.Game.States
 {
     public class AppState : StateMachine
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Base.Component
+namespace _Game.Scripts.Base.Component
 {
     public class ComponentContainer
     {

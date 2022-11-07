@@ -1,9 +1,7 @@
-using Base.Component;
-using Base.State;
-using Game.States;
-using UnityEngine;
+using _Game.Scripts.Base.Component;
+using _Game.Scripts.Base.State;
 
-namespace Game.States.Main
+namespace _Game.Scripts.Game.States.Main
 {
     public class SettingsState : StateMachine, IChangeable, IRequestable
     {

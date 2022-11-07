@@ -1,7 +1,7 @@
-using Base.UserInterface;
+using _Game.Scripts.Base.UserInterface;
 using UnityEngine;
 
-namespace Game.UserInterfaces.Splash
+namespace _Game.Scripts.Game.UserInterfaces.Splash
 {
     public class LoadingGameCanvas : BaseCanvas, IStartable, IQuitable
     {

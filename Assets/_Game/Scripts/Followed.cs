@@ -1,63 +1,80 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using _Game.Scripts.Player;
 using UnityEngine;
 
 namespace _Game.Scripts
 {
     public class Followed : MonoBehaviour
     {
-        private Floor floor;
-        [SerializeField] private int createdBall=1;
-        private List<Ball> balls=new List<Ball>();
-        [SerializeField] private Ball ball;
-        public void Initialize(Floor floor) => this.floor=floor;
         
-        public int GetBallCount() => balls.Count;
+        private int maxColumn;
+        private int maxRow;
+        [SerializeField]private Ball ball;
+        private BallManager ballManager;
+        
+        private Dictionary<int, List<Ball>> ballList=new Dictionary<int, List<Ball>>();
+        private int ballCount;
 
-        private void Start()
+        public int GetBallCount() => ballCount;
+        public void Initiliaze(int maxColumn,int maxRow,BallManager ballManager)
         {
-            if (createdBall <= 1) createdBall = 1;
-            for(int i=0;i<createdBall;i++)AddBall();
+            this.ballManager = ballManager;
+            this.maxColumn = maxColumn;
+            this.maxRow = maxRow;
+            InitializeBallList();
         }
 
-        private void FixedUpdate()
+        private void InitializeBallList()
         {
-            
+            for (int i = ballList.Count; i < maxColumn; i++) ballList.Add(i, new List<Ball>());
         }
+        
+        
 
-        public void RemoveBallIndex(int ballIndex)
-        {
-            if (balls.Count > ballIndex)
-            {
-                balls[ballIndex].LeaveQueue();
-            }
-        }
         public void AddBall()
         {
+            if (ballCount >= maxColumn * maxRow) return;
             Ball createdBall;
-            createdBall=Instantiate(ball);
-            if (!balls.Any())
-            {
-                createdBall.InitializeBall(null,this);
-            }
-            else createdBall.InitializeBall(balls[balls.Count-1],this);
-            balls.Add(createdBall);
-            // Ball createdBall = Instantiate(BallManager.ballManager.ball);
-            // if(balls.Count>0)createdBall.InitializeBall(balls[balls.Count-1],this);
-            // else createdBall.InitializeBall(this,this);
-            // balls.Add(createdBall);
+            createdBall = Instantiate(ball);
+            createdBall.InitializeBall(this, ballCount%maxRow,ballCount/maxRow);
+            ballList[ballCount/maxRow].Add(createdBall);
+            ballCount++;
         }
-
+        
         public void RemoveBall(Ball ball)
         {
-            balls.Remove(ball);
+            ballCount--;
+            if (ballCount == 0)
+            {
+                ballManager.RemoveFollowed(this);
+                return;
+            }
+            PositioningRow(ball);
+            //PositioningColumn(ball.yPos,ball.xPos);
         }
 
-        private void OnTriggerEnter(Collider other)
+      
+        private void PositioningColumn(int column,int rowPos)
         {
-            print("calisti");
+            if(column>=maxColumn-1)return;
+            if (ballList[column + 1].Count >= rowPos+1)
+            {
+                Ball ball = ballList[column + 1][rowPos];
+                PositioningRow(ball);
+                ball.OnFollowChange(column,rowPos);
+                PositioningColumn(column+1,rowPos);
+            }
+        }
+
+        private void PositioningRow(Ball ball)
+        {
+            ballList[ball.yPos].Remove(ball);
+            for (int i = ball.xPos; i < ballList[ball.yPos].Count; i++)
+            {
+                ballList[ball.yPos][i].OnFollowChange(i, ball.yPos);
+            }
         }
     }
 }

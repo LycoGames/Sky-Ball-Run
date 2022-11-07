@@ -1,9 +1,9 @@
-using Base.UserInterface;
-using UnityEngine;
+using _Game.Scripts.Base.UserInterface;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.UserInterfaces.InGame
+namespace _Game.Scripts.Game.UserInterfaces.InGame
 {
     public class InGameCanvas : BaseCanvas, IStartable
     {

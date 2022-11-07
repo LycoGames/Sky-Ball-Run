@@ -1,11 +1,10 @@
-using Base.State;
-using Base.Component;
-using Game.Components;
-using Game.Enums;
-using Game.UserInterfaces.InGame;
-using UnityEngine;
+using _Game.Scripts.Base.Component;
+using _Game.Scripts.Base.State;
+using _Game.Scripts.Game.Components;
+using _Game.Scripts.Game.Enums;
+using _Game.Scripts.Game.UserInterfaces.InGame;
 
-namespace Game.States.InGame
+namespace _Game.Scripts.Game.States.InGame
 {
     public class InGameState : StateMachine, IChangeable, IRequestable
     {

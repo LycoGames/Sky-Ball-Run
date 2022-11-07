@@ -2,7 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.UserInterfaces.Splash
+namespace _Game.Scripts.Game.UserInterfaces.Splash
 {
     public class LoadingSlider : MonoBehaviour
     {

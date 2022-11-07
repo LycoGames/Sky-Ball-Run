@@ -1,4 +1,4 @@
-namespace Base.UserInterface
+namespace _Game.Scripts.Base.UserInterface
 {
     public interface IStartable
     {

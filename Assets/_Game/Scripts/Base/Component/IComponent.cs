@@ -1,4 +1,4 @@
-namespace Base.Component
+namespace _Game.Scripts.Base.Component
 {
     public interface IComponent
     {

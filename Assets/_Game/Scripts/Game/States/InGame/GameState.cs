@@ -1,9 +1,8 @@
-using Base.Component;
-using Base.State;
-using Game.Enums;
-using UnityEngine;
+using _Game.Scripts.Base.Component;
+using _Game.Scripts.Base.State;
+using _Game.Scripts.Game.Enums;
 
-namespace Game.States.InGame
+namespace _Game.Scripts.Game.States.InGame
 {
     public class GameState : StateMachine
     {

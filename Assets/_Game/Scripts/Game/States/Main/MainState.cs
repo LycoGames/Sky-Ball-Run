@@ -1,10 +1,8 @@
-using Base.Component;
-using Base.State;
-using Game.Enums;
-using Game.States.Splash;
-using UnityEngine;
+using _Game.Scripts.Base.Component;
+using _Game.Scripts.Base.State;
+using _Game.Scripts.Game.Enums;
 
-namespace Game.States.Main
+namespace _Game.Scripts.Game.States.Main
 {
     public class MainState : StateMachine
     {

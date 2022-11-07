@@ -1,4 +1,4 @@
-namespace Base.State
+namespace _Game.Scripts.Base.State
 {
     public interface IRequestable
     {

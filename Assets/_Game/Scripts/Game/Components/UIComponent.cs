@@ -1,9 +1,9 @@
-using Base.Component;
-using Base.UserInterface;
-using Game.Enums;
+using _Game.Scripts.Base.Component;
+using _Game.Scripts.Base.UserInterface;
+using _Game.Scripts.Game.Enums;
 using UnityEngine;
 
-namespace Game.Components
+namespace _Game.Scripts.Game.Components
 {
     public class UIComponent : MonoBehaviour, IComponent
     {

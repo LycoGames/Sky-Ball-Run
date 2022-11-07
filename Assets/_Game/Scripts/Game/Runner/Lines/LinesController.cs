@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Game.Scripts.Lines
+namespace _Game.Scripts.Game.Runner.Lines
 {
     public class LinesController : MonoBehaviour
     {
@@ -21,14 +20,12 @@ namespace _Game.Scripts.Lines
 
         private void OnEnable()
         {
-            Debug.Log("Lines Enabled");
             if(firstRun)SpawnLines();
             firstRun = false;//todo refactor
         }
 
         void OnDisable()
         {
-            Debug.Log("Lines Disabled");
             ResetLinePos();
         }
 

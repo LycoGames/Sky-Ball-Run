@@ -1,10 +1,9 @@
-using System;
-using Base.UserInterface;
+using _Game.Scripts.Base.UserInterface;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.UserInterfaces.EndGame
+namespace _Game.Scripts.Game.UserInterfaces.EndGame
 {
     public class EndGameCanvas : BaseCanvas, IStartable, IQuitable
     {

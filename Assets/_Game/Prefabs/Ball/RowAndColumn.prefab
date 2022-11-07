@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1666967833402894864
+--- !u!1 &2709147162005373305
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1666967833402894871}
-  - component: {fileID: 6252914503582565890}
+  - component: {fileID: 2709147162005373304}
+  - component: {fileID: 2709147162005373307}
   m_Layer: 0
-  m_Name: Followed
-  m_TagString: Untagged
+  m_Name: RowAndColumn
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1666967833402894871
+--- !u!4 &2709147162005373304
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1666967833402894864}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 2709147162005373305}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32,20 +32,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6252914503582565890
+--- !u!114 &2709147162005373307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1666967833402894864}
+  m_GameObject: {fileID: 2709147162005373305}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1de80d2b8b84194d9e6d6cf0a45a35e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followBall: {fileID: 0}
-  followedBall: {fileID: 0}
-  rotateSpeed: 0.1
-  followDistance: 0.33
-  rb: {fileID: 0}
+  ball: {fileID: 9125506688147887519, guid: 869eb27b325bff44ebb9825f80847379, type: 3}

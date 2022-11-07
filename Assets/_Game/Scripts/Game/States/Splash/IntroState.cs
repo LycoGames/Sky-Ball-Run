@@ -1,8 +1,7 @@
-using Base.Component;
-using Base.State;
-using UnityEngine;
+using _Game.Scripts.Base.Component;
+using _Game.Scripts.Base.State;
 
-namespace Game.States.Splash
+namespace _Game.Scripts.Game.States.Splash
 {
     public class IntroState : StateMachine
     {

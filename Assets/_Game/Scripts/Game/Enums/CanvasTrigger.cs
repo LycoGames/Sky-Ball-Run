@@ -1,4 +1,4 @@
-namespace Game.Enums
+namespace _Game.Scripts.Game.Enums
 {
     public enum CanvasTrigger
     {

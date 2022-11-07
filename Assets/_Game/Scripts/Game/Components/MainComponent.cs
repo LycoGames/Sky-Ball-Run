@@ -1,12 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using Base.Component;
-using Game.States;
+using _Game.Scripts.Base.Component;
+using _Game.Scripts.Game.States;
 using UnityEngine;
 
-namespace Game.Components
+namespace _Game.Scripts.Game.Components
 {
     public class MainComponent : MonoBehaviour
     {

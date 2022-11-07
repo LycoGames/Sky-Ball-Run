@@ -1,8 +1,8 @@
 using System.Collections;
-using Base.Component;
+using _Game.Scripts.Base.Component;
 using UnityEngine;
 
-namespace Game.Components
+namespace _Game.Scripts.Game.Components
 {
     public class LoadingGameComponent : MonoBehaviour, IComponent, IConstructable, IDestructible
     {

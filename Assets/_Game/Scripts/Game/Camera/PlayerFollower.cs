@@ -1,19 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFollower : MonoBehaviour
+namespace _Game.Scripts.Game.Camera
 {
-    [SerializeField] private Transform Player;
-    private Vector3 offset;
-    void Start()
+    public class PlayerFollower : MonoBehaviour
     {
-        offset = transform.position-Player.position;
-    }
+        [SerializeField] private Transform Player;
+        private Vector3 offset;
+        void Start()
+        {
+            offset = transform.position-Player.position;
+        }
 
     
-    void Update()
-    {
-        transform.position = offset + new Vector3(Player.position.x,0,Player.position.z);
+        void Update()
+        {
+            transform.position = offset + new Vector3(Player.position.x,0,Player.position.z);
+        }
     }
 }

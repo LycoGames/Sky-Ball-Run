@@ -1,10 +1,10 @@
-using Base.Component;
-using Base.State;
-using Game.Components;
-using Game.Enums;
-using Game.UserInterfaces.Splash;
+using _Game.Scripts.Base.Component;
+using _Game.Scripts.Base.State;
+using _Game.Scripts.Game.Components;
+using _Game.Scripts.Game.Enums;
+using _Game.Scripts.Game.UserInterfaces.Splash;
 
-namespace Game.States.Splash
+namespace _Game.Scripts.Game.States.Splash
 {
     public class LoadingGameState : StateMachine, IChangeable
     {

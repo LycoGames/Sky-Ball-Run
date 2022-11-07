@@ -1,7 +1,7 @@
-using Base.Component;
+using _Game.Scripts.Base.Component;
 using UnityEngine;
 
-namespace Game.Components
+namespace _Game.Scripts.Game.Components
 {
     public class InGameComponent : MonoBehaviour, IComponent, IConstructable, IDestructible
     {
