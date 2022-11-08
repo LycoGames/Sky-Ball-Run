@@ -136,6 +136,7 @@ MonoBehaviour:
   maxXPos: 8.75
   meshRenderer: {fileID: 4544383669042015663}
   particleSystem: {fileID: 5926386977056676005}
+  test: 0
 --- !u!1 &5701153568002574733
 GameObject:
   m_ObjectHideFlags: 0
