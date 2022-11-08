@@ -131,13 +131,11 @@ MonoBehaviour:
   rotateSpeed: 20
   followDistance: 0.5
   rb: {fileID: 4544383669042015657}
-  changePosSpeed: 10
+  changePosSpeed: 20
   minXPos: -8.75
   maxXPos: 8.75
   meshRenderer: {fileID: 4544383669042015663}
   particleSystem: {fileID: 5926386977056676005}
-  xPos: 0
-  yPos: 0
 --- !u!1 &5701153568002574733
 GameObject:
   m_ObjectHideFlags: 0

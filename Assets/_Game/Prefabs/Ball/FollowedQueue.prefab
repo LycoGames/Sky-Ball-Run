@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2709147162005373304}
   - component: {fileID: 2709147162005373307}
   m_Layer: 0
-  m_Name: RowAndColumn
+  m_Name: FollowedQueue
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

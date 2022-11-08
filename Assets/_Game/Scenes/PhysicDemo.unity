@@ -878,18 +878,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89dd598b24aab0f4db1e1759d058d5ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followed: {fileID: 2709147162005373307, guid: a52f8fdf10a85ff40a01107f9a520075, type: 3}
-  distance: 0.5
-  startBall: 20
-  minRow: 5
-  minColumn: 5
-  minColumnAndRow: 5
-  maxRow: 15
-  maxColumn: 8
-  maxColumnAndRow: 5
-  playerRunner: {fileID: 1742475866}
-  boundHorMax: 8.75
-  boundHorMin: -8.75
+  followedQueue: {fileID: 2709147162005373307, guid: a52f8fdf10a85ff40a01107f9a520075, type: 3}
+  maxRow: 99
+  testSpawnBall: 20
 --- !u!65 &1742475869
 BoxCollider:
   m_ObjectHideFlags: 0

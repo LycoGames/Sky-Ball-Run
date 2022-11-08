@@ -17,21 +17,21 @@ namespace _Game.Scripts
         
         public void OnHit(BallManager ballManager)
         {
-            switch (adderType)
-            {
-                case AdderType.Adder:
-                    ballManager.AddBalls(ballCount);
-                    break;
-                case AdderType.MultipleBack:
-                    ballManager.MultiplyBack();
-                    break;
-                case AdderType.MultipleRight:
-                    ballManager.MultiplyRight();
-                    break;
-                case AdderType.MultipleUpper:
-                    ballManager.MultiplyUpper();
-                    break;
-            }
+            // switch (adderType)
+            // {
+            //     case AdderType.Adder:
+            //         ballManager.AddBalls(ballCount);
+            //         break;
+            //     case AdderType.MultipleBack:
+            //         ballManager.MultiplyBack();
+            //         break;
+            //     case AdderType.MultipleRight:
+            //         ballManager.MultiplyRight();
+            //         break;
+            //     case AdderType.MultipleUpper:
+            //         ballManager.MultiplyUpper();
+            //         break;
+            // }
         }
     }
 }

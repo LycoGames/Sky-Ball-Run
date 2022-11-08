@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Game.Scripts
 {
     public class Floor : MonoBehaviour
     {
-        [SerializeField] private Followed followed;
+        [FormerlySerializedAs("followed")] [SerializeField] private FollowedQueue followedQueue;
         [SerializeField] private float distance = 0.1f;
         [SerializeField] private float positioningSpeed = 0.5f;
-        private Dictionary<bool, List<Followed>> followedList = new Dictionary<bool, List<Followed>>();
+        private Dictionary<bool, List<FollowedQueue>> followedList = new Dictionary<bool, List<FollowedQueue>>();
         private int currentColumnIndex;
 
         // public int BallCount()
