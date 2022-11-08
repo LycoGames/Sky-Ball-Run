@@ -881,6 +881,8 @@ MonoBehaviour:
   followedQueue: {fileID: 2709147162005373307, guid: a52f8fdf10a85ff40a01107f9a520075, type: 3}
   maxRow: 99
   testSpawnBall: 20
+  testSpawnFollowedQueue: 5
+  distance: 0.5
 --- !u!65 &1742475869
 BoxCollider:
   m_ObjectHideFlags: 0
