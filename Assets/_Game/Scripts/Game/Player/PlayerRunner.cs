@@ -40,7 +40,7 @@ namespace _Game.Scripts.Game.Player
         {
             var pos = transform.position + transform.forward ;
             pos.x = Mathf.Clamp(pos.x, boundHorMin, boundHorMax);
-            pos.y = Math.Clamp(pos.y, 0.5f, 100);
+            pos.y = Math.Clamp(pos.y, 0, 100);
             transform.position=Vector3.MoveTowards(transform.position,pos, movementSpeed * Time.deltaTime);
         }
         private void Rotate(float rotateXTo,float rotateYTo)
@@ -50,16 +50,16 @@ namespace _Game.Scripts.Game.Player
         private float UpDownAngle(float rotateTo)
         {
             float yPos = transform.position.y;
-            if (yPos == 0.5f && xAngle > 0)
+            if (yPos <= 0.01f && xAngle > 0)
             {
-                xAngle -= rotationXSpeed * Time.deltaTime;
+                xAngle -= rotationXSpeed *2* Time.deltaTime;
                 if (xAngle < 0) xAngle = 0;
             }
             else if (rotateTo > 0)
             {
                 xAngle = Math.Clamp( xAngle-rotationXSpeed * Time.deltaTime,-45f,45f);
             }
-            else if(yPos>0.5f)
+            else if(yPos>0f)
             {
                 xAngle =Math.Clamp( xAngle+rotationXSpeed * Time.deltaTime,-45f,45f);
             }

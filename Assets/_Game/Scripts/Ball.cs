@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,7 +15,7 @@ namespace _Game.Scripts
             NotInQueue
         }
 
-        public Action OnBallLeaveQueue;
+        public IEnumerator OnBallLeaveQueue;
         
         [SerializeField] private float rotateSpeed = 2f;
         [SerializeField] private float followDistance = 0.33f;
@@ -33,23 +35,30 @@ namespace _Game.Scripts
         private float distanceToNextPosY;
         private BallState ballState;
         private float removeTime;
-        private Vector3 newPos;
+     
 
         public Ball GetNextBall() => nextBall;
 
        
-
-        private void FixedUpdate()
+        private void OnTriggerEnter(Collider other)
+        {
+            if (gameObject.CompareTag("Player")) return;
+            if (other.CompareTag("Obstacle") && ballState != BallState.NotInQueue)
+            {
+                followedQueue.AddLeaveBallProcessToQueue(LeaveQueue());
+                //SetRigidbodyOnLeaveQueue();
+                SetAnimation();
+            }
+        }
+        public void BallUpdate()
         {
             if (ballState.Equals(BallState.Follow))
             {
-                newPos = CalculateNewPos();
                 SetPosition(0, 0);
                 SetRotation();
             }
             else if (ballState.Equals(BallState.ChangePosition))
             {
-                newPos = CalculateNewPos();
                 ChangeInQueuePosition();
                 SetRotation();
             }
@@ -67,17 +76,36 @@ namespace _Game.Scripts
             SetFollowTransform();
             SetRigidbody();
             SpawnBehindQueue();
-            OnFollowChange();
+            SetOnFollowChange();
         }
 
-        public void ChangeQueue(FollowedQueue followedQueue, Ball nextBall)
+        public IEnumerator ChangeQueue(FollowedQueue followedQueue, Ball nextBall)
         {
             UnRegister();
             SetFollowed(followedQueue);
             SetNextBall(nextBall);
             Register();
             SetFollowTransform();
-            OnFollowChange();
+            SetOnFollowChange();
+            while (ballState != BallState.Follow) yield return null;
+            yield return null;
+        }
+        private IEnumerator LeaveQueue()
+        {
+            UnRegister();
+            RemoveBallInQueue();
+            ballState = BallState.NotInQueue;
+            if(OnBallLeaveQueue!=null)yield return StartCoroutine(OnBallLeaveQueue);
+            yield return null;
+        }
+        private IEnumerator ChangeNextBall()
+        {
+            if (nextBall!=null) nextBall = nextBall.nextBall;
+            Register();
+            SetFollowTransform();
+            SetOnFollowChange();
+            while (ballState != BallState.Follow) yield return null;
+            yield return null;
         }
 
         private void SetNextBall(Ball nextBall)
@@ -91,30 +119,12 @@ namespace _Game.Scripts
         }
         
 
-        private void LeaveQueue()
-        {
-            OnBallLeaveQueue?.Invoke();
-            UnRegister();
-            RemoveBallInQueue();
-            SetRigidbodyOnLeaveQueue();
-            ballState = BallState.NotInQueue;
-            SetAnimation();
-        }
-
         private void SetAnimation()
         {
             particleSystem.Play();
             meshRenderer.enabled = false;
         }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (gameObject.CompareTag("Player")) return;
-            if (other.CompareTag("Obstacle") && ballState != BallState.NotInQueue)
-            {
-                LeaveQueue();
-            }
-        }
+        
         
 
         private void SetRotation()
@@ -124,25 +134,21 @@ namespace _Game.Scripts
 
         private void SetPosition(float zOffset, float yOffset)
         {
+            Vector3 newPos = follow.position - (follow.forward * followDistance);
+            newPos.x = Mathf.Clamp(newPos.x, minXPos, maxXPos);
             newPos.y += yOffset;
             newPos.z -= zOffset;
             transform.position = newPos;
         }
 
-        private Vector3 CalculateNewPos()
+        public void SetOnFollowChange()
         {
-            Vector3 newPos = follow.position - (follow.forward * followDistance);
-            newPos.x = Mathf.Clamp(newPos.x, minXPos, maxXPos);
-            return newPos;
-        }
-
-        public void OnFollowChange()
-        {
-            Vector3 pos = (follow.localPosition - follow.forward*followDistance) - transform.position;
-            distanceToNextPosX = pos.z;
-            distanceToNextPosY = -pos.y;
+            Vector3 distance = (follow.position - (transform.forward * followDistance)) - transform.position;
+            distanceToNextPosX = distance.x;
+            distanceToNextPosY = distance.y;
             ballState = BallState.ChangePosition;
         }
+        
 
         private void ChangeInQueuePosition()
         {
@@ -194,26 +200,19 @@ namespace _Game.Scripts
             rb.isKinematic = false;
             rb.velocity = new Vector3(Random.Range(-10, 10), 10, -3);
         }
-
-        private void ChangeNextBall()
-        {
-            if (nextBall!=null) nextBall = nextBall.nextBall;
-            Register();
-            SetFollowTransform();
-            OnFollowChange();
-        }
+        
         private void SpawnBehindQueue()
         {
             transform.position = follow.position - (transform.forward * 10);
         }
         private void Register()
         {
-            if (nextBall != null) nextBall.OnBallLeaveQueue += ChangeNextBall;
+            if (nextBall != null) nextBall.OnBallLeaveQueue = ChangeNextBall();
         }
 
         private void UnRegister()
         {
-            if (nextBall != null) nextBall.OnBallLeaveQueue -= ChangeNextBall;
+            if (nextBall != null) nextBall.OnBallLeaveQueue = null;
         }
     }
 }

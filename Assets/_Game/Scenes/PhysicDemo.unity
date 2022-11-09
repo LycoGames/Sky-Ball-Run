@@ -755,9 +755,9 @@ GameObject:
   - component: {fileID: 1742475860}
   - component: {fileID: 1742475863}
   - component: {fileID: 1742475862}
+  - component: {fileID: 1742475870}
   - component: {fileID: 1742475864}
   - component: {fileID: 1742475866}
-  - component: {fileID: 1742475868}
   - component: {fileID: 1742475869}
   m_Layer: 0
   m_Name: Player
@@ -859,30 +859,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd21e947bf1315a469557fd477ba54e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 30
-  rotationYSpeed: 100
-  rotationXSpeed: 50
+  movementSpeed: 20
+  rotationYSpeed: 80
+  rotationXSpeed: 40
   boundHorMax: 8.75
   boundHorMin: -8.75
-  maxRotationDegree: 20
+  maxRotationDegree: 60
   rb: {fileID: 1742475864}
---- !u!114 &1742475868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742475859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89dd598b24aab0f4db1e1759d058d5ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followedQueue: {fileID: 2709147162005373307, guid: a52f8fdf10a85ff40a01107f9a520075, type: 3}
-  maxRow: 99
-  testSpawnBall: 20
-  testSpawnFollowedQueue: 5
-  distance: 0.5
 --- !u!65 &1742475869
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -896,6 +879,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.99999994, z: 0.99999994}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1742475870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742475859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a585e639d97d6d40809718d79aa3d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trail: {fileID: 2536016130823935010, guid: 1725af96f8676e44a87b9c77c9d8f9eb, type: 3}
+  ballSpawnCount: 50
 --- !u!1 &1981781985
 GameObject:
   m_ObjectHideFlags: 0

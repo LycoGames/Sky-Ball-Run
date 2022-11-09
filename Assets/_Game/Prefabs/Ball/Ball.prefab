@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 4544383669042015663}
   - component: {fileID: 4544383669042015662}
   - component: {fileID: 4544383669042015657}
-  - component: {fileID: 9125506688147887519}
+  - component: {fileID: 610690114219080608}
+  - component: {fileID: 7241945070022347006}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -116,7 +117,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &9125506688147887519
+--- !u!114 &610690114219080608
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,18 +126,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 4544383669042015659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d643844b33361034db8ef153c0fe589f, type: 3}
+  m_Script: {fileID: 11500000, guid: 990df79cacfa8c745b10182d10e0920b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 20
-  followDistance: 0.5
-  rb: {fileID: 4544383669042015657}
-  changePosSpeed: 20
-  minXPos: -8.75
-  maxXPos: 8.75
+  ballMover: {fileID: 7241945070022347006}
   meshRenderer: {fileID: 4544383669042015663}
-  particleSystem: {fileID: 5926386977056676005}
-  test: 0
+  animation: {fileID: 5926386977056676005}
+--- !u!114 &7241945070022347006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4544383669042015659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac3356f056e9b454daf27cfcfc2da671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballManager: {fileID: 0}
+  distance: 0.5
+  followCatchSpeed: 15
+  rotateSpeed: 20
+  minXPos: -8
+  maxXPos: 8
 --- !u!1 &5701153568002574733
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +266,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.15
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -306,7 +319,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -422,7 +435,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
