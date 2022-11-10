@@ -15,10 +15,8 @@ namespace _Game.Scripts.Game.Runner.Ball
         private float height;
 
 
-        private void OnEnable()
-        {
-            meshRenderer.enabled = true;
-        }
+
+       
 
         private void OnTriggerEnter(Collider other)
         {
@@ -26,14 +24,14 @@ namespace _Game.Scripts.Game.Runner.Ball
             {
                 effect.Play();
                 meshRenderer.enabled = false;
-                Invoke("RemoveBall", waitForRemove);
+                RemoveBall();
             }
         }
 
         private void RemoveBall()
         {
             ballColumn.RemoveBall(this);
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
 
         public void SetHeight(float _height)
@@ -45,6 +43,7 @@ namespace _Game.Scripts.Game.Runner.Ball
 
         public void SetBall(BallColumn _ballColumn, float _height)
         {
+            meshRenderer.enabled = true;
             ballColumn = _ballColumn;
             SetHeight(_height);
         }

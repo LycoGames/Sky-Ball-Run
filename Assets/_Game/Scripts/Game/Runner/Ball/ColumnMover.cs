@@ -9,7 +9,6 @@ namespace _Game.Scripts.Game.Runner.Ball
         [SerializeField] private float rotateSpeed = 5;
         [SerializeField] private float minXPos = 8;
         [SerializeField] private float maxXPos = 8;
-        public bool isFollow;
 
         public void SetFollow(Transform _follow)
         {
@@ -18,11 +17,8 @@ namespace _Game.Scripts.Game.Runner.Ball
 
         void FixedUpdate()
         {
-            if (isFollow)
-            {
-                SetPosition();
-                SetRotation();
-            }
+            SetPosition();
+            SetRotation();
         }
 
         private void SetRotation()

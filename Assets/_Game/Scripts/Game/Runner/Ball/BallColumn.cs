@@ -11,11 +11,13 @@ namespace _Game.Scripts.Game.Runner.Ball
         [SerializeField] private float waitForRequestingBallFromBack=1f;
         public int BallCount { get; private set; }
 
+        private Queue<Ball> removeQueue=new Queue<Ball>();
         private float distance;
         private Trail trail;
         private List<Ball> balls = new List<Ball>();
         private bool isStartRequestBallCoroutine;
 
+        public int ReturnBallCount() => balls.Count;
         public void InitializeBallColumn(Transform follow, Trail _trail, float _distance)
         {
             trail = _trail;
@@ -26,7 +28,6 @@ namespace _Game.Scripts.Game.Runner.Ball
         public void AddBall(Ball ball)
         {
             if (ball == null) return;
-            columnMover.isFollow = true;
             BallCount++;
             balls.Add(ball);
             ball.transform.parent = transform;
@@ -35,19 +36,30 @@ namespace _Game.Scripts.Game.Runner.Ball
 
         public void RemoveBall(Ball ball)
         {
-            RemoveBallInList(ball);
-            DisablingMover();
-            SetHeight();
-            Invoke("RequestingBall",waitForRequestingBallFromBack);
+            removeQueue.Enqueue(ball);
+        }
+
+        public void StartRemoveProcess()
+        {
+            while (removeQueue.Any())
+            {
+                Ball ball = removeQueue.Dequeue();
+                RemoveBallInList(ball);
+                SetHeight();
+                ball.gameObject.SetActive(false);
+            }
+            
         }
 
         public Ball GetBall(int index)
         {
-            if (index > BallCount) return null;
+            if(index >= balls.Count||index<0)
+            {
+                Debug.Break();
+                print(index);
+            }
             Ball ball = balls[index];
             RemoveBallInList(ball);
-            if (BallCount >= index) SetHeight();
-            DisablingMover();
             return ball;
         }
         
@@ -62,11 +74,7 @@ namespace _Game.Scripts.Game.Runner.Ball
             }
         }
 
-        private void RequestingBall()
-        {
-            //Invoke("StartRequestingBall",waitForRequestingBallFromBack);
-            trail.RepositioningToForward(BallCount+1);
-        }
+   
 
         
        
@@ -76,10 +84,7 @@ namespace _Game.Scripts.Game.Runner.Ball
             BallCount--;
         }
 
-        private void DisablingMover()
-        {
-            if (!balls.Any()) columnMover.isFollow = false;
-        }
+      
     }
 }
 

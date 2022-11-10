@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballColumn: {fileID: 5377857087004858780, guid: 6f0286b7db1672e4b9a681d4526fdfe3, type: 3}
   maxColumn: 20
+  maxColumnSize: 5
   ball: {fileID: 2313657159718231233, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
   distance: 0.5
 --- !u!1 &179286702
@@ -217,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballColumn: {fileID: 5377857087004858780, guid: 6f0286b7db1672e4b9a681d4526fdfe3, type: 3}
   maxColumn: 20
+  maxColumnSize: 5
   ball: {fileID: 2313657159718231233, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
   distance: 0.5
 --- !u!1 &288034852
@@ -265,6 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballColumn: {fileID: 5377857087004858780, guid: 6f0286b7db1672e4b9a681d4526fdfe3, type: 3}
   maxColumn: 20
+  maxColumnSize: 5
   ball: {fileID: 2313657159718231233, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
   distance: 0.5
 --- !u!1 &575684509
@@ -313,6 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballColumn: {fileID: 5377857087004858780, guid: 6f0286b7db1672e4b9a681d4526fdfe3, type: 3}
   maxColumn: 20
+  maxColumnSize: 5
   ball: {fileID: 2313657159718231233, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
   distance: 0.5
 --- !u!1 &705507993
@@ -738,7 +742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5415752329418836463, guid: b98880322f5518140a02fa33be642f77, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5415752329418836463, guid: b98880322f5518140a02fa33be642f77, type: 3}
       propertyPath: m_LocalPosition.z
@@ -750,15 +754,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5415752329418836463, guid: b98880322f5518140a02fa33be642f77, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5415752329418836463, guid: b98880322f5518140a02fa33be642f77, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5415752329418836463, guid: b98880322f5518140a02fa33be642f77, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5415752329418836463, guid: b98880322f5518140a02fa33be642f77, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -954,6 +958,7 @@ GameObject:
   - component: {fileID: 1742475864}
   - component: {fileID: 1742475866}
   - component: {fileID: 1742475869}
+  - component: {fileID: 1742475870}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1078,8 +1083,27 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.99999994, z: 0.99999994}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 21.356068, y: 14.877663, z: 0.99999994}
+  m_Center: {x: -0.2124443, y: 3.0401852, z: 7.900108e-11}
+--- !u!114 &1742475870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742475859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5c39266d1805ea44b019ba93daad171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  removeProcess: {fileID: -5821690997303219968, guid: 62bd7f6fe21953e4984acd06226df24d, type: 3}
+  trails:
+  - {fileID: 2036365262}
+  - {fileID: 179286704}
+  - {fileID: 288034854}
+  - {fileID: 575684511}
+  - {fileID: 63678656}
 --- !u!1 &1981781985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,5 +1251,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballColumn: {fileID: 5377857087004858780, guid: 6f0286b7db1672e4b9a681d4526fdfe3, type: 3}
   maxColumn: 20
+  maxColumnSize: 5
   ball: {fileID: 2313657159718231233, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
   distance: 0.5

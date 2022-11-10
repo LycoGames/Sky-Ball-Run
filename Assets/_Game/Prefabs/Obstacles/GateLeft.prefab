@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 2428944330514308233}
   - component: {fileID: 6326397948335900461}
   - component: {fileID: 3255800456111611022}
-  - component: {fileID: 3612786180430689808}
   m_Layer: 0
   m_Name: Barier
   m_TagString: Obstacle
@@ -117,19 +116,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3612786180430689808
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354968651483978640}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2145189978870097459
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +127,6 @@ GameObject:
   - component: {fileID: 7562591432140805491}
   - component: {fileID: 1608099866953302333}
   - component: {fileID: 1488434403232719019}
-  - component: {fileID: 5686045715243094543}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -215,20 +200,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5686045715243094543
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2145189978870097459}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &5260875324805568100
 GameObject:
   m_ObjectHideFlags: 0
