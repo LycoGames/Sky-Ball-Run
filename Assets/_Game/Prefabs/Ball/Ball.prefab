@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 4544383669042015663}
   - component: {fileID: 4544383669042015662}
   - component: {fileID: 4544383669042015657}
-  - component: {fileID: 610690114219080608}
-  - component: {fileID: 7241945070022347006}
+  - component: {fileID: 2313657159718231233}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -53,7 +52,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4544383669042015659}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -117,7 +116,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &610690114219080608
+--- !u!114 &2313657159718231233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,30 +125,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4544383669042015659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 990df79cacfa8c745b10182d10e0920b, type: 3}
+  m_Script: {fileID: 11500000, guid: 96de3d16c4b47a34dab79a0030245d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballMover: {fileID: 7241945070022347006}
+  speed: 5
+  waitForRemove: 0.25
+  effect: {fileID: 5926386977056676005}
   meshRenderer: {fileID: 4544383669042015663}
-  animation: {fileID: 5926386977056676005}
---- !u!114 &7241945070022347006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4544383669042015659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac3356f056e9b454daf27cfcfc2da671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballManager: {fileID: 0}
-  distance: 0.5
-  followCatchSpeed: 15
-  rotateSpeed: 20
-  minXPos: -8
-  maxXPos: 8
 --- !u!1 &5701153568002574733
 GameObject:
   m_ObjectHideFlags: 0

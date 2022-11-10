@@ -12,6 +12,7 @@ namespace _Game.Scripts.Game.Player
         [SerializeField] private float boundHorMin = 9.6f;
         [SerializeField] private float maxRotationDegree = 20f;
         [SerializeField] private Rigidbody rb;
+        [SerializeField] private float bounceAngle=15f;
         
         private Vector3 startPos;
         private float xAngle;//Todo bunlardan kurtul
@@ -52,8 +53,13 @@ namespace _Game.Scripts.Game.Player
             float yPos = transform.position.y;
             if (yPos <= 0.01f && xAngle > 0)
             {
-                xAngle -= rotationXSpeed *2* Time.deltaTime;
-                if (xAngle < 0) xAngle = 0;
+                if (xAngle > bounceAngle)
+                {
+                    xAngle *= -1;
+                    xAngle += bounceAngle;
+                }   
+                else if(xAngle<bounceAngle)xAngle -= rotationXSpeed *2* Time.deltaTime;
+                else if (xAngle < 0) xAngle = 0;
             }
             else if (rotateTo > 0)
             {

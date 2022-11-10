@@ -1,59 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.Game.Runner.Ball;
 using UnityEngine;
 
-namespace _Game.Scripts.Game.Runner.Ball
+public class Trail : MonoBehaviour
 {
-    public class Trail : MonoBehaviour
+    [SerializeField] private BallColumn ballColumn;
+    [SerializeField] private int maxColumn = 20;
+    [SerializeField] private Ball ball;
+    [SerializeField] private float distance = 0.5f;
+    private readonly List<BallColumn> ballColumnList = new List<BallColumn>();
+
+    void Start()
     {
-        [SerializeField] private int maxBall=20;
-        [SerializeField] private BallManager ballObject;
-        [SerializeField] private float waitForRemove = 10f;
-        private List<BallManager> ballList=new List<BallManager>();
-        private Queue<BallManager> removeQueue=new Queue<BallManager>();
-        private WaitForSeconds wfsWaitForRemove;
-        private bool isRuning;
-
-        private void Start()
+        for (int i = 0; i < maxColumn; i++)
         {
-            wfsWaitForRemove = new WaitForSeconds(waitForRemove);
+            ballColumnList.Add(Instantiate(ballColumn));
+            if (i == 0) ballColumnList[0].InitializeBallColumn(transform,this, distance);
+            else ballColumnList[i].InitializeBallColumn(ballColumnList[i - 1].transform,this, distance);
+            for(int j=0;j<5;j++)ballColumnList[i].AddBall(Instantiate(ball));
         }
-        public void RemoveBallInQueue(BallManager ball)
+    }
+
+    public void RepositioningToForward(int index)
+    {
+        BallColumn ballColumn = ballColumnList.First();
+        for (int i = 1; i < maxColumn; i++)
         {
-            removeQueue.Enqueue(ball);
-            if (!isRuning)
+            if  ( ballColumnList[i].BallCount>=index&&ballColumn.BallCount<index)
             {
-                isRuning = true;
-                StartCoroutine(waitingForRemoveQueue());
+                ballColumn.AddBall(ballColumnList[i].GetBall(index));
+                ballColumn = ballColumnList[i];
             }
         }
-        public void AddBall()
-        {
-            if (ballList.Count >= maxBall) return;
-            BallManager createdBall = Instantiate(ballObject);
-            ballList.Add(createdBall);
-            createdBall.InitializeBall(this);
-        }
-        public BallManager GetNextBall(BallManager ball)
-        {
-            int index = ballList.IndexOf(ball);
-            if (index > 0) return ballList[index-1];
-            return null;
-        }
-        
-        IEnumerator waitingForRemoveQueue()
-        {
-            yield return wfsWaitForRemove;
-            while (removeQueue.Any())
-            {
-                BallManager ball = removeQueue.Dequeue();
-                int index = ballList.IndexOf(ball);
-                ballList.Remove(ball);
-                ball.RemoveBall();
-            }
-            isRuning = false;
-        }
+    }
 
+    public BallColumn GetBackColumn(BallColumn ballColumn)
+    {
+        int index = ballColumnList.IndexOf(ballColumn);
+        if (index >= maxColumn-1) return null;
+        return ballColumnList[index + 1];
+    }
+    public bool CheckForLongerColumn(BallColumn ballColumn)
+    {
+        for (int i = ballColumnList.IndexOf(ballColumn)+1; i < maxColumn - 1; i++)
+        {
+            if (ballColumn.BallCount < ballColumnList[i].BallCount) return true;
+        }
+        return false;
     }
 }
