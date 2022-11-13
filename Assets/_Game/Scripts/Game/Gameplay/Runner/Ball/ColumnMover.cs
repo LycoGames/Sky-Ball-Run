@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Game.Scripts.Game.Runner.Ball
+namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 {
     public class ColumnMover : MonoBehaviour
     {

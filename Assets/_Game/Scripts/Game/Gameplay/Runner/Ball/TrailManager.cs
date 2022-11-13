@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Game.Scripts.Game.Runner.Ball
+namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 {
     public class TrailManager : MonoBehaviour
     {

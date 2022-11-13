@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace _Game.Scripts.Game.Runner.Lines
+namespace _Game.Scripts.Game.Gameplay.Runner.Lines
 {
     public class Line : MonoBehaviour
     {

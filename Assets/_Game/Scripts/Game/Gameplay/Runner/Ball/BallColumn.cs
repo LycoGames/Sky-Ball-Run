@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace _Game.Scripts.Game.Runner.Ball
+namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 {
     public class BallColumn : MonoBehaviour
     {
@@ -74,10 +73,6 @@ namespace _Game.Scripts.Game.Runner.Ball
             }
         }
 
-   
-
-        
-       
         private void RemoveBallInList(Ball ball)
         {
             balls.Remove(ball);
@@ -91,29 +86,3 @@ namespace _Game.Scripts.Game.Runner.Ball
 
 
 
-// private void StartRequestingBall()
-// {
-//     if (isStartRequestBallCoroutine) return;
-//     isStartRequestBallCoroutine = true;
-//     StartCoroutine(RequestBallCoroutine());
-// }
-
-
-
-// private IEnumerator RequestBallCoroutine()
-// {
-//     while (trail.CheckForLongerColumn(this))
-//     {
-//         BallColumn backColumn = trail.GetBackColumn(this);
-//         if (BallCount < backColumn.BallCount)
-//         {
-//             Ball ball = backColumn.GetBall(BallCount);
-//             AddBall(ball);
-//         }
-//
-//         yield return null;
-//     }
-//
-//     isStartRequestBallCoroutine = false;
-//     yield return null;
-// }

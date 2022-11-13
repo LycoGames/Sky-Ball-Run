@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballColumn: {fileID: 5377857087004858780, guid: 6f0286b7db1672e4b9a681d4526fdfe3, type: 3}
-  maxColumn: 20
-  maxColumnSize: 5
+  maxColumn: 10
+  maxColumnSize: 20
   ball: {fileID: 2313657159718231233, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
   distance: 0.5
 --- !u!1 &179286702
@@ -217,8 +217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballColumn: {fileID: 5377857087004858780, guid: 6f0286b7db1672e4b9a681d4526fdfe3, type: 3}
-  maxColumn: 20
-  maxColumnSize: 5
+  maxColumn: 10
+  maxColumnSize: 20
   ball: {fileID: 2313657159718231233, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
   distance: 0.5
 --- !u!1 &288034852
@@ -266,8 +266,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballColumn: {fileID: 5377857087004858780, guid: 6f0286b7db1672e4b9a681d4526fdfe3, type: 3}
-  maxColumn: 20
-  maxColumnSize: 5
+  maxColumn: 10
+  maxColumnSize: 20
   ball: {fileID: 2313657159718231233, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
   distance: 0.5
 --- !u!1 &575684509
@@ -315,8 +315,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballColumn: {fileID: 5377857087004858780, guid: 6f0286b7db1672e4b9a681d4526fdfe3, type: 3}
-  maxColumn: 20
-  maxColumnSize: 5
+  maxColumn: 10
+  maxColumnSize: 20
   ball: {fileID: 2313657159718231233, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
   distance: 0.5
 --- !u!1 &705507993
@@ -1250,7 +1250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballColumn: {fileID: 5377857087004858780, guid: 6f0286b7db1672e4b9a681d4526fdfe3, type: 3}
-  maxColumn: 20
-  maxColumnSize: 5
+  maxColumn: 10
+  maxColumnSize: 20
   ball: {fileID: 2313657159718231233, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
   distance: 0.5

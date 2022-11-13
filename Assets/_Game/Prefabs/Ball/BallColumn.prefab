@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   columnMover: {fileID: 5835682661163503595}
+  waitForRequestingBallFromBack: 1
 --- !u!114 &5835682661163503595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +60,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0.5
-  rotateSpeed: 15
+  rotateSpeed: 20
   minXPos: -8.75
   maxXPos: 8.75
-  isFollow: 0
