@@ -32,6 +32,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         private Coroutine waitForwarding;
 
         private Dictionary<Trail, List<BallColumn>> ballColumns = new Dictionary<Trail, List<BallColumn>>();
+
         private void Start()
         {
             ballManager = this;
@@ -40,22 +41,28 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 
         public void StartForwading()
         {
-            if (waitForwarding != null) currentWaitingTime += waitForForwarding;
+            if (waitForwarding != null)
+            {
+                currentWaitingTime = waitForForwarding;
+                return;
+            }
+
             waitForwarding = StartCoroutine(Forwarding());
         }
+
         public IEnumerator InitiliazeBallManager()
         {
             ballPool = Instantiate(ballPool);
             ballPool.amountToPool = maxRow * maxColumn * maxFloor;
             yield return StartCoroutine(ballPool.StartInstantiatePool());
             trailManager = Instantiate(trailManager, transform);
-            yield return StartCoroutine(trailManager.InstantiateTrailList(maxColumn, distance,playerRunner));
+            yield return StartCoroutine(trailManager.InstantiateTrailList(maxColumn, distance, playerRunner));
             List<Trail> trailList = trailManager.GetDeactivedList();
             CreateColumns(trailList);
             InstantiateStartBalls();
             yield return null;
         }
-        
+
         private void InstantiateStartBalls()
         {
             for (int i = 0; i < currentColumn; i++)
@@ -95,18 +102,18 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
                 }
             }
         }
+
         public void RepositioningToForward()
         {
-
             foreach (KeyValuePair<Trail, List<BallColumn>> ballColumnList in ballColumns)
             {
-                for (int i = 0; i < currentRow-1; i++)
+                for (int i = 0; i < currentRow - 1; i++)
                 {
                     BallColumn ballColumn = ballColumnList.Value[i];
-                    for (int j = i+1; j < currentRow; j++)
+                    for (int j = i + 1; j < currentRow; j++)
                     {
                         if (ballColumn.BallCount() >= currentFloor) break;
-                        if (ballColumnList.Value[j].BallCount()  >ballColumn.BallCount())
+                        if (ballColumnList.Value[j].BallCount() > ballColumn.BallCount())
                         {
                             ballColumnList.Value[j].GetBall(ballColumn.BallCount()).SetBall(ballColumn);
                             j--;
@@ -115,7 +122,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
                 }
             }
             //TODO maliyeti azalt
-            
         }
 
         private IEnumerator Forwarding()
@@ -123,12 +129,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             currentWaitingTime = waitForForwarding;
             while (currentWaitingTime >= 0)
             {
-                currentWaitingTime -= 0.1f;
-                yield return new WaitForSeconds(0.1f);
+                currentWaitingTime -= 0.01f;
+                yield return new WaitForSeconds(0.01f);
             }
+
             RepositioningToForward();
             waitForwarding = null;
-            print("calisti");
             yield return null;
         }
     }

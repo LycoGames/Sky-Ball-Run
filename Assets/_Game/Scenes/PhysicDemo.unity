@@ -901,12 +901,12 @@ MonoBehaviour:
   maxRow: 30
   maxColumn: 38
   maxFloor: 20
-  currentRow: 15
-  currentColumn: 6
-  currentFloor: 20
+  currentRow: 9
+  currentColumn: 3
+  currentFloor: 3
   ballPool: {fileID: 3801894025843496801, guid: 1cd81462333a6bd4996cade52b4f3ab4, type: 3}
   trailManager: {fileID: 5445088099487171347, guid: 976d1360f825ad1479e5158e3fc83aab, type: 3}
-  waitForForwarding: 1.5
+  waitForForwarding: 0.1
 --- !u!1 &1981781985
 GameObject:
   m_ObjectHideFlags: 0
