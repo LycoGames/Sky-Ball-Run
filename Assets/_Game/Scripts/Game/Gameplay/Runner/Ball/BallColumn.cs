@@ -21,7 +21,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 
         public void RegisterColumn(Ball ball)
         {
-            if(maxBallSize<=BallCount()) ball.gameObject.SetActive(false);
+            if (maxBallSize <= BallCount())
+            {
+                ball.gameObject.SetActive(false);
+                return;
+            }
+            if(BallCount()==0)trail.IncreaseActiveBallColumnCount();
             balls.Add(ball);
             ball.SetHeight(balls.Count-1);
         }
@@ -29,6 +34,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         public void UnregisterColumn(Ball ball)
         {
             balls.Remove(ball);
+            if (BallCount() <= 0)
+            {
+                trail.DecreaseActiveBallColumnCount();
+                return;
+            }
             SetHeight();
         }
         public Ball GetBall(int index)

@@ -38,7 +38,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             ballManager = this;
             StartCoroutine(InitiliazeBallManager());
         }
-
+        
         public void StartForwading()
         {
             if (waitForwarding != null)

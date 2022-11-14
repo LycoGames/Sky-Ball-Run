@@ -44,4 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84104d832879d0642a65e52fdec2606d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 2.5
+  rotateSpeed: 25
+  rotateStartAngle: 20
+  trailManager: {fileID: 0}

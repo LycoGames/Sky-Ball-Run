@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 {
-    internal class TrailManager : MonoBehaviour
+    public class TrailManager : MonoBehaviour
     { 
         [SerializeField] private Trail trail;
         private PlayerRunner playerRunner;
@@ -23,6 +23,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             for (int i = 0; i < trailCount; i++)
             {
                 deactiveTrailList.Add(Instantiate(trail, transform));
+                deactiveTrailList.Last().InitiliazeTrail(this);
             }
 
             yield return null;
