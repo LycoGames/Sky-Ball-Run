@@ -18,7 +18,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         void FixedUpdate()
         {
             SetPosition();
-            SetRotation();
+                SetRotation();
         }
 
         private void SetRotation()

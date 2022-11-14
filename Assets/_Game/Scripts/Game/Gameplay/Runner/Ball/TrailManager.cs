@@ -1,37 +1,66 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using _Game.Scripts.Game.Player;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 {
-    public class TrailManager : MonoBehaviour
-    {
-        
-        [SerializeField] private RemoveProcess removeProcess;
-        [SerializeField] private List<Trail> trails;
-        private bool checkObstacle = true;
-        
-        private void Start()
+    internal class TrailManager : MonoBehaviour
+    { 
+        [SerializeField] private Trail trail;
+        private PlayerRunner playerRunner;
+
+        private List<Trail> activeTrailList = new List<Trail>();
+        private List<Trail> deactiveTrailList = new List<Trail>();
+        private float distance;
+
+
+        public IEnumerator InstantiateTrailList(int trailCount,float _distance,PlayerRunner _playerRunner)
         {
-            removeProcess = Instantiate(removeProcess);
-            removeProcess.Initialize(this);
+            playerRunner = _playerRunner;
+            distance = _distance;
+            for (int i = 0; i < trailCount; i++)
+            {
+                deactiveTrailList.Add(Instantiate(trail, transform));
+            }
+
+            yield return null;
         }
 
-        public void StartRemoveProcess()
+        public List<Trail> GetDeactivedList()
         {
-            foreach (Trail trail in trails)
-            {
-                trail.StartRemoveProcess();
-                checkObstacle = true;
-            }
+            return deactiveTrailList;
         }
-        private void OnTriggerEnter(Collider other)
+
+        public void DeactivetingTrail(Trail trail)
         {
-            if (other.CompareTag("Obstacle")&&checkObstacle)
+            activeTrailList.Remove(trail);
+            deactiveTrailList.Add(trail);
+            SetPositions();
+        }
+
+        public Trail ActivetingTrail()
+        {
+            if (!deactiveTrailList.Any()) return null;
+            Trail trail = deactiveTrailList.First();
+            deactiveTrailList.Remove(trail);
+            activeTrailList.Add(trail);
+            SetPositions();
+            return trail;
+        }
+
+        public void SetPositions()
+        {
+            int count=activeTrailList.Count;
+            int div = count / 2;
+            float currentDistance = ((distance * div) - distance / 2 * (1-(count % 2)))*-1;
+            foreach (Trail trail in activeTrailList)
             {
-                removeProcess.isFollow = true;
-                checkObstacle = false;
+                trail.SetPosition(currentDistance);
+                currentDistance += distance;
             }
+            playerRunner.ChangeBounds(currentDistance+distance);
         }
     }
 }

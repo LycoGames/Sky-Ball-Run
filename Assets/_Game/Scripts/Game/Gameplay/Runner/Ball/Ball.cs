@@ -9,12 +9,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         [SerializeField] private float waitForRemove = 1.5f;
         [SerializeField] private ParticleSystem effect;
         [SerializeField] private MeshRenderer meshRenderer;
+        [SerializeField] private float distance;
         private BallColumn ballColumn;
-        private float height;
 
 
 
-       
+
 
         private void OnTriggerEnter(Collider other)
         {
@@ -22,31 +22,38 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             {
                 effect.Play();
                 meshRenderer.enabled = false;
-                RemoveBall();
+                Invoke("RemoveBall",waitForRemove);
             }
         }
 
+        public void SetHeight(float position)
+        {
+            StopAllCoroutines();
+            StartCoroutine(MoveToDestination(position*distance));
+        }
+
+        public void SetBall(BallColumn _ballColumn)
+        {
+            gameObject.SetActive(true);
+            meshRenderer.enabled = true;
+            SetColumn(_ballColumn);
+        }
+
+        public void SetColumn(BallColumn _ballColumn)
+        {
+            if(ballColumn!=null)ballColumn.UnregisterColumn(this);
+            transform.parent = _ballColumn.transform;
+            ballColumn = _ballColumn;
+            ballColumn.RegisterColumn(this);
+        }
         private void RemoveBall()
         {
-            ballColumn.RemoveBall(this);
-            //gameObject.SetActive(false);
+            ballColumn.UnregisterColumn(this);
+            gameObject.SetActive(false);
+            BallManager.ballManager.StartForwading();
         }
 
-        public void SetHeight(float _height)
-        {
-            height = _height;
-            StopAllCoroutines();
-            StartCoroutine(MoveToDestination());
-        }
-
-        public void SetBall(BallColumn _ballColumn, float _height)
-        {
-            meshRenderer.enabled = true;
-            ballColumn = _ballColumn;
-            SetHeight(_height);
-        }
-
-        private IEnumerator MoveToDestination()
+        private IEnumerator MoveToDestination(float height)
         {
             Vector3 newPos = Vector3.zero;
             newPos.y = height;
