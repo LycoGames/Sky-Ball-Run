@@ -50,7 +50,7 @@ namespace _Game.Scripts.Game.Player
 
         private void Rotate(float rotateXTo, float rotateYTo)
         {
-            transform.rotation = Quaternion.Euler(UpDownAngle(rotateXTo), LeftRightAngle(rotateYTo), 0);
+            transform.rotation = Quaternion.Euler(0, LeftRightAngle(rotateYTo), 0);
         }
 
         private float UpDownAngle(float rotateTo)

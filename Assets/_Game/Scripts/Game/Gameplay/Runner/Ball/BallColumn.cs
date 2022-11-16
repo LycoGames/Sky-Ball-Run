@@ -7,6 +7,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
     public class BallColumn : MonoBehaviour
     {
         [SerializeField] private ColumnMover columnMover;
+        [SerializeField] private float distance=0.5f;
         private Trail trail;
         private int maxBallSize;
         private List<Ball> balls = new List<Ball>();
@@ -28,6 +29,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             }
             if(BallCount()==0)trail.IncreaseActiveBallColumnCount();
             balls.Add(ball);
+            ball.transform.localPosition = new Vector3(0, (balls.Count-1)*distance,  - 5);
             ball.SetHeight(balls.Count-1);
         }
 

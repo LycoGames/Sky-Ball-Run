@@ -12,8 +12,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         [SerializeField] private TrailManager trailManager; 
         
         private bool firstRun=true; //TODO kötü duruyor.
-        private int activeBallColumnCount = 0;
+        private int activeBallColumnCount;
 
+        public void SetZero()
+        {
+            activeBallColumnCount = 0;
+        }
         public void InitiliazeTrail(TrailManager _trailManager)
         {
             trailManager = _trailManager;
@@ -35,9 +39,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         public void DecreaseActiveBallColumnCount()
         {
             activeBallColumnCount--;
-            if (activeBallColumnCount <= 0)
+            if (activeBallColumnCount == 0)
             {
+                
                 trailManager.DeactivetingTrail(this);
+                firstRun = true;
+            }
+            else if(activeBallColumnCount<0)
+            {
+                SetZero();
                 firstRun = true;
             }
             
@@ -50,7 +60,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             transform.localRotation=Quaternion.Euler(0,yRotation,0);
             while (transform.eulerAngles.y!=0)
             {
-                Debug.Log("Girdi");
                 transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(0, 0, 0), rotateSpeed*Time.deltaTime);
                 yield return null;
             }

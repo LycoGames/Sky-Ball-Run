@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.Game.Gameplay.Runner.Gates;
 using _Game.Scripts.Game.ObjectPools;
 using _Game.Scripts.Game.Player;
 using Unity.VisualScripting;
@@ -11,7 +12,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 {
     public class BallManager : MonoBehaviour
     {
-        static public BallManager ballManager;
+        public static BallManager ballManager;
+        public int totalBallCount;
         [SerializeField] private PlayerRunner playerRunner;
         [SerializeField] private BallColumn ballColumn;
         [SerializeField] private float distance = 0.5f;
@@ -28,6 +30,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 
         [SerializeField] private float waitForForwarding = 1.5f;
 
+
         private float currentWaitingTime;
         private Coroutine waitForwarding;
 
@@ -38,7 +41,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             ballManager = this;
             StartCoroutine(InitiliazeBallManager());
         }
-        
+
+        public void OnEnterGate(GateSpecs gateSpecs)
+        {
+            StartCoroutine(WaitUntilBallEnd(totalBallCount, gateSpecs));
+        }
+
         public void StartForwading()
         {
             if (waitForwarding != null)
@@ -105,23 +113,23 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 
         public void RepositioningToForward()
         {
-            foreach (KeyValuePair<Trail, List<BallColumn>> ballColumnList in ballColumns)
+            List<Trail> activeTrailList = trailManager.GetActivatedList();
+            foreach (Trail trail in activeTrailList)
             {
                 for (int i = 0; i < currentRow - 1; i++)
                 {
-                    BallColumn ballColumn = ballColumnList.Value[i];
+                    BallColumn ballColumn = ballColumns[trail][i];
                     for (int j = i + 1; j < currentRow; j++)
                     {
                         if (ballColumn.BallCount() >= currentFloor) break;
-                        if (ballColumnList.Value[j].BallCount() > ballColumn.BallCount())
+                        if (ballColumns[trail][j].BallCount() > ballColumn.BallCount())
                         {
-                            ballColumnList.Value[j].GetBall(ballColumn.BallCount()).SetBall(ballColumn);
+                            ballColumns[trail][j].GetBall(ballColumn.BallCount()).SetBall(ballColumn);
                             j--;
                         }
                     }
                 }
             }
-            //TODO maliyeti azalt
         }
 
         private IEnumerator Forwarding()
@@ -136,6 +144,41 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             RepositioningToForward();
             waitForwarding = null;
             yield return null;
+        }
+
+        private IEnumerator WaitUntilBallEnd(int spawnBallCount, GateSpecs gateSpecs)
+        {
+            while (trailManager.GetActivatedList().Count > 0)
+            {
+                yield return null;
+            }
+            currentColumn = gateSpecs.newColumn;
+            currentFloor = gateSpecs.newFloor;
+            trailManager.ResetList();
+            for (int i = 0; i < currentColumn; i++)
+            {
+                trailManager.ActivetingTrail();
+            }
+            Debug.Break();
+            yield return new WaitForSeconds(0.5f);
+            Debug.Break();
+            List<Trail> _trails = trailManager.GetActivatedList();
+            
+            for (int j = 0; j < currentRow; j++)
+            {
+                for (int i = 0; i < currentColumn; i++)
+                {
+                    Trail trail = _trails[i];
+                    BallColumn ballColumn = ballColumns[trail][j];
+                    for (int k = 0; k < currentFloor && spawnBallCount > 0; k++)
+                    {
+                        Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
+                        ball.SetBall(ballColumn);
+                        spawnBallCount--;
+                        yield return null;
+                    }
+                }
+            }
         }
     }
 }

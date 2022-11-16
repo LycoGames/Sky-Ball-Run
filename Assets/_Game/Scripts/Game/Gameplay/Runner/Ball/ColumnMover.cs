@@ -9,6 +9,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         [SerializeField] private float rotateSpeed = 5;
         [SerializeField] private float minXPos = 8;
         [SerializeField] private float maxXPos = 8;
+        [SerializeField] private Rigidbody rb;
 
         public void SetFollow(Transform _follow)
         {
@@ -18,12 +19,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         void FixedUpdate()
         {
             SetPosition();
-                SetRotation();
+            SetRotation();
         }
 
         private void SetRotation()
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, follow.rotation, rotateSpeed * Time.deltaTime);
+
         }
 
         private void SetPosition()
@@ -32,6 +34,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             newPos.x = Mathf.Clamp(newPos.x, minXPos, maxXPos);
             newPos.y = Mathf.Clamp(newPos.y, 0.01f, 100);
             transform.position = newPos;
+   
         }
     }
 }

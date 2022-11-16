@@ -22,6 +22,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             {
                 effect.Play();
                 meshRenderer.enabled = false;
+                BallManager.ballManager.totalBallCount--;
+                Invoke("RemoveBall",waitForRemove);
+                Invoke("StartForwading",waitForRemove+0.05f);
+            }
+            else if (other.CompareTag("Gate"))
+            {
+                effect.Play();
+                meshRenderer.enabled = false;
+                BallManager.ballManager.totalBallCount--;
                 Invoke("RemoveBall",waitForRemove);
             }
         }
@@ -34,8 +43,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 
         public void SetBall(BallColumn _ballColumn)
         {
-            gameObject.SetActive(true);
-            meshRenderer.enabled = true;
+            if (gameObject.activeSelf == false)
+            {
+                gameObject.SetActive(true);
+                meshRenderer.enabled = true;
+                BallManager.ballManager.totalBallCount++;
+            }
             SetColumn(_ballColumn);
         }
 
@@ -50,6 +63,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         {
             ballColumn.UnregisterColumn(this);
             gameObject.SetActive(false);
+        }
+
+        private void StartForwading()
+        {
             BallManager.ballManager.StartForwading();
         }
 
