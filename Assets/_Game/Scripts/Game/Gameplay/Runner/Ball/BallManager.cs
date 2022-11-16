@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
     {
         public static BallManager ballManager;
         public int totalBallCount;
+        //TODO çok kötü
+        [SerializeField] private Transform ballColumnTransform;
+        [SerializeField] private Transform registeredTrailTransform;
+        
         [SerializeField] private PlayerRunner playerRunner;
         [SerializeField] private BallColumn ballColumn;
         [SerializeField] private float distance = 0.5f;
@@ -42,9 +47,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             StartCoroutine(InitiliazeBallManager());
         }
 
-        public void OnEnterGate(GateSpecs gateSpecs)
+        public void OnEnterGate(GateSpecs gateSpecs, Action DisableGate)
         {
-            StartCoroutine(WaitUntilBallEnd(totalBallCount, gateSpecs));
+            StartCoroutine(WaitUntilBallEnd(totalBallCount, gateSpecs, DisableGate));
         }
 
         public void StartForwading()
@@ -65,7 +70,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             yield return StartCoroutine(ballPool.StartInstantiatePool());
             trailManager = Instantiate(trailManager, transform);
             yield return StartCoroutine(trailManager.InstantiateTrailList(maxColumn, distance, playerRunner));
-            List<Trail> trailList = trailManager.GetDeactivedList();
+            List<Trail> trailList = trailManager.GetTrailList();
             CreateColumns(trailList);
             InstantiateStartBalls();
             yield return null;
@@ -75,7 +80,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         {
             for (int i = 0; i < currentColumn; i++)
             {
-                Trail activetingTrail = trailManager.ActivetingTrail();
+                Trail activetingTrail = trailManager.GetTrailList()[i];
                 for (int j = 0; j < currentRow; j++)
                 {
                     BallColumn ballColumn = ballColumns[activetingTrail][j];
@@ -92,6 +97,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         {
             foreach (Trail trail in trailList)
             {
+                Transform parent = Instantiate(registeredTrailTransform);
+                parent.parent = ballColumnTransform;
                 for (int i = 0; i < maxColumn; i++)
                 {
                     BallColumn CreatedBallColumn = Instantiate(ballColumn);
@@ -106,6 +113,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
                         ballColumns[trail] = new List<BallColumn>();
                     }
 
+                    CreatedBallColumn.transform.parent = parent;
                     ballColumns[trail].Add(CreatedBallColumn);
                 }
             }
@@ -113,7 +121,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 
         public void RepositioningToForward()
         {
-            List<Trail> activeTrailList = trailManager.GetActivatedList();
+            List<Trail> activeTrailList = trailManager.GetActivatedTrailList();
             foreach (Trail trail in activeTrailList)
             {
                 for (int i = 0; i < currentRow - 1; i++)
@@ -146,38 +154,28 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             yield return null;
         }
 
-        private IEnumerator WaitUntilBallEnd(int spawnBallCount, GateSpecs gateSpecs)
+        private IEnumerator WaitUntilBallEnd(int spawnBallCount, GateSpecs gateSpecs, Action DisableGate)
         {
-            while (trailManager.GetActivatedList().Count > 0)
+            while (totalBallCount > 0)
             {
                 yield return null;
             }
+            DisableGate?.Invoke();
             currentColumn = gateSpecs.newColumn;
             currentFloor = gateSpecs.newFloor;
-            trailManager.ResetList();
-            for (int i = 0; i < currentColumn; i++)
-            {
-                trailManager.ActivetingTrail();
-            }
-            Debug.Break();
-            yield return new WaitForSeconds(0.5f);
-            Debug.Break();
-            List<Trail> _trails = trailManager.GetActivatedList();
-            
             for (int j = 0; j < currentRow; j++)
             {
                 for (int i = 0; i < currentColumn; i++)
                 {
-                    Trail trail = _trails[i];
-                    BallColumn ballColumn = ballColumns[trail][j];
                     for (int k = 0; k < currentFloor && spawnBallCount > 0; k++)
                     {
                         Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
-                        ball.SetBall(ballColumn);
+                        ball.SetBall(ballColumns[trailManager.GetTrailList()[i]][j]);
                         spawnBallCount--;
-                        yield return null;
+                        
                     }
                 }
+                yield return null;
             }
         }
     }

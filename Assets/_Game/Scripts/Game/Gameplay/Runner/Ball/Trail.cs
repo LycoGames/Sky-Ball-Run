@@ -13,6 +13,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         
         private bool firstRun=true; //TODO kötü duruyor.
         private int activeBallColumnCount;
+        public bool isActive = false;
 
         public void SetZero()
         {
@@ -32,6 +33,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 
         public void IncreaseActiveBallColumnCount()
         {
+            if (activeBallColumnCount == 0)
+            {
+                isActive = true;
+                trailManager.SetPositions();
+            }
             activeBallColumnCount++;
             
         }
@@ -41,8 +47,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             activeBallColumnCount--;
             if (activeBallColumnCount == 0)
             {
-                
-                trailManager.DeactivetingTrail(this);
+                isActive = false;
+                trailManager.SetPositions();
                 firstRun = true;
             }
             else if(activeBallColumnCount<0)

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.Game.ObjectPools;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Ball
@@ -36,6 +37,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         public void UnregisterColumn(Ball ball)
         {
             balls.Remove(ball);
+            ball.transform.parent = BallPool.ballPool.transform;
             if (BallCount() <= 0)
             {
                 trail.DecreaseActiveBallColumnCount();

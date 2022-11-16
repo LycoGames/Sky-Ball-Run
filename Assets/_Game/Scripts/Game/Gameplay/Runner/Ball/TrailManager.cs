@@ -10,9 +10,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
     { 
         [SerializeField] private Trail trail;
         private PlayerRunner playerRunner;
-
-        private List<Trail> activeTrailList = new List<Trail>();
-        private List<Trail> deactiveTrailList = new List<Trail>();
         private List<Trail> trailList = new List<Trail>();
         private float distance;
 
@@ -23,68 +20,31 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             distance = _distance;
             for (int i = 0; i < trailCount; i++)
             {
-                deactiveTrailList.Add(Instantiate(trail, transform));
-                trailList.Add(deactiveTrailList.Last());
-                deactiveTrailList.Last().InitiliazeTrail(this);
+                trailList.Add(Instantiate(trail, transform));
+                trailList.Last().InitiliazeTrail(this);
             }
 
             yield return null;
         }
 
-        public void ResetList()
+        public List<Trail> GetTrailList()
         {
-            activeTrailList.Clear();
-            deactiveTrailList.Clear();
+            return trailList;
+        }
+        public List<Trail> GetActivatedTrailList()
+        {
+            List<Trail> activeTrailList=new List<Trail>();
             foreach (Trail trail in trailList)
             {
-                deactiveTrailList.Add(trail);
-                trail.SetZero();
+                if(trail.isActive) activeTrailList.Add(trail);
             }
-        }
-        public List<Trail> GetDeactivedList()
-        {
-            return deactiveTrailList;
-        }
 
-        public List<Trail> GetActivatedList()
-        {
             return activeTrailList;
-        }
-
-        public void DeactivetingTrail(Trail trail)
-        {
-            if (deactiveTrailList.Contains(trail)) return;
-            activeTrailList.Remove(trail);
-            deactiveTrailList.Add(trail);
-            trail.transform.localPosition=Vector3.zero;
-            SetPositions();
-        }
-
-        public Trail ActivetingTrail()
-        {
-            if (!deactiveTrailList.Any()) return null;
-            Trail trail = deactiveTrailList.First();
-            deactiveTrailList.Remove(trail);
-            activeTrailList.Add(trail);
-            SetAddedTrailPosition();
-            return trail;
-        }
-
-        private void SetAddedTrailPosition()
-        {
-            int count = activeTrailList.Count;
-            int div = count / 2;
-            float currentDistance = ((distance * div) - distance / 2 * (1 - (count % 2))) * -1;
-            foreach (Trail _trail in activeTrailList)
-            {
-                _trail.transform.localPosition = new Vector3(currentDistance, 0, 0);
-                currentDistance += distance;
-            }
-            playerRunner.ChangeBounds(currentDistance+distance);
         }
 
         public void SetPositions()
         {
+            List<Trail> activeTrailList = GetActivatedTrailList();
             int count=activeTrailList.Count;
             int div = count / 2;
             float currentDistance = ((distance * div) - distance / 2 * (1-(count % 2)))*-1;

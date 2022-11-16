@@ -14,13 +14,19 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             if (other.CompareTag("Player")&&isActive)
             {
                 GateSpecs selectedGate = other.transform.position.x >= 0 ? rightGate : leftGate;
-                BallManager.ballManager.OnEnterGate(selectedGate);
+                BallManager.ballManager.OnEnterGate(selectedGate,DisablingGate);
                 leftGate.gate.SetActive(false);
                 rightGate.gate.SetActive(false);
                 isActive = false;
             }
         }
+
+        private void DisablingGate()
+        {
+            gameObject.SetActive(false);
+        }
     }
+    
 
     [System.Serializable]
     public struct GateSpecs
