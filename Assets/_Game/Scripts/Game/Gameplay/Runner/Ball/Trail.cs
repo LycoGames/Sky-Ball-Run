@@ -12,13 +12,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         [SerializeField] private TrailManager trailManager; 
         
         private bool firstRun=true; //TODO kötü duruyor.
-        private int activeBallColumnCount;
         public bool isActive = false;
-
-        public void SetZero()
-        {
-            activeBallColumnCount = 0;
-        }
+        
         public void InitiliazeTrail(TrailManager _trailManager)
         {
             trailManager = _trailManager;
@@ -30,34 +25,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
             StartCoroutine(MoveToDestination(posX));
             //StartCoroutine()
         }
-
-        public void IncreaseActiveBallColumnCount()
-        {
-            if (activeBallColumnCount == 0)
-            {
-                isActive = true;
-                trailManager.SetPositions();
-            }
-            activeBallColumnCount++;
-            
-        }
-
-        public void DecreaseActiveBallColumnCount()
-        {
-            activeBallColumnCount--;
-            if (activeBallColumnCount == 0)
-            {
-                isActive = false;
-                trailManager.SetPositions();
-                firstRun = true;
-            }
-            else if(activeBallColumnCount<0)
-            {
-                SetZero();
-                firstRun = true;
-            }
-            
-        }
+        
 
         private IEnumerator RotateToDestination(float newX)
         {

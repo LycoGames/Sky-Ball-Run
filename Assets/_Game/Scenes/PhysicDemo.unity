@@ -794,6 +794,7 @@ GameObject:
   - component: {fileID: 1742475866}
   - component: {fileID: 1742475869}
   - component: {fileID: 1742475870}
+  - component: {fileID: 1742475871}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -927,20 +928,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalBallCount: 0
-  ballColumnTransform: {fileID: 1342186946}
-  registeredTrailTransform: {fileID: 1001261462066715489, guid: 6befb1e9bf771144fae81e0793c84190, type: 3}
   playerRunner: {fileID: 1742475866}
-  ballColumn: {fileID: 5377857087004858780, guid: 6f0286b7db1672e4b9a681d4526fdfe3, type: 3}
   distance: 0.5
-  maxRow: 5
+  maxRow: 20
   maxColumn: 15
   maxFloor: 20
   currentRow: 10
   currentColumn: 5
   currentFloor: 5
   ballPool: {fileID: 3801894025843496801, guid: 1cd81462333a6bd4996cade52b4f3ab4, type: 3}
-  trailManager: {fileID: 5445088099487171347, guid: 976d1360f825ad1479e5158e3fc83aab, type: 3}
+  headsOrganizer: {fileID: 1742475871}
   waitForForwarding: 0.25
+--- !u!114 &1742475871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742475859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9a0fa38ad8145b4dbee28263230d440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastActiveList: []
+  columnHead: {fileID: 2512580293541104066, guid: 0b937edeae9216047ad61e598ca92bfb, type: 3}
 --- !u!1 &1981781985
 GameObject:
   m_ObjectHideFlags: 0

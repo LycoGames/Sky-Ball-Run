@@ -1,4 +1,5 @@
 using System.Collections;
+using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Ball
@@ -11,26 +12,21 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private float distance;
         private BallColumn ballColumn;
-
-
-
-
+        
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Obstacle"))
+            if (other.CompareTag("Obstacle")&&meshRenderer.enabled)
             {
                 effect.Play();
                 meshRenderer.enabled = false;
-                BallManager.ballManager.totalBallCount--;
                 Invoke("RemoveBall",waitForRemove);
                 Invoke("StartForwading",waitForRemove+0.05f);
             }
-            else if (other.CompareTag("Gate"))
+            else if (other.CompareTag("Gate")&&meshRenderer.enabled)
             {
                 effect.Play();
                 meshRenderer.enabled = false;
-                BallManager.ballManager.totalBallCount--;
                 Invoke("RemoveBall",waitForRemove);
             }
         }
@@ -56,6 +52,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         {
             if(ballColumn!=null)ballColumn.UnregisterColumn(this);
             transform.parent = _ballColumn.transform;
+            transform.localPosition = Vector3.zero;
             ballColumn = _ballColumn;
             ballColumn.RegisterColumn(this);
         }
@@ -63,6 +60,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         {
             ballColumn.UnregisterColumn(this);
             gameObject.SetActive(false);
+            BallManager.ballManager.totalBallCount--;
         }
 
         private void StartForwading()

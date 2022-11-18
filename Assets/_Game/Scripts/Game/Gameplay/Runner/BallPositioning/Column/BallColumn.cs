@@ -1,55 +1,62 @@
 using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.Game.Gameplay.Runner.Ball;
+using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
 using _Game.Scripts.Game.ObjectPools;
 using UnityEngine;
 
-namespace _Game.Scripts.Game.Gameplay.Runner.Ball
+namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 {
     public class BallColumn : MonoBehaviour
     {
         [SerializeField] private ColumnMover columnMover;
         [SerializeField] private float distance=0.5f;
-        private Trail trail;
         private int maxBallSize;
-        private List<Ball> balls = new List<Ball>();
+        private List<Ball.Ball> balls = new List<Ball.Ball>();
 
         public int BallCount() => balls.Count;
-        public void InitializeBallColumn(Transform follow,float _distance,int _maxBallSize,Trail _trail)
+
+        public bool CheckIsActive()
         {
-            trail = _trail;
+            if (balls.Any())
+            {
+                columnMover.IsFollow = true;
+                return true;
+            }
+            columnMover.IsFollow = false;
+            return false;
+            
+        }
+        public void InitializeBallColumn(Transform follow,float _distance,int _maxBallSize)
+        {
             maxBallSize = _maxBallSize;
             columnMover.SetFollow(follow);
         }
-
-        public void RegisterColumn(Ball ball)
+        public void RegisterColumn(Ball.Ball ball)
         {
             if (maxBallSize <= BallCount())
             {
                 ball.gameObject.SetActive(false);
+                ball.transform.parent = BallPool.ballPool.transform;
                 return;
             }
-            if(BallCount()==0)trail.IncreaseActiveBallColumnCount();
             balls.Add(ball);
-            ball.transform.localPosition = new Vector3(0, (balls.Count-1)*distance,  - 5);
+            //ball.transform.localPosition = new Vector3(0, (balls.Count-1)*distance,  - 5);
             ball.SetHeight(balls.Count-1);
         }
 
-        public void UnregisterColumn(Ball ball)
+        public void UnregisterColumn(Ball.Ball ball)
         {
             balls.Remove(ball);
             ball.transform.parent = BallPool.ballPool.transform;
-            if (BallCount() <= 0)
-            {
-                trail.DecreaseActiveBallColumnCount();
-                return;
-            }
+            if (BallCount() <= 0) return;
             SetHeight();
         }
-        public Ball GetBall(int index)
+        public Ball.Ball GetBall(int index)
         {
             if (BallCount() > index)
             {
-                Ball removedBall=balls[index];
+                Ball.Ball removedBall=balls[index];
                 UnregisterColumn(removedBall);
                 return removedBall;
             }
@@ -60,7 +67,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         {
             //TODO fazla işlem olabilir.
             float height = 0;
-            foreach (Ball ball in balls)
+            foreach (Ball.Ball ball in balls)
             {
                 ball.SetHeight(height);
                 height++;
