@@ -39,12 +39,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
 
         public void SetBall(BallColumn _ballColumn)
         {
-            if (gameObject.activeSelf == false)
-            {
-                gameObject.SetActive(true);
+            gameObject.SetActive(true);
                 meshRenderer.enabled = true;
                 BallManager.ballManager.totalBallCount++;
-            }
+                SetColumn(_ballColumn);
+                transform.localPosition = new Vector3(0,distance*(_ballColumn.BallCount()-1),-5);
+        }
+
+        public void SwapColumn(BallColumn _ballColumn)
+        {
             SetColumn(_ballColumn);
         }
 
@@ -52,7 +55,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         {
             if(ballColumn!=null)ballColumn.UnregisterColumn(this);
             transform.parent = _ballColumn.transform;
-            transform.localPosition = Vector3.zero;
             ballColumn = _ballColumn;
             ballColumn.RegisterColumn(this);
         }
@@ -60,6 +62,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Ball
         {
             ballColumn.UnregisterColumn(this);
             gameObject.SetActive(false);
+            transform.position = Vector3.zero;
             BallManager.ballManager.totalBallCount--;
         }
 

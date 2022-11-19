@@ -107,7 +107,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                         if (ballColumn.BallCount() >= currentFloor) break;
                         if (columnHeads[i].BallColumns[k].BallCount() > ballColumn.BallCount())
                         {
-                            columnHeads[i].BallColumns[k].GetBall(ballColumn.BallCount()).SetBall(ballColumn);
+                            columnHeads[i].BallColumns[k].GetBall(ballColumn.BallCount()).SwapColumn(ballColumn);
                             k--;
                         }
                     }

@@ -41,23 +41,28 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 return;
             }
             balls.Add(ball);
-            //ball.transform.localPosition = new Vector3(0, (balls.Count-1)*distance,  - 5);
             ball.SetHeight(balls.Count-1);
         }
 
         public void UnregisterColumn(Ball.Ball ball)
         {
-            balls.Remove(ball);
-            ball.transform.parent = BallPool.ballPool.transform;
+            RemoveBallList(ball);
             if (BallCount() <= 0) return;
             SetHeight();
         }
+
+        private void RemoveBallList(Ball.Ball ball)
+        {
+            balls.Remove(ball);
+            ball.transform.parent = BallPool.ballPool.transform;
+        }
+
         public Ball.Ball GetBall(int index)
         {
             if (BallCount() > index)
             {
                 Ball.Ball removedBall=balls[index];
-                UnregisterColumn(removedBall);
+                RemoveBallList(removedBall);
                 return removedBall;
             }
             return null;
