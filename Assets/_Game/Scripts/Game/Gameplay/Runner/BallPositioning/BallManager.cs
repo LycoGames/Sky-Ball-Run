@@ -2,12 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using _Game.Scripts.Game.Gameplay.Runner.Ball;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue;
 using _Game.Scripts.Game.Gameplay.Runner.Gates;
 using _Game.Scripts.Game.ObjectPools;
-using _Game.Scripts.Game.Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 {
@@ -16,7 +15,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public static BallManager ballManager;
         public int totalBallCount;
 
-        [SerializeField] private PlayerRunner playerRunner;
+        [FormerlySerializedAs("playerRunner")] [SerializeField] private PlayerController playerController;
         [SerializeField] private float distance = 0.5f;
         [SerializeField] private int maxRow = 30;
         [SerializeField] private int maxColumn = 38;
@@ -60,7 +59,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public IEnumerator InitiliazeBallManager()
         {
             yield return InstantiateBallPool();
-            yield return StartCoroutine(headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerRunner, maxFloor, maxRow));
+            yield return StartCoroutine(headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
             InstantiateStartBalls();
             headsOrganizer.SetPositionsInstantly();
             yield return null;
@@ -85,7 +84,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     BallColumn ballColumn = columnHead.BallColumns[j];
                     for (int k = 0; k < currentFloor; k++)
                     {
-                        Ball.Ball ball=ballPool.GetPooledObject().GetComponent<Ball.Ball>();
+                        Ball ball=ballPool.GetPooledObject().GetComponent<Ball>();
                         ball.SetBall(ballColumn);
                     }
                 }
@@ -145,7 +144,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     BallColumn ballColumn = headsOrganizer.ColumnHeads[i].BallColumns[j];
                     for (int k = 0; k < currentFloor && spawnBallCount > 0; k++)
                     {
-                        Ball.Ball ball = ballPool.GetPooledObject().GetComponent<Ball.Ball>();
+                        Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
                         ball.SetBall(ballColumn);
                         spawnBallCount--;
                         

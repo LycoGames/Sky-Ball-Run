@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace _Game.Scripts.Game.Player
+namespace _Game.Scripts.Game.Gameplay.Runner
 {
-    public class PlayerRunner : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         [SerializeField] private float movementSpeed = 10;
         [SerializeField] private float rotationYSpeed = 10;

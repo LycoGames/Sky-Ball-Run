@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using _Game.Scripts.Game.Player;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Serialization;
@@ -16,13 +15,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
 
         [SerializeField] private ColumnHead columnHead;
 
-        private PlayerRunner playerRunner;
+        private PlayerController playerController;
         private float distance;
 
-        public IEnumerator InitializeHeadsOrganizer(int maxColumn, float _distance, PlayerRunner _playerRunner,
+        public IEnumerator InitializeHeadsOrganizer(int maxColumn, float _distance, PlayerController playerController,
             int maxFloor, int maxRow)
         {
-            playerRunner = _playerRunner;
+            this.playerController = playerController;
             distance = _distance;
             ColumnHeads = new List<ColumnHead>();
             for (int i = 0; i < maxColumn; i++)
@@ -52,7 +51,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
             }
 
             lastActiveList = activeList;
-            playerRunner.ChangeBounds(currentDistance + distance);
+            playerController.ChangeBounds(currentDistance + distance);
         }
 
         public void SetPositionsInstantly()
@@ -76,7 +75,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
             }
 
             lastActiveList = activeList;
-            playerRunner.ChangeBounds(currentDistance + distance);
+            playerController.ChangeBounds(currentDistance + distance);
         }
 
         private bool ListChecker(List<ColumnHead> currentList)

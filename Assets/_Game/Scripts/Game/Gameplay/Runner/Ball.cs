@@ -2,7 +2,7 @@ using System.Collections;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using UnityEngine;
 
-namespace _Game.Scripts.Game.Gameplay.Runner.Ball
+namespace _Game.Scripts.Game.Gameplay.Runner
 {
     public class Ball : MonoBehaviour
     {

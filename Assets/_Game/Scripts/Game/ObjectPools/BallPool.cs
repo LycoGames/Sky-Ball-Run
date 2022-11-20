@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using _Game.Scripts.Base.ObjectPooling;
-using _Game.Scripts.Game.Gameplay.Runner.Ball;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.ObjectPools

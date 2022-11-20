@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using _Game.Scripts.Game.Gameplay.Runner.Ball;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
 using _Game.Scripts.Game.ObjectPools;
 using UnityEngine;
@@ -12,7 +11,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         [SerializeField] private ColumnMover columnMover;
         [SerializeField] private float distance=0.5f;
         private int maxBallSize;
-        private List<Ball.Ball> balls = new List<Ball.Ball>();
+        private List<Ball> balls = new List<Ball>();
 
         public int BallCount() => balls.Count;
 
@@ -32,7 +31,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             maxBallSize = _maxBallSize;
             columnMover.SetFollow(follow);
         }
-        public void RegisterColumn(Ball.Ball ball)
+        public void RegisterColumn(Ball ball)
         {
             if (maxBallSize <= BallCount())
             {
@@ -44,24 +43,24 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             ball.SetHeight(balls.Count-1);
         }
 
-        public void UnregisterColumn(Ball.Ball ball)
+        public void UnregisterColumn(Ball ball)
         {
             RemoveBallList(ball);
             if (BallCount() <= 0) return;
             SetHeight();
         }
 
-        private void RemoveBallList(Ball.Ball ball)
+        private void RemoveBallList(Ball ball)
         {
             balls.Remove(ball);
             ball.transform.parent = BallPool.ballPool.transform;
         }
 
-        public Ball.Ball GetBall(int index)
+        public Ball GetBall(int index)
         {
             if (BallCount() > index)
             {
-                Ball.Ball removedBall=balls[index];
+                Ball removedBall=balls[index];
                 RemoveBallList(removedBall);
                 return removedBall;
             }
@@ -72,7 +71,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         {
             //TODO fazla işlem olabilir.
             float height = 0;
-            foreach (Ball.Ball ball in balls)
+            foreach (Ball ball in balls)
             {
                 ball.SetHeight(height);
                 height++;

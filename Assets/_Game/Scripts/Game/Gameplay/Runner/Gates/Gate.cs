@@ -1,5 +1,4 @@
 using System;
-using _Game.Scripts.Game.Gameplay.Runner.Ball;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using UnityEngine;
 
