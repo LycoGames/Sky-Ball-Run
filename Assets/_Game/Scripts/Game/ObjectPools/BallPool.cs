@@ -11,10 +11,9 @@ namespace _Game.Scripts.Game.ObjectPools
         public IEnumerator StartInstantiatePool()
         {
             ballPool = this;
-            FillThePool();
-            yield return null;
+            yield return StartCoroutine(FillThePool());
         }
-        protected override void FillThePool()
+        protected override IEnumerator FillThePool()
         {
             pooledObjects = new List<GameObject>();
             GameObject ball;
@@ -24,6 +23,7 @@ namespace _Game.Scripts.Game.ObjectPools
                 ball.gameObject.SetActive(false);
                 pooledObjects.Add(ball.gameObject);
             }
+            yield return null;
         }
     }
 }

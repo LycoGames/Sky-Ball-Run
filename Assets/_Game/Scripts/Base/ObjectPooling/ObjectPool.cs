@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace _Game.Scripts.Base.ObjectPooling
         public int amountToPool;
     
 
-        protected abstract void FillThePool();
+        protected abstract IEnumerator FillThePool();
     
         public GameObject GetPooledObject()
         {

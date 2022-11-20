@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
 using _Game.Scripts.Game.ObjectPools;
 using UnityEngine;
 
-namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
+namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
 {
     public class BallColumn : MonoBehaviour
     {

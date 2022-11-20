@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue;
 using _Game.Scripts.Game.Gameplay.Runner.Gates;
 using _Game.Scripts.Game.ObjectPools;
@@ -34,10 +35,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         private Coroutine waitForwarding;
         
 
-        private void Start()
+        private void Awake()
         {
             ballManager = this;
-            StartCoroutine(InitiliazeBallManager());
+            //StartCoroutine(InitiliazeBallManager());
         }
 
         public void OnEnterGate(GateSpecs gateSpecs, Action DisableGate)
@@ -60,20 +61,20 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         {
             yield return InstantiateBallPool();
             yield return StartCoroutine(headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
-            InstantiateStartBalls();
-            headsOrganizer.SetPositionsInstantly();
+            yield return StartCoroutine(InstantiateStartBalls());
+            yield return StartCoroutine(headsOrganizer.SetPositionsInstantly(currentColumn));
             yield return null;
         }
 
-        private object InstantiateBallPool()
+        private IEnumerator InstantiateBallPool()
         {
             ballPool = Instantiate(ballPool);
             ballPool.amountToPool = maxRow * maxColumn * maxFloor;
-            return StartCoroutine(ballPool.StartInstantiatePool());
+            yield return StartCoroutine(ballPool.StartInstantiatePool());
             
         }
 
-        private void InstantiateStartBalls()
+        private IEnumerator InstantiateStartBalls()
         {
             List<ColumnHead> columnHeads = headsOrganizer.ColumnHeads;
             for (int i = 0; i < currentColumn; i++)
@@ -86,9 +87,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     {
                         Ball ball=ballPool.GetPooledObject().GetComponent<Ball>();
                         ball.SetBall(ballColumn);
+                        
                     }
                 }
             }
+            yield return null;
         }
         
 
@@ -150,11 +153,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                         
                     }
                 }
-                
-                yield return null;
             }
-            yield return null;
-            headsOrganizer.SetPositionsInstantly();
+            StartCoroutine(headsOrganizer.SetPositionsInstantly(currentColumn));
         }
     }
 }

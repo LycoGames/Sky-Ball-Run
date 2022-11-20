@@ -18,21 +18,33 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         private float xAngle; //Todo bunlardan kurtul
         private float yAngle;
 
+        public float VerticalInput;
+        public float HorizontalInput;
+        public bool canMove=false;
         private void OnEnable()
         {
             GetStartPosition();
             orginalBound = boundHorizontal;
+            GameManager.gameManager.onStartGame += StartMove;
         }
 
         private void OnDisable()
         {
             ResetStartPosition();
+            //GameManager.gameManager.onStartGame -= StartMove;
         }
 
         private void FixedUpdate()
         {
-            Rotate(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
-            Movement();
+            if(canMove){
+                Movement();
+            }
+            Rotate(VerticalInput, HorizontalInput);
+        }
+
+        public void StartMove()
+        {
+            canMove = true;
         }
 
         public void ChangeBounds(float changeValue)

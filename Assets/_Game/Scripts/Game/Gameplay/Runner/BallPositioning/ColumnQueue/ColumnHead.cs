@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
@@ -13,14 +14,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
         [SerializeField] private BallColumn ballColumn;
         public List<BallColumn> BallColumns { get; private set; }
 
-        public void InitializeColumnHead(int columnCount, float distance, int maxFloor)
+        public IEnumerator InitializeColumnHead(int columnCount, float distance, int maxFloor)
         {
             GameObject emptyGO = new GameObject();
             emptyGO.name = gameObject.name + " List";
-            InstantiateBallColumns(emptyGO.transform, columnCount, distance, maxFloor);
+            yield return StartCoroutine(InstantiateBallColumns(emptyGO.transform, columnCount, distance, maxFloor));
         }
 
-        public void InstantiateBallColumns(Transform parent, int columnCount, float distance, int maxFloor)
+        public IEnumerator InstantiateBallColumns(Transform parent, int columnCount, float distance, int maxFloor)
         {
             BallColumns = new List<BallColumn>();
             for (int i = 0; i < columnCount; i++)
@@ -34,7 +35,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                 {
                     BallColumns.Last().InitializeBallColumn(BallColumns[i - 1].transform, distance, maxFloor);
                 }
+                
             }
+            yield return null;
         }
 
         public bool CheckIsActive()

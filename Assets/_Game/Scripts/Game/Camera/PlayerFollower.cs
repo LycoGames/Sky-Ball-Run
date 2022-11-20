@@ -1,13 +1,15 @@
+using _Game.Scripts.Game.Gameplay.Runner;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Camera
 {
     public class PlayerFollower : MonoBehaviour
     {
-        [SerializeField] private Transform Player;
+        private Transform Player;
         private Vector3 offset;
         void Start()
         {
+            Player = GameManager.gameManager.GetPlayerController().transform;
             offset = transform.position-Player.position;
         }
 

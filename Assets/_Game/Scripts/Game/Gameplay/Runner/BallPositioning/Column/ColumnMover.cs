@@ -9,7 +9,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
         [SerializeField] private float rotateSpeed = 5;
         [SerializeField] private float minXPos = 8;
         [SerializeField] private float maxXPos = 8;
-        [SerializeField] private Rigidbody rb;
         public bool IsFollow { private get; set; }
 
         public void SetFollow(Transform _follow)

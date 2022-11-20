@@ -1,5 +1,6 @@
 using System.Collections;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
+using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner
@@ -39,7 +40,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         public void SetBall(BallColumn _ballColumn)
         {
-            gameObject.SetActive(true);
+                gameObject.SetActive(true);
                 meshRenderer.enabled = true;
                 BallManager.ballManager.totalBallCount++;
                 SetColumn(_ballColumn);

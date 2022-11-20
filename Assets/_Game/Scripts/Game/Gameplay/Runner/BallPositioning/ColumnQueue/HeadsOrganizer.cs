@@ -27,7 +27,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
             for (int i = 0; i < maxColumn; i++)
             {
                 ColumnHeads.Add(Instantiate(columnHead, transform));
-                ColumnHeads.Last().InitializeColumnHead(maxRow, distance, maxFloor);
+                yield return StartCoroutine(ColumnHeads.Last().InitializeColumnHead(maxRow, distance, maxFloor));
             }
 
             yield return null;
@@ -54,28 +54,23 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
             playerController.ChangeBounds(currentDistance + distance);
         }
 
-        public void SetPositionsInstantly()
+        public IEnumerator SetPositionsInstantly(int count)
         {
-            List<ColumnHead> activeList = new List<ColumnHead>();
-            
-            foreach (ColumnHead _columnHead in ColumnHeads)
-            {
-                if (_columnHead.CheckIsActive()) activeList.Add(_columnHead);
-            }
-            if (ListChecker(activeList)) lastActiveList = activeList;
-            int count = activeList.Count;
             int div = count / 2;
             float currentDistance = ((distance * div) - distance / 2 * (1 - (count % 2))) * -1;
             Vector3 newPos = Vector3.zero;
+            lastActiveList.Clear();
             for (int i = 0; i < count; i++)
             {
                 newPos.x = currentDistance;
-                activeList[i].transform.localPosition = newPos;
+                ColumnHeads[i].transform.localPosition = newPos;
+                ColumnHeads[i].CheckIsActive();
+                lastActiveList.Add(ColumnHeads[i]);
                 currentDistance += distance;
+                yield return null;
             }
-
-            lastActiveList = activeList;
             playerController.ChangeBounds(currentDistance + distance);
+            yield return null;
         }
 
         private bool ListChecker(List<ColumnHead> currentList)
