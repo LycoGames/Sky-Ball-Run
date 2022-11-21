@@ -150,7 +150,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<--- 5 --->
+  m_text: '     +2 --->
 
 '
   m_isRightToLeft: 0
@@ -489,15 +489,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '-
+  m_text: '^
 
     |
 
-    5
+    +2
 
-    |
 
-    -'
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -660,10 +659,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8610092382498576958}
   - component: {fileID: 5846675014258903287}
-  - component: {fileID: 1768518213777979646}
   - component: {fileID: 2516979729276899624}
+  - component: {fileID: 2079787343809184868}
   m_Layer: 0
-  m_Name: ScaleChangerGate
+  m_Name: AdderGate
   m_TagString: Gate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -699,26 +698,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 21.975536, y: 83.19471, z: 1.7466366}
   m_Center: {x: 0.06062317, y: 40.904804, z: -0.3733183}
---- !u!114 &1768518213777979646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8812267174832644585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df33ef4556474c54dad2f616ae89d16b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftGate:
-    gate: {fileID: 6887443622847216145}
-    newFloor: 1
-    newColumn: 5
-  rightGate:
-    gate: {fileID: 371632091229966095}
-    newFloor: 5
-    newColumn: 1
 --- !u!54 &2516979729276899624
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -735,3 +714,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &2079787343809184868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8812267174832644585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cbc4dd31606cb041b9572dba5eee440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftGate:
+    adderType: 0
+    addSize: 2
+  rightGate:
+    adderType: 1
+    addSize: 2

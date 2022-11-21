@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1433628155094717971}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -50,16 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41efcf24856f314f905c4c6d70c283e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacles:
-  - {fileID: 2139162488925737608, guid: f1d0ef1b8c5e11345907d9b6b9bb73e1, type: 3}
-  - {fileID: 8812267174832644585, guid: 54485c6fb8b515c49acc0c9bc2d19a4b, type: 3}
-  - {fileID: 823459156089465784, guid: 609fdf6ccddd93544b5b34dfdc3ae523, type: 3}
-  - {fileID: 823459156089465784, guid: 50318e1f15f18874395c472918d44cc6, type: 3}
-  - {fileID: 7734954175176893107, guid: 2f3550775e9e1294597f5856dda69e09, type: 3}
-  - {fileID: 8530123235479019105, guid: a2ffaf2c603727e4ba8c1ce83027e302, type: 3}
-  - {fileID: 3000927190750526723, guid: 1d63488c03624a64bb60381ede6f5ab2, type: 3}
-  - {fileID: 3000927190750526723, guid: 69ebb3f7ab2421e4c947a7055398fb11, type: 3}
   obstaclePositions:
+  - {fileID: 3171239725981075863}
   - {fileID: 770411420782239465}
 --- !u!65 &8172164857282788214
 BoxCollider:

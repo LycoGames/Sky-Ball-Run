@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd21e947bf1315a469557fd477ba54e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 20
+  movementSpeed: 30
   rotationYSpeed: 80
   rotationXSpeed: 40
   boundHorizontal: 9.6
@@ -153,13 +153,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalBallCount: 0
   playerController: {fileID: 8376767500898857333}
-  distance: 0.5
-  maxRow: 15
-  maxColumn: 15
+  distance: 1
+  maxRow: 12
+  maxColumn: 8
   maxFloor: 15
-  currentRow: 15
-  currentColumn: 15
-  currentFloor: 15
+  currentRow: 12
+  currentColumn: 3
+  currentFloor: 2
   ballPool: {fileID: 3801894025843496801, guid: 1cd81462333a6bd4996cade52b4f3ab4, type: 3}
   headsOrganizer: {fileID: 8376767500898857328}
   waitForForwarding: 0.25

@@ -25,7 +25,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             GetStartPosition();
             orginalBound = boundHorizontal;
-            GameManager.gameManager.onStartGame += StartMove;
+            GameManager.Instance.onStartGame += StartMove;
         }
 
         private void OnDisable()
@@ -45,6 +45,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         public void StartMove()
         {
             canMove = true;
+        }
+
+        public void StopMove()
+        {
+            canMove = false;
         }
 
         public void ChangeBounds(float changeValue)

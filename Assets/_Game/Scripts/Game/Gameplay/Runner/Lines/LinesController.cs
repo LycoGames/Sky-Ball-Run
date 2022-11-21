@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Lines
@@ -8,48 +10,35 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
         [SerializeField] Line linePrefab;
         [SerializeField] private int linePoolCount;
         [SerializeField] private float lineForwardBound;
-        [SerializeField] private List<Transform> linesTransforms;
+        [SerializeField] private Level level;
+        [SerializeField]private int showedLineCount;
+        [SerializeField] private float height=-0.5f;
+        
+        private List<Transform> linesTransforms=new List<Transform>();
         private bool firstRun = true;
         private int currentLine;
 
-        private void SwapLine()
+        public IEnumerator InitializeLines()
         {
-            linesTransforms[currentLine].position += linesTransforms[currentLine].forward * lineForwardBound * linePoolCount;
-            currentLine=currentLine >= linePoolCount-1?0:currentLine+1;
+            SpawnLines();
+            yield return null;
         }
-
-        private void OnEnable()
+        private void SwapLine(int index)
         {
-            if(firstRun)SpawnLines();
-            firstRun = false;//todo refactor
+            if(index+showedLineCount<linesTransforms.Count)
+            linesTransforms[index+showedLineCount].gameObject.SetActive(true);
         }
-
-        void OnDisable()
-        {
-            ResetLinePos();
-        }
-
-        private void ResetLinePos()
-        {
-            var transformParent = transform;
-            for (int i = 0; i < linePoolCount; i++)
-            {
-                linesTransforms[i].position = transformParent.position + (transformParent.forward * i * lineForwardBound);
-                currentLine = 0;
-            }
-        }
-
         private void SpawnLines()
         {
-            var transformParent = transform;
-            for (int i = 0; i < linePoolCount; i++)
+            int i = 0;
+            foreach (Level.LineInteractables lineInteractable in level.GetLineInteractables())
             {
-                Line line = Instantiate(linePrefab,
-                    transformParent.position + (transformParent.forward * i * lineForwardBound),
-                    transformParent.rotation,
-                    transformParent);
-                line.OnLinePassed += SwapLine;
-                linesTransforms.Add(line.transform);
+                Line spawnedLined = Instantiate(linePrefab);
+                linesTransforms.Add(spawnedLined.transform);
+                linesTransforms.Last().position = new Vector3(0, height, lineForwardBound * (linesTransforms.Count-1));
+                spawnedLined.InitializeLine(lineInteractable.interactables, SwapLine, linesTransforms.Count - 1);
+                if(i>=showedLineCount)spawnedLined.gameObject.SetActive(false);
+                i++;
             }
         }
     }

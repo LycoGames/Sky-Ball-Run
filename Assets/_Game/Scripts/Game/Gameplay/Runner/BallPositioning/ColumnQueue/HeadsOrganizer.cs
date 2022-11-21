@@ -29,8 +29,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                 ColumnHeads.Add(Instantiate(columnHead, transform));
                 yield return StartCoroutine(ColumnHeads.Last().InitializeColumnHead(maxRow, distance, maxFloor));
             }
-
-            yield return null;
         }
 
         public void SetPositions()
@@ -49,13 +47,19 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                 activeList[i].SetPosition(currentDistance);
                 currentDistance += distance;
             }
-
             lastActiveList = activeList;
             playerController.ChangeBounds(currentDistance + distance);
+            BallManager.Instance.currentColumn = count;
         }
 
-        public IEnumerator SetPositionsInstantly(int count)
+        public IEnumerator SetPositionsInstantly()
         {
+            List<ColumnHead> activeList = new List<ColumnHead>();
+            foreach (ColumnHead _columnHead in ColumnHeads)
+            {
+                if (_columnHead.CheckIsActive()) activeList.Add(_columnHead);
+            }
+            int count = activeList.Count;
             int div = count / 2;
             float currentDistance = ((distance * div) - distance / 2 * (1 - (count % 2))) * -1;
             Vector3 newPos = Vector3.zero;
@@ -81,7 +85,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
             {
                 if (currentList[i] != lastActiveList[i]) return false;
             }
-
             return true;
         }
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5415752329418836463}
   - component: {fileID: 5415752329418836460}
   m_Layer: 0
-  m_Name: Lines
+  m_Name: LinesController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5415752329418836461}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47,4 +47,5 @@ MonoBehaviour:
   linePrefab: {fileID: 512582270935213281, guid: 546c2af939c66a14db42e3f86e4379d9, type: 3}
   linePoolCount: 4
   lineForwardBound: 60
-  linesTransforms: []
+  level: {fileID: 11400000, guid: 291e403372e0559429e724427d3e25e2, type: 2}
+  showedLineCount: 4

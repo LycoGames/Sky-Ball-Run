@@ -12,6 +12,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         [SerializeField] private ParticleSystem effect;
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private float distance;
+        [SerializeField] private float spawmPositionZ=10f;
         private BallColumn ballColumn;
         
 
@@ -37,14 +38,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             StopAllCoroutines();
             StartCoroutine(MoveToDestination(position*distance));
         }
-
+        //TODO burada fazlalık olabilir.
         public void SetBall(BallColumn _ballColumn)
         {
                 gameObject.SetActive(true);
                 meshRenderer.enabled = true;
-                BallManager.ballManager.totalBallCount++;
+                BallManager.Instance.totalBallCount++;
                 SetColumn(_ballColumn);
-                transform.localPosition = new Vector3(0,distance*(_ballColumn.BallCount()-1),-5);
+                transform.localPosition = new Vector3(0,distance*(_ballColumn.BallCount()-1),-spawmPositionZ);
         }
 
         public void SwapColumn(BallColumn _ballColumn)
@@ -64,12 +65,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             ballColumn.UnregisterColumn(this);
             gameObject.SetActive(false);
             transform.position = Vector3.zero;
-            BallManager.ballManager.totalBallCount--;
+            BallManager.Instance.totalBallCount--;
         }
 
         private void StartForwading()
         {
-            BallManager.ballManager.StartForwading();
+            BallManager.Instance.StartForwarding();
         }
 
         private IEnumerator MoveToDestination(float height)

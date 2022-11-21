@@ -27,6 +27,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
         }
         public void InitializeBallColumn(Transform follow,float _distance,int _maxBallSize)
         {
+            BallManager.Instance.CheckingCurrentFloor += CheckFloor;
             maxBallSize = _maxBallSize;
             columnMover.SetFollow(follow);
         }
@@ -39,6 +40,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
                 return;
             }
             balls.Add(ball);
+            CheckFloor();
             ball.SetHeight(balls.Count-1);
         }
 
@@ -48,13 +50,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
             if (BallCount() <= 0) return;
             SetHeight();
         }
-
-        private void RemoveBallList(Ball ball)
-        {
-            balls.Remove(ball);
-            ball.transform.parent = BallPool.ballPool.transform;
-        }
-
+        
         public Ball GetBall(int index)
         {
             if (BallCount() > index)
@@ -75,6 +71,17 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
                 ball.SetHeight(height);
                 height++;
             }
+        }
+        private void RemoveBallList(Ball ball)
+        {
+            balls.Remove(ball);
+            ball.transform.parent = BallPool.ballPool.transform;
+        }
+
+        private void CheckFloor()
+        {
+            if (BallManager.Instance.currentFloor < balls.Count)
+                BallManager.Instance.currentFloor = balls.Count;
         }
 
 

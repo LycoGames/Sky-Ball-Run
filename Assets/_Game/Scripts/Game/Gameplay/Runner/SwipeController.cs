@@ -14,7 +14,7 @@ public class SwipeController : MonoBehaviour
     void Start()
     {
         firstTouch = Vector3.zero;
-        playerController = GameManager.gameManager.GetPlayerController();
+        playerController = GameManager.Instance.GetPlayerController();
     }
 
     void Update()
@@ -30,7 +30,6 @@ public class SwipeController : MonoBehaviour
             if (isStillTouch)
             {
                 slipOnX = CalculateSliping().x;
-                firstTouch = Input.mousePosition;
             }
             else
             {
@@ -53,6 +52,6 @@ public class SwipeController : MonoBehaviour
 
     private void MovePlayer()
     {
-        playerController.HorizontalInput = -slipOnX * sense;
+        playerController.HorizontalInput = Mathf.Clamp(-slipOnX * sense,-1,1);
     }
 }

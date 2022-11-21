@@ -1,30 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue;
 using _Game.Scripts.Game.Gameplay.Runner.Gates;
 using _Game.Scripts.Game.ObjectPools;
 using UnityEngine;
-using UnityEngine.Serialization;
+
 
 namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 {
     public class BallManager : MonoBehaviour
     {
-        public static BallManager ballManager;
+        public static BallManager Instance;
+        public Action CheckingCurrentRow;
+        public Action CheckingCurrentFloor;
         public int totalBallCount;
 
-        [FormerlySerializedAs("playerRunner")] [SerializeField] private PlayerController playerController;
+        [SerializeField] private PlayerController playerController;
         [SerializeField] private float distance = 0.5f;
-        [SerializeField] private int maxRow = 30;
-        [SerializeField] private int maxColumn = 38;
-        [SerializeField] private int maxFloor = 20;
+        public int maxRow = 30;
+        public int maxColumn = 38;
+        public int maxFloor = 20;
 
-        [SerializeField] private int currentRow = 10;
-        [SerializeField] private int currentColumn = 1;
-        [SerializeField] private int currentFloor = 1;
+        public int currentRow = 10;
+        public int currentColumn = 1;
+        public int currentFloor = 1;
 
         [SerializeField] private BallPool ballPool;
         [SerializeField] private HeadsOrganizer headsOrganizer;
@@ -37,16 +38,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         private void Awake()
         {
-            ballManager = this;
-            //StartCoroutine(InitiliazeBallManager());
+            Instance = this;
         }
-
-        public void OnEnterGate(GateSpecs gateSpecs, Action DisableGate)
+        
+        public void OnEnterGate(GateSpecs gateSpecs, Action disableGate)
         {
-            StartCoroutine(WaitUntilBallEnd(totalBallCount, gateSpecs, DisableGate));
+            StartCoroutine(WaitUntilBallEnd(totalBallCount, gateSpecs, disableGate));
         }
 
-        public void StartForwading()
+        public void StartForwarding()
         {
             if (waitForwarding != null)
             {
@@ -56,13 +56,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
             waitForwarding = StartCoroutine(Forwarding());
         }
-
-        public IEnumerator InitiliazeBallManager()
+    
+        public IEnumerator InitializeBallManager()
         {
             yield return InstantiateBallPool();
             yield return StartCoroutine(headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
             yield return StartCoroutine(InstantiateStartBalls());
-            yield return StartCoroutine(headsOrganizer.SetPositionsInstantly(currentColumn));
+            yield return StartCoroutine(headsOrganizer.SetPositionsInstantly());
             yield return null;
         }
 
@@ -84,10 +84,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 {
                     BallColumn ballColumn = columnHead.BallColumns[j];
                     for (int k = 0; k < currentFloor; k++)
-                    {
+                    { 
                         Ball ball=ballPool.GetPooledObject().GetComponent<Ball>();
-                        ball.SetBall(ballColumn);
-                        
+                       ball.SetBall(ballColumn);
                     }
                 }
             }
@@ -95,7 +94,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         }
         
 
-        public void RepositioningToForward()
+        private void RepositioningToForward()
         {
             
             for (int i = 0; i < currentColumn; i++)
@@ -107,11 +106,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     for (int k = j + 1; k < currentRow; k++)
                     {
                         if (ballColumn.BallCount() >= currentFloor) break;
-                        if (columnHeads[i].BallColumns[k].BallCount() > ballColumn.BallCount())
-                        {
-                            columnHeads[i].BallColumns[k].GetBall(ballColumn.BallCount()).SwapColumn(ballColumn);
-                            k--;
-                        }
+                        if (columnHeads[i].BallColumns[k].BallCount() <= ballColumn.BallCount()) continue;
+                        columnHeads[i].BallColumns[k].GetBall(ballColumn.BallCount()).SwapColumn(ballColumn);
+                        k--;
                     }
                 }
             }
@@ -128,7 +125,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             RepositioningToForward();
             headsOrganizer.SetPositions();
             waitForwarding = null;
-            yield return null;
         }
 
         private IEnumerator WaitUntilBallEnd(int spawnBallCount, GateSpecs gateSpecs, Action DisableGate)
@@ -140,7 +136,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             DisableGate?.Invoke();
             currentColumn = gateSpecs.newColumn;
             currentFloor = gateSpecs.newFloor;
-            for (int j = 0; j < currentRow; j++)
+            for (int j = 0; j < maxRow; j++)
             {
                 for (int i = 0; i < currentColumn; i++)
                 {
@@ -150,11 +146,76 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                         Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
                         ball.SetBall(ballColumn);
                         spawnBallCount--;
-                        
                     }
                 }
             }
-            StartCoroutine(headsOrganizer.SetPositionsInstantly(currentColumn));
+            
+            StartCoroutine(headsOrganizer.SetPositionsInstantly());
+        }
+
+        public void UpAdder(int size)
+        {
+            GetCubicForm();
+            currentFloor += size;
+            for (int i = 0; i < currentColumn; i++)
+            {
+                for (int j = 0; j < currentRow; j++)
+                {
+                    for (int k =  currentFloor - size; k < currentFloor; k++)
+                    {
+                        BallColumn ballColumn = headsOrganizer.ColumnHeads[i].BallColumns[j];
+                        Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
+                        ball.SetBall(ballColumn);
+                    }
+                }
+            }
+        }
+
+        public void RightAdder(int size)
+        {
+            GetCubicForm();
+            currentColumn += size;
+            for (int i = currentColumn-size; i < currentColumn; i++)
+            {
+                for (int j = 0; j < currentRow; j++)
+                {
+                    for (int k = 0; k < currentFloor; k++)
+                    {
+                        BallColumn ballColumn = headsOrganizer.ColumnHeads[i].BallColumns[j];
+                        Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
+                        ball.SetBall(ballColumn);
+                    }
+                }
+            }
+            headsOrganizer.SetPositions();
+        }
+
+        private void GetCubicForm()
+        {
+            currentFloor = 0;
+            currentRow = 0;
+            CheckingCurrentRow?.Invoke();
+            CheckingCurrentFloor?.Invoke();
+            for (int i = 0; i < currentColumn; i++)
+            {
+                for (int j = 0; j < currentRow; j++)
+                {
+                    for (int k = 0; k < currentFloor; k++)
+                    {
+                        BallColumn ballColumn = headsOrganizer.ColumnHeads[i].BallColumns[j];
+                        if (ballColumn.BallCount()<currentFloor)
+                        {
+                            Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
+                            ball.SetBall(ballColumn);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            
         }
     }
 }

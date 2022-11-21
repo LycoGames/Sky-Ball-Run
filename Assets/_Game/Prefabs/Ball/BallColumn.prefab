@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   columnMover: {fileID: 5835682661163503595}
-  distance: 0.5
+  distance: 1
 --- !u!114 &5835682661163503595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,8 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f4f6d669af4c114b855dc82ecd100f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 0.5
+  distance: 1
   rotateSpeed: 20
   minXPos: -8.75
   maxXPos: 8.75
-  rb: {fileID: 0}

@@ -16,6 +16,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
 
         public IEnumerator InitializeColumnHead(int columnCount, float distance, int maxFloor)
         {
+            BallManager.Instance.CheckingCurrentRow += CurrentRow;
             GameObject emptyGO = new GameObject();
             emptyGO.name = gameObject.name + " List";
             yield return StartCoroutine(InstantiateBallColumns(emptyGO.transform, columnCount, distance, maxFloor));
@@ -43,7 +44,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
         public bool CheckIsActive()
         {
             //TODO Çok maliyetli
-            int count=0;
+            int  count = ActiveColumnCount();
+            if (count > 0) return true;
+            return false;
+        }
+
+        private int ActiveColumnCount()
+        {
+            int count = 0;
             foreach (BallColumn ballColumn in BallColumns)
             {
                 if (ballColumn.CheckIsActive())
@@ -51,18 +59,23 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                     count++;
                 }
             }
-            if (count > 0) return true;
-            return false;
+
+            return count;
         }
 
         public void SetPosition(float posX)
         {
-            print("calist");
             StopAllCoroutines();
             StartCoroutine(RotateToDestination(posX));
             StartCoroutine(MoveToDestination(posX));
         }
 
+        private void CurrentRow()
+        {
+            int count = ActiveColumnCount();
+            if (count > BallManager.Instance.currentRow)
+                BallManager.Instance.currentRow = count;
+        }
         private IEnumerator RotateToDestination(float newX)
         {
             bool isPositive = (transform.localPosition.x - newX) >= 0;
@@ -74,9 +87,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                     rotateSpeed * Time.deltaTime);
                 yield return null;
             }
-
             transform.localRotation = Quaternion.Euler(0, 0, 0);
-            yield return null;
         }
 
         private IEnumerator MoveToDestination(float newX)

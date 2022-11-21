@@ -6,11 +6,10 @@ namespace _Game.Scripts.Game.Camera
     public class PlayerFollower : MonoBehaviour
     {
         private Transform Player;
-        private Vector3 offset;
+        [SerializeField] private Vector3 offset;
         void Start()
         {
-            Player = GameManager.gameManager.GetPlayerController().transform;
-            offset = transform.position-Player.position;
+            Player = GameManager.Instance.GetPlayerController().transform;
         }
 
     
