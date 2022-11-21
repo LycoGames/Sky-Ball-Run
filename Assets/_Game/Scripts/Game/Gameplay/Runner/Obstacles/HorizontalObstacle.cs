@@ -12,9 +12,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Obstacles
         
         private void OnEnable()
         {
-            Color color = material.color;
-            color.a = 255;
-            material.color = color;
+            material.color = new Color(material.color.r,material.color.g,material.color.b,1);
         }
 
         private void OnTriggerEnter(Collider other)
