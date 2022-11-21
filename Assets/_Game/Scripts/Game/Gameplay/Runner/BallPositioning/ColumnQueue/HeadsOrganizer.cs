@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using _Game.Scripts.Game.Gameplay.Runner.Player;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Serialization;
@@ -33,11 +34,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
 
         public void SetPositions()
         {
-            List<ColumnHead> activeList = new List<ColumnHead>();
-            foreach (ColumnHead _columnHead in ColumnHeads)
-            {
-                if (_columnHead.CheckIsActive()) activeList.Add(_columnHead);
-            }
+            List<ColumnHead> activeList = GetActiveList();
             if (ListChecker(activeList)) return;
             int count = activeList.Count;
             int div = count / 2;
@@ -48,17 +45,29 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                 currentDistance += distance;
             }
             lastActiveList = activeList;
+            activeList.AddRange(ColumnHeads);
+            activeList=activeList.Distinct().ToList();
+            ColumnHeads.Clear();
+            ColumnHeads.AddRange(activeList);
             playerController.ChangeBounds(currentDistance + distance);
             BallManager.Instance.currentColumn = count;
         }
+        
 
-        public IEnumerator SetPositionsInstantly()
+        public List<ColumnHead> GetActiveList()
         {
             List<ColumnHead> activeList = new List<ColumnHead>();
             foreach (ColumnHead _columnHead in ColumnHeads)
             {
                 if (_columnHead.CheckIsActive()) activeList.Add(_columnHead);
             }
+
+            return activeList;
+        }
+
+        public IEnumerator SetPositionsInstantly()
+        {
+            var activeList = GetActiveList();
             int count = activeList.Count;
             int div = count / 2;
             float currentDistance = ((distance * div) - distance / 2 * (1 - (count % 2))) * -1;

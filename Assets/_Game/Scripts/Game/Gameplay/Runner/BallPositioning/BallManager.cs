@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue;
 using _Game.Scripts.Game.Gameplay.Runner.Gates;
+using _Game.Scripts.Game.Gameplay.Runner.Player;
 using _Game.Scripts.Game.ObjectPools;
 using UnityEngine;
 
@@ -40,6 +41,44 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         {
             Instance = this;
         }
+        public IEnumerator  UpAdder(int size)
+        {
+            yield return StartCoroutine(GetCubicForm());
+            currentFloor += size;
+            for (int i = 0; i < currentColumn; i++)
+            {
+                for (int j = 0; j < currentRow; j++)
+                {
+                    for (int k =  currentFloor - size; k < currentFloor; k++)
+                    {
+                        BallColumn ballColumn = headsOrganizer.ColumnHeads[i].BallColumns[j];
+                        Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
+                        ball.SetBall(ballColumn);
+                    }
+                }
+            }
+            yield return null;
+        }
+
+        public IEnumerator RightAdder(int size)
+        {
+            yield return StartCoroutine(GetCubicForm());
+            currentColumn += size;
+            for (int i = currentColumn-size; i < currentColumn; i++)
+            {
+                for (int j = 0; j < currentRow; j++)
+                {
+                    for (int k = 0; k < currentFloor; k++)
+                    {
+                        BallColumn ballColumn = headsOrganizer.ColumnHeads[i].BallColumns[j];
+                        Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
+                        ball.SetBall(ballColumn);
+                    }
+                }
+            }
+            headsOrganizer.SetPositions();
+            yield return null;
+        }
         
         public void OnEnterGate(GateSpecs gateSpecs, Action disableGate)
         {
@@ -59,7 +98,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
     
         public IEnumerator InitializeBallManager()
         {
-            yield return InstantiateBallPool();
+            yield return StartCoroutine(InstantiateBallPool());
             yield return StartCoroutine(headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
             yield return StartCoroutine(InstantiateStartBalls());
             yield return StartCoroutine(headsOrganizer.SetPositionsInstantly());
@@ -151,51 +190,17 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             }
             
             StartCoroutine(headsOrganizer.SetPositionsInstantly());
+            Debug.Log("bitti");
         }
+        
 
-        public void UpAdder(int size)
-        {
-            GetCubicForm();
-            currentFloor += size;
-            for (int i = 0; i < currentColumn; i++)
-            {
-                for (int j = 0; j < currentRow; j++)
-                {
-                    for (int k =  currentFloor - size; k < currentFloor; k++)
-                    {
-                        BallColumn ballColumn = headsOrganizer.ColumnHeads[i].BallColumns[j];
-                        Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
-                        ball.SetBall(ballColumn);
-                    }
-                }
-            }
-        }
-
-        public void RightAdder(int size)
-        {
-            GetCubicForm();
-            currentColumn += size;
-            for (int i = currentColumn-size; i < currentColumn; i++)
-            {
-                for (int j = 0; j < currentRow; j++)
-                {
-                    for (int k = 0; k < currentFloor; k++)
-                    {
-                        BallColumn ballColumn = headsOrganizer.ColumnHeads[i].BallColumns[j];
-                        Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
-                        ball.SetBall(ballColumn);
-                    }
-                }
-            }
-            headsOrganizer.SetPositions();
-        }
-
-        private void GetCubicForm()
+        private IEnumerator GetCubicForm()
         {
             currentFloor = 0;
             currentRow = 0;
             CheckingCurrentRow?.Invoke();
             CheckingCurrentFloor?.Invoke();
+            yield return null;
             for (int i = 0; i < currentColumn; i++)
             {
                 for (int j = 0; j < currentRow; j++)
@@ -215,7 +220,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
-            
+
+            yield return null;
         }
     }
 }

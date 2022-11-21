@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace _Game.Scripts.Game.Gameplay.Runner
+namespace _Game.Scripts.Game.Gameplay.Runner.Player
 {
     public class PlayerController : MonoBehaviour
     {
@@ -31,14 +31,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         private void OnDisable()
         {
             ResetStartPosition();
-            //GameManager.gameManager.onStartGame -= StartMove;
+            GameManager.Instance.onStartGame -= StartMove;
         }
 
         private void FixedUpdate()
         {
-            if(canMove){
-                Movement();
-            }
+            if(canMove)Movement();
             Rotate(VerticalInput, HorizontalInput);
         }
 

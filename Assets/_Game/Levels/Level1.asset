@@ -29,6 +29,7 @@ MonoBehaviour:
   - interactables:
     - {fileID: 2139162488925737608, guid: f1d0ef1b8c5e11345907d9b6b9bb73e1, type: 3}
     - {fileID: 2139162488925737608, guid: f1d0ef1b8c5e11345907d9b6b9bb73e1, type: 3}
+  - interactables: []
   - interactables:
     - {fileID: 823459156089465784, guid: 609fdf6ccddd93544b5b34dfdc3ae523, type: 3}
     - {fileID: 823459156089465784, guid: 50318e1f15f18874395c472918d44cc6, type: 3}
@@ -44,6 +45,7 @@ MonoBehaviour:
   - interactables:
     - {fileID: 823459156089465784, guid: 609fdf6ccddd93544b5b34dfdc3ae523, type: 3}
     - {fileID: 823459156089465784, guid: 50318e1f15f18874395c472918d44cc6, type: 3}
+  - interactables: []
   - interactables:
     - {fileID: 8812267174832644585, guid: cbae22f2b0393b74caa14d0b08168818, type: 3}
   - interactables: []
@@ -55,9 +57,9 @@ MonoBehaviour:
   - interactables:
     - {fileID: 3000927190750526723, guid: 1d63488c03624a64bb60381ede6f5ab2, type: 3}
     - {fileID: 3000927190750526723, guid: 69ebb3f7ab2421e4c947a7055398fb11, type: 3}
+  - interactables: []
   - interactables:
     - {fileID: 8812267174832644585, guid: cbae22f2b0393b74caa14d0b08168818, type: 3}
-  - interactables: []
   - interactables:
     - {fileID: 8937683536832051971, guid: 804147eca0e55cf49b15f2a61a5fc1fc, type: 3}
   - interactables: []

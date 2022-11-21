@@ -80,6 +80,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
 
         private void CheckFloor()
         {
+            if(balls.Count>5)Debug.Break();
             if (BallManager.Instance.currentFloor < balls.Count)
                 BallManager.Instance.currentFloor = balls.Count;
         }

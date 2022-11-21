@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 {
-    public class Gate : MonoBehaviour
+    public class ShapeChangerGate : MonoBehaviour
     {
         [SerializeField] private GateSpecs leftGate;
         [SerializeField] private GateSpecs rightGate;
