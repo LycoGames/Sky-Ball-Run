@@ -45,10 +45,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                 currentDistance += distance;
             }
             lastActiveList = activeList;
-            activeList.AddRange(ColumnHeads);
-            activeList=activeList.Distinct().ToList();
-            ColumnHeads.Clear();
-            ColumnHeads.AddRange(activeList);
+            ReIndexingList(activeList);
             playerController.ChangeBounds(currentDistance + distance);
             BallManager.Instance.currentColumn = count;
         }
@@ -96,5 +93,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
             }
             return true;
         }
+        private void ReIndexingList(List<ColumnHead> activeList)
+        {
+            activeList.AddRange(ColumnHeads);
+            activeList = activeList.Distinct().ToList();
+            ColumnHeads.Clear();
+            ColumnHeads.AddRange(activeList);
+        }
+
     }
 }

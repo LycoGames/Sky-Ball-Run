@@ -57,7 +57,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
-            yield return null;
         }
 
         public IEnumerator RightAdder(int size)
@@ -77,7 +76,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 }
             }
             headsOrganizer.SetPositions();
-            yield return null;
         }
         
         public void OnEnterGate(GateSpecs gateSpecs, Action disableGate)
@@ -92,7 +90,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 currentWaitingTime = waitForForwarding;
                 return;
             }
-
             waitForwarding = StartCoroutine(Forwarding());
         }
     
@@ -110,7 +107,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             ballPool = Instantiate(ballPool);
             ballPool.amountToPool = maxRow * maxColumn * maxFloor;
             yield return StartCoroutine(ballPool.StartInstantiatePool());
-            
         }
 
         private IEnumerator InstantiateStartBalls()
@@ -188,9 +184,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
-            
             StartCoroutine(headsOrganizer.SetPositionsInstantly());
-            Debug.Log("bitti");
         }
         
 
@@ -200,7 +194,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             currentRow = 0;
             CheckingCurrentRow?.Invoke();
             CheckingCurrentFloor?.Invoke();
-            yield return null;
             for (int i = 0; i < currentColumn; i++)
             {
                 for (int j = 0; j < currentRow; j++)
@@ -220,7 +213,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
-
             yield return null;
         }
     }
