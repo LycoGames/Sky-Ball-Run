@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.Game.Gameplay.Runner.LevelSystems;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Lines
@@ -8,9 +9,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
     public class LinesController : MonoBehaviour
     {
         [SerializeField] Line linePrefab;
-        [SerializeField] private int linePoolCount;
         [SerializeField] private float lineForwardBound;
-        [SerializeField] private Level.Level level;
+        [SerializeField] private Level level;
         [SerializeField] private int showedLineCount;
         [SerializeField] private float height = -0.5f;
 
@@ -32,7 +32,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
         private void SpawnLines()
         {
             int i = 0;
-            foreach (Level.Level.LineInteractables lineInteractable in level.GetLineInteractables())
+            foreach (Level.LineInteractables lineInteractable in level.GetLineInteractables())
             {
                 Line spawnedLined = Instantiate(linePrefab);
                 linesTransforms.Add(spawnedLined.transform);

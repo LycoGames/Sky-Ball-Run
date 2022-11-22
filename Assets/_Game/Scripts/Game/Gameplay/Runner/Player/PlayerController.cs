@@ -95,12 +95,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
 
         private float LeftRightAngle(float rotateTo)
         {
-            rotateTo = Math.Clamp(rotateTo, -1, 1);
+            rotateTo = Mathf.Clamp(rotateTo, -1, 1);
             float xPos = transform.position.x;
             if ((xPos == boundHorizontal && rotateTo > 0) || (xPos == -boundHorizontal && rotateTo < 0)) rotateTo = 0;
             if (rotateTo != 0)
             {
-                yAngle = Math.Clamp(yAngle + rotationYSpeed * rotateTo * Time.deltaTime, -maxRotationDegree,
+                yAngle = Mathf.Clamp(yAngle + rotationYSpeed * rotateTo * Time.deltaTime, -maxRotationDegree,
                     maxRotationDegree);
             }
             else

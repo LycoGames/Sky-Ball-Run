@@ -7,10 +7,10 @@ namespace _Game.Scripts.Game.ObjectPools
 {
     public class BallPool : ObjectPool
     {
-        public static BallPool ballPool;
+        public static BallPool Instance;
         public IEnumerator StartInstantiatePool()
         {
-            ballPool = this;
+            Instance = this;
             yield return StartCoroutine(FillThePool());
         }
         protected override IEnumerator FillThePool()

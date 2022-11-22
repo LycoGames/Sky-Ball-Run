@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - Gate
+  - BallDropper
   layers:
   - Default
   - TransparentFX

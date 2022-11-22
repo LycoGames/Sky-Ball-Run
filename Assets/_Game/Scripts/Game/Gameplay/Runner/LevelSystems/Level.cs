@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Game.Scripts.Game.Gameplay.Runner.Level
+namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
 {
     [CreateAssetMenu(menuName = "Level", fileName = "LevelScript")]
     public class Level : ScriptableObject

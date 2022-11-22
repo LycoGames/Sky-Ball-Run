@@ -83,6 +83,26 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             StartCoroutine(WaitUntilBallEnd(totalBallCount, newColumn, newFloor,disableGate));
         }
 
+        public List<Ball> GetFloors(int floorCount)
+        {
+            List<Ball> balls = new List<Ball>();
+            List<ColumnHead> columnHeads=headsOrganizer.ColumnHeads;
+            for (int i = 0; i < currentColumn; i++)
+            {
+                ColumnHead columnHead = columnHeads[i];
+                for (int j = 0; j < currentRow; j++)
+                {
+                    BallColumn ballColumn = columnHead.BallColumns[j];
+                    for (int k = 0; k < floorCount; k++)
+                    { 
+                        balls.Add(ballColumn.GetBallReference(k));
+                    }
+                }
+            }
+
+            return balls;
+        }
+
         public void StartForwarding()
         {
             if (waitForwarding != null)

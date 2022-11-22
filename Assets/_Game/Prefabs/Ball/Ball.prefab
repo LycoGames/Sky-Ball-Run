@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8156627942773450259}
   - component: {fileID: 4544383669042015662}
   - component: {fileID: 2313657159718231233}
+  - component: {fileID: -4447375370612247334}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -117,6 +118,26 @@ MonoBehaviour:
   meshRenderer: {fileID: 4544383669042015663}
   distance: 1
   spawmPositionZ: 10
+  ballMover: {fileID: -4447375370612247334}
+--- !u!114 &-4447375370612247334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4544383669042015659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0cbcf07e9ead9e4ba4e0037fe983245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 25
+  yBound: -6.3
+  xBound: 8.5
+  zMinBound: 0
+  zMaxBound: 25
+  bounceAngle: 15
+  rotationXSpeed: 40
 --- !u!1 &5701153568002574733
 GameObject:
   m_ObjectHideFlags: 0

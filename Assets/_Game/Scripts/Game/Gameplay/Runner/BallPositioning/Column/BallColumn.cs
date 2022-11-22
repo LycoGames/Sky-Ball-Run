@@ -35,7 +35,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
             if (maxBallSize <= BallCount())
             {
                 ball.gameObject.SetActive(false);
-                ball.transform.parent = BallPool.ballPool.transform;
+                ball.transform.parent = BallPool.Instance.transform;
                 return;
             }
             balls.Add(ball);
@@ -49,7 +49,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
             if (BallCount() <= 0) return;
             SetHeight();
         }
-        
+
+        public Ball GetBallReference(int index)
+        {
+            if (BallCount() > index) return balls[index];
+            return null;
+        }
         public Ball GetBall(int index)
         {
             if (BallCount() > index)
@@ -74,7 +79,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
         private void RemoveBallList(Ball ball)
         {
             balls.Remove(ball);
-            ball.transform.parent = BallPool.ballPool.transform;
+            ball.transform.parent = BallPool.Instance.transform;
         }
 
         private void CheckFloor()
