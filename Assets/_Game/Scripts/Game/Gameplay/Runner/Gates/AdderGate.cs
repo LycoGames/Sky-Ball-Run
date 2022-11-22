@@ -10,37 +10,37 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
     {
         [SerializeField] private AdderGateSpecs leftGate;
         [SerializeField] private AdderGateSpecs rightGate;
-        private bool isFirstCall;
+
+        [Serializable]
+        public struct AdderGateSpecs
+        {
+            public AdderType adderType;
+            public int addSize;
+        }
+
+        public enum AdderType
+        {
+            RightAdder,
+            UpAdder
+        }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player") & !isFirstCall)
+            if (other.CompareTag("Player"))
             {
                 AdderGateSpecs selectedGate = other.transform.position.x >= 0 ? rightGate : leftGate;
-                if (selectedGate.adderType == AdderType.RightAdder)
+                switch (selectedGate.adderType)
                 {
-                    BallManager.Instance.StartCoroutine(BallManager.Instance.RightAdder(selectedGate.addSize));
+                    case AdderType.RightAdder:
+                        BallManager.Instance.StartCoroutine(BallManager.Instance.RightAdder(selectedGate.addSize));
+                        break;
+                    case AdderType.UpAdder:
+                        BallManager.Instance.StartCoroutine(BallManager.Instance.UpAdder(selectedGate.addSize));
+                        break;
                 }
-                else
-                {
-                    BallManager.Instance.StartCoroutine(BallManager.Instance.UpAdder(selectedGate.addSize));
-                }
-
                 gameObject.SetActive(false);
             }
         }
     }
-
-    [Serializable]
-    public struct AdderGateSpecs
-    {
-        public AdderType adderType;
-        public int addSize;
-    }
-
-    public enum AdderType
-    {
-        RightAdder,
-        UpAdder
-    }
+    
 }

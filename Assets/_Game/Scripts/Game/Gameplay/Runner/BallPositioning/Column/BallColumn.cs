@@ -8,9 +8,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
     public class BallColumn : MonoBehaviour
     {
         [SerializeField] private ColumnMover columnMover;
-        [SerializeField] private float distance=0.5f;
         private int maxBallSize;
-        private List<Ball> balls = new List<Ball>();
+        private readonly List<Ball> balls = new List<Ball>();
 
         public int BallCount() => balls.Count;
 
@@ -25,7 +24,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
             return false;
             
         }
-        public void InitializeBallColumn(Transform follow,float _distance,int _maxBallSize)
+        public void InitializeBallColumn(Transform follow,int _maxBallSize)
         {
             BallManager.Instance.CheckingCurrentFloor += CheckFloor;
             maxBallSize = _maxBallSize;
@@ -80,7 +79,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
 
         private void CheckFloor()
         {
-            if(balls.Count>5)Debug.Break();
             if (BallManager.Instance.currentFloor < balls.Count)
                 BallManager.Instance.currentFloor = balls.Count;
         }

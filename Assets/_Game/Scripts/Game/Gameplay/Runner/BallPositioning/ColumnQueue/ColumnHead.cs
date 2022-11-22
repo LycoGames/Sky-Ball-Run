@@ -30,11 +30,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                 BallColumns.Add(Instantiate(ballColumn, parent));
                 if (i == 0)
                 {
-                    BallColumns.Last().InitializeBallColumn(transform, distance, maxFloor);
+                    BallColumns.Last().InitializeBallColumn(transform, maxFloor);
                 }
                 else
                 {
-                    BallColumns.Last().InitializeBallColumn(BallColumns[i - 1].transform, distance, maxFloor);
+                    BallColumns.Last().InitializeBallColumn(BallColumns[i - 1].transform, maxFloor);
                 }
                 
             }

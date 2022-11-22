@@ -78,9 +78,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             headsOrganizer.SetPositions();
         }
         
-        public void OnEnterGate(GateSpecs gateSpecs, Action disableGate)
+        public void OnEnterGate(int newColumn,int newFloor, Action disableGate)
         {
-            StartCoroutine(WaitUntilBallEnd(totalBallCount, gateSpecs, disableGate));
+            StartCoroutine(WaitUntilBallEnd(totalBallCount, newColumn, newFloor,disableGate));
         }
 
         public void StartForwarding()
@@ -162,15 +162,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             waitForwarding = null;
         }
 
-        private IEnumerator WaitUntilBallEnd(int spawnBallCount, GateSpecs gateSpecs, Action DisableGate)
+        private IEnumerator WaitUntilBallEnd(int spawnBallCount, int newColumn,int newFloor, Action DisableGate)
         {
             while (totalBallCount > 0)
             {
                 yield return null;
             }
             DisableGate?.Invoke();
-            currentColumn = gateSpecs.newColumn;
-            currentFloor = gateSpecs.newFloor;
+            currentColumn = newColumn>=maxColumn?maxColumn:newColumn;
+            currentFloor = newFloor>=maxFloor?maxFloor:newFloor;
             for (int j = 0; j < maxRow; j++)
             {
                 for (int i = 0; i < currentColumn; i++)
