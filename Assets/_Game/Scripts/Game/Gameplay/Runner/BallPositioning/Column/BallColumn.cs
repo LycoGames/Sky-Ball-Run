@@ -9,7 +9,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
     {
         [SerializeField] private ColumnMover columnMover;
         private int maxBallSize;
-        private readonly List<Ball> balls = new List<Ball>();
+        [SerializeField] private List<Ball> balls = new List<Ball>();
 
         public int BallCount() => balls.Count;
 

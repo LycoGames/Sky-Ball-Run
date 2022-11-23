@@ -372,7 +372,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e8bf9bec5439947a80822c64a04049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barricades: []
+  barricades:
+  - {fileID: 3088132392522964860}
+  - {fileID: 6766669541099827727}
   openTime: 2
 --- !u!1 &7758086736114941033
 GameObject:

@@ -27,6 +27,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             dropState = false;
         }
 
+        private void OnDisable()
+        {
+            dropState = false;
+        }
+
         private void Update()
         {
             MoveForward();

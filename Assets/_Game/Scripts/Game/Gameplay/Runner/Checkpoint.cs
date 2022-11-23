@@ -43,11 +43,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             List<Ball> balls = BallManager.Instance.GetFloors(removeFloorCount);
             foreach (Ball ball in balls)
             {
+                if (ball == null)
+                {
+                    continue;
+                }
                 ball.StartMoveToPool();
                 ball.transform.parent = transform;
+                ballCount++;
             }
-
-            ballCount = balls.Count;
             StartCoroutine(OnAllBallCollected(balls));
         }
 
@@ -80,6 +83,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             foreach (Ball ball in balls)
             {
+                if(ball==null)continue;
                 ball.gameObject.SetActive(false);
                 ball.transform.parent = BallPool.Instance.transform;
                 ball.transform.localPosition = Vector3.zero;

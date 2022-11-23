@@ -38,6 +38,9 @@ MonoBehaviour:
   - interactables: []
   - interactables:
     - {fileID: 3919331419495014668, guid: df2701af46309e34899f634992ad1ff0, type: 3}
+  - interactables: []
+  - interactables:
+    - {fileID: 1433628155094717971, guid: bb603abcb51ac5943ab74a5172b8026a, type: 3}
   - interactables:
     - {fileID: 8937683536832051971, guid: 804147eca0e55cf49b15f2a61a5fc1fc, type: 3}
   - interactables: []

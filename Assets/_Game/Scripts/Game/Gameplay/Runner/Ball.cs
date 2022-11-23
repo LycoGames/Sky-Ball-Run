@@ -25,6 +25,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         private void OnDisable()
         {
             ballMover.enabled = false;
+            
         }
 
         private void OnTriggerEnter(Collider other)
@@ -60,30 +61,30 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
                 gameObject.SetActive(true);
                 meshRenderer.enabled = true;
+                SetParent(_ballColumn);
                 BallManager.Instance.totalBallCount++;
-                SetColumn(_ballColumn);
                 transform.rotation=Quaternion.Euler(0,0,0);
-                transform.localPosition = new Vector3(0,distance*(_ballColumn.BallCount()-1),-spawmPositionZ);
-     
+                transform.localPosition = new Vector3(0,distance*(_ballColumn.BallCount()),-spawmPositionZ);
+                SetColumn(_ballColumn);
         }
 
+       
         public void SwapColumn(BallColumn _ballColumn)
         {
+            ballColumn.UnregisterColumn(this);
+            SetParent(_ballColumn);
             SetColumn(_ballColumn);
         }
 
         public void SetColumn(BallColumn _ballColumn)
         {
-            if(ballColumn!=null)ballColumn.UnregisterColumn(this);
-            transform.parent = _ballColumn.transform;
             ballColumn = _ballColumn;
             ballColumn.RegisterColumn(this);
         }
         private void RemoveBall()
-        {
+        {  
             ballColumn.UnregisterColumn(this);
             gameObject.SetActive(false);
-            transform.position = Vector3.zero;
             BallManager.Instance.totalBallCount--;
         }
 
@@ -105,5 +106,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             transform.localPosition = newPos;
             yield return null;
         }
+        private void SetParent(BallColumn _ballColumn)
+        {
+            transform.parent = _ballColumn.transform;
+        }
+
     }
 }

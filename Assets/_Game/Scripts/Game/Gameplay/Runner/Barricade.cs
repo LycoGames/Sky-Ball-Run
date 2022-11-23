@@ -12,7 +12,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             foreach (Transform barricade in barricades)
             {
-                //barricade.DORotate(new Vector3(0,0,90),openTime);
+                barricade.DORotate(new Vector3(0,0,90),openTime,RotateMode.LocalAxisAdd);
             }
         }
     }
