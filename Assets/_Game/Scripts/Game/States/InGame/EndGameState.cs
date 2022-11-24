@@ -44,16 +44,14 @@ namespace _Game.Scripts.Game.States.InGame
         public void SubscribeToComponentChangeDelegates()
         {
       
-            endGameComponent.OnSuccess += Success;
-            endGameComponent.OnFail += Fail;
+ 
         }
 
 
         public void UnsubscribeToComponentChangeDelegates()
         {
 
-            endGameComponent.OnSuccess -= Success;
-            endGameComponent.OnFail -= Fail;
+   
         }
 
         public void SubscribeToCanvasRequestDelegates()
@@ -69,44 +67,7 @@ namespace _Game.Scripts.Game.States.InGame
 
         #region Changes
 
-        private void ChangeFinalPhaseCannonballCount(string score, string targetScore)
-        {
-            endGameCanvas.ChangeCannonballCount(score, targetScore);
-        }
-
-        private void FinalPhase()
-        {
-            endGameCanvas.EnableFinalPhaseObjects();
-        }
-
-        private void EndGame()
-        {
-            endGameCanvas.EnableEndGameObjects();
-        }
-
-        private void Success()
-        {
-            endGameCanvas.EnableEndGameObjects();
-            endGameCanvas.EnableSuccessObjects();
-        }
-
-        private void Fail()
-        {
-            endGameCanvas.EnableEndGameObjects();
-            endGameCanvas.EnableFailObjects();
-        }
-
-        private void ChangeCompletedLevel(string completedLevel)
-        {
-            endGameCanvas.ChangeCompletedLevelText(completedLevel);
-        }
-
-        private void ChangeLevel(string currentLevel, string nextLevel)
-        {
-            endGameCanvas.ChangeCurrentLevel(currentLevel);
-            endGameCanvas.ChangeNextLevel(nextLevel);
-        }
-
+        
         #endregion
 
         private void ReturnToMain()

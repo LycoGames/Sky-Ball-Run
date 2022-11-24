@@ -2,6 +2,7 @@ using _Game.Scripts.Base.Component;
 using _Game.Scripts.Base.State;
 using _Game.Scripts.Game.Components;
 using _Game.Scripts.Game.Enums;
+using _Game.Scripts.Game.UserInterfaces.Loading;
 using _Game.Scripts.Game.UserInterfaces.Splash;
 
 namespace _Game.Scripts.Game.States.Splash
@@ -49,7 +50,7 @@ namespace _Game.Scripts.Game.States.Splash
 
         private void StartLoadingSlider(float time)
         {
-            loadingGameCanvas.StartSlider(time);
+            //loadingGameCanvas.StartSlider(time);
         }
 
 

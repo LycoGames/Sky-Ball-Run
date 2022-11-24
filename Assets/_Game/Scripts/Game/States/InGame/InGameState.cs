@@ -60,8 +60,8 @@ namespace _Game.Scripts.Game.States.InGame
 
         private void ChangeLevel(string text, string txt)
         {
-            inGameCanvas.ChangeCurrentLevel(text);
-            inGameCanvas.ChangeNextLevel(txt);
+            // inGameCanvas.ChangeCurrentLevel(text);
+            // inGameCanvas.ChangeNextLevel(txt);
         }
 
         private void RequestEndGame()
