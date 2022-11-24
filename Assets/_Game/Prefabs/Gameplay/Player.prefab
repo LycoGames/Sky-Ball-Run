@@ -159,7 +159,7 @@ MonoBehaviour:
   maxFloor: 15
   currentRow: 12
   currentColumn: 3
-  currentFloor: 2
+  currentFloor: 5
   ballPool: {fileID: 3801894025843496801, guid: 1cd81462333a6bd4996cade52b4f3ab4, type: 3}
   headsOrganizer: {fileID: 8376767500898857328}
   waitForForwarding: 0.25

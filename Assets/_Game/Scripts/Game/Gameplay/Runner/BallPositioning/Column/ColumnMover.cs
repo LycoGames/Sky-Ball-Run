@@ -18,7 +18,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
 
         void FixedUpdate()
         {
-            if (!IsFollow) return;
+            //if (!IsFollow) return;
             SetPosition();
             SetRotation();
         }

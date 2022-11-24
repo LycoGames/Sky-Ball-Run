@@ -319,7 +319,7 @@ MonoBehaviour:
   barricade: {fileID: 8825915993159668822, guid: 52ee12ee9fff7c043ae6eb7a7893ae57, type: 3}
   moverLine: {fileID: 353340694105857236}
   removeFloorCount: 1
-  coverCloseTime: 2
+  coverCloseTime: 0.2
 --- !u!1 &2045465292691916051
 GameObject:
   m_ObjectHideFlags: 0

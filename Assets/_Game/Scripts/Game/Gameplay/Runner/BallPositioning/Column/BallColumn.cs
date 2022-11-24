@@ -20,16 +20,18 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
                 columnMover.IsFollow = true;
                 return true;
             }
+
             columnMover.IsFollow = false;
             return false;
-            
         }
-        public void InitializeBallColumn(Transform follow,int _maxBallSize)
+
+        public void InitializeBallColumn(Transform follow, int _maxBallSize)
         {
             BallManager.Instance.CheckingCurrentFloor += CheckFloor;
             maxBallSize = _maxBallSize;
             columnMover.SetFollow(follow);
         }
+
         public void RegisterColumn(Ball ball)
         {
             if (maxBallSize <= BallCount())
@@ -38,9 +40,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
                 ball.transform.parent = BallPool.Instance.transform;
                 return;
             }
+
             balls.Add(ball);
             CheckFloor();
-            ball.SetHeight(balls.Count-1);
+            ball.SetHeight(balls.Count - 1);
+        }
+
+        public void CustomUnRegister(Ball ball)
+        {
+            if (balls.Contains(ball)) balls.Remove(ball);
         }
 
         public void UnregisterColumn(Ball ball)
@@ -55,17 +63,19 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
             if (BallCount() > index) return balls[index];
             return null;
         }
+
         public Ball GetBall(int index)
         {
             if (BallCount() > index)
             {
-                Ball removedBall=balls[index];
+                Ball removedBall = balls[index];
                 RemoveBallList(removedBall);
                 return removedBall;
             }
+
             return null;
         }
-        
+
         public void SetHeight()
         {
             //TODO fazla işlem olabilir.
@@ -76,6 +86,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
                 height++;
             }
         }
+
         private void RemoveBallList(Ball ball)
         {
             balls.Remove(ball);
@@ -87,11 +98,5 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
             if (BallManager.Instance.currentFloor < balls.Count)
                 BallManager.Instance.currentFloor = balls.Count;
         }
-
-
     }
 }
-
-
-
-

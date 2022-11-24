@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cbcf07e9ead9e4ba4e0037fe983245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
+  speed: 30
   yBound: -6.3
   xBound: 8.5
   zMinBound: 0
@@ -254,7 +254,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.15
+      scalar: 1.75
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -307,7 +307,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -361,7 +361,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 2
       minColor: {r: 1, g: 0.67145586, b: 0, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      maxColor: {r: 1, g: 0.2737233, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -423,7 +423,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.25
+      scalar: 0.45
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1005,7 +1005,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 200
       minScalar: 10
       maxCurve:
         serializedVersion: 2

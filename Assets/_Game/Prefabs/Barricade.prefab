@@ -375,7 +375,7 @@ MonoBehaviour:
   barricades:
   - {fileID: 3088132392522964860}
   - {fileID: 6766669541099827727}
-  openTime: 2
+  openTime: 0.2
 --- !u!1 &7758086736114941033
 GameObject:
   m_ObjectHideFlags: 0

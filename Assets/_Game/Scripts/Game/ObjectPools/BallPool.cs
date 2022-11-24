@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using _Game.Scripts.Base.ObjectPooling;
+using _Game.Scripts.Game.Gameplay.Runner;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.ObjectPools
@@ -12,6 +13,19 @@ namespace _Game.Scripts.Game.ObjectPools
         {
             Instance = this;
             yield return StartCoroutine(FillThePool());
+        }
+
+        public List<Ball> GetAllActiveBall()
+        {
+            List<Ball> balls = new List<Ball>();
+            for (int i = 0; i < amountToPool; i++)
+            {
+                if (pooledObjects[i].activeInHierarchy)
+                {
+                    balls.Add(pooledObjects[i].GetComponent<Ball>());
+                }
+            }
+            return balls;
         }
         protected override IEnumerator FillThePool()
         {

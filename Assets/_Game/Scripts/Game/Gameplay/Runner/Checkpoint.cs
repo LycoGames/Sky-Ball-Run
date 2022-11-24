@@ -41,12 +41,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             GameManager.Instance.GetPlayerController().canMove = false;
             List<Ball> balls = BallManager.Instance.GetFloors(removeFloorCount);
-            foreach (Ball ball in balls)
+            foreach (var ball in balls)
             {
-                if (ball == null)
-                {
-                    continue;
-                }
                 ball.StartMoveToPool();
                 ball.transform.parent = transform;
                 ballCount++;
@@ -76,17 +72,16 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
             GameManager.Instance.GetPlayerController().StartMove();
             BallManager.Instance.currentFloor -= removeFloorCount;
-            BallManager.Instance.totalBallCount -= balls.Count;
         }
 
         private void ReturnAllBallToPool(List<Ball> balls)
         {
-            foreach (Ball ball in balls)
+            foreach (var ball in balls)
             {
-                if(ball==null)continue;
                 ball.gameObject.SetActive(false);
                 ball.transform.parent = BallPool.Instance.transform;
                 ball.transform.localPosition = Vector3.zero;
+                BallManager.Instance.totalBallCount--;
             }
         }
     }

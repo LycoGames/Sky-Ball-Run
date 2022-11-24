@@ -8,6 +8,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 {
     public class Ball : MonoBehaviour
     {
+        //TODO top sütün ilişki yöntemleri düzenlenmeli
+        
         [SerializeField] private float speed = 1;
         [SerializeField] private float waitForRemove = 1.5f;
         [SerializeField] private ParticleSystem effect;
@@ -37,11 +39,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner
                 Invoke("RemoveBall",waitForRemove);
                 Invoke("StartForwading",waitForRemove+0.05f);
             }
-            else if (other.CompareTag("Gate")&&meshRenderer.enabled)
+            else if (other.CompareTag("Gate"))
             {
-                effect.Play();
-                meshRenderer.enabled = false;
-                Invoke("RemoveBall",waitForRemove);
+                ballColumn.CustomUnRegister(this);
+                BallManager.Instance.totalBallCount--;
+                BallManager.Instance.moveBalls.Add(this);
             }
         }
         public void StartMoveToPool()
@@ -71,7 +73,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner
        
         public void SwapColumn(BallColumn _ballColumn)
         {
-            ballColumn.UnregisterColumn(this);
             SetParent(_ballColumn);
             SetColumn(_ballColumn);
         }

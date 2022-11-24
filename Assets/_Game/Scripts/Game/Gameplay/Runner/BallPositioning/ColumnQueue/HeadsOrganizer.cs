@@ -11,6 +11,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
 {
     public class HeadsOrganizer : MonoBehaviour
     {
+        //TODO sırayı her zaman konumluyor.
         public List<ColumnHead> ColumnHeads { get; private set; }
         public List<ColumnHead> lastActiveList = new List<ColumnHead>();
 
