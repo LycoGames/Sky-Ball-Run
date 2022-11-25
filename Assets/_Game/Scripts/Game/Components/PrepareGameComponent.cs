@@ -9,11 +9,7 @@ namespace _Game.Scripts.Game.Components
 
         public event PrepareGameChangeDelegate OnGameLaunch;
 
-        public delegate void PrepareGameTextChangeDelegate(string text, string txt);
-
-        public event PrepareGameTextChangeDelegate OnLevelChange;
-
-        private const string LevelText = "Level";
+        
 
         public void Initialize(ComponentContainer componentContainer)
         {

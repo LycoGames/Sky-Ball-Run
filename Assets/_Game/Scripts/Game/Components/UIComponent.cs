@@ -7,23 +7,26 @@ namespace _Game.Scripts.Game.Components
 {
     public class UIComponent : MonoBehaviour, IComponent
     {
-        [SerializeField] private BaseCanvas loadingGameCanvas;
+        [SerializeField] private BaseCanvas introCanvas;
         [SerializeField] private BaseCanvas prepareGameCanvas;
+        [SerializeField] private BaseCanvas startGameCanvas;
         [SerializeField] private BaseCanvas inGameCanvas;
         [SerializeField] private BaseCanvas endGameCanvas;
 
         private BaseCanvas activeCanvas;
-
+        
         public void Initialize(ComponentContainer componentContainer)
         {
             Debug.Log("<color=lime>" + gameObject.name + " initialized!</color>");
-            loadingGameCanvas.Initialize();
+            introCanvas.Initialize();
             prepareGameCanvas.Initialize();
+            startGameCanvas.Initialize();
             inGameCanvas.Initialize();
             endGameCanvas.Initialize();
-
-            DeactivateCanvas(loadingGameCanvas);
+            
+            DeactivateCanvas(introCanvas);
             DeactivateCanvas(prepareGameCanvas);
+            DeactivateCanvas(startGameCanvas);
             DeactivateCanvas(inGameCanvas);
             DeactivateCanvas(endGameCanvas);
         }
@@ -32,8 +35,9 @@ namespace _Game.Scripts.Game.Components
         {
             return canvasTrigger switch
             {
-                CanvasTrigger.LoadingGame => loadingGameCanvas,
+                CanvasTrigger.Intro => introCanvas,
                 CanvasTrigger.PrepareGame => prepareGameCanvas,
+                CanvasTrigger.StartGame => startGameCanvas,
                 CanvasTrigger.InGame => inGameCanvas,
                 CanvasTrigger.EndGame => endGameCanvas,
                 _ => null
@@ -56,8 +60,9 @@ namespace _Game.Scripts.Game.Components
         {
             activeCanvas = canvasTrigger switch
             {
-                CanvasTrigger.LoadingGame => loadingGameCanvas,
+                CanvasTrigger.Intro => introCanvas,
                 CanvasTrigger.PrepareGame => prepareGameCanvas,
+                CanvasTrigger.StartGame => startGameCanvas,
                 CanvasTrigger.InGame => inGameCanvas,
                 CanvasTrigger.EndGame => endGameCanvas,
                 _ => activeCanvas

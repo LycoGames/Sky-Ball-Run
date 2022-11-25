@@ -8,9 +8,15 @@ namespace _Game.Scripts.Game.UserInterfaces.Loading
     {
         [SerializeField] private TextMeshProUGUI loadingText;
         private string loadstr = "Loading";
-        void Start()
+
+        public void PlayLoadingTextAnimation()
         {
             StartCoroutine(Loading());
+        }
+
+        public void StopLoadingTextAnimation()
+        {
+            StopAllCoroutines();
         }
 
         IEnumerator Loading()

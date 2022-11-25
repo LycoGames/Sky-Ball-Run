@@ -10,14 +10,32 @@ namespace _Game.Scripts.Game.UserInterfaces.Loading
 
         public void OnStart()
         {
-           
+            EnableLoadingIcon();
+            PlayLoadingIconAnimation();
         }
 
         public void OnQuit()
         {
-           
+            StopLoadingIconAnimation();
+            DisableLoadingIcon();
+        }
+        private void EnableLoadingIcon()
+        {
+            loadingText.gameObject.SetActive(true);
         }
 
-       
+        private void DisableLoadingIcon()
+        {
+            loadingText.gameObject.SetActive(false);
+        }
+        private void PlayLoadingIconAnimation()
+        {
+            loadingText.PlayLoadingTextAnimation();
+        }
+
+        private void StopLoadingIconAnimation()
+        {
+            loadingText.StopLoadingTextAnimation();
+        }
     }
 }

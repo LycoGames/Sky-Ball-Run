@@ -5,12 +5,12 @@ namespace _Game.Scripts.Game.States.Splash
 {
     public class SplashState : StateMachine
     {
-        private readonly LoadingGameState loadingGameState;
+        private readonly PrepareGameState prepareGameState;
 
         public SplashState(ComponentContainer componentContainer)
         {
-            loadingGameState = new LoadingGameState(componentContainer);
-            AddSubState(loadingGameState);
+            prepareGameState = new PrepareGameState(componentContainer);
+            AddSubState(prepareGameState);
         }
 
         protected override void OnEnter()
