@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace _Game.Scripts.Base.State
@@ -31,7 +32,7 @@ namespace _Game.Scripts.Base.State
 
         protected void AddSubState(StateMachine subState)
         {
-            if (subStates.Count == 0)
+            if (!subStates.Any())// SULAK AMA MALAK AHMET
                 defaultSubState = subState;
 
             subState.parent = this;

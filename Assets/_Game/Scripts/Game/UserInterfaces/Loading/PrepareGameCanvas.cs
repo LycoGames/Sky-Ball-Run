@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Game.Scripts.Game.UserInterfaces.Loading
 {
-    public class LoadingGameCanvas : BaseCanvas, IStartable, IQuitable
+    public class PrepareGameCanvas : BaseCanvas, IStartable, IQuitable
     {
         [SerializeField] private LoadingText loadingText;
 

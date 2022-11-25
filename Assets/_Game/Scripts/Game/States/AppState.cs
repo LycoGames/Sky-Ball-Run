@@ -16,18 +16,14 @@ namespace _Game.Scripts.Game.States
         public AppState(ComponentContainer componentContainer)
         {
             splashState = new SplashState(componentContainer);
-            mainState = new MainState(componentContainer);
             gameState = new GameState(componentContainer);
 
             AddSubState(splashState);
-            AddSubState(mainState);
             AddSubState(gameState);
 
-            AddTransition(splashState, mainState, (int) StateTrigger.GoToMain);
-            AddTransition(mainState, gameState, (int) StateTrigger.StartGame);
-            AddTransition(gameState, mainState, (int) StateTrigger.ReturnToPreparingGame);
+            AddTransition(splashState, gameState, (int) StateTrigger.GoToGame);
         }
-
+ 
         protected override void OnEnter()
         {
         }

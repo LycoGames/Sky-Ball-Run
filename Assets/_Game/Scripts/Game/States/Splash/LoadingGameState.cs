@@ -12,14 +12,14 @@ namespace _Game.Scripts.Game.States.Splash
         private readonly UIComponent uiComponent;
         private readonly LoadingGameComponent loadingGameComponent;
 
-        private readonly LoadingGameCanvas loadingGameCanvas;
+        private readonly PrepareGameCanvas prepareGameCanvas;
 
         public LoadingGameState(ComponentContainer componentContainer)
         {
             uiComponent = componentContainer.GetComponent("UIComponent") as UIComponent;
             loadingGameComponent = componentContainer.GetComponent("LoadingGameComponent") as LoadingGameComponent;
 
-            loadingGameCanvas = uiComponent.GetCanvas(CanvasTrigger.LoadingGame) as LoadingGameCanvas;
+            prepareGameCanvas = uiComponent.GetCanvas(CanvasTrigger.LoadingGame) as PrepareGameCanvas;
         }
 
         protected override void OnEnter()
@@ -28,7 +28,7 @@ namespace _Game.Scripts.Game.States.Splash
             uiComponent.EnableCanvas(CanvasTrigger.LoadingGame);
 
             loadingGameComponent.OnConstruct();
-            loadingGameCanvas.OnStart();
+            prepareGameCanvas.OnStart();
         }
 
         protected override void OnExit()
