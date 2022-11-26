@@ -58,7 +58,7 @@ namespace _Game.Scripts.Game.States.Splash
 
         private void RequestMain()
         {
-            SendTrigger((int)StateTrigger.GoToMain);
+            SendTrigger((int)StateTrigger.GoToGame);
         }
     }
 }

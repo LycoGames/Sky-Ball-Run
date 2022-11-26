@@ -20,18 +20,16 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
 
         public float VerticalInput;
         public float HorizontalInput;
-        public bool canMove=false;
+        public bool canMove;
         private void OnEnable()
         {
             GetStartPosition();
             orginalBound = boundHorizontal;
-            GameManager.Instance.onStartGame += StartMove;
         }
 
         private void OnDisable()
         {
             ResetStartPosition();
-            GameManager.Instance.onStartGame -= StartMove;
         }
 
         private void FixedUpdate()

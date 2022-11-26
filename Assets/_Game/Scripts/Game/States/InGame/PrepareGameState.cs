@@ -7,7 +7,7 @@ using _Game.Scripts.Game.UserInterfaces.Splash;
 
 namespace _Game.Scripts.Game.States.Splash
 {
-    public class PrepareGameState : StateMachine, IChangeable
+    public class PrepareGameState : StateMachine ,IRequestable
     {
         private readonly UIComponent uiComponent;
         private readonly PrepareGameComponent prepareGameComponent;
@@ -17,14 +17,11 @@ namespace _Game.Scripts.Game.States.Splash
         {
             uiComponent = componentContainer.GetComponent("UIComponent") as UIComponent;
             prepareGameComponent = componentContainer.GetComponent("LoadingGameComponent") as PrepareGameComponent;
-
             prepareGameCanvas = uiComponent.GetCanvas(CanvasTrigger.PrepareGame) as PrepareGameCanvas;
         }
 
         protected override void OnEnter()
         {
-            SubscribeToComponentChangeDelegates();
-            
             prepareGameComponent.OnConstruct();
             prepareGameCanvas.OnStart();
             
@@ -33,19 +30,9 @@ namespace _Game.Scripts.Game.States.Splash
 
         protected override void OnExit()
         {
-            prepareGameComponent.OnDestruct();
             prepareGameCanvas.OnQuit();
-
-            UnsubscribeToComponentChangeDelegates();
         }
-
-        public void SubscribeToComponentChangeDelegates()
-        {
-        }
-
-        public void UnsubscribeToComponentChangeDelegates()
-        {
-        }
+        
 
         #region Changes
 
@@ -54,5 +41,19 @@ namespace _Game.Scripts.Game.States.Splash
             SendTrigger((int) StateTrigger.StartGame);
         }
         #endregion
+
+        public void SubscribeToCanvasRequestDelegates()
+        {
+            prepareGameComponent.OnGameLaunch += RequestLoadGame;
+        }
+
+        public void UnsubscribeToCanvasRequestDelegates()
+        {
+            prepareGameComponent.OnGameLaunch -= RequestLoadGame;
+        }
+        private void RequestLoadGame()
+        {
+            SendTrigger((int)StateTrigger.GoToStartGame);
+        }
     }
 }

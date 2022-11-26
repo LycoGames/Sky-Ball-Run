@@ -9,20 +9,25 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         private Vector3 firstTouch;
         private PlayerController playerController;
         private float slipOnX = 0;
+        private bool canRotate;
 
-        void Start()
+        private void Start()
         {
             firstTouch = Vector3.zero;
             playerController = GameManager.Instance.GetPlayerController();
         }
 
-        void Update()
+        private void Update()
         {
-            TouchHandler();
+            if(canRotate) TouchHandler();
             MovePlayer();
+            
         }
 
-        void TouchHandler()
+        public void StartRotate() => canRotate = true;
+        public void StopRotate() => canRotate = false;
+
+        private void TouchHandler()
         {
             if (Input.GetMouseButton(0))
             {

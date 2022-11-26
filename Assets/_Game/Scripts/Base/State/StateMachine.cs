@@ -32,7 +32,7 @@ namespace _Game.Scripts.Base.State
 
         protected void AddSubState(StateMachine subState)
         {
-            if (!subStates.Any())// SULAK AMA MALAK AHMET
+            if (!subStates.Any())
                 defaultSubState = subState;
 
             subState.parent = this;

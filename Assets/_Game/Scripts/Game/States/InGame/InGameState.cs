@@ -6,7 +6,7 @@ using _Game.Scripts.Game.UserInterfaces.InGame;
 
 namespace _Game.Scripts.Game.States.InGame
 {
-    public class InGameState : StateMachine, IChangeable, IRequestable
+    public class InGameState : StateMachine, IRequestable
     {
         private readonly UIComponent uiComponent;
         private readonly InGameComponent inGameComponent;
@@ -33,8 +33,6 @@ namespace _Game.Scripts.Game.States.InGame
 
         protected override void OnExit()
         {
-            inGameComponent.OnDestruct();
-
             UnsubscribeToComponentChangeDelegates();
             UnsubscribeToCanvasRequestDelegates();
         }
@@ -57,12 +55,7 @@ namespace _Game.Scripts.Game.States.InGame
         public void UnsubscribeToCanvasRequestDelegates()
         {
         }
-
-        private void ChangeLevel(string text, string txt)
-        {
-            // inGameCanvas.ChangeCurrentLevel(text);
-            // inGameCanvas.ChangeNextLevel(txt);
-        }
+        
 
         private void RequestEndGame()
         {

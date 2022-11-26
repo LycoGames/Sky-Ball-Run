@@ -6,7 +6,7 @@ using _Game.Scripts.Game.UserInterfaces.InGame;
 
 namespace _Game.Scripts.Game.States.InGame
 {
-    public class EndGameState : StateMachine, IChangeable, IRequestable
+    public class EndGameState : StateMachine, IRequestable
     {
         private readonly UIComponent uiComponent;
         private readonly EndGameComponent endGameComponent;
@@ -23,7 +23,6 @@ namespace _Game.Scripts.Game.States.InGame
 
         protected override void OnEnter()
         {
-            SubscribeToComponentChangeDelegates();
             SubscribeToCanvasRequestDelegates();
 
             endGameCanvas.OnStart();
@@ -34,25 +33,12 @@ namespace _Game.Scripts.Game.States.InGame
 
         protected override void OnExit()
         {
-            UnsubscribeToComponentChangeDelegates();
             UnsubscribeToCanvasRequestDelegates();
 
             endGameCanvas.OnQuit();
             endGameComponent.OnDestruct();
         }
-
-        public void SubscribeToComponentChangeDelegates()
-        {
-      
- 
-        }
-
-
-        public void UnsubscribeToComponentChangeDelegates()
-        {
-
-   
-        }
+        
 
         public void SubscribeToCanvasRequestDelegates()
         {

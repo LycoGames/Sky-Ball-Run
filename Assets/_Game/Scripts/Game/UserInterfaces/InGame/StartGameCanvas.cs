@@ -11,12 +11,10 @@ namespace _Game.Scripts.Game.UserInterfaces.InGame
 
         public void OnStart()
         {
-            throw new System.NotImplementedException();
         }
 
         public void OnQuit()
         {
-            throw new System.NotImplementedException();
         }
 
         public void RequestStartGame()

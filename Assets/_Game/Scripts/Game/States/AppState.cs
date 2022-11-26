@@ -2,7 +2,6 @@ using _Game.Scripts.Base.Component;
 using _Game.Scripts.Base.State;
 using _Game.Scripts.Game.Enums;
 using _Game.Scripts.Game.States.InGame;
-using _Game.Scripts.Game.States.Main;
 using _Game.Scripts.Game.States.Splash;
 
 namespace _Game.Scripts.Game.States
@@ -10,7 +9,6 @@ namespace _Game.Scripts.Game.States
     public class AppState : StateMachine
     {
         private readonly SplashState splashState;
-        private readonly MainState mainState;
         private readonly GameState gameState;
 
         public AppState(ComponentContainer componentContainer)
