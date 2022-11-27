@@ -28,18 +28,31 @@ namespace _Game.Scripts.Game.Components
         public IEnumerator InitiliazeGame()
         {
             yield return GameManager.Instance.StartCoroutine(GameManager.Instance.InitializeGame());
+            SwipeController.InitiliazeController();
         }
 
         public void OnConstruct()
         {
+            GameManager.OnEndOfLine += OnEndOfLine;
             GameManager.StartGame();
             SwipeController.StartRotate();
         }
 
         public void OnDestruct()
         {
+            GameManager.OnEndOfLine -= OnEndOfLine;
             GameManager.StopGame();
             SwipeController.StopRotate();
+        }
+
+        public void DestroyGame()
+        {
+            
+        }
+
+        private void OnEndOfLine()
+        {
+            OnInGameComplete?.Invoke();
         }
     }
 }

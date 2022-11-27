@@ -1,3 +1,4 @@
+using System.Collections;
 using _Game.Scripts.Base.Component;
 using _Game.Scripts.Base.State;
 using _Game.Scripts.Game.Components;
@@ -10,14 +11,14 @@ namespace _Game.Scripts.Game.States.InGame
     {
         private readonly UIComponent uiComponent;
         private readonly EndGameComponent endGameComponent;
-
+        private readonly InGameComponent inGameComponent;
         private readonly EndGameCanvas endGameCanvas;
 
         public EndGameState(ComponentContainer componentContainer)
         {
             uiComponent = componentContainer.GetComponent("UIComponent") as UIComponent;
             endGameComponent = componentContainer.GetComponent("EndGameComponent") as EndGameComponent;
-
+            inGameComponent = componentContainer.GetComponent("InGameComponent") as InGameComponent;
             endGameCanvas = uiComponent.GetCanvas(CanvasTrigger.EndGame) as EndGameCanvas;
         }
 
@@ -58,6 +59,7 @@ namespace _Game.Scripts.Game.States.InGame
 
         private void ReturnToMain()
         {
+            inGameComponent.GameManager.ResetGame();
             SendTrigger((int)StateTrigger.ReturnToPreparingGame);
         }
     }

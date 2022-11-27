@@ -35,6 +35,7 @@ namespace _Game.Scripts.Game.States.InGame
         {
             UnsubscribeToComponentChangeDelegates();
             UnsubscribeToCanvasRequestDelegates();
+            inGameComponent.OnDestruct();
         }
 
         public void SubscribeToComponentChangeDelegates()

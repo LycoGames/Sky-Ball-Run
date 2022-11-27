@@ -1,3 +1,4 @@
+using System.Collections;
 using _Game.Scripts.Base.Component;
 using _Game.Scripts.Base.State;
 using _Game.Scripts.Game.Components;
@@ -12,33 +13,39 @@ namespace _Game.Scripts.Game.States.Splash
         private readonly UIComponent uiComponent;
         private readonly PrepareGameComponent prepareGameComponent;
         private readonly PrepareGameCanvas prepareGameCanvas;
+        private readonly ComponentContainer componentContainer;
 
-        public PrepareGameState(ComponentContainer componentContainer)
+        public PrepareGameState(ComponentContainer _componentContainer)
         {
+            componentContainer = _componentContainer;
             uiComponent = componentContainer.GetComponent("UIComponent") as UIComponent;
-            prepareGameComponent = componentContainer.GetComponent("LoadingGameComponent") as PrepareGameComponent;
+            prepareGameComponent = componentContainer.GetComponent("PrepareGameComponent") as PrepareGameComponent;
             prepareGameCanvas = uiComponent.GetCanvas(CanvasTrigger.PrepareGame) as PrepareGameCanvas;
         }
 
         protected override void OnEnter()
         {
+            SubscribeToCanvasRequestDelegates();
             prepareGameComponent.OnConstruct();
             prepareGameCanvas.OnStart();
             
             uiComponent.EnableCanvas(CanvasTrigger.PrepareGame);
+
         }
 
         protected override void OnExit()
         {
+            UnsubscribeToCanvasRequestDelegates();
             prepareGameCanvas.OnQuit();
         }
         
 
         #region Changes
 
-        private void RequestStartGame()
+        private void RequestLoadGame()
         {
-            SendTrigger((int) StateTrigger.StartGame);
+            SendTrigger((int)StateTrigger.GoToStartGame);
+            uiComponent.EnableCanvas(CanvasTrigger.StartGame);
         }
         #endregion
 
@@ -51,9 +58,8 @@ namespace _Game.Scripts.Game.States.Splash
         {
             prepareGameComponent.OnGameLaunch -= RequestLoadGame;
         }
-        private void RequestLoadGame()
-        {
-            SendTrigger((int)StateTrigger.GoToStartGame);
-        }
+        
+
+        
     }
 }

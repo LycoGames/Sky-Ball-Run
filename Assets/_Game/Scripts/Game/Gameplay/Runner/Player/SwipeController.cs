@@ -14,16 +14,18 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         private void Start()
         {
             firstTouch = Vector3.zero;
-            playerController = GameManager.Instance.GetPlayerController();
+            
         }
-
+        
         private void Update()
         {
+            if (playerController == null) return;
             if(canRotate) TouchHandler();
             MovePlayer();
             
         }
 
+        public void InitiliazeController() => playerController = GameManager.Instance.GetPlayerController();
         public void StartRotate() => canRotate = true;
         public void StopRotate() => canRotate = false;
 

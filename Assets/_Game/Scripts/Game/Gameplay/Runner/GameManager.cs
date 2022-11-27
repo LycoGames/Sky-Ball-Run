@@ -12,6 +12,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 {
     public class GameManager : MonoBehaviour
     {
+        public delegate void EndOfLineDelegate();
+
+        public event EndOfLineDelegate OnEndOfLine;
+        
         public static GameManager Instance;
         [SerializeField] private GameObject mainCamera;
         [SerializeField] private LinesController linesController;
@@ -22,15 +26,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             Instance = this;
         }
-
         public void ResetGame()
         {
             SceneManager.LoadScene(0);
         }
 
-        public void OnEndOfLine()
+        public void ArriveEndOfLine()
         {
-            playerController.StopMove();
+            OnEndOfLine?.Invoke();
         }
 
         public PlayerController GetPlayerController()
@@ -40,7 +43,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         public void StopGame() => playerController.StopMove();
 
-        public void StartGame() => playerController.StopMove();
+        public void StartGame() => playerController.StartMove();
 
         public IEnumerator InitializeGame()
         {

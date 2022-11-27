@@ -10,16 +10,12 @@ namespace _Game.Scripts.Game.States.InGame
     public class StartGameState : StateMachine, IRequestable
     {
         private readonly UIComponent uiComponent;
-        private readonly StartGameComponent startGameComponent;
         private readonly StartGameCanvas startGameCanvas;
-        private readonly ComponentContainer componentContainer;
 
         public StartGameState(ComponentContainer _componentContainer)
         {
-            componentContainer = _componentContainer;
             uiComponent=_componentContainer.GetComponent("UIComponent") as UIComponent;
-            startGameComponent=_componentContainer.GetComponent("StartGameComponent") as StartGameComponent;
-            startGameCanvas=_componentContainer.GetComponent("StartGameCanvas") as StartGameCanvas;
+            startGameCanvas = uiComponent.GetCanvas(CanvasTrigger.StartGame) as StartGameCanvas;
         }
         protected override void OnEnter()
         {
@@ -30,8 +26,6 @@ namespace _Game.Scripts.Game.States.InGame
         protected override void OnExit()
         {
             UnsubscribeToCanvasRequestDelegates();
-            InGameComponent inGameComponent = componentContainer.GetComponent("InGameComponent") as InGameComponent;
-            
         }
 
         public void SubscribeToCanvasRequestDelegates()
@@ -46,7 +40,8 @@ namespace _Game.Scripts.Game.States.InGame
 
         private void RequestStartGame()
         {
-            SendTrigger((int)StateTrigger.GoToGame);
+            Debug.Log("Game Start");
+            SendTrigger((int)StateTrigger.StartGame);
         }
     }
 }

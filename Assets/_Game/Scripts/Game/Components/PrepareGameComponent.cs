@@ -16,7 +16,6 @@ namespace _Game.Scripts.Game.Components
         public void Initialize(ComponentContainer _componentContainer)
         {
             componentContainer = _componentContainer;
-            _componentContainer.AddComponent(gameObject.name,this);
             Debug.Log("<color=lime>" + gameObject.name + " initialized!</color>");
         }
 
@@ -32,6 +31,6 @@ namespace _Game.Scripts.Game.Components
             OnGameLaunch?.Invoke();
         }
 
-        
+
     }
 }
