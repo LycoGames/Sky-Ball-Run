@@ -13,6 +13,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         [SerializeField] private float speed = 1;
         [SerializeField] private float waitForRemove = 1.5f;
         [SerializeField] private ParticleSystem effect;
+        [SerializeField] private AudioSource audioSource;
+        
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private float distance;
         [SerializeField] private float spawmPositionZ=10f;
@@ -35,6 +37,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             if (other.CompareTag("Obstacle")&&meshRenderer.enabled)
             {
                 effect.Play();
+                audioSource.Play();
                 meshRenderer.enabled = false;
                 Invoke("RemoveBall",waitForRemove);
                 Invoke("StartForwading",waitForRemove+0.05f);

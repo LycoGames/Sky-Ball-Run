@@ -15,7 +15,7 @@ namespace _Game.Scripts.Game.Components
 
         public event IntroChangeDelegate OnIntroAnimationComplete;
 
-        private const float _animationTime = 5.0f;
+        private const float _animationTime = 0.1f;
 
         public void Initialize(ComponentContainer componentContainer)
         {
