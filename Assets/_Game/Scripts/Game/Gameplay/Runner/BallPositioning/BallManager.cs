@@ -32,7 +32,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         [SerializeField] private HeadsOrganizer headsOrganizer;
 
         [SerializeField] private float waitForForwarding = 1.5f;
-        [SerializeField] private List<Ball> activeBALLS;
 
         private float currentWaitingTime;
         private Coroutine waitForwarding;
@@ -58,6 +57,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                         ball.SetBall(ballColumn);
                     }
                 }
+                yield return null;
             }
         }
 
@@ -181,6 +181,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         }
         public void ReshapeWider(int newSize)
         {
+            
             if (totalBallCount <= 0) return;
             List<Ball> repositionedBalls = new List<Ball>();
             repositionedBalls=ballPool.GetAllActiveBall();
@@ -188,9 +189,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             int oneFloorMaxSize = newSize * maxRow;
             currentFloor = totalBallCount / oneFloorMaxSize;
             if (totalBallCount % oneFloorMaxSize > 0) currentFloor++;
-            currentRow = maxRow;
+            if (currentColumn <= 1)
+            {
+                currentRow = totalBallCount / newSize;
+                if (totalBallCount % newSize > 0) currentRow++;
+            }
+            else currentRow = maxRow;
             currentColumn = newSize;
-            RepositioningBall(repositionedBalls);
+            RepositioningWiderBall(repositionedBalls);
         }
         public void ReshapeTaller(int newSize)
         {
@@ -200,24 +206,53 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             headsOrganizer.ClearAllColumns();
             int oneColumnMaxSize = newSize * maxRow;
             currentColumn = totalBallCount / oneColumnMaxSize;
-            if (totalBallCount % oneColumnMaxSize > 0) currentColumn++;
+            if (totalBallCount % oneColumnMaxSize > 0) currentColumn++; 
             currentRow = maxRow;
             currentFloor = newSize;
-            RepositioningBall(repositionedBalls);
+            RepositioningTallerBall(repositionedBalls);
         }
 
-        private void RepositioningBall(List<Ball> repositionedBalls)
+        private void RepositioningTallerBall(List<Ball> repositionedBalls)
         {
             BallColumn ballColumn;
             ColumnHead columnHead;
             Ball ball;
+            if (currentColumn >= maxColumn) currentColumn = maxColumn;
             for (int i = 0; i < currentColumn; i++)
             {
-                if(i>=maxColumn)continue;
+                
                 columnHead = headsOrganizer.ColumnHeads[i];
                 for (int j = 0; j < currentRow; j++)
                 {
                     ballColumn = columnHead.BallColumns[j];
+                    for (int k = 0; k < currentFloor && repositionedBalls.Count > 0; k++)
+                    {
+                        ball = repositionedBalls[0];
+                        ball.SwapColumn(ballColumn);
+                        repositionedBalls.RemoveAt(0);
+                    }
+                }
+            }
+
+            foreach (Ball newBall in repositionedBalls)
+            {
+                newBall.RemoveBall();
+                newBall.transform.parent = ballPool.transform;
+            }
+            headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
+        }
+        private void RepositioningWiderBall(List<Ball> repositionedBalls)
+        {
+            BallColumn ballColumn;
+            ColumnHead columnHead;
+            Ball ball;
+            if (currentColumn >= maxColumn) currentColumn = maxColumn;
+            for (int i = 0; i < currentRow; i++)
+            {
+                for (int j = 0; j <currentColumn ; j++)
+                {
+                    columnHead = headsOrganizer.ColumnHeads[j];
+                    ballColumn = columnHead.BallColumns[i];
                     for (int k = 0; k < currentFloor && repositionedBalls.Count > 0; k++)
                     {
                         ball = repositionedBalls[0];

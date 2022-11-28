@@ -10,8 +10,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         
         [SerializeField] private GateSpecs leftGate;
         [SerializeField] private GateSpecs rightGate;
-
-        private float ballMultiplier=1;
+        
         private bool isActive = true;
         
         [Serializable]

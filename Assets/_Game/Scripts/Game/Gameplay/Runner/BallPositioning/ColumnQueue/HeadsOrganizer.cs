@@ -88,8 +88,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                 currentDistance += distance;
                 yield return null;
             }
-
-            BallManager.Instance.currentColumn = count;
             playerController.ChangeBounds(currentDistance + distance);
             yield return null;
         }
