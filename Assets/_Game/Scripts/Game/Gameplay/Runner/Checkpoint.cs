@@ -16,6 +16,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         [SerializeField] private Transform moverLine;
         [SerializeField] private int removeFloorCount = 2;
         [SerializeField] private float coverCloseTime = 2f;
+        [SerializeField] private ParticleSystem firework;
+        [SerializeField] private float zOffset;
+        [SerializeField] private float xOffset;
+        private List<ParticleSystem> fireworks=new List<ParticleSystem>();
         private int ballCount;
         private int collectedBallCount;
 
@@ -33,6 +37,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             }
 
             barricade = Instantiate(barricade, transform.parent);
+            for (int i = 0; i < 2; i++)
+            {
+                fireworks.Add(Instantiate(firework));
+                Vector3 pos = transform.position;
+                pos.z += zOffset;
+                if (i == 0) pos.x = xOffset;
+                else pos.x = -xOffset;
+                fireworks.Last().transform.position = pos;
+            }
         }
 
         public void CollectBall() => collectedBallCount++;
@@ -71,6 +84,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner
                 transform.gameObject.SetActive(true);
             }
             GameManager.Instance.onExitCheckpoint?.Invoke();
+            if(BallManager.Instance.TotalBallCount<=0)yield break;
+            foreach (ParticleSystem firework in fireworks)
+            {
+                firework.Play();
+                Destroy(firework.gameObject,2f);
+            }
             GameManager.Instance.GetPlayerController().StartMove();
             BallManager.Instance.currentFloor -= removeFloorCount;
         }

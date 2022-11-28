@@ -16,7 +16,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public static BallManager Instance;
         public Action CheckingCurrentRow;
         public Action CheckingCurrentFloor;
-        private int totalBallCount;
+        public int TotalBallCount { get; private set; }
 
         [SerializeField] private PlayerController playerController;
         [SerializeField] private float distance = 0.5f;
@@ -37,8 +37,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         public void AddTotalBallCount(int count)
         {
-            totalBallCount += count;
-            if(totalBallCount<=0)
+            TotalBallCount += count;
+            if(TotalBallCount<=0)
             {
                 GameManager.Instance.OnGameOver();
             }
@@ -187,17 +187,17 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public void ReshapeWider(int newSize)
         {
             
-            if (totalBallCount <= 0) return;
+            if (TotalBallCount <= 0) return;
             List<Ball> repositionedBalls = new List<Ball>();
             repositionedBalls=ballPool.GetAllActiveBall();
             headsOrganizer.ClearAllColumns();
             int oneFloorMaxSize = newSize * maxRow;
-            currentFloor = totalBallCount / oneFloorMaxSize;
-            if (totalBallCount % oneFloorMaxSize > 0) currentFloor++;
+            currentFloor = TotalBallCount / oneFloorMaxSize;
+            if (TotalBallCount % oneFloorMaxSize > 0) currentFloor++;
             if (currentColumn <= 1)
             {
-                currentRow = totalBallCount / newSize;
-                if (totalBallCount % newSize > 0) currentRow++;
+                currentRow = TotalBallCount / newSize;
+                if (TotalBallCount % newSize > 0) currentRow++;
             }
             else currentRow = maxRow;
             currentColumn = newSize;
@@ -205,13 +205,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         }
         public void ReshapeTaller(int newSize)
         {
-            if (totalBallCount <= 0) return;
+            if (TotalBallCount <= 0) return;
             List<Ball> repositionedBalls = new List<Ball>();
             repositionedBalls=ballPool.GetAllActiveBall();
             headsOrganizer.ClearAllColumns();
             int oneColumnMaxSize = newSize * maxRow;
-            currentColumn = totalBallCount / oneColumnMaxSize;
-            if (totalBallCount % oneColumnMaxSize > 0) currentColumn++; 
+            currentColumn = TotalBallCount / oneColumnMaxSize;
+            if (TotalBallCount % oneColumnMaxSize > 0) currentColumn++; 
             currentRow = maxRow;
             currentFloor = newSize;
             RepositioningTallerBall(repositionedBalls);

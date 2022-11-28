@@ -19,8 +19,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
 
         public IEnumerator InitializeLines()
         {
-            SpawnLines();
-            yield return null;
+            yield return StartCoroutine(SpawnLines());
+             
         }
 
         private void SwapLine(int index)
@@ -29,7 +29,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
                 linesTransforms[index + showedLineCount].gameObject.SetActive(true);
         }
 
-        private void SpawnLines()
+        private IEnumerator SpawnLines()
         {
             int i = 0;
             foreach (Level.LineInteractables lineInteractable in level.GetLineInteractables())
@@ -41,6 +41,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
                 spawnedLined.InitializeLine(lineInteractable.interactables, SwapLine, linesTransforms.Count - 1);
                 if (i >= showedLineCount) spawnedLined.gameObject.SetActive(false);
                 i++;
+                yield return null;
             }
         }
     }

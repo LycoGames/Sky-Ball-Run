@@ -25,7 +25,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         [SerializeField] private GameObject mainCamera;
         [SerializeField] private LinesController linesController;
         [SerializeField] private PlayerController playerController;
-        [SerializeField] private InGameComponent inGameComponent;
 
 
         void Awake()

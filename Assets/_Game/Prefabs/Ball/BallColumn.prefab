@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   columnMover: {fileID: 5835682661163503595}
-  distance: 1
+  balls: []
 --- !u!114 &5835682661163503595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +60,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 1
-  rotateSpeed: 20
+  rotateSpeed: 30
   minXPos: -8.75
   maxXPos: 8.75
