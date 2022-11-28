@@ -12,6 +12,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
         [SerializeField] private List<Ball> balls = new List<Ball>();
 
         public int BallCount() => balls.Count;
+        public void ClearColumn() => balls.Clear();
 
         public bool CheckIsActive()
         {
@@ -46,13 +47,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
             ball.SetHeight(balls.Count - 1);
         }
 
-        public void CustomUnRegister(Ball ball)
-        {
-            if (balls.Contains(ball)) balls.Remove(ball);
-        }
-
         public void UnregisterColumn(Ball ball)
         {
+            if (!balls.Contains(ball)) return;
             RemoveBallList(ball);
             if (BallCount() <= 0) return;
             SetHeight();

@@ -10,7 +10,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         
         [SerializeField] private GateSpecs leftGate;
         [SerializeField] private GateSpecs rightGate;
-        [SerializeField] private GameObject gateModels;
 
         private float ballMultiplier=1;
         private bool isActive = true;
@@ -33,12 +32,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                 isActive = false;
                 GateSpecs selectedGate = other.transform.position.x >= 0 ? rightGate : leftGate;
                 SetGates(selectedGate);
-                DisableModels();
+                DisableGate();
             }
-        }
-        private void DisableModels()
-        {
-            gateModels.SetActive(false);
         }
         private void DisableGate()
         {
@@ -47,26 +42,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void SetGates(GateSpecs gateSpecs)
         {
-            int newFloor=1;
-            int newColumn=1;
             switch (gateSpecs.gateType)
             {
                 case GateType.Vertical:
-                    newFloor = (int)ballMultiplier * gateSpecs.newIndex;
-                    newColumn = SetAnotherIndex(gateSpecs.newIndex);
+                    BallManager.Instance.ReshapeTaller(gateSpecs.newIndex);
                     break;
                 case GateType.Horizontal:
-                    newColumn = (int)ballMultiplier * gateSpecs.newIndex;
-                    newFloor = SetAnotherIndex(gateSpecs.newIndex);
+                    BallManager.Instance.ReshapeWider(gateSpecs.newIndex);
                     break;
             }
-            BallManager.Instance.OnEnterGate(newColumn, newFloor,DisableGate);
-        }
-        private int SetAnotherIndex(int index)
-        {
-            int div = BallManager.Instance.maxRow * index;
-            int ballCount = BallManager.Instance.totalBallCount;
-            return ballCount / div + (ballCount % div == 0 ? 0 : 1);
         }
     }
     

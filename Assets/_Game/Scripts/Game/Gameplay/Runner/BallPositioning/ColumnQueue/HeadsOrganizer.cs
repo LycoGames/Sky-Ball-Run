@@ -12,13 +12,21 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
     public class HeadsOrganizer : MonoBehaviour
     {
         //TODO sırayı her zaman konumluyor.
-        public List<ColumnHead> ColumnHeads { get; private set; }
+        public List<ColumnHead> ColumnHeads;
         public List<ColumnHead> lastActiveList = new List<ColumnHead>();
 
         [SerializeField] private ColumnHead columnHead;
 
         private PlayerController playerController;
         private float distance;
+
+        public void ClearAllColumns()
+        {
+            foreach (ColumnHead columnHead in ColumnHeads)
+            {
+                columnHead.ClearAllColumns();
+            }
+        }
 
         public IEnumerator InitializeHeadsOrganizer(int maxColumn, float _distance, PlayerController playerController,
             int maxFloor, int maxRow)
@@ -80,6 +88,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                 currentDistance += distance;
                 yield return null;
             }
+
+            BallManager.Instance.currentColumn = count;
             playerController.ChangeBounds(currentDistance + distance);
             yield return null;
         }

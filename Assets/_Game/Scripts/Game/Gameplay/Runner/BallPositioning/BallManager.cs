@@ -36,7 +36,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         private float currentWaitingTime;
         private Coroutine waitForwarding;
-        public List<Ball> moveBalls = new List<Ball>();
+        //public List<Ball> moveBalls = new List<Ball>();
 
 
         private void Awake()
@@ -78,11 +78,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 }
             }
             headsOrganizer.SetPositions();
-        }
-        
-        public void OnEnterGate(int newColumn,int newFloor, Action disableGate)
-        {
-            StartCoroutine(WaitUntilBallEnd(newColumn, newFloor,disableGate));
         }
 
         public List<Ball> GetFloors(int floorCount)
@@ -184,33 +179,62 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             headsOrganizer.SetPositions();
             waitForwarding = null;
         }
-
-        private IEnumerator WaitUntilBallEnd( int newColumn,int newFloor, Action DisableGate)
+        public void ReshapeWider(int newSize)
         {
-            while (totalBallCount > 0)
+            if (totalBallCount <= 0) return;
+            List<Ball> repositionedBalls = new List<Ball>();
+            repositionedBalls=ballPool.GetAllActiveBall();
+            headsOrganizer.ClearAllColumns();
+            int oneFloorMaxSize = newSize * maxRow;
+            currentFloor = totalBallCount / oneFloorMaxSize;
+            if (totalBallCount % oneFloorMaxSize > 0) currentFloor++;
+            currentRow = maxRow;
+            currentColumn = newSize;
+            RepositioningBall(repositionedBalls);
+        }
+        public void ReshapeTaller(int newSize)
+        {
+            if (totalBallCount <= 0) return;
+            List<Ball> repositionedBalls = new List<Ball>();
+            repositionedBalls=ballPool.GetAllActiveBall();
+            headsOrganizer.ClearAllColumns();
+            int oneColumnMaxSize = newSize * maxRow;
+            currentColumn = totalBallCount / oneColumnMaxSize;
+            if (totalBallCount % oneColumnMaxSize > 0) currentColumn++;
+            currentRow = maxRow;
+            currentFloor = newSize;
+            RepositioningBall(repositionedBalls);
+        }
+
+        private void RepositioningBall(List<Ball> repositionedBalls)
+        {
+            BallColumn ballColumn;
+            ColumnHead columnHead;
+            Ball ball;
+            for (int i = 0; i < currentColumn; i++)
             {
-                yield return null;
-            }
-            DisableGate?.Invoke();
-            currentColumn = newColumn>=maxColumn?maxColumn:newColumn;
-            currentFloor = newFloor>=maxFloor?maxFloor:newFloor;
-            for (int j = 0; j < maxRow; j++)
-            {
-                for (int i = 0; i < currentColumn; i++)
+                if(i>=maxColumn)continue;
+                columnHead = headsOrganizer.ColumnHeads[i];
+                for (int j = 0; j < currentRow; j++)
                 {
-                    BallColumn ballColumn = headsOrganizer.ColumnHeads[i].BallColumns[j];
-                    for (int k = 0; k < currentFloor && moveBalls.Count > 0; k++)
+                    ballColumn = columnHead.BallColumns[j];
+                    for (int k = 0; k < currentFloor && repositionedBalls.Count > 0; k++)
                     {
-                        Ball ball = moveBalls[0];
+                        ball = repositionedBalls[0];
                         ball.SwapColumn(ballColumn);
-                        moveBalls.RemoveAt(0);
-                        totalBallCount++;
+                        repositionedBalls.RemoveAt(0);
                     }
                 }
             }
-            StartCoroutine(headsOrganizer.SetPositionsInstantly());
+
+            foreach (Ball newBall in repositionedBalls)
+            {
+                newBall.RemoveBall();
+                newBall.transform.parent = ballPool.transform;
+            }
+            headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
         }
-        
+
 
         private IEnumerator GetCubicForm()
         {

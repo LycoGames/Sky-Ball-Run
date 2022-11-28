@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
@@ -13,6 +14,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
         [SerializeField] private float rotateStartAngle = 20f;
         [SerializeField] private BallColumn ballColumn;
         public List<BallColumn> BallColumns { get; private set; }
+
+        public void ClearAllColumns()
+        {
+            foreach (BallColumn ballColumn in BallColumns)
+            {
+                ballColumn.ClearColumn();
+            }
+        }
 
         public IEnumerator InitializeColumnHead(int columnCount, float distance, int maxFloor)
         {

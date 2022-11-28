@@ -42,13 +42,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner
                 Invoke("RemoveBall",waitForRemove);
                 Invoke("StartForwading",waitForRemove+0.05f);
             }
-            else if (other.CompareTag("Gate"))
-            {
-                ballColumn.CustomUnRegister(this);
-                BallManager.Instance.totalBallCount--;
-                BallManager.Instance.moveBalls.Add(this);
-            }
+
         }
+        
         public void StartMoveToPool()
         {
             ballColumn.UnregisterColumn(this);
@@ -85,7 +81,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             ballColumn = _ballColumn;
             ballColumn.RegisterColumn(this);
         }
-        private void RemoveBall()
+        public void RemoveBall()
         {  
             ballColumn.UnregisterColumn(this);
             gameObject.SetActive(false);

@@ -154,15 +154,16 @@ MonoBehaviour:
   totalBallCount: 0
   playerController: {fileID: 8376767500898857333}
   distance: 1
-  maxRow: 12
-  maxColumn: 8
-  maxFloor: 15
-  currentRow: 12
-  currentColumn: 3
-  currentFloor: 5
+  maxRow: 8
+  maxColumn: 12
+  maxFloor: 20
+  currentRow: 8
+  currentColumn: 12
+  currentFloor: 3
   ballPool: {fileID: 3801894025843496801, guid: 1cd81462333a6bd4996cade52b4f3ab4, type: 3}
   headsOrganizer: {fileID: 8376767500898857328}
   waitForForwarding: 0.25
+  activeBALLS: []
 --- !u!114 &8376767500898857328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,5 +176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a0fa38ad8145b4dbee28263230d440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ColumnHeads: []
   lastActiveList: []
   columnHead: {fileID: 2512580293541104066, guid: 0b937edeae9216047ad61e598ca92bfb, type: 3}
