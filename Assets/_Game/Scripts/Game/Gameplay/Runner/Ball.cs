@@ -64,7 +64,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
                 gameObject.SetActive(true);
                 meshRenderer.enabled = true;
                 SetParent(_ballColumn);
-                BallManager.Instance.totalBallCount++;
+                BallManager.Instance.AddTotalBallCount(1);
                 transform.rotation=Quaternion.Euler(0,0,0);
                 transform.localPosition = new Vector3(0,distance*(_ballColumn.BallCount()),-spawmPositionZ);
                 SetColumn(_ballColumn);
@@ -86,7 +86,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {  
             ballColumn.UnregisterColumn(this);
             gameObject.SetActive(false);
-            BallManager.Instance.totalBallCount--;
+            BallManager.Instance.AddTotalBallCount(-1);
         }
 
         private void StartForwading()

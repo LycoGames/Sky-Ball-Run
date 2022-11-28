@@ -16,7 +16,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public static BallManager Instance;
         public Action CheckingCurrentRow;
         public Action CheckingCurrentFloor;
-        public int totalBallCount;
+        private int totalBallCount;
 
         [SerializeField] private PlayerController playerController;
         [SerializeField] private float distance = 0.5f;
@@ -30,14 +30,19 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         [SerializeField] private BallPool ballPool;
         [SerializeField] private HeadsOrganizer headsOrganizer;
-
         [SerializeField] private float waitForForwarding = 1.5f;
 
         private float currentWaitingTime;
         private Coroutine waitForwarding;
-        //public List<Ball> moveBalls = new List<Ball>();
 
-
+        public void AddTotalBallCount(int count)
+        {
+            totalBallCount += count;
+            if(totalBallCount<=0)
+            {
+                GameManager.Instance.OnGameOver();
+            }
+        }
         private void Awake()
         {
             Instance = this;

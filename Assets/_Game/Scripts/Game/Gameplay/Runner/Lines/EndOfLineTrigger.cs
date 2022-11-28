@@ -7,7 +7,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
         private void OnTriggerEnter(Collider other)
         {
             if(other.CompareTag("Player"))
-                GameManager.Instance.ArriveEndOfLine();
+                GameManager.Instance.OnGameOver();
         }
     
     }

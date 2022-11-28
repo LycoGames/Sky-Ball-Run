@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Game.Scripts.Game.Components;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using _Game.Scripts.Game.Gameplay.Runner.Lines;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
+using _Game.Scripts.Game.ObjectPools;
+using _Game.Scripts.Game.States.InGame;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -14,28 +17,34 @@ namespace _Game.Scripts.Game.Gameplay.Runner
     {
         public Action onEnterCheckpoint;
         public Action onExitCheckpoint;
-        public delegate void EndOfLineDelegate();
+        public delegate void GameOverDelegate();
 
-        public event EndOfLineDelegate OnEndOfLine;
+        public event GameOverDelegate GameOver;
         
         public static GameManager Instance;
         [SerializeField] private GameObject mainCamera;
         [SerializeField] private LinesController linesController;
         [SerializeField] private PlayerController playerController;
+        [SerializeField] private InGameComponent inGameComponent;
 
 
         void Awake()
         {
             Instance = this;
         }
+
+        public int GetBallCount()
+        {
+            return BallPool.Instance.GetAllActiveBall().Count;
+        }
         public void ResetGame()
         {
             SceneManager.LoadScene(0);
         }
 
-        public void ArriveEndOfLine()
+        public void OnGameOver()
         {
-            OnEndOfLine?.Invoke();
+            GameOver?.Invoke();
         }
 
         public PlayerController GetPlayerController()

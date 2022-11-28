@@ -82,7 +82,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
                 ball.gameObject.SetActive(false);
                 ball.transform.parent = BallPool.Instance.transform;
                 ball.transform.localPosition = Vector3.zero;
-                BallManager.Instance.totalBallCount--;
+                BallManager.Instance.AddTotalBallCount(-1);
             }
         }
     }

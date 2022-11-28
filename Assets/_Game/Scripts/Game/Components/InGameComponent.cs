@@ -33,14 +33,14 @@ namespace _Game.Scripts.Game.Components
 
         public void OnConstruct()
         {
-            GameManager.OnEndOfLine += OnEndOfLine;
+            GameManager.GameOver += GameOver;
             GameManager.StartGame();
             SwipeController.StartRotate();
         }
 
         public void OnDestruct()
         {
-            GameManager.OnEndOfLine -= OnEndOfLine;
+            GameManager.GameOver -= GameOver;
             GameManager.StopGame();
             SwipeController.StopRotate();
         }
@@ -50,7 +50,7 @@ namespace _Game.Scripts.Game.Components
             
         }
 
-        private void OnEndOfLine()
+        private void GameOver()
         {
             OnInGameComplete?.Invoke();
         }
