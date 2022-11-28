@@ -39,6 +39,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         public void StartCollectingBalls()
         {
+            GameManager.Instance.onEnterCheckpoint?.Invoke();
             GameManager.Instance.GetPlayerController().canMove = false;
             List<Ball> balls = BallManager.Instance.GetFloors(removeFloorCount);
             foreach (var ball in balls)
@@ -69,7 +70,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             {
                 transform.gameObject.SetActive(true);
             }
-
+            GameManager.Instance.onExitCheckpoint?.Invoke();
             GameManager.Instance.GetPlayerController().StartMove();
             BallManager.Instance.currentFloor -= removeFloorCount;
         }

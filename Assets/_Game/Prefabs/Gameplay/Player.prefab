@@ -119,7 +119,7 @@ MonoBehaviour:
   movementSpeed: 30
   rotationYSpeed: 80
   rotationXSpeed: 40
-  boundHorizontal: 9.6
+  boundHorizontal: 10.4
   maxRotationDegree: 60
   rb: {fileID: 8376767500898857335}
   bounceAngle: 15
@@ -154,11 +154,11 @@ MonoBehaviour:
   totalBallCount: 0
   playerController: {fileID: 8376767500898857333}
   distance: 1
-  maxRow: 8
+  maxRow: 10
   maxColumn: 12
   maxFloor: 20
-  currentRow: 8
-  currentColumn: 1
+  currentRow: 5
+  currentColumn: 4
   currentFloor: 2
   ballPool: {fileID: 3801894025843496801, guid: 1cd81462333a6bd4996cade52b4f3ab4, type: 3}
   headsOrganizer: {fileID: 8376767500898857328}

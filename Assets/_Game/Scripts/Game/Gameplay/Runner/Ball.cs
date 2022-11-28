@@ -11,25 +11,23 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         //TODO top sütün ilişki yöntemleri düzenlenmeli
         
         [SerializeField] private float speed = 1;
+        [SerializeField] private float moveForwardSpeed = 1;
         [SerializeField] private float waitForRemove = 1.5f;
         [SerializeField] private ParticleSystem effect;
         [SerializeField] private AudioSource audioSource;
-        
+        [SerializeField] private Rigidbody myRigidbody;
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private float distance;
         [SerializeField] private float spawmPositionZ=10f;
-        [SerializeField] private BallMover ballMover;
+        [SerializeField] private Collider collider;
         private BallColumn ballColumn;
+
 
         private void OnEnable()
         {
-            ballMover.enabled = false;
-        }
-
-        private void OnDisable()
-        {
-            ballMover.enabled = false;
-            
+            collider.isTrigger = true;
+            myRigidbody.isKinematic = true;
+            myRigidbody.useGravity = false;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -48,12 +46,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         public void StartMoveToPool()
         {
             ballColumn.UnregisterColumn(this);
-            ballMover.enabled = true;
+            collider.isTrigger = false;
+            myRigidbody.isKinematic = false;
+            myRigidbody.useGravity = true;
+            myRigidbody.velocity=Vector3.forward*moveForwardSpeed;
         }
 
         public void SetHeight(float position)
         {
-            if (ballMover.enabled) return;
+            if (myRigidbody.useGravity) return;
             StopAllCoroutines();
             StartCoroutine(MoveToDestination(position*distance));
         }

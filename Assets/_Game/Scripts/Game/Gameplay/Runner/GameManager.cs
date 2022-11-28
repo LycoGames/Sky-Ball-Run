@@ -12,6 +12,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 {
     public class GameManager : MonoBehaviour
     {
+        public Action onEnterCheckpoint;
+        public Action onExitCheckpoint;
         public delegate void EndOfLineDelegate();
 
         public event EndOfLineDelegate OnEndOfLine;
