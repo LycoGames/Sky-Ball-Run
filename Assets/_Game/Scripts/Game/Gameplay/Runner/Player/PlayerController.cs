@@ -10,7 +10,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         [SerializeField] private float rotationXSpeed = 10;
         [SerializeField] private float boundHorizontal = 9.6f;
         [SerializeField] private float maxRotationDegree = 20f;
-        [SerializeField] private Rigidbody rb;
         [SerializeField] private float bounceAngle = 15f;
         private float orginalBound;
 

@@ -45,8 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linePrefab: {fileID: 512582270935213281, guid: 546c2af939c66a14db42e3f86e4379d9, type: 3}
-  linePoolCount: 5
   lineForwardBound: 60
-  level: {fileID: 11400000, guid: 291e403372e0559429e724427d3e25e2, type: 2}
+  level: {fileID: 11400000, guid: 647db5828c55e614f9c52b87ce53ce0d, type: 2}
   showedLineCount: 4
   height: -0.5

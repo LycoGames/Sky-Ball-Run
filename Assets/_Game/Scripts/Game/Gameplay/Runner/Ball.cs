@@ -15,19 +15,22 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         [SerializeField] private float waitForRemove = 1.5f;
         [SerializeField] private ParticleSystem effect;
         [SerializeField] private AudioSource audioSource;
-        [SerializeField] private Rigidbody myRigidbody;
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private float distance;
         [SerializeField] private float spawmPositionZ=10f;
         [SerializeField] private Collider collider;
         private BallColumn ballColumn;
-
-
+        private Rigidbody myRigidbody;
+        private bool moveToPool;
         private void OnEnable()
         {
+            moveToPool = false;
             collider.isTrigger = true;
-            myRigidbody.isKinematic = true;
-            myRigidbody.useGravity = false;
+        }
+
+        private void OnDisable()
+        {
+            Destroy(myRigidbody);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -47,14 +50,17 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             ballColumn.UnregisterColumn(this);
             collider.isTrigger = false;
-            myRigidbody.isKinematic = false;
-            myRigidbody.useGravity = true;
+            moveToPool = true;
+            myRigidbody = gameObject.AddComponent<Rigidbody>();
+            myRigidbody.mass = 10;
+            // myRigidbody.isKinematic = false;
+            // myRigidbody.useGravity = true;
             myRigidbody.velocity=Vector3.forward*moveForwardSpeed;
         }
 
         public void SetHeight(float position)
         {
-            if (myRigidbody.useGravity) return;
+            if (moveToPool) return;
             StopAllCoroutines();
             StartCoroutine(MoveToDestination(position*distance));
         }
@@ -70,6 +76,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner
                 SetColumn(_ballColumn);
         }
 
+        public void SetHeightOldColumn()
+        {
+            ballColumn.SetHeight();
+        }
        
         public void SwapColumn(BallColumn _ballColumn)
         {
