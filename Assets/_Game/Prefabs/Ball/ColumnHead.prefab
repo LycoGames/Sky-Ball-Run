@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  rotateSpeed: 5
-  rotateStartAngle: 20
+  rotateSpeed: 2.5
+  rotateStartAngle: 5
   ballColumn: {fileID: 5377857087004858780, guid: 6f0286b7db1672e4b9a681d4526fdfe3, type: 3}
+  movementDelay: 0.25
+  distance: 0

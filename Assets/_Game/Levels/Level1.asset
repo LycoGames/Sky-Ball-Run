@@ -31,10 +31,12 @@ MonoBehaviour:
   - interactables:
     - {fileID: 2060029309858690705, guid: b8f4fb97e4d0bbb478b81c2f62e2cd00, type: 3}
     - {fileID: 2060029309858690705, guid: b8f4fb97e4d0bbb478b81c2f62e2cd00, type: 3}
-  - interactables: []
   - interactables:
-    - {fileID: 823459156089465784, guid: 609fdf6ccddd93544b5b34dfdc3ae523, type: 3}
-    - {fileID: 823459156089465784, guid: 50318e1f15f18874395c472918d44cc6, type: 3}
+    - {fileID: 8677961357051440505, guid: 3b870b07d9cc5b74b971fed18032a304, type: 3}
+    - {fileID: 810876742219852399, guid: b44bbf935bf94134d882cc08946bef61, type: 3}
+  - interactables:
+    - {fileID: 8530123235479019105, guid: a2ffaf2c603727e4ba8c1ce83027e302, type: 3}
+    - {fileID: 7734954175176893107, guid: 2f3550775e9e1294597f5856dda69e09, type: 3}
   - interactables: []
   - interactables: []
   - interactables:
@@ -47,9 +49,7 @@ MonoBehaviour:
   - interactables:
     - {fileID: 2060029309858690705, guid: b8f4fb97e4d0bbb478b81c2f62e2cd00, type: 3}
     - {fileID: 2060029309858690705, guid: b8f4fb97e4d0bbb478b81c2f62e2cd00, type: 3}
-  - interactables:
-    - {fileID: 823459156089465784, guid: 609fdf6ccddd93544b5b34dfdc3ae523, type: 3}
-    - {fileID: 823459156089465784, guid: 50318e1f15f18874395c472918d44cc6, type: 3}
+  - interactables: []
   - interactables: []
   - interactables:
     - {fileID: 2307814742566669500, guid: ef72c874eae692948822a9f0a92a0d04, type: 3}
