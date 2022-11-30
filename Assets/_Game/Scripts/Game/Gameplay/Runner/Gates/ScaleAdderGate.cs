@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 {
-    public class AdderGate : MonoBehaviour
+    public class ScaleAdderGate : MonoBehaviour
     {
         [SerializeField] private AdderGateSpecs selectedGate;
         [SerializeField] private BoxCollider boxCollider;

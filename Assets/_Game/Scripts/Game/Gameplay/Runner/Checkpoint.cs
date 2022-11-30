@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using _Game.Scripts.Game.ObjectPools;
 using UnityEngine;
@@ -49,7 +51,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         }
 
         public void CollectBall() => collectedBallCount++;
-
         public void StartCollectingBalls()
         {
             GameManager.Instance.onEnterCheckpoint?.Invoke();
@@ -58,6 +59,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             foreach (var ball in balls)
             {
                 ball.StartMoveToPool();
+                ball.UnregisterBall();
                 ball.transform.parent = transform;
                 ballCount++;
             }

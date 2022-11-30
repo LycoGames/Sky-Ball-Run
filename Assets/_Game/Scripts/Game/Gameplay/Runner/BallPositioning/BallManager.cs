@@ -48,7 +48,40 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 GameManager.Instance.OnGameOver();
             }
         }
+        
+        public void RemoveBall(int ballCount)
+        {
+          
+            BallColumn ballColumn;
+            ColumnHead columnHead;
+            Ball ball;
+            for (int i = currentFloor-1; i >= 0; i--)
+            {
+                for (int j = currentColumn-1; j >=0 ; j--)
+                {
+                    columnHead = headsOrganizer.ColumnHeads[j];
+                    for (int k = currentRow-1; k >= 0 ; k--)
+                    {
+                        ballColumn = columnHead.BallColumns[k];
+                        if (ballColumn.BallCount() > i)
+                        {
+                            ball=ballColumn.GetBall(i);
+                            ball.RemoveBallWithAnimation();
+                            ballCount--;
+                        }
 
+                        if (ballCount == 0)
+                        {
+                            currentFloor = 0;
+                            CheckingCurrentFloor?.Invoke();
+                            return;
+                                
+                        }
+                    }
+                }
+            }
+            
+        }
         public void AddBall(int ballCount)
         {
           
@@ -93,6 +126,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             }
             for (int i = 0; i < currentColumn; i++)
             {
+                
                 for (int j = 0; j < currentRow; j++)
                 {
                     for (int k =  currentFloor - size; k < currentFloor; k++)
@@ -103,6 +137,101 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
+        }
+        public IEnumerator UpRemover(int size)
+        {
+            currentFloor -= size;
+            if (currentFloor < 0)
+            {
+                currentFloor = 0;
+            }
+            BallColumn ballColumn;
+            ColumnHead columnHead;
+            Ball ball;
+            for (int i = currentFloor+size-1; i >= currentFloor; i--)
+            {
+                for (int j = currentColumn-1; j >=0 ; j--)
+                {
+                    columnHead = headsOrganizer.ColumnHeads[j];
+                    for (int k = currentRow-1; k >= 0 ; k--)
+                    {
+                        ballColumn = columnHead.BallColumns[k];
+                        if (ballColumn.BallCount() > i)
+                        {
+                            ball=ballColumn.GetBall(i);
+                            ball.RemoveBallWithAnimation();
+                        }
+                    }
+                }
+
+                yield return null;
+            }
+            currentFloor = 0;
+            CheckingCurrentFloor?.Invoke();
+        }
+        
+        public IEnumerator RightRemover(int size)
+        {
+            currentColumn -= size;
+            if (currentColumn < 0)
+            {
+                currentColumn = 0;
+            }
+            BallColumn ballColumn;
+            ColumnHead columnHead;
+            Ball ball;
+            for (int i = currentFloor-1; i >= 0; i--)
+            {
+                for (int j = currentColumn+size-1; j >=currentColumn ; j--)
+                {
+                    columnHead = headsOrganizer.ColumnHeads[j];
+                    for (int k = currentRow-1; k >= 0 ; k--)
+                    {
+                        ballColumn = columnHead.BallColumns[k];
+                        if (ballColumn.BallCount() > i)
+                        {
+                            ball=ballColumn.GetBall(i);
+                            ball.RemoveBallWithAnimation();
+                        }
+                    }
+                }
+
+                yield return null;
+            }
+            headsOrganizer.SetPositions();
+            currentFloor = 0;
+            CheckingCurrentFloor?.Invoke();
+        }
+        public IEnumerator LengthRemover(int size)
+        {
+            currentRow -= size;
+            if (currentRow < 0)
+            {
+                currentRow = 0;
+            }
+            BallColumn ballColumn;
+            ColumnHead columnHead;
+            Ball ball;
+            for (int i = currentFloor-1; i >= 0; i--)
+            {
+                for (int j = currentColumn-1; j >=0 ; j--)
+                {
+                    columnHead = headsOrganizer.ColumnHeads[j];
+                    for (int k = currentRow+size-1; k >= currentRow ; k--)
+                    {
+                        ballColumn = columnHead.BallColumns[k];
+                        if (ballColumn.BallCount() > i)
+                        {
+                            ball=ballColumn.GetBall(i);
+                            ball.RemoveBallWithAnimation();
+                        }
+                    }
+                }
+
+                yield return null;
+            }
+            currentFloor = 0;
+            CheckingCurrentRow?.Invoke();
         }
 
         public IEnumerator RightAdder(int size)
@@ -166,7 +295,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     BallColumn ballColumn = columnHead.BallColumns[j];
                     for (int k = 0; k < floorCount; k++)
                     {
-                        ball = ballColumn.GetBallReference(k);
+                        ball = ballColumn.GetBall(k);
                         if(ball!=null)balls.Add(ball);
                     }
                 }
@@ -238,7 +367,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                         if (columnHeads[i].BallColumns[k].BallCount() <= ballColumn.BallCount()) continue;
 
                         ball = columnHeads[i].BallColumns[k].GetBall(ballColumn.BallCount());
-                        ball.SetHeightOldColumn();
                         ball.SwapColumn(ballColumn);
                         k--;
                     }

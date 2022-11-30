@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
+using _Game.Scripts.Game.ObjectPools;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner
@@ -21,11 +22,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         [SerializeField] private Collider collider;
         private BallColumn ballColumn;
         private Rigidbody myRigidbody;
-        private bool moveToPool;
+
         private void OnEnable()
         {
-            moveToPool = false;
-            collider.isTrigger = true;
+           collider.isTrigger = true;
         }
 
         private void OnDisable()
@@ -37,30 +37,31 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             if (other.CompareTag("Obstacle")&&meshRenderer.enabled)
             {
-                effect.Play();
-                audioSource.Play();
-                meshRenderer.enabled = false;
-                Invoke("RemoveBall",waitForRemove);
-                Invoke("StartForwading",waitForRemove+0.05f);
+                RemoveBallWithAnimation();
             }
 
         }
-        
+
+        public void RemoveBallWithAnimation()
+        {
+            effect.Play();
+            audioSource.Play();
+            meshRenderer.enabled = false;
+            Invoke("RemoveBall", waitForRemove);
+            Invoke("StartForwading", waitForRemove + 0.05f);
+        }
+
         public void StartMoveToPool()
         {
             ballColumn.UnregisterColumn(this);
             collider.isTrigger = false;
-            moveToPool = true;
             myRigidbody = gameObject.AddComponent<Rigidbody>();
             myRigidbody.mass = 10;
-            // myRigidbody.isKinematic = false;
-            // myRigidbody.useGravity = true;
             myRigidbody.velocity=Vector3.forward*moveForwardSpeed;
         }
 
         public void SetHeight(float position)
         {
-            if (moveToPool) return;
             StopAllCoroutines();
             StartCoroutine(MoveToDestination(position*distance));
         }
@@ -76,11 +77,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner
                 SetColumn(_ballColumn);
         }
 
-        public void SetHeightOldColumn()
-        {
-            ballColumn.SetHeight();
-        }
-       
         public void SwapColumn(BallColumn _ballColumn)
         {
             SetParent(_ballColumn);
@@ -89,14 +85,27 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         public void SetColumn(BallColumn _ballColumn)
         {
+            if(ballColumn!=null)ballColumn.UnregisterColumn(this);
             ballColumn = _ballColumn;
             ballColumn.RegisterColumn(this);
         }
         public void RemoveBall()
         {  
-            ballColumn.UnregisterColumn(this);
-            gameObject.SetActive(false);
+            UnregisterBall();
+            ReturnToPool();
             BallManager.Instance.AddTotalBallCount(-1);
+        }
+
+        public void UnregisterBall()
+        {
+            ballColumn.UnregisterColumn(this);
+        }
+
+        public void ReturnToPool()
+        {
+            ballColumn = null;
+            gameObject.SetActive(false);
+            transform.parent = BallPool.Instance.transform;
         }
 
         private void StartForwading()

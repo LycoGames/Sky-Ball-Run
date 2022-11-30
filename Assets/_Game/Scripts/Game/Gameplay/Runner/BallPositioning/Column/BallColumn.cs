@@ -40,7 +40,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
                 ball.transform.parent = BallPool.Instance.transform;
                 return;
             }
-
             balls.Add(ball);
             CheckFloor();
             ball.SetHeight(balls.Count - 1);
@@ -48,27 +47,16 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
 
         public void UnregisterColumn(Ball ball)
         {
+            int index = balls.IndexOf(ball);
             if (!balls.Contains(ball)) return;
             RemoveBallList(ball);
-            if (BallCount() <= 0) return;
+            if (BallCount() == index) return;
             SetHeight();
-        }
-
-        public Ball GetBallReference(int index)
-        {
-            if (BallCount() > index) return balls[index];
-            return null;
         }
 
         public Ball GetBall(int index)
         {
-            if (BallCount() > index)
-            {
-                Ball removedBall = balls[index];
-                RemoveBallList(removedBall);
-                return removedBall;
-            }
-
+            if (BallCount() > index) return balls[index];
             return null;
         }
 
@@ -86,7 +74,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
         private void RemoveBallList(Ball ball)
         {
             balls.Remove(ball);
-            ball.transform.parent = BallPool.Instance.transform;
         }
 
         private void CheckFloor()
