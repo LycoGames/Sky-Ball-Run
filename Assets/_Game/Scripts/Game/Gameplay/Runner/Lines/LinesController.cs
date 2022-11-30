@@ -16,12 +16,22 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
 
         private void Start()
         {
+            StartCoroutine(InitiliazeLines());
+        }
+
+        IEnumerator InitiliazeLines()
+        {
+            yield return new WaitForSeconds(2f);
             int counter = showedLineCount;
             foreach (Transform lineTransform in linesTransforms)
             {
                 lineTransform.GetComponent<Line>().InitializeLine(SwapLine,linesTransforms.IndexOf(lineTransform));
-                if (counter == 0) lineTransform.gameObject.SetActive(false);
-                else counter--;
+                if (counter >= 0)
+                {
+                    lineTransform.gameObject.SetActive(true);
+                    counter--;
+                }
+                
             }
         }
 

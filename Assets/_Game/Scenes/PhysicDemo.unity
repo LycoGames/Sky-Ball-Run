@@ -222,6 +222,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2631836527996660749}
     m_Modifications:
+    - target: {fileID: -90982233190667553, guid: 38f8b319d5f939b4aaa84418187c5ba6, type: 3}
+      propertyPath: selectedGate.removePercentage
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1138165245363398048, guid: 38f8b319d5f939b4aaa84418187c5ba6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -382,6 +386,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 119877026103524393}
     m_Modifications:
+    - target: {fileID: -90982233190667553, guid: cb9ce9572bfa72144b5f21393eaf0369, type: 3}
+      propertyPath: checkTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -90982233190667553, guid: cb9ce9572bfa72144b5f21393eaf0369, type: 3}
+      propertyPath: selectedGate.removePercentage
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 1138165245363398048, guid: cb9ce9572bfa72144b5f21393eaf0369, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -860,6 +872,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BallRemoverMoveAble
       objectReference: {fileID: 0}
+    - target: {fileID: 8402832275440763176, guid: 3877d310c829704478d41f5c77f0c967, type: 3}
+      propertyPath: removePercentage
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 3877d310c829704478d41f5c77f0c967, type: 3}
@@ -971,6 +987,10 @@ PrefabInstance:
     - target: {fileID: 3550404735926659840, guid: 4ebf1267ca485614fb6b9deec731851a, type: 3}
       propertyPath: selectedGate.addSize
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550404735926659840, guid: 4ebf1267ca485614fb6b9deec731851a, type: 3}
+      propertyPath: selectedGate.addPercentage
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -2020,6 +2040,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2049576233400469132}
     m_Modifications:
+    - target: {fileID: -90982233190667553, guid: 96a557cce3990d84299f13d257082be1, type: 3}
+      propertyPath: selectedGate.removePercentage
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1138165245363398048, guid: 96a557cce3990d84299f13d257082be1, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -2230,6 +2254,10 @@ PrefabInstance:
     - target: {fileID: 3550404735926659840, guid: c4055e2dcc748b949a66d3fef4661519, type: 3}
       propertyPath: xPos
       value: 4.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550404735926659840, guid: c4055e2dcc748b949a66d3fef4661519, type: 3}
+      propertyPath: selectedGate.addPercentage
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -6424,7 +6452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &507509544967235668
 GameObject:
   m_ObjectHideFlags: 0
@@ -9542,7 +9570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1078226976539616917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10155,7 +10183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1218308701127945426
 GameObject:
   m_ObjectHideFlags: 0
@@ -10684,7 +10712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1388139773894368776
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -13096,7 +13124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1885658484541610662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15067,7 +15095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &2181400128982564681
 GameObject:
   m_ObjectHideFlags: 0
@@ -19536,7 +19564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2926406124081882921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20124,7 +20152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3046593446097889626
 Transform:
   m_ObjectHideFlags: 0
@@ -24276,7 +24304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &3769235879969996311
 GameObject:
   m_ObjectHideFlags: 0
@@ -25253,7 +25281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &4008479152179381280
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -27223,7 +27251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &4353439361148225881
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28328,7 +28356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &4653078482758846433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30929,7 +30957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5028369800100278627
 Transform:
   m_ObjectHideFlags: 0
@@ -34424,7 +34452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &5595057607669429266
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -35214,7 +35242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &5732523692652397611
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35379,7 +35407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &5813887046633076380
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -35604,7 +35632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &5903561393496052483
 GameObject:
   m_ObjectHideFlags: 0
@@ -36395,7 +36423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &6046723216569691129
 GameObject:
   m_ObjectHideFlags: 0
@@ -36918,7 +36946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &6174971968875690141
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -43335,7 +43363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &7316172292849105804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45646,7 +45674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &7733820099268721956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48359,7 +48387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8238385624642858243
 Transform:
   m_ObjectHideFlags: 0
@@ -49101,7 +49129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &8405426476251310561
 GameObject:
   m_ObjectHideFlags: 0
@@ -52550,7 +52578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9092702592315157626
 Transform:
   m_ObjectHideFlags: 0
@@ -53118,7 +53146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &9209379660526755727
 MeshCollider:
   m_ObjectHideFlags: 0
