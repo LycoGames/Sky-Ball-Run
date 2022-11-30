@@ -21,7 +21,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
                 columnMover.IsFollow = true;
                 return true;
             }
-
             columnMover.IsFollow = false;
             return false;
         }

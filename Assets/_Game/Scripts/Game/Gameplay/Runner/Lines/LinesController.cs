@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,41 +9,26 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
 {
     public class LinesController : MonoBehaviour
     {
-        [SerializeField] Line linePrefab;
-        [SerializeField] private float lineForwardBound;
-        [SerializeField] private Level level;
         [SerializeField] private int showedLineCount;
-        [SerializeField] private float height = -0.5f;
 
-        private readonly List<Transform> linesTransforms = new List<Transform>();
+        [SerializeField] private List<Transform> linesTransforms;
         private int currentLine;
 
-        public IEnumerator InitializeLines()
+        private void Start()
         {
-            yield return StartCoroutine(SpawnLines());
-             
+            int counter = showedLineCount;
+            foreach (Transform lineTransform in linesTransforms)
+            {
+                lineTransform.GetComponent<Line>().InitializeLine(SwapLine,linesTransforms.IndexOf(lineTransform));
+                if (counter == 0) lineTransform.gameObject.SetActive(false);
+                else counter--;
+            }
         }
 
         private void SwapLine(int index)
         {
             if (index + showedLineCount < linesTransforms.Count)
                 linesTransforms[index + showedLineCount].gameObject.SetActive(true);
-        }
-
-        private IEnumerator SpawnLines()
-        {
-            int i = 0;
-            foreach (Level.LineInteractables lineInteractable in level.GetLineInteractables())
-            {
-                Line spawnedLined = Instantiate(linePrefab);
-                linesTransforms.Add(spawnedLined.transform);
-                linesTransforms.Last().position =
-                    new Vector3(0, height, lineForwardBound * (linesTransforms.Count - 1));
-                spawnedLined.InitializeLine(lineInteractable.interactables, SwapLine, linesTransforms.Count - 1);
-                if (i >= showedLineCount) spawnedLined.gameObject.SetActive(false);
-                i++;
-                yield return null;
-            }
         }
     }
 }

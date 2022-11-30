@@ -191,7 +191,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             yield return StartCoroutine(headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
             yield return StartCoroutine(InstantiateStartBalls());
             yield return StartCoroutine(headsOrganizer.SetPositionsInstantly());
-            yield return null;
         }
 
         private IEnumerator InstantiateBallPool()

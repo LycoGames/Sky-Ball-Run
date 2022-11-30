@@ -60,7 +60,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             linesController = Instantiate(linesController);
             playerController = Instantiate(playerController);
             mainCamera = Instantiate(mainCamera);
-            yield return StartCoroutine(linesController.InitializeLines());
+            //yield return StartCoroutine(linesController.InitializeLines());
             yield return StartCoroutine(BallManager.Instance.InitializeBallManager());
         }
     }

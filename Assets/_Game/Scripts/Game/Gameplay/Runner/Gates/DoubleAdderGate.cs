@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
+using TMPro;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 {
     public class DoubleAdderGate : MonoBehaviour
     {
+        [SerializeField] private TextMeshProUGUI leftText;
+        [SerializeField] private TextMeshProUGUI rightText;
         [SerializeField] private AdderGateSpecs leftGate;
         [SerializeField] private AdderGateSpecs rightGate;
 
@@ -23,6 +26,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             RightAdder,
             UpAdder
         }
+
+        private void Start()
+        {
+            leftText.text = "+" + leftGate.addSize;
+            rightText.text = "+" + rightGate.addSize;
+        }
+        
 
         private void OnTriggerEnter(Collider other)
         {

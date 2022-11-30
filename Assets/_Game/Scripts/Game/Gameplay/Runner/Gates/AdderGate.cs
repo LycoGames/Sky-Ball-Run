@@ -1,5 +1,6 @@
 using System;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
+using TMPro;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Gates
@@ -9,12 +10,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         [SerializeField] private AdderGateSpecs selectedGate;
         [SerializeField] private BoxCollider boxCollider;
         [SerializeField] private float xPos;
+        [SerializeField] private TextMeshProUGUI sizeText;
 
-        private void OnEnable()
+        private void Start()
         {
             Vector3 newPos = transform.position;
             newPos.x = xPos;
             transform.position = newPos;
+            sizeText.text = "+" + selectedGate.addSize;
         }
 
         private void OnTriggerEnter(Collider other)

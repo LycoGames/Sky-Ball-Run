@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 7921843456886036231}
   - component: {fileID: 6008506702958515928}
   m_Layer: 0
-  m_Name: Adder 3 Taller, 1 Thicker
+  m_Name: DoubleAdder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -478,6 +478,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cbc4dd31606cb041b9572dba5eee440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftText: {fileID: 1357503955032876656}
+  rightText: {fileID: 4989686688999795320}
   leftGate:
     adderType: 1
     addSize: 3

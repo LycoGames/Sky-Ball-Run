@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 7921843456886036231}
   - component: {fileID: 3550404735926659840}
   m_Layer: 0
-  m_Name: Adder 3,rigth 4
+  m_Name: LengthMoveable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -278,9 +278,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedGate:
     adderType: 2
-    addSize: 3
+    addSize: 2
   boxCollider: {fileID: 4319897389194661330}
-  xPos: 4.7
+  xPos: -4.7
+  sizeText: {fileID: 1357503955032876656}
 --- !u!1 &3323036347940478499
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +383,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '+3
+  m_text: '+2
 
 '
   m_isRightToLeft: 0
