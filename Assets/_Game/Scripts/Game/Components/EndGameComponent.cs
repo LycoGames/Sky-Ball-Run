@@ -36,10 +36,8 @@ namespace _Game.Scripts.Game.Components
 
         public void OnConstruct()
         {
-            
             SetupCoin();
             SetupTotalBallCount();
-
             StartCoroutine(WaterfallEndGameCoroutine());
         }
 

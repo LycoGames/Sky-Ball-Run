@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace _Game.Scripts.Game.Components
 {
-    public class InGameComponent : MonoBehaviour, IComponent, IConstructable,IDestructible
+    public class InGameComponent : MonoBehaviour, IComponent, IConstructable, IDestructible
     {
         public delegate void InGameChangeDelegate();
 
@@ -24,7 +24,7 @@ namespace _Game.Scripts.Game.Components
         [SerializeField] private LevelCreator levelCreatorPrefab;
         [SerializeField] private BallManager ballManagerPrefab;
         [SerializeField] private BallPool ballPoolPrebal;
-        
+
         private BallPool ballPool;
         private GameObject mainCamera;
         private PlayerController playerController;
@@ -36,6 +36,10 @@ namespace _Game.Scripts.Game.Components
         public void Initialize(ComponentContainer componentContainer)
         {
             Debug.Log("<color=lime>" + gameObject.name + " initialized!</color>");
+        }
+
+        public IEnumerator InitializeGame()
+        {
             InitializePlayer();
             InitializeBallManager();
             InitializeBallPool();
@@ -43,11 +47,8 @@ namespace _Game.Scripts.Game.Components
             InitializeGameManager();
             InitializeCamera();
             InitializeLevelCreator();
-        }
-        
-        public IEnumerator InitializeGame()
-        {
-            yield return StartCoroutine(ballManager.InitializeBallManager(ballPool,playerController));
+            
+            yield return StartCoroutine(ballManager.InitializeBallManager(ballPool, playerController));
             yield return StartCoroutine(levelCreator.CreateLevel());
         }
 
@@ -116,15 +117,17 @@ namespace _Game.Scripts.Game.Components
         {
             OnInGameComplete?.Invoke();
         }
+
         private void InitializeLevelCreator()
         {
-            levelCreator=Instantiate(levelCreatorPrefab);
+            levelCreator = Instantiate(levelCreatorPrefab);
         }
+
         private void InitializeCamera()
         {
             mainCamera = Instantiate(mainCameraPrefab);
         }
-        
+
         private void InitializeController()
         {
             swipeController = Instantiate(swipeControllerPrefab);
@@ -134,8 +137,9 @@ namespace _Game.Scripts.Game.Components
         private void InitializeGameManager()
         {
             gameManager = Instantiate(gameManagerPrefab);
-            gameManager.InitializeGameManager(playerController,swipeController);
+            gameManager.InitializeGameManager(playerController, swipeController);
         }
+
         private void InitializeBallPool()
         {
             ballPool = Instantiate(ballPoolPrebal);
@@ -145,12 +149,11 @@ namespace _Game.Scripts.Game.Components
         {
             playerController = Instantiate(playerControllerPrefab);
         }
+
         private void InitializeBallManager()
         {
             ballManager = Instantiate(ballManagerPrefab);
             ballManager.transform.parent = playerController.transform;
         }
-
-
     }
 }

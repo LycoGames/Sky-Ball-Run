@@ -7,11 +7,11 @@ namespace _Game.Scripts.Game.Components
     public class PrepareGameComponent : MonoBehaviour, IComponent, IConstructable
     {
         private ComponentContainer componentContainer;
+
         public delegate void PrepareGameChangeDelegate();
 
         public event PrepareGameChangeDelegate OnGameLaunch;
         private InGameComponent inGameComponent;
-
 
 
         public void Initialize(ComponentContainer _componentContainer)
@@ -27,11 +27,9 @@ namespace _Game.Scripts.Game.Components
 
         private IEnumerator PreparingGame()
         {
-            inGameComponent=componentContainer.GetComponent("InGameComponent") as InGameComponent;
+            inGameComponent = componentContainer.GetComponent("InGameComponent") as InGameComponent;
             yield return inGameComponent.StartCoroutine(inGameComponent.InitializeGame());
             OnGameLaunch?.Invoke();
         }
-
-
     }
 }
