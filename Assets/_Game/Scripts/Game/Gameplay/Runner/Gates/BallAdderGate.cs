@@ -39,11 +39,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private IEnumerator CheckSize()
         {
-            float newRemoveSize = 0;
+            float newAddSize = 0;
             while (true)
             {
-                newRemoveSize = ballManager.TotalBallCount * ((float)addPercentage / 100);
-                addSize = (int)Math.Round(newRemoveSize);
+                newAddSize = ballManager.TotalBallCount * ((float)addPercentage / 100);
+                addSize = (int)Math.Round(newAddSize);
                 if (addSize <= 0) addSize = 1;
                 text.text = "-" + addSize;
                 yield return wfsForCheckSize;

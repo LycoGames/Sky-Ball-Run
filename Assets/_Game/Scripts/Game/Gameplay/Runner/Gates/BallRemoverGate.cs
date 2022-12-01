@@ -32,7 +32,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             if (other.CompareTag("Ball"))
             {
                 collider.enabled = false;
-                BallManager.Instance.RemoveBall(removeSize);
+                BallManager.Instance.StartCoroutine(BallManager.Instance.RemoveBall(removeSize));
                 gameObject.SetActive(false);
             }
         }

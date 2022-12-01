@@ -53,7 +53,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         public void StartMoveToPool()
         {
-            ballColumn.UnregisterColumn(this);
             collider.isTrigger = false;
             myRigidbody = gameObject.AddComponent<Rigidbody>();
             myRigidbody.mass = 10;
