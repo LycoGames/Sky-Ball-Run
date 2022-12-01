@@ -34,10 +34,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             return BallPool.Instance.GetAllActiveBall().Count;
         }
-        public void ResetGame()
-        {
-            SceneManager.LoadScene(0);
-        }
 
         public void OnGameOver()
         {

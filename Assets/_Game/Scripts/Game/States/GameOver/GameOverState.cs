@@ -51,7 +51,6 @@ namespace _Game.Scripts.Game.States.GameOver
 
         private void ReturnToMain()
         {
-            inGameComponent.GameManager.ResetGame();
             SendTrigger((int)StateTrigger.ReturnToPreparingGame);
         }
     }

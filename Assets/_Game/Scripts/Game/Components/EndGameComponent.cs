@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _Game.Scripts.Base.Component;
 using _Game.Scripts.Game.Gameplay.EndGames.Waterfall;
+using _Game.Scripts.Game.Gameplay.Runner;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using UnityEngine;
 
@@ -35,6 +36,7 @@ namespace _Game.Scripts.Game.Components
 
         public void OnConstruct()
         {
+            
             SetupCoin();
             SetupTotalBallCount();
 

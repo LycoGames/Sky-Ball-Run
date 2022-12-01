@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1349702981406621377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1349702981406621376}
+  - component: {fileID: 1349702981406621379}
+  m_Layer: 0
+  m_Name: InGameComponent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1349702981406621376
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349702981406621377}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1349702981406621379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349702981406621377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa970531004a9a2479d3325a0f6cadfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManagerPrefab: {fileID: 6432102699597716473, guid: 9401d4d7ea4fffc48b67259a36ffee12, type: 3}
+  swipeControllerPrefab: {fileID: 3867289276033361962, guid: 56e6ab972d5dcc84598faa230a2ed1b3, type: 3}
+  mainCameraPrefab: {fileID: 1165605069637887360, guid: 812825f40b0b4c14bb75dd43d7d47720, type: 3}
+  playerControllerPrefab: {fileID: 8376767500898857333, guid: 45429aed5fde1a14d86d065d62f6af1f, type: 3}
+  levelCreatorPrefab: {fileID: 4300698989546673973, guid: d5f66cdf7f1a58d43aed0db40692cbc8, type: 3}
+  ballManagerPrefab: {fileID: 8376767500898857329, guid: 86fa8cabf93edc14eb27ecbf6677ea1b, type: 3}
+  ballPoolPrebal: {fileID: 3801894025843496801, guid: 1cd81462333a6bd4996cade52b4f3ab4, type: 3}
