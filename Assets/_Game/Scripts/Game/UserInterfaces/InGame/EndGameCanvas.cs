@@ -1,6 +1,5 @@
-using System;
 using _Game.Scripts.Base.UserInterface;
-using _Game.Scripts.Game.Gameplay.Runner;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -8,42 +7,20 @@ namespace _Game.Scripts.Game.UserInterfaces.InGame
 {
     public class EndGameCanvas : BaseCanvas, IStartable, IQuitable
     {
-        public delegate void EndGameRequestDelegate();
-
-        public event EndGameRequestDelegate OnReturnToMainRequest;
-
-        [SerializeField] private TextMeshProUGUI endText;
-        
+        [SerializeField] private TMP_Text coinText;
 
         public void OnStart()
         {
-            SetEndText();
         }
-
 
         public void OnQuit()
         {
         }
 
-        private void SetEndText()
+        public void ChangeCoin(string value)
         {
-            int ballCount = GameManager.Instance.GetBallCount();
-            if(ballCount>0)ChangeTextYouWin();
-            else ChangeTextYouLose();
+            coinText.text = value;
+            coinText.transform.DOScale(Vector3.one, .2f).SetEase(Ease.OutQuad);
         }
-        
-
-        #region Changes
-
-        private void ChangeTextYouLose() => endText.text = "You Lose";
-        private void ChangeTextYouWin() => endText.text = "You Win";
-        #endregion
-
-        public void RequestReturnToPreparingGame()
-        {
-            OnReturnToMainRequest?.Invoke();
-        }
-
-       
     }
 }

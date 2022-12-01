@@ -7,5 +7,6 @@ namespace _Game.Scripts.Game.Enums
         StartGame,
         InGame,
         EndGame,
+        GameOver,
     }
 }

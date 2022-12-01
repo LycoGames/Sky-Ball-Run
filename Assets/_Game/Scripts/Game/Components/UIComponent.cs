@@ -12,9 +12,10 @@ namespace _Game.Scripts.Game.Components
         [SerializeField] private BaseCanvas startGameCanvas;
         [SerializeField] private BaseCanvas inGameCanvas;
         [SerializeField] private BaseCanvas endGameCanvas;
+        [SerializeField] private BaseCanvas gameOverCanvas;
 
         private BaseCanvas activeCanvas;
-        
+
         public void Initialize(ComponentContainer componentContainer)
         {
             Debug.Log("<color=lime>" + gameObject.name + " initialized!</color>");
@@ -23,12 +24,14 @@ namespace _Game.Scripts.Game.Components
             startGameCanvas.Initialize();
             inGameCanvas.Initialize();
             endGameCanvas.Initialize();
-            
+            gameOverCanvas.Initialize();
+
             DeactivateCanvas(introCanvas);
             DeactivateCanvas(prepareGameCanvas);
             DeactivateCanvas(startGameCanvas);
             DeactivateCanvas(inGameCanvas);
             DeactivateCanvas(endGameCanvas);
+            DeactivateCanvas(gameOverCanvas);
         }
 
         public BaseCanvas GetCanvas(CanvasTrigger canvasTrigger)
@@ -40,6 +43,7 @@ namespace _Game.Scripts.Game.Components
                 CanvasTrigger.StartGame => startGameCanvas,
                 CanvasTrigger.InGame => inGameCanvas,
                 CanvasTrigger.EndGame => endGameCanvas,
+                CanvasTrigger.GameOver => gameOverCanvas,
                 _ => null
             };
         }
@@ -65,6 +69,7 @@ namespace _Game.Scripts.Game.Components
                 CanvasTrigger.StartGame => startGameCanvas,
                 CanvasTrigger.InGame => inGameCanvas,
                 CanvasTrigger.EndGame => endGameCanvas,
+                CanvasTrigger.GameOver => gameOverCanvas,
                 _ => activeCanvas
             };
 

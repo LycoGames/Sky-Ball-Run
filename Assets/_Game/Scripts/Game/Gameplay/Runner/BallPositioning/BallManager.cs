@@ -5,6 +5,11 @@ using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
 using _Game.Scripts.Game.ObjectPools;
+<<<<<<< Updated upstream
+=======
+using DG.Tweening;
+using Unity.VisualScripting;
+>>>>>>> Stashed changes
 using UnityEngine;
 
 
@@ -33,6 +38,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         private float currentWaitingTime;
         private Coroutine waitForwarding;
+
         private void Awake()
         {
             Instance = this;
@@ -41,29 +47,33 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public void AddTotalBallCount(int count)
         {
             TotalBallCount += count;
-            if(TotalBallCount<=0)
+            if (TotalBallCount <= 0)
             {
                 GameManager.Instance.OnGameOver();
             }
         }
+<<<<<<< Updated upstream
         
         public IEnumerator RemoveBall(int ballCount)
+=======
+
+        public void RemoveBall(int ballCount)
+>>>>>>> Stashed changes
         {
-          
             BallColumn ballColumn;
             ColumnHead columnHead;
             Ball ball;
-            for (int i = currentFloor-1; i >= 0; i--)
+            for (int i = currentFloor - 1; i >= 0; i--)
             {
-                for (int j = currentColumn-1; j >=0 ; j--)
+                for (int j = currentColumn - 1; j >= 0; j--)
                 {
                     columnHead = headsOrganizer.ColumnHeads[j];
-                    for (int k = currentRow-1; k >= 0 ; k--)
+                    for (int k = currentRow - 1; k >= 0; k--)
                     {
                         ballColumn = columnHead.BallColumns[k];
                         if (ballColumn.BallCount() > i)
                         {
-                            ball=ballColumn.GetBall(i);
+                            ball = ballColumn.GetBall(i);
                             ball.RemoveBallWithAnimation();
                             ballCount--;
                         }
@@ -72,48 +82,50 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                         {
                             currentFloor = 0;
                             CheckingCurrentFloor?.Invoke();
+<<<<<<< Updated upstream
                             yield break;
+=======
+                            return;
+>>>>>>> Stashed changes
                         }
                     }
 
                     yield return null;
                 }
             }
-            
         }
+
         public void AddBall(int ballCount)
         {
-          
             BallColumn ballColumn;
             ColumnHead columnHead;
             Ball ball;
-                for (int i = 0; i < maxFloor; i++)
+            for (int i = 0; i < maxFloor; i++)
+            {
+                for (int j = 0; j < currentColumn; j++)
                 {
-                    for (int j = 0; j < currentColumn; j++)
+                    columnHead = headsOrganizer.ColumnHeads[j];
+                    for (int k = 0; k < currentRow; k++)
                     {
-                        columnHead = headsOrganizer.ColumnHeads[j];
-                        for (int k = 0; k < currentRow; k++)
+                        ballColumn = columnHead.BallColumns[k];
+                        if (ballColumn.BallCount() < i)
                         {
-                            ballColumn = columnHead.BallColumns[k];
-                            if (ballColumn.BallCount() < i)
-                            {
-                                ball = ballPool.GetPooledObject().GetComponent<Ball>();
-                                ball.SetBall(ballColumn);
-                                ballCount--;
-                            }
+                            ball = ballPool.GetPooledObject().GetComponent<Ball>();
+                            ball.SetBall(ballColumn);
+                            ballCount--;
+                        }
 
-                            if (ballCount == 0)
-                            {
-                                currentFloor = 0;
-                                CheckingCurrentFloor?.Invoke();
-                                return;
-                                
-                            }
+                        if (ballCount == 0)
+                        {
+                            currentFloor = 0;
+                            CheckingCurrentFloor?.Invoke();
+                            return;
                         }
                     }
                 }
-            
+            }
         }
+
         public IEnumerator UpAdder(int size)
         {
             yield return StartCoroutine(GetCubicForm());
@@ -123,12 +135,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 currentFloor = maxFloor;
                 yield break;
             }
+
             for (int i = 0; i < currentColumn; i++)
             {
-                
                 for (int j = 0; j < currentRow; j++)
                 {
-                    for (int k =  currentFloor - size; k < currentFloor; k++)
+                    for (int k = currentFloor - size; k < currentFloor; k++)
                     {
                         BallColumn ballColumn = headsOrganizer.ColumnHeads[i].BallColumns[j];
                         Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
@@ -137,6 +149,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 }
             }
         }
+
         public IEnumerator UpRemover(int size)
         {
             currentFloor -= size;
@@ -144,20 +157,21 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             {
                 currentFloor = 0;
             }
+
             BallColumn ballColumn;
             ColumnHead columnHead;
             Ball ball;
-            for (int i = currentFloor+size-1; i >= currentFloor; i--)
+            for (int i = currentFloor + size - 1; i >= currentFloor; i--)
             {
-                for (int j = currentColumn-1; j >=0 ; j--)
+                for (int j = currentColumn - 1; j >= 0; j--)
                 {
                     columnHead = headsOrganizer.ColumnHeads[j];
-                    for (int k = currentRow-1; k >= 0 ; k--)
+                    for (int k = currentRow - 1; k >= 0; k--)
                     {
                         ballColumn = columnHead.BallColumns[k];
                         if (ballColumn.BallCount() > i)
                         {
-                            ball=ballColumn.GetBall(i);
+                            ball = ballColumn.GetBall(i);
                             ball.RemoveBallWithAnimation();
                         }
                     }
@@ -165,10 +179,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
                 yield return null;
             }
+
             currentFloor = 0;
             CheckingCurrentFloor?.Invoke();
         }
-        
+
         public IEnumerator RightRemover(int size)
         {
             currentColumn -= size;
@@ -176,20 +191,21 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             {
                 currentColumn = 0;
             }
+
             BallColumn ballColumn;
             ColumnHead columnHead;
             Ball ball;
-            for (int i = currentFloor-1; i >= 0; i--)
+            for (int i = currentFloor - 1; i >= 0; i--)
             {
-                for (int j = currentColumn+size-1; j >=currentColumn ; j--)
+                for (int j = currentColumn + size - 1; j >= currentColumn; j--)
                 {
                     columnHead = headsOrganizer.ColumnHeads[j];
-                    for (int k = currentRow-1; k >= 0 ; k--)
+                    for (int k = currentRow - 1; k >= 0; k--)
                     {
                         ballColumn = columnHead.BallColumns[k];
                         if (ballColumn.BallCount() > i)
                         {
-                            ball=ballColumn.GetBall(i);
+                            ball = ballColumn.GetBall(i);
                             ball.RemoveBallWithAnimation();
                         }
                     }
@@ -197,10 +213,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
                 yield return null;
             }
+
             headsOrganizer.SetPositions();
             currentFloor = 0;
             CheckingCurrentFloor?.Invoke();
         }
+
         public IEnumerator LengthRemover(int size)
         {
             currentRow -= size;
@@ -208,20 +226,21 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             {
                 currentRow = 0;
             }
+
             BallColumn ballColumn;
             ColumnHead columnHead;
             Ball ball;
-            for (int i = currentFloor-1; i >= 0; i--)
+            for (int i = currentFloor - 1; i >= 0; i--)
             {
-                for (int j = currentColumn-1; j >=0 ; j--)
+                for (int j = currentColumn - 1; j >= 0; j--)
                 {
                     columnHead = headsOrganizer.ColumnHeads[j];
-                    for (int k = currentRow+size-1; k >= currentRow ; k--)
+                    for (int k = currentRow + size - 1; k >= currentRow; k--)
                     {
                         ballColumn = columnHead.BallColumns[k];
                         if (ballColumn.BallCount() > i)
                         {
-                            ball=ballColumn.GetBall(i);
+                            ball = ballColumn.GetBall(i);
                             ball.RemoveBallWithAnimation();
                         }
                     }
@@ -229,6 +248,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
                 yield return null;
             }
+
             currentFloor = 0;
             CheckingCurrentRow?.Invoke();
         }
@@ -242,7 +262,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 currentColumn = maxColumn;
                 yield break;
             }
-            for (int i = currentColumn-size; i < currentColumn; i++)
+
+            for (int i = currentColumn - size; i < currentColumn; i++)
             {
                 for (int j = 0; j < currentRow; j++)
                 {
@@ -254,9 +275,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
+
             headsOrganizer.SetPositions();
         }
-        
+
         public IEnumerator LengthAdder(int size)
         {
             yield return StartCoroutine(GetCubicForm());
@@ -266,9 +288,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 currentRow = maxRow;
                 yield break;
             }
+
             for (int i = 0; i < currentColumn; i++)
             {
-                for (int j = currentRow-size; j < currentRow; j++)
+                for (int j = currentRow - size; j < currentRow; j++)
                 {
                     for (int k = 0; k < currentFloor; k++)
                     {
@@ -278,6 +301,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
+
             headsOrganizer.SetPositions();
         }
 
@@ -285,19 +309,29 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         {
             List<Ball> balls = new List<Ball>();
             Ball ball;
+<<<<<<< Updated upstream
             List<ColumnHead> columnHeads = headsOrganizer.GetActiveList();
             BallColumn ballColumn;
             for (int i = 0; i < currentFloor; i++)
+=======
+            List<ColumnHead> columnHeads = headsOrganizer.ColumnHeads;
+            for (int i = 0; i < currentColumn; i++)
+>>>>>>> Stashed changes
             {
                 for (int j = 0; j < currentRow; j++)
                 {
                     for (int k = 0; k < currentColumn&&ballCount>0; k++)
                     {
+<<<<<<< Updated upstream
                         ballColumn = columnHeads[k].BallColumns[j];
                         ball = ballColumn.GetBall(i);
                         if (ball == null) continue;
                         ballCount--;
                         balls.Add(ball);
+=======
+                        ball = ballColumn.GetBall(k);
+                        if (ball != null) balls.Add(ball);
+>>>>>>> Stashed changes
                     }
                 }
             }
@@ -311,15 +345,34 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 currentWaitingTime = waitForForwarding;
                 return;
             }
+
             waitForwarding = StartCoroutine(Forwarding());
         }
-    
+
         public IEnumerator InitializeBallManager()
         {
             yield return StartCoroutine(InstantiateBallPool());
-            yield return StartCoroutine(headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
+            yield return StartCoroutine(
+                headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
             yield return StartCoroutine(InstantiateStartBalls());
             yield return StartCoroutine(headsOrganizer.SetPositionsInstantly());
+        }
+
+        public IEnumerator GetWaterfallForm()
+        {
+            Vector3 newPos = Vector3.zero;
+            newPos.y = 60f;
+            newPos.z = -95f;
+            playerController.transform.DOMove(newPos, 2f).SetEase(Ease.Linear);
+            yield return new WaitForSeconds(2f);
+        }
+
+        public IEnumerator MoveDownwards()
+        {
+            Vector3 newPos = transform.position;
+            newPos.y = 0;
+            playerController.transform.DOMove(newPos, 2f).SetEase(Ease.Linear);
+            yield return new WaitForSeconds(2f);
         }
 
         private IEnumerator InstantiateBallPool()
@@ -341,14 +394,16 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 {
                     ballColumn = columnHead.BallColumns[j];
                     for (int k = 0; k < currentFloor; k++)
-                    { Ball ball=ballPool.GetPooledObject().GetComponent<Ball>();
-                       ball.SetBall(ballColumn);
+                    {
+                        Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
+                        ball.SetBall(ballColumn);
                     }
                 }
             }
+
             yield return null;
         }
-        
+
 
         private void RepositioningToForward()
         {
@@ -357,7 +412,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             Ball ball;
             for (int i = 0; i < currentColumn; i++)
             {
-               columnHeads=headsOrganizer.ColumnHeads;
+                columnHeads = headsOrganizer.ColumnHeads;
                 for (int j = 0; j < currentRow - 1; j++)
                 {
                     ballColumn = columnHeads[i].BallColumns[j];
@@ -374,13 +429,33 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             }
         }
 
+<<<<<<< Updated upstream
         
+=======
+        private IEnumerator Forwarding()
+        {
+            currentWaitingTime = waitForForwarding;
+            while (currentWaitingTime >= 0)
+            {
+                currentWaitingTime -= 0.01f;
+                yield return new WaitForSeconds(0.01f);
+            }
+
+            RepositioningToForward();
+            headsOrganizer.SetPositions();
+            currentFloor = 0;
+            currentRow = 0;
+            CheckingCurrentRow?.Invoke();
+            CheckingCurrentFloor?.Invoke();
+            waitForwarding = null;
+        }
+
+>>>>>>> Stashed changes
         public void ReshapeWider(int newSize)
         {
-            
             if (TotalBallCount <= 0) return;
             List<Ball> repositionedBalls = new List<Ball>();
-            repositionedBalls=ballPool.GetAllActiveBall();
+            repositionedBalls = ballPool.GetAllActiveBall();
             headsOrganizer.ClearAllColumns();
             int oneFloorMaxSize = newSize * maxRow;
             currentFloor = TotalBallCount / oneFloorMaxSize;
@@ -391,18 +466,20 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 if (TotalBallCount % newSize > 0) currentRow++;
             }
             else currentRow = maxRow;
+
             currentColumn = newSize;
             RepositioningWiderBall(repositionedBalls);
         }
+
         public void ReshapeTaller(int newSize)
         {
             if (TotalBallCount <= 0) return;
             List<Ball> repositionedBalls = new List<Ball>();
-            repositionedBalls=ballPool.GetAllActiveBall();
+            repositionedBalls = ballPool.GetAllActiveBall();
             headsOrganizer.ClearAllColumns();
             int oneColumnMaxSize = newSize * maxRow;
             currentColumn = TotalBallCount / oneColumnMaxSize;
-            if (TotalBallCount % oneColumnMaxSize > 0) currentColumn++; 
+            if (TotalBallCount % oneColumnMaxSize > 0) currentColumn++;
             currentRow = maxRow;
             currentFloor = newSize;
             RepositioningTallerBall(repositionedBalls);
@@ -416,7 +493,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             if (currentColumn >= maxColumn) currentColumn = maxColumn;
             for (int i = 0; i < currentColumn; i++)
             {
-                
                 columnHead = headsOrganizer.ColumnHeads[i];
                 for (int j = 0; j < currentRow; j++)
                 {
@@ -435,8 +511,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 newBall.RemoveBall();
                 newBall.transform.parent = ballPool.transform;
             }
+
             headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
         }
+
         private void RepositioningWiderBall(List<Ball> repositionedBalls)
         {
             BallColumn ballColumn;
@@ -445,7 +523,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             if (currentColumn >= maxColumn) currentColumn = maxColumn;
             for (int i = 0; i < currentRow; i++)
             {
-                for (int j = 0; j <currentColumn ; j++)
+                for (int j = 0; j < currentColumn; j++)
                 {
                     columnHead = headsOrganizer.ColumnHeads[j];
                     ballColumn = columnHead.BallColumns[i];
@@ -463,6 +541,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 newBall.RemoveBall();
                 newBall.transform.parent = ballPool.transform;
             }
+
             headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
         }
 
@@ -480,7 +559,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     for (int k = 0; k < currentFloor; k++)
                     {
                         BallColumn ballColumn = headsOrganizer.ColumnHeads[i].BallColumns[j];
-                        if (ballColumn.BallCount()<currentFloor)
+                        if (ballColumn.BallCount() < currentFloor)
                         {
                             Ball ball = ballPool.GetPooledObject().GetComponent<Ball>();
                             ball.SetBall(ballColumn);
@@ -492,6 +571,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
+
             yield return null;
         }
         private IEnumerator Forwarding()

@@ -43,13 +43,13 @@ namespace _Game.Scripts.Game.States.InGame
 
         public void SubscribeToCanvasRequestDelegates()
         {
-            endGameCanvas.OnReturnToMainRequest += ReturnToMain;
+          //  endGameCanvas.OnReturnToMainRequest += ReturnToMain;
         }
 
 
         public void UnsubscribeToCanvasRequestDelegates()
         {
-            endGameCanvas.OnReturnToMainRequest -= ReturnToMain;
+         //   endGameCanvas.OnReturnToMainRequest -= ReturnToMain;
         }
 
         #region Changes
@@ -57,10 +57,10 @@ namespace _Game.Scripts.Game.States.InGame
         
         #endregion
 
-        private void ReturnToMain()
-        {
-            inGameComponent.GameManager.ResetGame();
-            SendTrigger((int)StateTrigger.ReturnToPreparingGame);
-        }
+        // private void ReturnToMain()
+        // {
+        //     inGameComponent.GameManager.ResetGame();
+        //     SendTrigger((int)StateTrigger.ReturnToPreparingGame);
+        // }
     }
 }

@@ -20,11 +20,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
         public List<BallColumn> BallColumns { get; private set; }
         private int columnCount;
         private Vector3 follow;
+
         private void Start()
         {
             columnCount = BallColumns.Count;
         }
-        
+
 
         public void ClearAllColumns()
         {
@@ -56,15 +57,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                 {
                     BallColumns.Last().InitializeBallColumn(BallColumns[i - 1].transform, maxFloor);
                 }
-                
             }
+
             yield return null;
         }
 
         public bool CheckIsActive()
         {
             //TODO Çok maliyetli
-            int  count = ActiveColumnCount();
+            int count = ActiveColumnCount();
             if (count > 0) return true;
             return false;
         }
@@ -96,6 +97,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
             if (count > BallManager.Instance.currentRow)
                 BallManager.Instance.currentRow = count;
         }
+
         private IEnumerator RotateToDestination(float newX)
         {
             bool isPositive = (transform.localPosition.x - newX) >= 0;
@@ -107,6 +109,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                     rotateSpeed * Time.deltaTime);
                 yield return null;
             }
+
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
 
