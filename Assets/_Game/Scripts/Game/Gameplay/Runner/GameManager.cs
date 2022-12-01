@@ -15,17 +15,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 {
     public class GameManager : MonoBehaviour
     {
-        public Action onEnterCheckpoint;
-        public Action onExitCheckpoint;
+    
         public delegate void GameOverDelegate();
 
         public event GameOverDelegate GameOver;
         
         public static GameManager Instance;
-        [SerializeField] private GameObject mainCamera;
-        [SerializeField] private LinesController linesController;
-        [SerializeField] private PlayerController playerController;
 
+        private PlayerController playerController;
+        private SwipeController swipeController;
 
         void Awake()
         {
@@ -51,17 +49,22 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             return playerController;
         }
 
-        public void StopGame() => playerController.StopMove();
-
-        public void StartGame() => playerController.StartMove();
-
-        public IEnumerator InitializeGame()
+        public void StopMove()
         {
-            linesController = Instantiate(linesController);
-            playerController = Instantiate(playerController);
-            mainCamera = Instantiate(mainCamera);
-            //yield return StartCoroutine(linesController.InitializeLines());
-            yield return StartCoroutine(BallManager.Instance.InitializeBallManager());
+            playerController.StopMove();
+            swipeController.StopRotate();
+        }
+
+        public void StartMove()
+        {
+            playerController.StartMove();
+            swipeController.StartRotate();
+        }
+
+        public void InitializeGameManager(PlayerController _playerController,SwipeController _swapController)
+        {
+            playerController = _playerController;
+            swipeController = _swapController;
         }
     }
 }

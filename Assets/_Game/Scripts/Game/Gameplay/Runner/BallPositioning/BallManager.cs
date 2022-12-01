@@ -28,7 +28,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public int currentColumn = 1;
         public int currentFloor = 1;
 
-        [SerializeField] private BallPool ballPool;
+        private BallPool ballPool;
         [SerializeField] private HeadsOrganizer headsOrganizer;
         [SerializeField] private float waitForForwarding = 1.5f;
 
@@ -38,6 +38,22 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         private void Awake()
         {
             Instance = this;
+        }
+
+        public void OnDestroy()
+        {
+            headsOrganizer.destroyColumnHeads();
+        }
+
+        public IEnumerator InitializeBallManager(BallPool _ballPool,PlayerController _playerController)
+        {
+            ballPool = _ballPool;
+            ballPool.amountToPool = maxColumn * maxRow * maxFloor;
+            playerController = _playerController;
+            yield return StartCoroutine(ballPool.StartInstantiatePool());
+            yield return StartCoroutine(headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
+            yield return StartCoroutine(InstantiateStartBalls());
+            yield return StartCoroutine(headsOrganizer.SetPositionsInstantly());
         }
 
         public void AddTotalBallCount(int count)
@@ -327,15 +343,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             }
 
             waitForwarding = StartCoroutine(Forwarding());
-        }
-
-        public IEnumerator InitializeBallManager()
-        {
-            yield return StartCoroutine(InstantiateBallPool());
-            yield return StartCoroutine(
-                headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
-            yield return StartCoroutine(InstantiateStartBalls());
-            yield return StartCoroutine(headsOrganizer.SetPositionsInstantly());
         }
 
         public IEnumerator GetWaterfallForm()

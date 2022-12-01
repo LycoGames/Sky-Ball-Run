@@ -48,8 +48,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         public void StartCollectingBalls()
         {
             StopCoroutine(checkSizeCoroutine);
-            GameManager.Instance.onEnterCheckpoint?.Invoke();
-            GameManager.Instance.GetPlayerController().canMove = false;
+            GameManager.Instance.StopMove();
             List<Ball> balls = ballManager.GetBalls(removeSize);
             foreach (var ball in balls)
             {
@@ -78,14 +77,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             {
                 transform.gameObject.SetActive(true);
             }
-            GameManager.Instance.onExitCheckpoint?.Invoke();
             if(ballManager.TotalBallCount<=0)yield break;
             foreach (ParticleSystem firework in fireworks)
             {
                 firework.Play();
                 Destroy(firework.gameObject,2f);
             }
-            GameManager.Instance.GetPlayerController().StartMove();
+            GameManager.Instance.StartMove();
             ballManager.StartForwarding();
         }
 

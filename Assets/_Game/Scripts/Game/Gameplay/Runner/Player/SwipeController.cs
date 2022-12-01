@@ -14,8 +14,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         private void Start()
         {
             firstTouch = Vector3.zero;
-            GameManager.Instance.onExitCheckpoint += StartRotate;
-            GameManager.Instance.onEnterCheckpoint += StopRotate;
         }
         
         private void Update()
@@ -26,7 +24,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
             
         }
 
-        public void InitiliazeController() => playerController = GameManager.Instance.GetPlayerController();
+        public void InitiliazeController(PlayerController _playerController) => playerController = _playerController;
         public void StartRotate() => canRotate = true;
         public void StopRotate()
         {

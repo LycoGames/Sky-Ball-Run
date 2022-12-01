@@ -14,12 +14,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
         [SerializeField] private List<Transform> linesTransforms;
         private int currentLine;
 
-        private void Start()
-        {
-            StartCoroutine(InitiliazeLines());
-        }
-
-        IEnumerator InitiliazeLines()
+        public IEnumerator InitiliazeLines()
         {
             yield return new WaitForSeconds(2f);
             int counter = showedLineCount;

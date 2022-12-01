@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Game.Scripts.Base.ObjectPooling;
@@ -9,12 +10,15 @@ namespace _Game.Scripts.Game.ObjectPools
     public class BallPool : ObjectPool
     {
         public static BallPool Instance;
+
+    
+
         public IEnumerator StartInstantiatePool()
         {
             Instance = this;
             yield return StartCoroutine(FillThePool());
         }
-
+        
         public List<Ball> GetAllActiveBall()
         {
             List<Ball> balls = new List<Ball>();

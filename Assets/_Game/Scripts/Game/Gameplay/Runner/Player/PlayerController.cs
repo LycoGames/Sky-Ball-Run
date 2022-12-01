@@ -19,7 +19,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
 
         public float VerticalInput;
         public float HorizontalInput;
-        public bool canMove;
+        private bool canMove;
         private void OnEnable()
         {
             GetStartPosition();

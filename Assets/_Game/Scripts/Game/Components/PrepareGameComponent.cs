@@ -10,6 +10,7 @@ namespace _Game.Scripts.Game.Components
         public delegate void PrepareGameChangeDelegate();
 
         public event PrepareGameChangeDelegate OnGameLaunch;
+        private InGameComponent inGameComponent;
 
 
 
@@ -26,8 +27,8 @@ namespace _Game.Scripts.Game.Components
 
         private IEnumerator PreparingGame()
         {
-            InGameComponent inGameComponent=componentContainer.GetComponent("InGameComponent") as InGameComponent;
-            yield return inGameComponent.StartCoroutine(inGameComponent.InitiliazeGame());
+            inGameComponent=componentContainer.GetComponent("InGameComponent") as InGameComponent;
+            yield return inGameComponent.StartCoroutine(inGameComponent.InitializeGame());
             OnGameLaunch?.Invoke();
         }
 

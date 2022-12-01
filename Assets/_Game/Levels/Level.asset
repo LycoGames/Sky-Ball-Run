@@ -10,12 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8fdabbd5a7a0be4ba18366c709a9e8a, type: 3}
-  m_Name: Level1 1
+  m_Name: Level
   m_EditorClassIdentifier: 
-  lineInteractables:
-  - interactables: []
-  - interactables: []
-  - interactables: []
-  - interactables: []
-  - interactables:
-    - {fileID: 1849196379896021166, guid: 5eef7aa7c9af8dd4a9f88a644bb4be5c, type: 3}
+  levels:
+  - {fileID: 5066103876223209529, guid: ee847db5fe0ba9a4fa3577a8fbe80664, type: 3}

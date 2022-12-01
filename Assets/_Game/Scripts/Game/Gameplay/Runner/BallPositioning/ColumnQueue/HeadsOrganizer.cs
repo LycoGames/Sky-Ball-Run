@@ -17,9 +17,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
 
         [SerializeField] private ColumnHead columnHead;
 
+        private Transform columnHeadsParent;
         private PlayerController playerController;
         private float distance;
 
+        public void destroyColumnHeads()
+        {
+            Destroy(columnHeadsParent);
+        }
         public void ClearAllColumns()
         {
             foreach (ColumnHead columnHead in ColumnHeads)
@@ -28,12 +33,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
             }
         }
 
-        public IEnumerator InitializeHeadsOrganizer(int maxColumn, float _distance, PlayerController playerController,
+        public IEnumerator InitializeHeadsOrganizer(int maxColumn, float _distance, PlayerController _playerController,
             int maxFloor, int maxRow)
         {
-            this.playerController = playerController;
+            playerController = _playerController;
             distance = _distance;
             ColumnHeads = new List<ColumnHead>();
+            GameObject columnHeads = new GameObject();
+            columnHeadsParent = columnHeads.transform;
+            columnHeads.name = "Column Heads";
             for (int i = 0; i < maxColumn; i++)
             {
                 ColumnHeads.Add(Instantiate(columnHead, transform));

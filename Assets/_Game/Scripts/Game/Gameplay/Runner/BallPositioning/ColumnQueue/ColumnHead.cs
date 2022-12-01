@@ -26,7 +26,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
             columnCount = BallColumns.Count;
         }
 
-
         public void ClearAllColumns()
         {
             foreach (BallColumn ballColumn in BallColumns)
@@ -40,6 +39,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
             BallManager.Instance.CheckingCurrentRow += CurrentRow;
             GameObject emptyGO = new GameObject();
             emptyGO.name = gameObject.name + " List";
+            emptyGO.transform.parent = GameObject.Find("Column Heads").transform;
             yield return StartCoroutine(InstantiateBallColumns(emptyGO.transform, columnCount, distance, maxFloor));
         }
 

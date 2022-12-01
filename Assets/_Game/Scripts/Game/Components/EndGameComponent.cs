@@ -55,7 +55,6 @@ namespace _Game.Scripts.Game.Components
             dataComponent.SaveInventoryData();
         }
 
-
         private IEnumerator WaterfallEndGameCoroutine()
         {
             SetupBasketList();
@@ -107,7 +106,6 @@ namespace _Game.Scripts.Game.Components
                 basket.GoldCollected += IncreaseCoin;
             }
         }
-
 
         private void UnRegisterActions()
         {
