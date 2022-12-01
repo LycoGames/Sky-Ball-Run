@@ -5,11 +5,7 @@ using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
 using _Game.Scripts.Game.ObjectPools;
-<<<<<<< Updated upstream
-=======
 using DG.Tweening;
-using Unity.VisualScripting;
->>>>>>> Stashed changes
 using UnityEngine;
 
 
@@ -52,13 +48,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 GameManager.Instance.OnGameOver();
             }
         }
-<<<<<<< Updated upstream
-        
-        public IEnumerator RemoveBall(int ballCount)
-=======
 
-        public void RemoveBall(int ballCount)
->>>>>>> Stashed changes
+        public IEnumerator RemoveBall(int ballCount)
+
         {
             BallColumn ballColumn;
             ColumnHead columnHead;
@@ -82,11 +74,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                         {
                             currentFloor = 0;
                             CheckingCurrentFloor?.Invoke();
-<<<<<<< Updated upstream
                             yield break;
-=======
-                            return;
->>>>>>> Stashed changes
+
                         }
                     }
 
@@ -309,29 +298,20 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         {
             List<Ball> balls = new List<Ball>();
             Ball ball;
-<<<<<<< Updated upstream
             List<ColumnHead> columnHeads = headsOrganizer.GetActiveList();
             BallColumn ballColumn;
             for (int i = 0; i < currentFloor; i++)
-=======
-            List<ColumnHead> columnHeads = headsOrganizer.ColumnHeads;
-            for (int i = 0; i < currentColumn; i++)
->>>>>>> Stashed changes
+
             {
                 for (int j = 0; j < currentRow; j++)
                 {
                     for (int k = 0; k < currentColumn&&ballCount>0; k++)
                     {
-<<<<<<< Updated upstream
                         ballColumn = columnHeads[k].BallColumns[j];
                         ball = ballColumn.GetBall(i);
                         if (ball == null) continue;
                         ballCount--;
                         balls.Add(ball);
-=======
-                        ball = ballColumn.GetBall(k);
-                        if (ball != null) balls.Add(ball);
->>>>>>> Stashed changes
                     }
                 }
             }
@@ -428,29 +408,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 }
             }
         }
-
-<<<<<<< Updated upstream
         
-=======
-        private IEnumerator Forwarding()
-        {
-            currentWaitingTime = waitForForwarding;
-            while (currentWaitingTime >= 0)
-            {
-                currentWaitingTime -= 0.01f;
-                yield return new WaitForSeconds(0.01f);
-            }
-
-            RepositioningToForward();
-            headsOrganizer.SetPositions();
-            currentFloor = 0;
-            currentRow = 0;
-            CheckingCurrentRow?.Invoke();
-            CheckingCurrentFloor?.Invoke();
-            waitForwarding = null;
-        }
-
->>>>>>> Stashed changes
         public void ReshapeWider(int newSize)
         {
             if (TotalBallCount <= 0) return;
