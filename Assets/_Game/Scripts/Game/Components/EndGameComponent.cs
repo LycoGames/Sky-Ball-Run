@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Game.Scripts.Base.Component;
@@ -14,23 +15,44 @@ namespace _Game.Scripts.Game.Components
         public event EndGameChangeDelegate OnSuccess;
         public event EndGameChangeDelegate OnFail;
 
+        public Action<string> CoinChange;
+        public Action EndGameEnded;
+
         [SerializeField] private List<WaterfallBasket> waterfallBasketList;
 
-        public int EndGamePoints { get; set; }
+        private DataComponent dataComponent;
+
+        private int totalBallCount;
+        private int collectedBallCount;
+
+        public int Coin { get; set; }
 
         public void Initialize(ComponentContainer componentContainer)
         {
             Debug.Log("<color=lime>" + gameObject.name + " initialized!</color>");
+            dataComponent = componentContainer.GetComponent("DataComponent") as DataComponent;
         }
 
         public void OnConstruct()
         {
+            SetupCoin();
+            SetupTotalBallCount();
+
             StartCoroutine(WaterfallEndGameCoroutine());
         }
+
 
         public void OnDestruct()
         {
             UnRegisterActions();
+            ResetVariables();
+            SaveCoinData();
+        }
+
+        private void SaveCoinData()
+        {
+            dataComponent.InventoryData.ownedCoin = Coin;
+            dataComponent.SaveInventoryData();
         }
 
 
@@ -41,17 +63,48 @@ namespace _Game.Scripts.Game.Components
             yield return BallManager.Instance.MoveDownwards();
         }
 
-        private void IncreasePoint(int points)
+        private void SetupCoin()
         {
-            EndGamePoints += points;
-            Debug.LogError(EndGamePoints);
+            Coin = dataComponent.InventoryData.ownedCoin;
+            CoinChange?.Invoke(Coin.ToString());
+        }
+
+        private void SetupTotalBallCount()
+        {
+            totalBallCount = BallManager.Instance.TotalBallCount;
+        }
+
+
+        private void IncreaseCoin(int coin)
+        {
+            Coin += coin;
+            CoinChange?.Invoke(Coin.ToString());
+            IncreaseCollectedBallCount();
+        }
+
+        private void IncreaseCollectedBallCount()
+        {
+            collectedBallCount++;
+            CheckWaterfallGameEnd();
+        }
+
+        private void CheckWaterfallGameEnd()
+        {
+            if (collectedBallCount == totalBallCount)
+                EndGameEnded?.Invoke();
+        }
+
+        private void ResetVariables()
+        {
+            totalBallCount = 0;
+            collectedBallCount = 0;
         }
 
         private void SetupBasketList()
         {
             foreach (var basket in waterfallBasketList)
             {
-                basket.GoldCollected += IncreasePoint;
+                basket.GoldCollected += IncreaseCoin;
             }
         }
 
@@ -60,7 +113,7 @@ namespace _Game.Scripts.Game.Components
         {
             foreach (var basket in waterfallBasketList)
             {
-                basket.GoldCollected -= IncreasePoint;
+                basket.GoldCollected -= IncreaseCoin;
             }
         }
     }

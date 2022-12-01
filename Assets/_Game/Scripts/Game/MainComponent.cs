@@ -8,13 +8,16 @@ namespace _Game.Scripts.Game
     public class MainComponent : MonoBehaviour
     {
         private ComponentContainer componentContainer;
-        
+
         private UIComponent uiComponent;
+        private DataComponent dataComponent;
         private PrepareGameComponent prepareGameComponent;
         private IntroComponent introComponent;
         private StartGameComponent startGameComponent;
         private InGameComponent inGameComponent;
         private EndGameComponent endGameComponent;
+        private GameOverComponent gameOverComponent;
+
 
         private AppState appState;
 
@@ -28,17 +31,19 @@ namespace _Game.Scripts.Game
         void Start()
         {
             CreateUIComponent();
+            CreateDataComponent();
             CreatePrepareGameComponent();
             CreateIntroComponent();
             CreateStartGameComponent();
             CreateInGameComponent();
             CreateEndGameComponent();
+            CreateGameOverComponent();
 
             InitializeComponents();
             CreateAppState();
             EnterAppState();
         }
-        
+
 
         private void CreateComponentContainer()
         {
@@ -48,12 +53,15 @@ namespace _Game.Scripts.Game
         private void InitializeComponents()
         {
             uiComponent.Initialize(componentContainer);
+            dataComponent.Initialize(componentContainer);
             introComponent.Initialize(componentContainer);
             prepareGameComponent.Initialize(componentContainer);
             startGameComponent.Initialize(componentContainer);
             inGameComponent.Initialize(componentContainer);
             endGameComponent.Initialize(componentContainer);
+            gameOverComponent.Initialize(componentContainer);
         }
+
         private void CreateStartGameComponent()
         {
             startGameComponent = FindObjectOfType<StartGameComponent>();
@@ -61,7 +69,7 @@ namespace _Game.Scripts.Game
 
             componentContainer.AddComponent(componentKey, startGameComponent);
         }
-        
+
 
         private void CreateUIComponent()
         {
@@ -71,6 +79,14 @@ namespace _Game.Scripts.Game
             componentContainer.AddComponent(componentKey, uiComponent);
         }
 
+        private void CreateDataComponent()
+        {
+            dataComponent = FindObjectOfType<DataComponent>();
+            string componentKey = dataComponent.GetType().Name;
+
+            componentContainer.AddComponent(componentKey, dataComponent);
+        }
+
         private void CreateIntroComponent()
         {
             introComponent = FindObjectOfType<IntroComponent>();
@@ -78,9 +94,9 @@ namespace _Game.Scripts.Game
 
             componentContainer.AddComponent(componentKey, introComponent);
         }
-        
+
         private void CreatePrepareGameComponent()
-        { 
+        {
             prepareGameComponent = FindObjectOfType<PrepareGameComponent>();
             string componentKey = prepareGameComponent.GetType().Name;
 
@@ -103,6 +119,15 @@ namespace _Game.Scripts.Game
             componentContainer.AddComponent(componentKey, endGameComponent);
         }
 
+        private void CreateGameOverComponent()
+        {
+            gameOverComponent = FindObjectOfType<GameOverComponent>();
+            string componentKey = gameOverComponent.GetType().Name;
+
+            componentContainer.AddComponent(componentKey, gameOverComponent);
+        }
+
+
         private void CreateAppState()
         {
             appState = new AppState(componentContainer);
@@ -114,4 +139,3 @@ namespace _Game.Scripts.Game
         }
     }
 }
-

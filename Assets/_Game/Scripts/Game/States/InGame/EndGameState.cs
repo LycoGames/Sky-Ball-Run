@@ -7,25 +7,22 @@ using _Game.Scripts.Game.UserInterfaces.InGame;
 
 namespace _Game.Scripts.Game.States.InGame
 {
-    public class EndGameState : StateMachine, IRequestable
+    public class EndGameState : StateMachine, IChangeable
     {
         private readonly UIComponent uiComponent;
         private readonly EndGameComponent endGameComponent;
-        private readonly InGameComponent inGameComponent;
         private readonly EndGameCanvas endGameCanvas;
 
         public EndGameState(ComponentContainer componentContainer)
         {
             uiComponent = componentContainer.GetComponent("UIComponent") as UIComponent;
             endGameComponent = componentContainer.GetComponent("EndGameComponent") as EndGameComponent;
-            inGameComponent = componentContainer.GetComponent("InGameComponent") as InGameComponent;
             endGameCanvas = uiComponent.GetCanvas(CanvasTrigger.EndGame) as EndGameCanvas;
         }
 
         protected override void OnEnter()
         {
-            SubscribeToCanvasRequestDelegates();
-
+            SubscribeToComponentChangeDelegates();
             endGameCanvas.OnStart();
             endGameComponent.OnConstruct();
 
@@ -34,33 +31,30 @@ namespace _Game.Scripts.Game.States.InGame
 
         protected override void OnExit()
         {
-            UnsubscribeToCanvasRequestDelegates();
-
+            UnsubscribeToComponentChangeDelegates();
             endGameCanvas.OnQuit();
             endGameComponent.OnDestruct();
         }
-        
 
-        public void SubscribeToCanvasRequestDelegates()
+        public void SubscribeToComponentChangeDelegates()
         {
-          //  endGameCanvas.OnReturnToMainRequest += ReturnToMain;
+            endGameComponent.CoinChange += endGameCanvas.ChangeCoin;
+            endGameComponent.EndGameEnded += RequestGameOver;
         }
 
-
-        public void UnsubscribeToCanvasRequestDelegates()
+        public void UnsubscribeToComponentChangeDelegates()
         {
-         //   endGameCanvas.OnReturnToMainRequest -= ReturnToMain;
+            endGameComponent.CoinChange -= endGameCanvas.ChangeCoin;
+            endGameComponent.EndGameEnded -= RequestGameOver;
         }
 
         #region Changes
 
-        
         #endregion
 
-        // private void ReturnToMain()
-        // {
-        //     inGameComponent.GameManager.ResetGame();
-        //     SendTrigger((int)StateTrigger.ReturnToPreparingGame);
-        // }
+        private void RequestGameOver()
+        {
+            SendTrigger((int)StateTrigger.FinishEndGame);
+        }
     }
 }

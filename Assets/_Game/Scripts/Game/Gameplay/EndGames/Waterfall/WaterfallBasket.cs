@@ -1,4 +1,5 @@
 using System;
+using _Game.Scripts.Game.Gameplay.Runner;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
@@ -11,9 +12,10 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Ball")) return;
+            if (!other.TryGetComponent(out Ball ball)) return;
+
             GoldCollected?.Invoke(pointMultiplier);
-            other.gameObject.SetActive(false);
+            ball.ReturnToPool();
         }
     }
 }
