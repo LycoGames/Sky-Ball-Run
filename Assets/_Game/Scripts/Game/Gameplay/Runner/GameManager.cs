@@ -15,11 +15,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 {
     public class GameManager : MonoBehaviour
     {
-    
         public delegate void GameOverDelegate();
 
         public event GameOverDelegate GameOver;
-        
+
         public static GameManager Instance;
 
         private PlayerController playerController;
@@ -57,7 +56,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             swipeController.StartRotate();
         }
 
-        public void InitializeGameManager(PlayerController _playerController,SwipeController _swapController)
+        public void InitializeGameManager(PlayerController _playerController, SwipeController _swapController)
         {
             playerController = _playerController;
             swipeController = _swapController;

@@ -345,30 +345,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             waitForwarding = StartCoroutine(Forwarding());
         }
 
-        public IEnumerator GetWaterfallForm()
-        {
-            Vector3 newPos = Vector3.zero;
-            newPos.y = 60f;
-            newPos.z = -95f;
-            playerController.transform.DOMove(newPos, 2f).SetEase(Ease.Linear);
-            yield return new WaitForSeconds(2f);
-        }
-
-        public IEnumerator MoveDownwards()
-        {
-            Vector3 newPos = transform.position;
-            newPos.y = 0;
-            playerController.transform.DOMove(newPos, 2f).SetEase(Ease.Linear);
-            yield return new WaitForSeconds(2f);
-        }
-
-        private IEnumerator InstantiateBallPool()
-        {
-            ballPool = Instantiate(ballPool);
-            ballPool.amountToPool = maxRow * maxColumn * maxFloor;
-            yield return StartCoroutine(ballPool.StartInstantiatePool());
-        }
-
         private IEnumerator InstantiateStartBalls()
         {
             List<ColumnHead> columnHeads = headsOrganizer.ColumnHeads;

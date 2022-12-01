@@ -11,29 +11,28 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
     {
         [SerializeField] private int showedLineCount;
 
-        [SerializeField] private List<Transform> linesTransforms;
+        [SerializeField] private List<Line> lineList;
         private int currentLine;
 
-        public IEnumerator InitiliazeLines()
+        public IEnumerator InitializeLines()
         {
             yield return new WaitForSeconds(2f);
             int counter = showedLineCount;
-            foreach (Transform lineTransform in linesTransforms)
+            foreach (var line in lineList)
             {
-                lineTransform.GetComponent<Line>().InitializeLine(SwapLine,linesTransforms.IndexOf(lineTransform));
+                line.InitializeLine(SwapLine, lineList.IndexOf(line));
                 if (counter >= 0)
                 {
-                    lineTransform.gameObject.SetActive(true);
+                    line.gameObject.SetActive(true);
                     counter--;
                 }
-                
             }
         }
 
         private void SwapLine(int index)
         {
-            if (index + showedLineCount < linesTransforms.Count)
-                linesTransforms[index + showedLineCount].gameObject.SetActive(true);
+            if (index + showedLineCount < lineList.Count)
+                lineList[index + showedLineCount].gameObject.SetActive(true);
         }
     }
 }

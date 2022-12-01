@@ -1,5 +1,6 @@
 using System.Collections;
 using _Game.Scripts.Base.Component;
+using _Game.Scripts.Game.Gameplay.EndGames;
 using _Game.Scripts.Game.Gameplay.Runner;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using _Game.Scripts.Game.Gameplay.Runner.LevelSystems;
@@ -32,10 +33,12 @@ namespace _Game.Scripts.Game.Components
         private BallManager ballManager;
         private GameManager gameManager;
         private SwipeController swipeController;
+        private EndGameComponent endGameComponent;
 
         public void Initialize(ComponentContainer componentContainer)
         {
             Debug.Log("<color=lime>" + gameObject.name + " initialized!</color>");
+            endGameComponent = componentContainer.GetComponent("EndGameComponent") as EndGameComponent;
         }
 
         public IEnumerator InitializeGame()
@@ -47,9 +50,11 @@ namespace _Game.Scripts.Game.Components
             InitializeGameManager();
             InitializeCamera();
             InitializeLevelCreator();
-            
+
             yield return StartCoroutine(ballManager.InitializeBallManager(ballPool, playerController));
             yield return StartCoroutine(levelCreator.CreateLevel());
+
+            SetupEndGame();
         }
 
         public void OnConstruct()
@@ -75,6 +80,13 @@ namespace _Game.Scripts.Game.Components
             DestroyLevelCreator();
             DestroyBallPool();
             DestroyBallManager();
+        }
+
+        private void SetupEndGame()
+        {
+            EndGameController endGameController = levelCreator.EndGameController;
+            endGameController.Initialize(playerController);
+            endGameComponent.SetEndGameController(endGameController);
         }
 
         private void DestroyBallManager()
