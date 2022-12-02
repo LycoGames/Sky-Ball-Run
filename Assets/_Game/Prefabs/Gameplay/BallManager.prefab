@@ -66,7 +66,7 @@ MonoBehaviour:
   maxFloor: 30
   currentRow: 5
   currentColumn: 5
-  currentFloor: 5
+  currentFloor: 30
   headsOrganizer: {fileID: 8376767500898857328}
   waitForForwarding: 0.25
 --- !u!114 &8376767500898857328

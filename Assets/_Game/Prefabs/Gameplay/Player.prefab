@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd21e947bf1315a469557fd477ba54e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 39
+  movementSpeed: 50
   rotationYSpeed: 200
   rotationXSpeed: 30
-  boundHorizontal: 10.4
+  boundHorizontal: 12
   maxRotationDegree: 60
   bounceAngle: 15
   VerticalInput: 0

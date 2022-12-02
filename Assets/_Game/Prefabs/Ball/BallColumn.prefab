@@ -61,5 +61,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance: 1
   rotateSpeed: 30
-  minXPos: -8.75
-  maxXPos: 8.75
+  minXPos: -12
+  maxXPos: 12
