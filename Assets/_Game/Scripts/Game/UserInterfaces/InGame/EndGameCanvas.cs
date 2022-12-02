@@ -8,9 +8,10 @@ namespace _Game.Scripts.Game.UserInterfaces.InGame
 {
     public class EndGameCanvas : BaseCanvas, IStartable, IQuitable
     {
+        [SerializeField] private RectTransform coinSection;
         [SerializeField] private TMP_Text coinText;
 
-        private readonly Vector3 coinChangeScale = new(1.1f, 1.1f, 1.1f);
+        private readonly Vector3 coinChangeScale = new(.5f, .5f, .5f);
         private Tweener punchTweener;
 
         public void OnStart()
@@ -27,10 +28,10 @@ namespace _Game.Scripts.Game.UserInterfaces.InGame
             if (punchTweener is { active: true })
             {
                 punchTweener.Kill();
-                coinText.transform.localScale = Vector3.one;
+                coinSection.transform.localScale = Vector3.one;
             }
 
-            punchTweener = coinText.transform.DOPunchScale(coinChangeScale, .1f, 10, 0F);
+            punchTweener = coinSection.transform.DOPunchScale(coinChangeScale, .1f, 1, 0F);
         }
     }
 }
