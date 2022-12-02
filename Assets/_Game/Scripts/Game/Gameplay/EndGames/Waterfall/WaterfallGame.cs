@@ -1,16 +1,19 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
+using Cinemachine;
 using DG.Tweening;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
 {
-    public class WaterfallGame : MonoBehaviour
+    public class WaterfallGame : EndGameController
     {
         [SerializeField] private List<WaterfallBasket> waterfallBasketList;
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
+        [SerializeField] private Transform ballSetupTransform;
+        [SerializeField] private WaterfallCollider waterfallCollider;
 
         private int totalBallCount;
         private int collectedBallCount;
@@ -20,10 +23,14 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
         public void Setup(PlayerController _playerController)
         {
             playerController = _playerController;
+            SetupTotalBallCount();
             SetupBasketList();
-            StartCoroutine(GameCoroutine());
         }
 
+        public override void LaunchEndGame()
+        {
+            StartCoroutine(GameCoroutine());
+        }
 
         private void SetupTotalBallCount()
         {
@@ -32,17 +39,21 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
 
         private IEnumerator GameCoroutine()
         {
+            SetupCamera();
             yield return GetWaterfallForm();
             yield return MoveDownwards();
         }
 
+        private void SetupCamera()
+        {
+            virtualCamera.Priority = 15;
+        }
+
         private IEnumerator GetWaterfallForm()
         {
-            Vector3 newPos = Vector3.zero;
-            newPos.y = 60f;
-            newPos.z = -95f;
-            playerController.transform.DOMove(newPos, 2f).SetEase(Ease.Linear);
-            yield return new WaitForSeconds(2f);
+            playerController.transform.DOMove(ballSetupTransform.position, 1f).SetEase(Ease.Linear);
+            yield return new WaitForSeconds(1f);
+            waterfallCollider.GameStarted = true;
         }
 
         private IEnumerator MoveDownwards()
@@ -55,9 +66,9 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
 
         private void IncreaseCoin(int coin)
         {
-            // Coin += coin;
-            // CoinChange?.Invoke(Coin.ToString());
-            // IncreaseCollectedBallCount();
+            GainedCoin += coin;
+            GainedCoinChanged?.Invoke(GainedCoin);
+            IncreaseCollectedBallCount();
         }
 
         private void IncreaseCollectedBallCount()
@@ -68,24 +79,17 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
 
         private void CheckWaterfallGameEnd()
         {
-            // if (collectedBallCount == totalBallCount)
-            //     EndGameEnded?.Invoke();
+            if (collectedBallCount == totalBallCount)
+                EndGameEnded?.Invoke();
         }
 
-        private void ResetVariables()
-        {
-            totalBallCount = 0;
-            collectedBallCount = 0;
-        }
-
-
-        private void UnRegisterActions()
-        {
-            foreach (var basket in waterfallBasketList)
-            {
-                basket.GoldCollected -= IncreaseCoin;
-            }
-        }
+        // private void UnRegisterActions()
+        // {
+        //     foreach (var basket in waterfallBasketList)
+        //     {
+        //         basket.GoldCollected -= IncreaseCoin;
+        //     }
+        // }
 
         private void SetupBasketList()
         {

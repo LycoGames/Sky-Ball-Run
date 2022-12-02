@@ -96,7 +96,8 @@ namespace _Game.Scripts.Game.Components
         {
             EndGameController endGameController = levelCreator.EndGameController;
             endGameController.Initialize(playerController);
-            endGameComponent.SetEndGameController(endGameController);
+            endGameComponent.EndGameController = endGameController;
+            endGameComponent.PlayerController = playerController;
         }
 
         private void DestroyBallManager()

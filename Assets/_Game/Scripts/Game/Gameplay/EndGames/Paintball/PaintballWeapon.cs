@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
+using _Game.Scripts.Game.Gameplay.Runner;
 using _Game.Scripts.Game.ObjectPools;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
 {
@@ -8,6 +11,8 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
     {
         [SerializeField] private Transform barrelTransform;
         [SerializeField] private Transform magazineTransform;
+
+        private Action OnOutOfBullet;
 
         public Vector3 MagazinePosition { get; private set; }
 
@@ -23,7 +28,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         private WaitForSeconds rateOfFireWaitForSecond;
 
         public void Setup(float _bulletSpeed, float _rateOfFire, int _ballCount, float _randomnessMinX,
-            float _randomnessMaxX, float _randomnessMinY, float _randomnessMaxY)
+            float _randomnessMaxX, float _randomnessMinY, float _randomnessMaxY, Action _onOutOfBullet)
         {
             bulletSpeed = _bulletSpeed;
             rateOfFire = _rateOfFire;
@@ -34,6 +39,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
             randomnessMaxY = _randomnessMaxY;
             MagazinePosition = magazineTransform.position;
             rateOfFireWaitForSecond = new WaitForSeconds(rateOfFire);
+            OnOutOfBullet = _onOutOfBullet;
         }
 
         public void Fire()
@@ -48,12 +54,20 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
                 var ball = BallPool.Instance.GetPooledObject();
                 ball.transform.position = barrelTransform.position;
                 ball.transform.rotation = barrelTransform.rotation;
-                ball.SetActive(true);
-                var rb = ball.gameObject.AddComponent<Rigidbody>();
-                rb.velocity = barrelTransform.forward * bulletSpeed + GetRandomRecoil();
+                ball.gameObject.SetActive(true);
+                var ballSc = ball.GetComponent<Ball>();
+                ballSc.StartCoroutine(ballSc.MoveToForward(bulletSpeed, GetRandomRecoil()));
+                // Rigidbody rb;
+                // rb = ball.TryGetComponent(out Rigidbody rigidbody)
+                //     ? rigidbody
+                //     : ball.gameObject.AddComponent<Rigidbody>();
+                // rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                // rb.velocity = barrelTransform.forward * bulletSpeed + GetRandomRecoil();
                 firedBallCount++;
                 yield return rateOfFireWaitForSecond;
             }
+
+            OnOutOfBullet?.Invoke();
         }
 
         private Vector3 GetRandomRecoil()

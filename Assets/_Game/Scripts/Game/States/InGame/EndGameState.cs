@@ -39,13 +39,13 @@ namespace _Game.Scripts.Game.States.InGame
         public void SubscribeToComponentChangeDelegates()
         {
             endGameComponent.CoinChange += endGameCanvas.ChangeCoin;
-            endGameComponent.EndGameEnded += RequestGameOver;
+            endGameComponent.OnEndGameEnded += RequestGameOver;
         }
 
         public void UnsubscribeToComponentChangeDelegates()
         {
             endGameComponent.CoinChange -= endGameCanvas.ChangeCoin;
-            endGameComponent.EndGameEnded -= RequestGameOver;
+            endGameComponent.OnEndGameEnded -= RequestGameOver;
         }
 
         #region Changes

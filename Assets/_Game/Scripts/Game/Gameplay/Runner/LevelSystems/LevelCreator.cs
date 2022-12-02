@@ -14,7 +14,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
         private int currentLevel = 0;
         private int LevelCount;
         public EndGameController EndGameControllerPrefab => level.EndGameControllerPrefab;
-        public EndGameController EndGameController { get; set; }
+        public EndGameController EndGameController { get; private set; }
 
         private void Start()
         {
@@ -27,7 +27,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
             if (loadedLevel > LevelCount) loadedLevel %= LevelCount;
             linesController = Instantiate(level.GetLevels()[loadedLevel]);
             Transform lastLineTransform = linesController.GetLastLine();
-            EndGameController = Instantiate(EndGameControllerPrefab, lastLineTransform.position,
+            EndGameController = Instantiate(EndGameControllerPrefab,
+                EndGameControllerPrefab.transform.position + lastLineTransform.position,
                 lastLineTransform.rotation);
             currentLevel++;
             yield return StartCoroutine(linesController.InitializeLines());

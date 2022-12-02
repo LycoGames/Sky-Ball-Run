@@ -7,6 +7,7 @@ TagManager:
   - Obstacle
   - Gate
   - BallDropper
+  - Ball
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - PaintballAimTarget
   - 
   - 
   - 

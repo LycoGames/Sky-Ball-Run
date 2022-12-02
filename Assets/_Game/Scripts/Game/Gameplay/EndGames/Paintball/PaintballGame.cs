@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using _Game.Scripts.Game.ObjectPools;
@@ -10,9 +9,10 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
 {
     public class PaintballGame : EndGameController
     {
-        public Action<int> TargetHit;
+        [SerializeField] private PaintballWeaponController paintballWeaponController;
+        [SerializeField] private float weaponSensitivity;
 
-        [Header("PaintballWeapon")] [SerializeField]
+        [Space] [Header("PaintballWeapon")] [SerializeField]
         private PaintballWeapon paintballWeapon;
 
         [SerializeField] private float bulletSpeed;
@@ -24,17 +24,23 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
 
 
         [Space] [SerializeField] private MoveTarget target;
+        [SerializeField] private Transform aimTarget;
 
         [SerializeField] private CinemachineVirtualCamera
             virtualCamera;
 
+
         public override void LaunchEndGame()
         {
-            SetupWeapon();
-            SetupTarget();
             StartCoroutine(Launch());
         }
 
+        public void Setup()
+        {
+            SetupWeapon();
+            SetupTarget();
+            SetupWeaponController();
+        }
 
         private IEnumerator Launch()
         {
@@ -42,17 +48,37 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
             yield return new WaitForSeconds(1f);
             SwitchToWeaponCamera();
             yield return new WaitForSeconds(1f);
+            paintballWeaponController.Launch();
+            yield return new WaitForSeconds(.5f);
             paintballWeapon.Fire();
         }
 
         private void SetupWeapon()
         {
             paintballWeapon.Setup(bulletSpeed, rateOfFire, BallManager.Instance.TotalBallCount, randomnessMinX,
-                randomnessMaxX, randomnessMinY, randomnessMaxY);
+                randomnessMaxX, randomnessMinY, randomnessMaxY, EndGameEnd);
+        }
+
+        private void EndGameEnd()
+        {
+            StartCoroutine(EndGameCoroutine());
+        }
+
+        private IEnumerator EndGameCoroutine()
+        {
+            yield return new WaitForSeconds(1f);
+            paintballWeaponController.StopControl();
+            EndGameEnded?.Invoke();
+        }
+
+        private void SetupWeaponController()
+        {
+            paintballWeaponController.Setup(weaponSensitivity, aimTarget);
         }
 
         private void SetupTarget()
         {
+            target.TargetHit += GainCoin;
         }
 
 
@@ -65,9 +91,16 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
             }
         }
 
+
         private void SwitchToWeaponCamera()
         {
             virtualCamera.Priority = 15;
+        }
+
+        private void GainCoin(int count)
+        {
+            GainedCoin += count;
+            GainedCoinChanged?.Invoke(GainedCoin);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
     public class Ball : MonoBehaviour
     {
         //TODO top sütün ilişki yöntemleri düzenlenmeli
-        
+
         [SerializeField] private float speed = 1;
         [SerializeField] private float moveForwardSpeed = 1;
         [SerializeField] private float waitForRemove = 1.5f;
@@ -18,14 +18,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private float distance;
-        [SerializeField] private float spawmPositionZ=10f;
+        [SerializeField] private float spawmPositionZ = 10f;
         [SerializeField] private Collider collider;
         private BallColumn ballColumn;
         private Rigidbody myRigidbody;
 
         private void OnEnable()
         {
-           collider.isTrigger = true;
+            collider.isTrigger = true;
         }
 
         private void OnDisable()
@@ -35,11 +35,27 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Obstacle")&&meshRenderer.enabled)
+            if (other.CompareTag("Obstacle") && meshRenderer.enabled)
             {
                 RemoveBallWithAnimation();
             }
+        }
 
+        public IEnumerator MoveToForward(float speed, Vector3 randomRecoil)
+        {
+            while (true)
+            {
+                transform.position += transform.forward * (speed * Time.deltaTime);
+                yield return null;
+            }
+        }
+
+        public void StopForward()
+        {
+            StopAllCoroutines();
+            meshRenderer.enabled = false;
+            effect.Play();
+            collider.enabled = false;
         }
 
         public void RemoveBallWithAnimation()
@@ -56,24 +72,25 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             collider.isTrigger = false;
             myRigidbody = gameObject.AddComponent<Rigidbody>();
             myRigidbody.mass = 10;
-            myRigidbody.velocity=Vector3.forward*moveForwardSpeed;
+            myRigidbody.velocity = Vector3.forward * moveForwardSpeed;
         }
 
         public void SetHeight(float position)
         {
             StopAllCoroutines();
-            StartCoroutine(MoveToDestination(position*distance));
+            StartCoroutine(MoveToDestination(position * distance));
         }
+
         //TODO burada fazlalık olabilir.
         public void SetBall(BallColumn _ballColumn)
         {
-                gameObject.SetActive(true);
-                meshRenderer.enabled = true;
-                SetParent(_ballColumn);
-                BallManager.Instance.AddTotalBallCount(1);
-                transform.rotation=Quaternion.Euler(0,0,0);
-                transform.localPosition = new Vector3(0,distance*(_ballColumn.BallCount()),-spawmPositionZ);
-                SetColumn(_ballColumn);
+            gameObject.SetActive(true);
+            meshRenderer.enabled = true;
+            SetParent(_ballColumn);
+            BallManager.Instance.AddTotalBallCount(1);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.localPosition = new Vector3(0, distance * (_ballColumn.BallCount()), -spawmPositionZ);
+            SetColumn(_ballColumn);
         }
 
         public void SwapColumn(BallColumn _ballColumn)
@@ -84,12 +101,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         public void SetColumn(BallColumn _ballColumn)
         {
-            if(ballColumn!=null)ballColumn.UnregisterColumn(this);
+            if (ballColumn != null) ballColumn.UnregisterColumn(this);
             ballColumn = _ballColumn;
             ballColumn.RegisterColumn(this);
         }
+
         public void RemoveBall()
-        {  
+        {
             UnregisterBall();
             ReturnToPool();
             BallManager.Instance.AddTotalBallCount(-1);
@@ -112,7 +130,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             BallManager.Instance.StartForwarding();
         }
 
-        
+
         private IEnumerator MoveToDestination(float height)
         {
             Vector3 newPos = Vector3.zero;
@@ -122,13 +140,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner
                 transform.localPosition = Vector3.MoveTowards(transform.localPosition, newPos, speed * Time.deltaTime);
                 yield return null;
             }
+
             transform.localPosition = newPos;
             yield return null;
         }
+
         private void SetParent(BallColumn _ballColumn)
         {
             transform.parent = _ballColumn.transform;
         }
-
     }
 }
