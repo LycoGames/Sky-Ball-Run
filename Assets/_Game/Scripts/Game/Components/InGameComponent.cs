@@ -101,6 +101,7 @@ namespace _Game.Scripts.Game.Components
 
         private void DestroyBallManager()
         {
+            ballManager.DestroyBallManager();
             Destroy(ballManager.gameObject);
         }
 

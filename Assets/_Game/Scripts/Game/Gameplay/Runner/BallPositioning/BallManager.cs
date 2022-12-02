@@ -41,7 +41,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             Instance = this;
         }
 
-        public void OnDestroy()
+        public void DestroyBallManager()
         {
             headsOrganizer.destroyColumnHeads();
         }
