@@ -4,19 +4,16 @@ using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.EndGames
 {
-    public class EndGameController : MonoBehaviour
+    public abstract class EndGameController : MonoBehaviour
     {
-        protected Action OnEndGameStarted;
-        private PlayerController playerController;
+        protected PlayerController playerController;
 
         public void Initialize(PlayerController _playerController)
         {
             playerController = _playerController;
         }
 
-        public void EndGameStarted()
-        {
-            OnEndGameStarted?.Invoke();
-        }
+
+        public abstract void LaunchEndGame();
     }
 }

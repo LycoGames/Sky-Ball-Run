@@ -7,6 +7,7 @@ using _Game.Scripts.Game.Gameplay.Runner.LevelSystems;
 using _Game.Scripts.Game.Gameplay.Runner.Lines;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
 using _Game.Scripts.Game.ObjectPools;
+using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -21,13 +22,15 @@ namespace _Game.Scripts.Game.Components
         [SerializeField] private GameManager gameManagerPrefab;
         [SerializeField] private SwipeController swipeControllerPrefab;
         [SerializeField] private GameObject mainCameraPrefab;
+        [SerializeField] private CinemachineVirtualCamera playerFollowerCameraPrefab;
         [SerializeField] private PlayerController playerControllerPrefab;
         [SerializeField] private LevelCreator levelCreatorPrefab;
         [SerializeField] private BallManager ballManagerPrefab;
-        [SerializeField] private BallPool ballPoolPrebal;
+        [SerializeField] private BallPool ballPoolPrefab;
 
         private BallPool ballPool;
         private GameObject mainCamera;
+        private CinemachineVirtualCamera playerFollowerCamera;
         private PlayerController playerController;
         private LevelCreator levelCreator;
         private BallManager ballManager;
@@ -49,6 +52,7 @@ namespace _Game.Scripts.Game.Components
             InitializeController();
             InitializeGameManager();
             InitializeCamera();
+            InitializePlayerFollowerCamera();
             InitializeLevelCreator();
 
             yield return StartCoroutine(ballManager.InitializeBallManager(ballPool, playerController));
@@ -56,6 +60,7 @@ namespace _Game.Scripts.Game.Components
 
             SetupEndGame();
         }
+
 
         public void OnConstruct()
         {
@@ -77,6 +82,7 @@ namespace _Game.Scripts.Game.Components
             DestroyController();
             DestroyGameManager();
             DestroyCamera();
+            DestroyPlayerFollowerCamera();
             DestroyLevelCreator();
             DestroyBallPool();
             DestroyBallManager();
@@ -110,6 +116,11 @@ namespace _Game.Scripts.Game.Components
             Destroy(mainCamera);
         }
 
+        private void DestroyPlayerFollowerCamera()
+        {
+            Destroy(playerFollowerCamera);
+        }
+
         private void DestroyGameManager()
         {
             Destroy(gameManager);
@@ -140,6 +151,12 @@ namespace _Game.Scripts.Game.Components
             mainCamera = Instantiate(mainCameraPrefab);
         }
 
+        private void InitializePlayerFollowerCamera()
+        {
+            playerFollowerCamera = Instantiate(playerFollowerCameraPrefab);
+            playerFollowerCamera.Follow = playerController.transform;
+        }
+
         private void InitializeController()
         {
             swipeController = Instantiate(swipeControllerPrefab);
@@ -154,7 +171,7 @@ namespace _Game.Scripts.Game.Components
 
         private void InitializeBallPool()
         {
-            ballPool = Instantiate(ballPoolPrebal);
+            ballPool = Instantiate(ballPoolPrefab);
         }
 
         private void InitializePlayer()

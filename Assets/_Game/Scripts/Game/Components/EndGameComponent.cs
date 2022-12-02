@@ -7,6 +7,7 @@ using _Game.Scripts.Game.Gameplay.EndGames.Waterfall;
 using _Game.Scripts.Game.Gameplay.Runner;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
+using Cinemachine;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Components
@@ -21,11 +22,13 @@ namespace _Game.Scripts.Game.Components
         public Action<string> CoinChange;
         public Action EndGameEnded;
 
-        private DataComponent dataComponent;
         private PlayerController playerController;
         private EndGameController endGameController;
 
-        public int Coin { get; set; }
+        private DataComponent dataComponent;
+
+
+        private int coin;
 
         public void Initialize(ComponentContainer componentContainer)
         {
@@ -36,6 +39,7 @@ namespace _Game.Scripts.Game.Components
         public void OnConstruct()
         {
             SetupCoin();
+            endGameController.LaunchEndGame();
         }
 
         public void OnDestruct()
@@ -48,17 +52,22 @@ namespace _Game.Scripts.Game.Components
             endGameController = _endGameController;
         }
 
+        private void ChangeCoin(int value)
+        {
+            coin = value;
+            CoinChange?.Invoke(coin.ToString());
+        }
+
         private void SaveCoinData()
         {
-            dataComponent.InventoryData.ownedCoin = Coin;
+            dataComponent.InventoryData.ownedCoin = coin;
             dataComponent.SaveInventoryData();
         }
 
-
         private void SetupCoin()
         {
-            Coin = dataComponent.InventoryData.ownedCoin;
-            CoinChange?.Invoke(Coin.ToString());
+            coin = dataComponent.InventoryData.ownedCoin;
+            CoinChange?.Invoke(coin.ToString());
         }
     }
 }

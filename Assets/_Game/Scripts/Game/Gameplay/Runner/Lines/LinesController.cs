@@ -29,6 +29,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
             }
         }
 
+        public Transform GetLastLine()
+        {
+            return lineList.Last().transform;
+        }
+
         private void SwapLine(int index)
         {
             if (index + showedLineCount < lineList.Count)

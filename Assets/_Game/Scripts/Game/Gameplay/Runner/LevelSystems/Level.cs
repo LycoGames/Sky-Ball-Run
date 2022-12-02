@@ -10,9 +10,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
     public class Level : ScriptableObject
     {
         [SerializeField] private List<LinesController> levels;
-        [SerializeField] private EndGameController endGameController;
+        [SerializeField] private EndGameController endGameControllerPrefab;
 
-        public EndGameController EndGameController => endGameController;
+        public EndGameController EndGameControllerPrefab => endGameControllerPrefab;
 
         public List<LinesController> GetLevels() => levels;
         public int GetLevelCount() => levels.Count;
