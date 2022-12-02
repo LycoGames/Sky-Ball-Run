@@ -35,7 +35,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
 
         public void DestroyLevel()
         {
-            Destroy(linesController);
+            Destroy(linesController.gameObject);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 {
     public class Checkpoint : MonoBehaviour
     {
+        //TODO şuna bi el at allah rızası için
         public List<Transform> transforms = new List<Transform>();
         [SerializeField] private Barricade barricade;
         [SerializeField] private Transform moverLine;
@@ -30,6 +31,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         private BallManager ballManager;
         private WaitForSeconds wfsForCheckSize;
         private Coroutine checkSizeCoroutine;
+
+        private void OnDestroy()
+        { 
+            if(fireworks.Any())DestroyFireWork();
+        }
+
         private void OnEnable()
         {
             ballManager=BallManager.Instance;
@@ -78,13 +85,18 @@ namespace _Game.Scripts.Game.Gameplay.Runner
                 transform.gameObject.SetActive(true);
             }
             if(ballManager.TotalBallCount<=0)yield break;
+            DestroyFireWork();
+            GameManager.Instance.StartMove();
+            ballManager.StartForwarding();
+        }
+
+        private void DestroyFireWork()
+        {
             foreach (ParticleSystem firework in fireworks)
             {
                 firework.Play();
-                Destroy(firework.gameObject,2f);
+                Destroy(firework.gameObject, 2f);
             }
-            GameManager.Instance.StartMove();
-            ballManager.StartForwarding();
         }
 
         private void ReturnAllBallToPool(List<Ball> balls)
@@ -92,10 +104,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             foreach (var ball in balls)
             {
                 ball.RemoveBall();
-                //ball.gameObject.SetActive(false);
                 ball.transform.parent = BallPool.Instance.transform;
                 ball.transform.localPosition = Vector3.zero;
-                //BallManager.Instance.AddTotalBallCount(-1);
             }
         }
         private void CreateFireworks()

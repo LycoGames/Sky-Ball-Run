@@ -15,10 +15,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 {
     public class GameManager : MonoBehaviour
     {
-        public delegate void GameOverDelegate();
+        public delegate void OnArriveEndLineDelegate();
+        public delegate void OnLoseGameDelegate();
 
-        public event GameOverDelegate GameOver;
+        public event OnArriveEndLineDelegate ArriveEndLine;
+        
+        
 
+        public event OnLoseGameDelegate LoseGame;
         public static GameManager Instance;
 
         private PlayerController playerController;
@@ -34,9 +38,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             return BallPool.Instance.GetAllActiveBall().Count;
         }
 
+        public void OnLoseGame()
+        {
+            LoseGame?.Invoke();
+        }
         public void OnGameOver()
         {
-            GameOver?.Invoke();
+            ArriveEndLine?.Invoke();
         }
 
         public PlayerController GetPlayerController()

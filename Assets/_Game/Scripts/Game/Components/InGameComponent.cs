@@ -18,6 +18,7 @@ namespace _Game.Scripts.Game.Components
         public delegate void InGameChangeDelegate();
 
         public event InGameChangeDelegate OnInGameComplete;
+        public event InGameChangeDelegate OnLoseGame;
 
         [SerializeField] private GameManager gameManagerPrefab;
         [SerializeField] private SwipeController swipeControllerPrefab;
@@ -64,19 +65,21 @@ namespace _Game.Scripts.Game.Components
 
         public void OnConstruct()
         {
-            gameManager.GameOver += GameOver;
+            gameManager.ArriveEndLine += ArriveEndLine;
+            gameManager.LoseGame += LoseGame;
             gameManager.StartMove();
             swipeController.StartRotate();
         }
 
         public void OnDestruct()
         {
-            gameManager.GameOver -= GameOver;
+            gameManager.ArriveEndLine -= ArriveEndLine;
+            gameManager.LoseGame -= LoseGame;
             gameManager.StopMove();
             swipeController.StopRotate();
         }
 
-        public void DestroyGame()
+        public IEnumerator DestroyGame()
         {
             DestroyPlayer();
             DestroyController();
@@ -86,6 +89,7 @@ namespace _Game.Scripts.Game.Components
             DestroyLevelCreator();
             DestroyBallPool();
             DestroyBallManager();
+            yield return null;
         }
 
         private void SetupEndGame()
@@ -97,48 +101,53 @@ namespace _Game.Scripts.Game.Components
 
         private void DestroyBallManager()
         {
-            Destroy(ballManager);
+            Destroy(ballManager.gameObject);
         }
 
         private void DestroyBallPool()
         {
-            Destroy(ballPool);
+            Destroy(ballPool.gameObject);
         }
 
         private void DestroyLevelCreator()
         {
             levelCreator.DestroyLevel();
-            Destroy(levelCreator);
+            Destroy(levelCreator.gameObject);
         }
 
         private void DestroyCamera()
         {
-            Destroy(mainCamera);
+            Destroy(mainCamera.gameObject);
         }
 
         private void DestroyPlayerFollowerCamera()
         {
-            Destroy(playerFollowerCamera);
+            Destroy(playerFollowerCamera.gameObject);
         }
 
         private void DestroyGameManager()
         {
-            Destroy(gameManager);
+            Destroy(gameManager.gameObject);
         }
 
         private void DestroyController()
         {
-            Destroy(swipeController);
+            Destroy(swipeController.gameObject);
         }
 
         private void DestroyPlayer()
         {
-            Destroy(playerController);
+            Destroy(playerController.gameObject);
         }
 
-        private void GameOver()
+        private void ArriveEndLine()
         {
             OnInGameComplete?.Invoke();
+        }
+
+        private void LoseGame()
+        {
+            OnLoseGame?.Invoke();
         }
 
         private void InitializeLevelCreator()

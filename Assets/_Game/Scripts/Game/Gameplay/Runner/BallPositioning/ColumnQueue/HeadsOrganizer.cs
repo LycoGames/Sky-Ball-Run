@@ -23,7 +23,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
 
         public void destroyColumnHeads()
         {
-            Destroy(columnHeadsParent);
+            Destroy(columnHeadsParent.gameObject);
         }
         public void ClearAllColumns()
         {

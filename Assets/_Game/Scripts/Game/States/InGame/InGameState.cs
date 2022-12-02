@@ -3,6 +3,7 @@ using _Game.Scripts.Base.State;
 using _Game.Scripts.Game.Components;
 using _Game.Scripts.Game.Enums;
 using _Game.Scripts.Game.UserInterfaces.InGame;
+using Unity.VisualScripting.Dependencies.NCalc;
 
 namespace _Game.Scripts.Game.States.InGame
 {
@@ -41,12 +42,14 @@ namespace _Game.Scripts.Game.States.InGame
         public void SubscribeToComponentChangeDelegates()
         {
             inGameComponent.OnInGameComplete += RequestEndGame;
+            inGameComponent.OnLoseGame += RequestGameOver;
         }
 
 
         public void UnsubscribeToComponentChangeDelegates()
         {
             inGameComponent.OnInGameComplete -= RequestEndGame;
+            inGameComponent.OnLoseGame -= RequestGameOver;
         }
 
         public void SubscribeToCanvasRequestDelegates()
@@ -56,8 +59,11 @@ namespace _Game.Scripts.Game.States.InGame
         public void UnsubscribeToCanvasRequestDelegates()
         {
         }
-        
 
+        private void RequestGameOver()
+        {
+            SendTrigger((int)StateTrigger.GoToGameOver);
+        }
         private void RequestEndGame()
         {
             SendTrigger((int)StateTrigger.FinishGame);

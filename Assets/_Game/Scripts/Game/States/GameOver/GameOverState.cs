@@ -1,3 +1,4 @@
+using System.Collections;
 using _Game.Scripts.Base.Component;
 using _Game.Scripts.Base.State;
 using _Game.Scripts.Game.Components;
@@ -10,14 +11,13 @@ namespace _Game.Scripts.Game.States.GameOver
     {
         private readonly UIComponent uiComponent;
         private readonly GameOverComponent gameOverComponent;
-        private readonly InGameComponent inGameComponent;
         private readonly GameOverCanvas gameOverCanvas;
 
         public GameOverState(ComponentContainer componentContainer)
         {
             uiComponent = componentContainer.GetComponent("UIComponent") as UIComponent;
             gameOverComponent = componentContainer.GetComponent("GameOverComponent") as GameOverComponent;
-            inGameComponent = componentContainer.GetComponent("InGameComponent") as InGameComponent;
+
 
             gameOverCanvas = uiComponent.GetCanvas(CanvasTrigger.GameOver) as GameOverCanvas;
         }
@@ -40,18 +40,27 @@ namespace _Game.Scripts.Game.States.GameOver
 
         public void SubscribeToCanvasRequestDelegates()
         {
-            gameOverCanvas.OnReturnToMainRequest += ReturnToMain;
+            gameOverCanvas.OnReturnToMainRequest += RequestReturnToMain;
+            gameOverComponent.GameOverComplete += ReturnToMain;
         }
 
 
         public void UnsubscribeToCanvasRequestDelegates()
         {
-            gameOverCanvas.OnReturnToMainRequest -= ReturnToMain;
+            gameOverCanvas.OnReturnToMainRequest -= RequestReturnToMain;
+            gameOverComponent.GameOverComplete -= ReturnToMain;
+        }
+
+        private void RequestReturnToMain()
+        {
+            gameOverComponent.RemoveGame();
         }
 
         private void ReturnToMain()
         {
             SendTrigger((int)StateTrigger.ReturnToPreparingGame);
         }
+
+
     }
 }
