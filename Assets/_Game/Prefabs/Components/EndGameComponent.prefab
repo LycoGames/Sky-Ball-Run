@@ -44,4 +44,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc14b9734ea568408ef40d677420288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterfallBasketList: []
