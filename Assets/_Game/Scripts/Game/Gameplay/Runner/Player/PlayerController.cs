@@ -54,10 +54,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
 
         private void Movement()
         {
-            var pos = transform.position + transform.forward;
+            var pos = transform.position + transform.forward*movementSpeed*Time.deltaTime;
             pos.x = Mathf.Clamp(pos.x, -boundHorizontal, boundHorizontal);
             pos.y = Math.Clamp(pos.y, 0, 100);
-            transform.position = Vector3.MoveTowards(transform.position, pos, movementSpeed * Time.deltaTime);
+            transform.position = pos;
         }
 
         private void Rotate(float rotateXTo, float rotateYTo)
