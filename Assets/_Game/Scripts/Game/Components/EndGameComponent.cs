@@ -1,14 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using _Game.Scripts.Base.Component;
 using _Game.Scripts.Game.Gameplay.EndGames;
 using _Game.Scripts.Game.Gameplay.EndGames.Paintball;
 using _Game.Scripts.Game.Gameplay.EndGames.Waterfall;
-using _Game.Scripts.Game.Gameplay.Runner;
-using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
-using Cinemachine;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Components
@@ -26,21 +21,17 @@ namespace _Game.Scripts.Game.Components
         public EndGameController EndGameController { get; set; }
         public PlayerController PlayerController { get; set; }
 
-        private DataComponent dataComponent;
-
+        public int GainedCoin { get; private set; }
 
         private int lastSavedCoin;
-        private int gainedCoin;
 
         public void Initialize(ComponentContainer componentContainer)
         {
             Debug.Log("<color=lime>" + gameObject.name + " initialized!</color>");
-            dataComponent = componentContainer.GetComponent("DataComponent") as DataComponent;
         }
 
         public void OnConstruct()
         {
-            SetupCoin();
             SetupEndGame();
         }
 
@@ -48,13 +39,6 @@ namespace _Game.Scripts.Game.Components
         {
             EndGameController.GainedCoinChanged -= ChangeCoin;
             EndGameController.EndGameEnded -= EndGameEnded;
-
-            SaveCoinData();
-        }
-
-        public void SetEndGameController(EndGameController _endGameController)
-        {
-            EndGameController = _endGameController;
         }
 
         private void SetupEndGame()
@@ -81,20 +65,8 @@ namespace _Game.Scripts.Game.Components
 
         private void ChangeCoin(int value)
         {
-            gainedCoin = value;
-            CoinChange?.Invoke((lastSavedCoin + gainedCoin).ToString());
-        }
-
-        private void SaveCoinData()
-        {
-            dataComponent.InventoryData.ownedCoin = lastSavedCoin + gainedCoin;
-            dataComponent.SaveInventoryData();
-        }
-
-        private void SetupCoin()
-        {
-            lastSavedCoin = dataComponent.InventoryData.ownedCoin;
-            CoinChange?.Invoke(lastSavedCoin.ToString());
+            GainedCoin = value;
+            CoinChange?.Invoke((lastSavedCoin + GainedCoin).ToString());
         }
     }
 }

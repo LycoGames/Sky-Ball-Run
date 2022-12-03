@@ -8,7 +8,7 @@ using _Game.Scripts.Game.UserInterfaces.Splash;
 
 namespace _Game.Scripts.Game.States.Splash
 {
-    public class PrepareGameState : StateMachine ,IRequestable
+    public class PrepareGameState : StateMachine, IRequestable
     {
         private readonly UIComponent uiComponent;
         private readonly PrepareGameComponent prepareGameComponent;
@@ -28,17 +28,18 @@ namespace _Game.Scripts.Game.States.Splash
             SubscribeToCanvasRequestDelegates();
             prepareGameComponent.OnConstruct();
             prepareGameCanvas.OnStart();
-            
-            uiComponent.EnableCanvas(CanvasTrigger.PrepareGame);
 
+            uiComponent.EnableCanvas(CanvasTrigger.PrepareGame);
         }
 
         protected override void OnExit()
         {
             UnsubscribeToCanvasRequestDelegates();
             prepareGameCanvas.OnQuit();
+
+            uiComponent.DisableCanvas(CanvasTrigger.PrepareGame);
         }
-        
+
 
         #region Changes
 
@@ -47,6 +48,7 @@ namespace _Game.Scripts.Game.States.Splash
             SendTrigger((int)StateTrigger.GoToStartGame);
             uiComponent.EnableCanvas(CanvasTrigger.StartGame);
         }
+
         #endregion
 
         public void SubscribeToCanvasRequestDelegates()
@@ -58,8 +60,5 @@ namespace _Game.Scripts.Game.States.Splash
         {
             prepareGameComponent.OnGameLaunch -= RequestLoadGame;
         }
-        
-
-        
     }
 }

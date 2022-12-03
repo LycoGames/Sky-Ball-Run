@@ -26,7 +26,6 @@ namespace _Game.Scripts.Game.States.Splash
             SubscribeToComponentChangeDelegates();
 
             _introCanvas.OnStart();
-
             _introComponent.OnConstruct();
 
             _uiComponent.EnableCanvas(CanvasTrigger.Intro);
@@ -34,9 +33,11 @@ namespace _Game.Scripts.Game.States.Splash
 
         protected override void OnExit()
         {
+            UnsubscribeToComponentChangeDelegates();
+
             _introCanvas.OnQuit();
 
-            UnsubscribeToComponentChangeDelegates();
+            _uiComponent.DisableCanvas(CanvasTrigger.Intro);
         }
 
         public void SubscribeToComponentChangeDelegates()

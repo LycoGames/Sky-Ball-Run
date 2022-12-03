@@ -18,13 +18,13 @@ namespace _Game.Scripts.Game.States.GameOver
             uiComponent = componentContainer.GetComponent("UIComponent") as UIComponent;
             gameOverComponent = componentContainer.GetComponent("GameOverComponent") as GameOverComponent;
 
-
             gameOverCanvas = uiComponent.GetCanvas(CanvasTrigger.GameOver) as GameOverCanvas;
         }
 
         protected override void OnEnter()
         {
             SubscribeToCanvasRequestDelegates();
+
             gameOverCanvas.OnStart();
             gameOverComponent.OnConstruct();
 
@@ -34,8 +34,11 @@ namespace _Game.Scripts.Game.States.GameOver
         protected override void OnExit()
         {
             UnsubscribeToCanvasRequestDelegates();
+
             gameOverCanvas.OnQuit();
-            gameOverComponent.OnConstruct();
+            gameOverComponent.OnDestruct();
+
+            uiComponent.DisableCanvas(CanvasTrigger.GameOver);
         }
 
         public void SubscribeToCanvasRequestDelegates()
@@ -60,7 +63,5 @@ namespace _Game.Scripts.Game.States.GameOver
         {
             SendTrigger((int)StateTrigger.ReturnToPreparingGame);
         }
-
-
     }
 }

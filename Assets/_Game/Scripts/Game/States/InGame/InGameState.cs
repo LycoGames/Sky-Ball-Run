@@ -12,6 +12,7 @@ namespace _Game.Scripts.Game.States.InGame
         private readonly UIComponent uiComponent;
         private readonly InGameComponent inGameComponent;
         private readonly InGameCanvas inGameCanvas;
+        private readonly WealthCanvas wealthCanvas;
 
         public InGameState(ComponentContainer componentContainer)
         {
@@ -19,6 +20,7 @@ namespace _Game.Scripts.Game.States.InGame
             inGameComponent = componentContainer.GetComponent("InGameComponent") as InGameComponent;
 
             inGameCanvas = uiComponent.GetCanvas(CanvasTrigger.InGame) as InGameCanvas;
+            wealthCanvas = uiComponent.GetCanvas(CanvasTrigger.Wealth) as WealthCanvas;
         }
 
         protected override void OnEnter()
@@ -36,11 +38,16 @@ namespace _Game.Scripts.Game.States.InGame
         {
             UnsubscribeToComponentChangeDelegates();
             UnsubscribeToCanvasRequestDelegates();
+
+            inGameCanvas.OnQuit();
             inGameComponent.OnDestruct();
+
+            uiComponent.DisableCanvas(CanvasTrigger.InGame);
         }
 
         public void SubscribeToComponentChangeDelegates()
         {
+            inGameComponent.DiamondChange += wealthCanvas.ChangeDiamond;
             inGameComponent.OnInGameComplete += RequestEndGame;
             inGameComponent.OnLoseGame += RequestGameOver;
         }
@@ -48,6 +55,7 @@ namespace _Game.Scripts.Game.States.InGame
 
         public void UnsubscribeToComponentChangeDelegates()
         {
+            inGameComponent.DiamondChange += wealthCanvas.ChangeDiamond;
             inGameComponent.OnInGameComplete -= RequestEndGame;
             inGameComponent.OnLoseGame -= RequestGameOver;
         }
@@ -64,6 +72,7 @@ namespace _Game.Scripts.Game.States.InGame
         {
             SendTrigger((int)StateTrigger.GoToGameOver);
         }
+
         private void RequestEndGame()
         {
             SendTrigger((int)StateTrigger.FinishGame);

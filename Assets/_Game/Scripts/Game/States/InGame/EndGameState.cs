@@ -12,12 +12,14 @@ namespace _Game.Scripts.Game.States.InGame
         private readonly UIComponent uiComponent;
         private readonly EndGameComponent endGameComponent;
         private readonly EndGameCanvas endGameCanvas;
+        private readonly WealthCanvas wealthCanvas;
 
         public EndGameState(ComponentContainer componentContainer)
         {
             uiComponent = componentContainer.GetComponent("UIComponent") as UIComponent;
             endGameComponent = componentContainer.GetComponent("EndGameComponent") as EndGameComponent;
             endGameCanvas = uiComponent.GetCanvas(CanvasTrigger.EndGame) as EndGameCanvas;
+            wealthCanvas = uiComponent.GetCanvas(CanvasTrigger.Wealth) as WealthCanvas;
         }
 
         protected override void OnEnter()
@@ -34,17 +36,20 @@ namespace _Game.Scripts.Game.States.InGame
             UnsubscribeToComponentChangeDelegates();
             endGameCanvas.OnQuit();
             endGameComponent.OnDestruct();
+
+            uiComponent.DisableCanvas(CanvasTrigger.EndGame);
+            uiComponent.DisableCanvas(CanvasTrigger.Wealth);
         }
 
         public void SubscribeToComponentChangeDelegates()
         {
-            endGameComponent.CoinChange += endGameCanvas.ChangeCoin;
+            endGameComponent.CoinChange += wealthCanvas.ChangeCoin;
             endGameComponent.OnEndGameEnded += RequestGameOver;
         }
 
         public void UnsubscribeToComponentChangeDelegates()
         {
-            endGameComponent.CoinChange -= endGameCanvas.ChangeCoin;
+            endGameComponent.CoinChange -= wealthCanvas.ChangeCoin;
             endGameComponent.OnEndGameEnded -= RequestGameOver;
         }
 

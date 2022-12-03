@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using _Game.Scripts.Base.Component;
 using _Game.Scripts.Game.Gameplay.EndGames;
@@ -20,6 +21,8 @@ namespace _Game.Scripts.Game.Components
         public event InGameChangeDelegate OnInGameComplete;
         public event InGameChangeDelegate OnLoseGame;
 
+        public Action<string> DiamondChange;
+
         [SerializeField] private GameManager gameManagerPrefab;
         [SerializeField] private SwipeController swipeControllerPrefab;
         [SerializeField] private GameObject mainCameraPrefab;
@@ -28,6 +31,8 @@ namespace _Game.Scripts.Game.Components
         [SerializeField] private LevelCreator levelCreatorPrefab;
         [SerializeField] private BallManager ballManagerPrefab;
         [SerializeField] private BallPool ballPoolPrefab;
+
+        public int GainedDiamond { get; private set; }
 
         private BallPool ballPool;
         private GameObject mainCamera;
@@ -38,6 +43,8 @@ namespace _Game.Scripts.Game.Components
         private GameManager gameManager;
         private SwipeController swipeController;
         private EndGameComponent endGameComponent;
+
+        private int lastSavedDiamond;
 
         public void Initialize(ComponentContainer componentContainer)
         {
@@ -194,6 +201,12 @@ namespace _Game.Scripts.Game.Components
         {
             ballManager = Instantiate(ballManagerPrefab);
             ballManager.transform.parent = playerController.transform;
+        }
+
+        private void ChangeDiamond(int value)
+        {
+            GainedDiamond = value;
+            DiamondChange?.Invoke((lastSavedDiamond + GainedDiamond).ToString());
         }
     }
 }

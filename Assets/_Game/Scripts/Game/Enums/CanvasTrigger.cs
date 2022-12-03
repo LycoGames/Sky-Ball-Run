@@ -6,6 +6,7 @@ namespace _Game.Scripts.Game.Enums
         PrepareGame,
         StartGame,
         InGame,
+        Wealth,
         EndGame,
         GameOver,
     }
