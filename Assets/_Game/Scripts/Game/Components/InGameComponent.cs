@@ -99,6 +99,7 @@ namespace _Game.Scripts.Game.Components
             yield return null;
         }
 
+
         private void SetupEndGame()
         {
             EndGameController endGameController = levelCreator.EndGameController;
@@ -201,12 +202,6 @@ namespace _Game.Scripts.Game.Components
         {
             ballManager = Instantiate(ballManagerPrefab);
             ballManager.transform.parent = playerController.transform;
-        }
-
-        private void ChangeDiamond(int value)
-        {
-            GainedDiamond = value;
-            DiamondChange?.Invoke((lastSavedDiamond + GainedDiamond).ToString());
         }
     }
 }

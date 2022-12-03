@@ -23,17 +23,22 @@ namespace _Game.Scripts.Game.Components
 
         public int GainedCoin { get; private set; }
 
+        private DataComponent dataComponent;
+
         private int lastSavedCoin;
 
         public void Initialize(ComponentContainer componentContainer)
         {
             Debug.Log("<color=lime>" + gameObject.name + " initialized!</color>");
+            dataComponent = componentContainer.GetComponent("DataComponent") as DataComponent;
         }
 
         public void OnConstruct()
         {
             SetupEndGame();
+            SetupCoin();
         }
+
 
         public void OnDestruct()
         {
@@ -62,6 +67,12 @@ namespace _Game.Scripts.Game.Components
         {
             OnEndGameEnded?.Invoke();
         }
+
+        private void SetupCoin()
+        {
+            lastSavedCoin = dataComponent.InventoryData.ownedCoin;
+        }
+
 
         private void ChangeCoin(int value)
         {

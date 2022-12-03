@@ -29,7 +29,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
             Transform lastLineTransform = linesController.GetLastLine();
             EndGameController = Instantiate(EndGameControllerPrefab,
                 EndGameControllerPrefab.transform.position + lastLineTransform.position,
-                lastLineTransform.rotation);
+                lastLineTransform.rotation, linesController.transform);
             currentLevel++;
             yield return StartCoroutine(linesController.InitializeLines());
         }

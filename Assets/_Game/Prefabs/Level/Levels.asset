@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - {fileID: 5066103876223209529, guid: ee847db5fe0ba9a4fa3577a8fbe80664, type: 3}
-  endGameControllerPrefab: {fileID: 891623664712054509, guid: 1c07b83c248de214ea2c49e53f53755c, type: 3}
+  endGameControllerPrefab: {fileID: 254778847197471065, guid: 9cfd8995de3eedd4d8d68ba86a1e4e1b, type: 3}
