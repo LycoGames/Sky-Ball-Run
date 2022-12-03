@@ -14,29 +14,19 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 {
     public class Checkpoint : MonoBehaviour
     {
-        //TODO şuna bi el at allah rızası için
-        public List<Transform> transforms = new List<Transform>();
         [SerializeField] private Barricade barricade;
-        [SerializeField] private Transform moverLine;
+        [SerializeField] private Transform hood;
         [SerializeField] private int removePercentage=1;
         [SerializeField] private float coverCloseTime = 2f;
-        [SerializeField] private ParticleSystem firework;
-        [SerializeField] private float zOffset;
-        [SerializeField] private float xOffset;
         [SerializeField] private TextMeshProUGUI removeSizeText;
         [SerializeField] private float checkTime=1f;
-        private List<ParticleSystem> fireworks=new List<ParticleSystem>();
+        [SerializeField] private List<ParticleSystem> fireworks;
         private int removeSize;
         private int collectedBallCount;
         private BallManager ballManager;
         private WaitForSeconds wfsForCheckSize;
         private Coroutine checkSizeCoroutine;
-
-        private void OnDestroy()
-        { 
-            if(fireworks.Any())DestroyFireWork();
-        }
-
+        
         private void OnEnable()
         {
             ballManager=BallManager.Instance;
@@ -46,9 +36,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         private void Start()
         {
             wfsForCheckSize = new WaitForSeconds(checkTime);
-            SetTransforms();
-            barricade = Instantiate(barricade, transform.parent);
-            CreateFireworks();
         }
 
         public void CollectBall() => collectedBallCount++;
@@ -64,38 +51,55 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             }
             StartCoroutine(OnAllBallCollected(balls));
         }
-
-        private bool CheckIsChild(Transform child)
-        {
-            return transform.GetComponentsInChildren<Transform>().Any(_transform => child == _transform);
-        }
+        
 
         private IEnumerator OnAllBallCollected(List<Ball> balls)
         {
             while (removeSize > collectedBallCount) yield return null;
-            barricade.OpenBarricades();
-            moverLine.transform.DOLocalMoveZ(0, coverCloseTime);
+            
+            OpenBarricades();
+            CloseHood();
+            
             yield return new WaitForSeconds(coverCloseTime);
-            moverLine.transform.DOLocalMoveY(0, 0.5f);
-            yield return new WaitForSeconds(0.5f);
             ReturnAllBallToPool(balls);
-            gameObject.SetActive(false);
-            foreach (Transform transform in transforms)
-            {
-                transform.gameObject.SetActive(true);
-            }
+            
             if(ballManager.TotalBallCount<=0)yield break;
-            DestroyFireWork();
-            GameManager.Instance.StartMove();
+            PlayFireWork();
+            StartPlayMove();
+            ReshapingBalls();
+        }
+
+        private void ReshapingBalls()
+        {
             ballManager.StartForwarding();
         }
 
-        private void DestroyFireWork()
+        private static void StartPlayMove()
+        {
+            GameManager.Instance.StartMove();
+        }
+
+        private void CloseHood()
+        {
+            hood.transform.DOLocalMoveZ(0, coverCloseTime);
+            Invoke("MoveDownHood",coverCloseTime);
+        }
+
+        private void MoveDownHood()
+        {
+            hood.transform.DOLocalMoveY(0, 0.5f);
+        }
+
+        private void OpenBarricades()
+        {
+            barricade.OpenBarricades();
+        }
+
+        private void PlayFireWork()
         {
             foreach (ParticleSystem firework in fireworks)
             {
                 firework.Play();
-                Destroy(firework.gameObject, 2f);
             }
         }
 
@@ -108,32 +112,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
                 ball.transform.localPosition = Vector3.zero;
             }
         }
-        private void CreateFireworks()
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                fireworks.Add(Instantiate(firework));
-                Vector3 pos = transform.position;
-                pos.z += zOffset;
-                if (i == 0) pos.x = xOffset;
-                else pos.x = -xOffset;
-                fireworks.Last().transform.position = pos;
-            }
-        }
 
-        private void SetTransforms()
-        {
-            foreach (Transform _transform in transform.parent.GetComponentsInChildren<Transform>())
-            {
-                if (_transform == transform.parent || CheckIsChild(_transform)) continue;
-                transforms.Add(_transform);
-            }
-
-            foreach (Transform _transform in transforms)
-            {
-                _transform.gameObject.SetActive(false);
-            }
-        }
         private IEnumerator CheckSize()
         {
             float newRemoveSize = 0;

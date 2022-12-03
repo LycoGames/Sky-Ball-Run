@@ -14552,7 +14552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  moveForwardSpeed: 25
+  moveForwardSpeed: 35
   waitForRemove: 0.25
   effect: {fileID: 856340783862310505}
   audioSource: {fileID: 1902039052495114700}
