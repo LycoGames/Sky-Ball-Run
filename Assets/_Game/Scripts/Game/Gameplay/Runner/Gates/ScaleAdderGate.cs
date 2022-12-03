@@ -22,7 +22,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         {
             ballManager=BallManager.Instance;
             StartCoroutine(CheckSize());
-            Debug.Log("calisti");
         }
 
         private void OnDisable()

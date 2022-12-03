@@ -100,7 +100,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         private void GainCoin(int count)
         {
             GainedCoin += count;
-            GainedCoinChanged?.Invoke(GainedCoin);
+            GainedCoinDiamond?.Invoke(GainedCoin);
         }
     }
 }

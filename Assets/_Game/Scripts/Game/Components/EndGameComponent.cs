@@ -3,6 +3,7 @@ using _Game.Scripts.Base.Component;
 using _Game.Scripts.Game.Gameplay.EndGames;
 using _Game.Scripts.Game.Gameplay.EndGames.Paintball;
 using _Game.Scripts.Game.Gameplay.EndGames.Waterfall;
+using _Game.Scripts.Game.Gameplay.Runner;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
 using UnityEngine;
 
@@ -15,17 +16,17 @@ namespace _Game.Scripts.Game.Components
         public event EndGameChangeDelegate OnSuccess;
         public event EndGameChangeDelegate OnFail;
 
-        public Action<string> CoinChange;
+        public Action<string> DiamondChange;
         public Action OnEndGameEnded;
 
         public EndGameController EndGameController { get; set; }
         public PlayerController PlayerController { get; set; }
 
-        public int GainedCoin { get; private set; }
+        public int GainedDiamond { get; private set; }
 
         private DataComponent dataComponent;
 
-        private int lastSavedCoin;
+        private int lastSavedDiamond;
 
         public void Initialize(ComponentContainer componentContainer)
         {
@@ -36,19 +37,22 @@ namespace _Game.Scripts.Game.Components
         public void OnConstruct()
         {
             SetupEndGame();
-            SetupCoin();
         }
 
 
         public void OnDestruct()
         {
-            EndGameController.GainedCoinChanged -= ChangeCoin;
+            EndGameController.GainedCoinDiamond -= ChangeDiamond;
             EndGameController.EndGameEnded -= EndGameEnded;
+            SaveDiamondData();
+            SaveLevel();
         }
+        
+        
 
         private void SetupEndGame()
         {
-            EndGameController.GainedCoinChanged += ChangeCoin;
+            EndGameController.GainedCoinDiamond += ChangeDiamond;
             EndGameController.EndGameEnded += EndGameEnded;
 
             var waterfallGame = EndGameController as WaterfallGame;
@@ -68,16 +72,27 @@ namespace _Game.Scripts.Game.Components
             OnEndGameEnded?.Invoke();
         }
 
-        private void SetupCoin()
+        public void SetupDiamond(int value)
         {
-            lastSavedCoin = dataComponent.InventoryData.ownedCoin;
+            GainedDiamond = 0;
+            lastSavedDiamond = value;
         }
 
-
-        private void ChangeCoin(int value)
+        private void ChangeDiamond(int value)
         {
-            GainedCoin = value;
-            CoinChange?.Invoke((lastSavedCoin + GainedCoin).ToString());
+            GainedDiamond = value;
+            DiamondChange?.Invoke((lastSavedDiamond + GainedDiamond).ToString());
+        }
+        private void SaveDiamondData()
+        {
+            dataComponent.InventoryData.ownedDiamond = GainedDiamond+lastSavedDiamond;
+            dataComponent.SaveInventoryData();
+        }
+
+        private void SaveLevel()
+        {
+            dataComponent.LevelData.currentLevel += 1;
+            dataComponent.SaveLevelData();
         }
     }
 }

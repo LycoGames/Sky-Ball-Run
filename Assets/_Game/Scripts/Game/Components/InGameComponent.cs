@@ -20,7 +20,7 @@ namespace _Game.Scripts.Game.Components
 
         public event InGameChangeDelegate OnInGameComplete;
         public event InGameChangeDelegate OnLoseGame;
-
+        
         public Action<string> DiamondChange;
 
         [SerializeField] private GameManager gameManagerPrefab;
@@ -44,7 +44,9 @@ namespace _Game.Scripts.Game.Components
         private SwipeController swipeController;
         private EndGameComponent endGameComponent;
 
+
         private int lastSavedDiamond;
+        
 
         public void Initialize(ComponentContainer componentContainer)
         {
@@ -52,7 +54,7 @@ namespace _Game.Scripts.Game.Components
             endGameComponent = componentContainer.GetComponent("EndGameComponent") as EndGameComponent;
         }
 
-        public IEnumerator InitializeGame()
+        public IEnumerator InitializeGame(int level)
         {
             InitializePlayer();
             InitializeBallManager();
@@ -64,14 +66,20 @@ namespace _Game.Scripts.Game.Components
             InitializeLevelCreator();
 
             yield return StartCoroutine(ballManager.InitializeBallManager(ballPool, playerController));
-            yield return StartCoroutine(levelCreator.CreateLevel());
+            yield return StartCoroutine(levelCreator.CreateLevel(level));
 
             SetupEndGame();
+        }
+        public void SetupDiamond(int value)
+        {
+            GainedDiamond = 0;
+            lastSavedDiamond = value;
         }
 
 
         public void OnConstruct()
         {
+            gameManager.OnGainDiamond += ChangeDiamond;
             gameManager.ArriveEndLine += ArriveEndLine;
             gameManager.LoseGame += LoseGame;
             gameManager.StartMove();
@@ -80,6 +88,7 @@ namespace _Game.Scripts.Game.Components
 
         public void OnDestruct()
         {
+            gameManager.OnGainDiamond -= ChangeDiamond;
             gameManager.ArriveEndLine -= ArriveEndLine;
             gameManager.LoseGame -= LoseGame;
             gameManager.StopMove();
@@ -152,6 +161,7 @@ namespace _Game.Scripts.Game.Components
 
         private void ArriveEndLine()
         {
+            endGameComponent.SetupDiamond(GainedDiamond+lastSavedDiamond);
             OnInGameComplete?.Invoke();
         }
 
@@ -202,6 +212,12 @@ namespace _Game.Scripts.Game.Components
         {
             ballManager = Instantiate(ballManagerPrefab);
             ballManager.transform.parent = playerController.transform;
+        }
+
+        private void ChangeDiamond(int value)
+        {
+            GainedDiamond += value;
+            DiamondChange?.Invoke((lastSavedDiamond + GainedDiamond).ToString());
         }
     }
 }

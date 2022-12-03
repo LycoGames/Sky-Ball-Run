@@ -37,5 +37,6 @@ namespace _Game.Scripts.Game.UserInterfaces.Loading
         {
             loadingText.StopLoadingTextAnimation();
         }
+        
     }
 }

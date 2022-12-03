@@ -19,8 +19,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         public delegate void OnLoseGameDelegate();
 
         public event OnArriveEndLineDelegate ArriveEndLine;
-        
-        
+
+        public Action<int> OnGainDiamond;
 
         public event OnLoseGameDelegate LoseGame;
         public static GameManager Instance;
@@ -36,6 +36,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         public int GetBallCount()
         {
             return BallPool.Instance.GetAllActiveBall().Count;
+        }
+
+        public void GainedDiamond(int value)
+        {
+            OnGainDiamond?.Invoke(value);
         }
 
         public void OnLoseGame()

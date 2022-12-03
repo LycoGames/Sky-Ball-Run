@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.Game.Gameplay.EndGames;
 using _Game.Scripts.Game.Gameplay.Runner.LevelSystems;
 using UnityEngine;
 
@@ -13,6 +14,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
 
         [SerializeField] private List<Line> lineList;
         private int currentLine;
+        
+        [SerializeField] private EndGameController endGameController;
+
+        public EndGameController EndGameController => endGameController;
 
         public IEnumerator InitializeLines()
         {
@@ -36,8 +41,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
 
         private void SwapLine(int index)
         {
-            if (index + showedLineCount < lineList.Count)
-                lineList[index + showedLineCount].gameObject.SetActive(true);
+            if (index + showedLineCount < lineList.Count) lineList[index + showedLineCount].gameObject.SetActive(true);
+            else if(index + showedLineCount == lineList.Count)endGameController.gameObject.SetActive(true);
         }
     }
 }

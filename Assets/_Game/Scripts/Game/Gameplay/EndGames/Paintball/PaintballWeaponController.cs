@@ -10,7 +10,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         [SerializeField] private Transform moveTarget;
         private float sensitivity;
         private Transform aimTarget;
-        private const float Range = 500f;
+        private const float Range = 70f;
         private Camera cam;
         private bool setupCompleted;
 

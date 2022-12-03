@@ -43,13 +43,13 @@ namespace _Game.Scripts.Game.States.InGame
 
         public void SubscribeToComponentChangeDelegates()
         {
-            endGameComponent.CoinChange += wealthCanvas.ChangeCoin;
+            endGameComponent.DiamondChange += wealthCanvas.ChangeDiamond;
             endGameComponent.OnEndGameEnded += RequestGameOver;
         }
 
         public void UnsubscribeToComponentChangeDelegates()
         {
-            endGameComponent.CoinChange -= wealthCanvas.ChangeCoin;
+            endGameComponent.DiamondChange -= wealthCanvas.ChangeDiamond;
             endGameComponent.OnEndGameEnded -= RequestGameOver;
         }
 

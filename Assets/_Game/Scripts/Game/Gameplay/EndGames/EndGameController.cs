@@ -6,7 +6,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames
 {
     public abstract class EndGameController : MonoBehaviour
     {
-        public Action<int> GainedCoinChanged;
+        public Action<int> GainedCoinDiamond;
         public Action EndGameEnded;
 
         protected PlayerController playerController;

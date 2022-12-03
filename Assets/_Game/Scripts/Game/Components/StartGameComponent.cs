@@ -21,20 +21,10 @@ namespace _Game.Scripts.Game.Components
 
         public void OnConstruct()
         {
-            SetupCoin();
-            SetupDiamond();
+          
         }
+        
 
-        private void SetupCoin()
-        {
-            var coin = dataComponent.InventoryData.ownedCoin;
-            CoinChange?.Invoke(coin.ToString());
-        }
-
-        private void SetupDiamond()
-        {
-            var diamond = dataComponent.InventoryData.ownedDiamond;
-            DiamondChange?.Invoke(diamond.ToString());
-        }
+       
     }
 }

@@ -7,8 +7,7 @@ namespace _Game.Scripts.Game.UserInterfaces.InGame
 {
     public class WealthCanvas : BaseCanvas, IStartable, IQuitable
     {
-        [SerializeField] private RectTransform coinSection;
-        [SerializeField] private TMP_Text coinText;
+        [SerializeField] private TMP_Text levelText;
         [SerializeField] private RectTransform diamondSection;
         [SerializeField] private TMP_Text diamondText;
 
@@ -29,25 +28,9 @@ namespace _Game.Scripts.Game.UserInterfaces.InGame
 
         #region Changes
 
-        public void SetupCoin(string value)
+        public void SetupLevel(string value)
         {
-            coinText.text = value;
-        }
-
-        public void ChangeCoin(string value)
-        {
-            coinText.text = value;
-            if (punchTweener is { active: true })
-            {
-                ResetEffect(coinSection);
-            }
-
-            PunchEffect(coinSection);
-        }
-
-        public void SetupDiamond(string value)
-        {
-            diamondText.text = value;
+            levelText.text = value;
         }
 
         public void ChangeDiamond(string value)

@@ -79,7 +79,7 @@ namespace _Game.Scripts.Game.Components
             if (!File.Exists(dataPath + InventoryDataFileName))
                 inventoryData = new InventoryData
                 {
-                    ownedCoin = 0,
+                    //ownedCoin = 0,
                     ownedDiamond = 0,
                 };
             else

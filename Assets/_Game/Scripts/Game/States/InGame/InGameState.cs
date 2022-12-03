@@ -44,7 +44,7 @@ namespace _Game.Scripts.Game.States.InGame
 
             uiComponent.DisableCanvas(CanvasTrigger.InGame);
         }
-
+        
         public void SubscribeToComponentChangeDelegates()
         {
             inGameComponent.DiamondChange += wealthCanvas.ChangeDiamond;
@@ -58,6 +58,7 @@ namespace _Game.Scripts.Game.States.InGame
             inGameComponent.DiamondChange += wealthCanvas.ChangeDiamond;
             inGameComponent.OnInGameComplete -= RequestEndGame;
             inGameComponent.OnLoseGame -= RequestGameOver;
+            
         }
 
         public void SubscribeToCanvasRequestDelegates()

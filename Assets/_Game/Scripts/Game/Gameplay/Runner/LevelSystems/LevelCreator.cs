@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using _Game.Scripts.Game.Components;
 using _Game.Scripts.Game.Gameplay.EndGames;
 using _Game.Scripts.Game.Gameplay.Runner.Lines;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
         private LinesController linesController;
         private int currentLevel = 0;
         private int LevelCount;
-        public EndGameController EndGameControllerPrefab => level.EndGameControllerPrefab;
+        
         public EndGameController EndGameController { get; private set; }
 
         private void Start()
@@ -21,16 +22,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
             LevelCount = level.GetLevelCount();
         }
 
-        public IEnumerator CreateLevel()
+        public IEnumerator CreateLevel(int loadedLevel)
         {
-            int loadedLevel = currentLevel;
-            if (loadedLevel > LevelCount) loadedLevel %= LevelCount;
+            if (loadedLevel >= LevelCount) loadedLevel %= LevelCount;
             linesController = Instantiate(level.GetLevels()[loadedLevel]);
-            Transform lastLineTransform = linesController.GetLastLine();
-            EndGameController = Instantiate(EndGameControllerPrefab,
-                EndGameControllerPrefab.transform.position + lastLineTransform.position,
-                lastLineTransform.rotation, linesController.transform);
-            currentLevel++;
+            EndGameController = linesController.EndGameController;
             yield return StartCoroutine(linesController.InitializeLines());
         }
 

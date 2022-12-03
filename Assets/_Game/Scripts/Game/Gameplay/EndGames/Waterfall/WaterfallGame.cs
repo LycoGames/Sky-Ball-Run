@@ -67,7 +67,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
         private void IncreaseCoin(int coin)
         {
             GainedCoin += coin;
-            GainedCoinChanged?.Invoke(GainedCoin);
+            GainedCoinDiamond?.Invoke(GainedCoin);
             IncreaseCollectedBallCount();
         }
 
