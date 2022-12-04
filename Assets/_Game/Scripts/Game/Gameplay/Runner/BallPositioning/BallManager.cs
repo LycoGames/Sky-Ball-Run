@@ -144,7 +144,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             }
         }
 
-       
 
         public IEnumerator UpAdder(int size)
         {
@@ -168,6 +167,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
+
             PlayBallAddSound();
             SetCameraPos();
         }
@@ -297,6 +297,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
+
             PlayBallAddSound();
             headsOrganizer.SetPositions();
         }
@@ -323,6 +324,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
+
             PlayBallAddSound();
             headsOrganizer.SetPositions();
         }
@@ -338,7 +340,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             {
                 for (int j = 0; j < currentRow; j++)
                 {
-                    for (int k = 0; k < currentColumn && ballCount > 0 && TotalBallCount>0; k++)
+                    for (int k = 0; k < currentColumn && ballCount > 0 && TotalBallCount > 0; k++)
                     {
                         ballColumn = columnHeads[k].BallColumns[j];
                         ball = ballColumn.GetBall(i);
@@ -427,15 +429,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             currentRow = maxRow;
             currentFloor = rowFloorCount / currentRow;
             if (rowFloorCount % currentRow > 0) currentFloor++;
-            if (currentFloor >= maxFloor) currentFloor=maxFloor;
+            if (currentFloor >= maxFloor) currentFloor = maxFloor;
             if (currentFloor <= 0) currentFloor = 1;
-            
+
             PlayReshapeSound();
             SetCameraPos();
             RepositioningWiderBall(repositionedBalls);
         }
 
-       
+
         public void ReshapeTaller(int newSize)
         {
             if (TotalBallCount <= 0) return;
@@ -453,7 +455,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
             currentRow = rowCount / currentColumn;
             if (rowCount % currentColumn > 0) currentRow++;
-            
+
             PlayReshapeSound();
             SetCameraPos();
             RepositioningTallerBall(repositionedBalls);
@@ -587,24 +589,25 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         private void SetCameraPos()
         {
-            float endValue = stockCameraTrackingY + currentFloor * distance;
+            float endValue = stockCameraTrackingY + (float)currentFloor * 3 / 5;
             DOTween.To(() => playerFollowerTarget.m_TrackedObjectOffset.y,
                 x => playerFollowerTarget.m_TrackedObjectOffset.y = x, endValue, .5f);
-            
-            endValue = stockCameraDistance + currentFloor * distance;
+
+            endValue = stockCameraDistance + (float)currentFloor / 3;
             DOTween.To(() => playerFollowerTarget.m_CameraDistance,
                 x => playerFollowerTarget.m_CameraDistance = x, endValue, .5f);
             // playerFollowerTarget.m_TrackedObjectOffset.y = stockCameraTrackingY + currentFloor * distance;
             // playerFollowerTarget.m_CameraDistance = stockCameraDistance + currentFloor * distance;
         }
+
         private static void PlayBallAddSound()
         {
             AudioSourceController.Instance.PlaySoundType(SoundType.BallAdd);
         }
+
         private void PlayReshapeSound()
         {
             AudioSourceController.Instance.PlaySoundType(SoundType.ShapeChange);
         }
-
     }
 }
