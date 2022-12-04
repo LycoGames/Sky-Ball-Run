@@ -67,8 +67,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             Invoke("StartForwading", waitForRemove + 0.05f);
         }
 
-        public void StartMoveToPool()
+        public void StartMoveToPool(float dropPosZ)
         {
+            StartCoroutine( MoveToForward(dropPosZ));
+        }
+
+        private void StartDroping()
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             collider.isTrigger = false;
             myRigidbody = gameObject.AddComponent<Rigidbody>();
             myRigidbody.mass = 10;
@@ -142,6 +148,19 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             }
 
             transform.localPosition = newPos;
+            yield return null;
+        }
+        private IEnumerator MoveToForward(float z)
+        {
+            Vector3 newPos = transform.position;
+            newPos.z = z;
+            while (Vector3.Distance(transform.position, newPos) >= 0.02f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, newPos, speed * Time.deltaTime);
+                yield return null;
+            }
+
+            StartDroping();
             yield return null;
         }
 

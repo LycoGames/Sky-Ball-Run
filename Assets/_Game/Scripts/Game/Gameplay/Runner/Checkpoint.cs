@@ -21,6 +21,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         [SerializeField] private TextMeshProUGUI removeSizeText;
         [SerializeField] private float checkTime=1f;
         [SerializeField] private List<ParticleSystem> fireworks;
+        [SerializeField] private Transform dropPosition;
         private int removeSize;
         private int collectedBallCount;
         private BallManager ballManager;
@@ -48,7 +49,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             List<Ball> balls = ballManager.GetBalls(removeSize);
             foreach (var ball in balls)
             {
-                ball.StartMoveToPool();
+                ball.StartMoveToPool(dropPosition.position.z);
                 ball.transform.parent = transform;
             }
             StartCoroutine(OnAllBallCollected(balls));
