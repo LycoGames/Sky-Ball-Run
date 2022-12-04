@@ -6,7 +6,7 @@ namespace _Game.Scripts.Game.UserInterfaces.Loading
 {
     public class PrepareGameCanvas : BaseCanvas, IStartable, IQuitable
     {
-        [SerializeField] private LoadingText loadingText;
+        [SerializeField] private LoadingImage loadingImage;
 
         public void OnStart()
         {
@@ -21,21 +21,21 @@ namespace _Game.Scripts.Game.UserInterfaces.Loading
         }
         private void EnableLoadingIcon()
         {
-            loadingText.gameObject.SetActive(true);
+            loadingImage.gameObject.SetActive(true);
         }
 
         private void DisableLoadingIcon()
         {
-            loadingText.gameObject.SetActive(false);
+            loadingImage.gameObject.SetActive(false);
         }
         private void PlayLoadingIconAnimation()
         {
-            loadingText.PlayLoadingTextAnimation();
+            loadingImage.PlayLoadingTextAnimation();
         }
 
         private void StopLoadingIconAnimation()
         {
-            loadingText.StopLoadingTextAnimation();
+            loadingImage.StopLoadingTextAnimation();
         }
         
     }

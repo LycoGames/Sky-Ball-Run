@@ -30,13 +30,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         private void OnEnable()
         {
             ballManager=BallManager.Instance;
+            wfsForCheckSize = new WaitForSeconds(checkTime);
             checkSizeCoroutine=StartCoroutine(CheckSize());
         }
 
-        private void Start()
+        private void OnDisable()
         {
-            wfsForCheckSize = new WaitForSeconds(checkTime);
+            StopAllCoroutines();
         }
+        
 
         public void CollectBall() => collectedBallCount++;
         public void StartCollectingBalls()

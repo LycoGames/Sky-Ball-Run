@@ -9,8 +9,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 {
     public class DoubleAdderGate : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI leftText;
-        [SerializeField] private TextMeshProUGUI rightText;
+        [SerializeField] private TextMeshProUGUI leftCount;
+        [SerializeField] private TextMeshProUGUI rightCount;
         [SerializeField] private AdderGateSpecs leftGate;
         [SerializeField] private AdderGateSpecs rightGate;
 
@@ -29,8 +29,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void Start()
         {
-            leftText.text = "+" + leftGate.addSize;
-            rightText.text = "+" + rightGate.addSize;
+            leftCount.text = "+" + leftGate.addSize;
+            rightCount.text = "+" + rightGate.addSize;
         }
         
 

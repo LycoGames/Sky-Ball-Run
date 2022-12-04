@@ -12,7 +12,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         [SerializeField] private AdderGateSpecs selectedGate;
         [SerializeField] private BoxCollider boxCollider;
         [SerializeField] private float xPos;
-        [SerializeField] private TextMeshProUGUI sizeText;
+        [SerializeField] private TextMeshProUGUI ballCountText;
         [SerializeField] private float checkTime = 2f;
         private int addSize=1;
         private BallManager ballManager;
@@ -35,7 +35,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             Vector3 newPos = transform.position;
             newPos.x = xPos;
             transform.position = newPos;
-            sizeText.text = "+" + addSize;
+            ballCountText.text = "+" + addSize;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -81,7 +81,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                 }
                 addSize=(int)Math.Round(newRemoveSize);
                 if (addSize <= 0) addSize = 1;
-                sizeText.text = "+" + addSize;
+                ballCountText.text = "+" + addSize;
                 yield return wfsForCheckSize;
             }
         }

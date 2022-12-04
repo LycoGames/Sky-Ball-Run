@@ -10,7 +10,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
     {
         [SerializeField] private Collider collider;
         [SerializeField] private int removePercentage;
-        [SerializeField] private TextMeshProUGUI text;
+        [SerializeField] private TextMeshProUGUI ballCountText;
         [SerializeField] private float checkTime = 2f;
         private int removeSize = 1;
         private BallManager ballManager;
@@ -44,7 +44,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                 newRemoveSize = ballManager.TotalBallCount * ((float)removePercentage / 100);
                 removeSize = (int)Math.Round(newRemoveSize);
                 if (removeSize <= 0) removeSize = 1;
-                text.text = "-" + removeSize;
+                ballCountText.text = "-" + removeSize;
                 yield return wfsForCheckSize;
             }
         }
