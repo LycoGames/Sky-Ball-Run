@@ -15,7 +15,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         [SerializeField] private float moveForwardSpeed = 1;
         [SerializeField] private float waitForRemove = 1.5f;
         [SerializeField] private ParticleSystem effect;
-        [SerializeField] private AudioSource audioSource;
+        
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private float distance;
         [SerializeField] private float spawmPositionZ = 10f;
@@ -61,7 +61,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         public void RemoveBallWithAnimation()
         {
             effect.Play();
-            audioSource.Play();
+            AudioSourceController.Instance.PlaySoundType(SoundType.BallExplode);
             meshRenderer.enabled = false;
             Invoke("RemoveBall", waitForRemove);
             Invoke("StartForwading", waitForRemove + 0.05f);
@@ -72,14 +72,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             StartCoroutine( MoveToForward(dropPosZ));
         }
 
-        private void StartDroping()
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            collider.isTrigger = false;
-            myRigidbody = gameObject.AddComponent<Rigidbody>();
-            myRigidbody.mass = 10;
-            myRigidbody.velocity = Vector3.forward * moveForwardSpeed;
-        }
+     
 
         public void SetHeight(float position)
         {
@@ -159,9 +152,17 @@ namespace _Game.Scripts.Game.Gameplay.Runner
                 transform.position = Vector3.MoveTowards(transform.position, newPos, speed * Time.deltaTime);
                 yield return null;
             }
-
+            
             StartDroping();
             yield return null;
+        }
+        private void StartDroping()
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            collider.isTrigger = false;
+            myRigidbody = gameObject.AddComponent<Rigidbody>();
+            myRigidbody.mass = 10;
+            myRigidbody.velocity = Vector3.forward * moveForwardSpeed;
         }
 
         private void SetParent(BallColumn _ballColumn)

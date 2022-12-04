@@ -40,6 +40,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         public void GainedDiamond(int value)
         {
+            PlayDiamondCollectedSound();
             OnGainDiamond?.Invoke(value);
         }
 
@@ -73,6 +74,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             playerController = _playerController;
             swipeController = _swapController;
+        }
+        private static void PlayDiamondCollectedSound()
+        {
+            AudioSourceController.Instance.PlaySoundType(SoundType.DiamondCollected);
         }
     }
 }

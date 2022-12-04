@@ -14,7 +14,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 {
     public class Checkpoint : MonoBehaviour
     {
-        [SerializeField] private Barricade barricade;
+        [SerializeField] private CheckpointBarricade checkpointBarricade;
         [SerializeField] private Transform hood;
         [SerializeField] private int removePercentage=1;
         [SerializeField] private float coverCloseTime = 2f;
@@ -22,6 +22,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         [SerializeField] private float checkTime=1f;
         [SerializeField] private List<ParticleSystem> fireworks;
         [SerializeField] private Transform dropPosition;
+        [SerializeField] private int minTakeBallCount;
         private int removeSize;
         private int collectedBallCount;
         private BallManager ballManager;
@@ -67,9 +68,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             ReturnAllBallToPool(balls);
             
             if(ballManager.TotalBallCount<=0)yield break;
+            PlaySound();
             PlayFireWork();
             StartPlayMove();
             ReshapingBalls();
+        }
+
+        private void PlaySound()
+        {
+            AudioSourceController.Instance.PlaySoundType(SoundType.PassCheckpoint);
         }
 
         private void ReshapingBalls()
@@ -95,7 +102,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         private void OpenBarricades()
         {
-            barricade.OpenBarricades();
+            checkpointBarricade.OpenGates();
         }
 
         private void PlayFireWork()
@@ -123,7 +130,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             {
                 newRemoveSize = ballManager.TotalBallCount * ((float)removePercentage / 100);
                 removeSize = (int)Math.Round(newRemoveSize);
-                if (removeSize <= 0) removeSize = 1;
+                if (removeSize <= minTakeBallCount) removeSize = minTakeBallCount;
                 removeSizeText.text = removeSize.ToString();
                 yield return wfsForCheckSize;
             }

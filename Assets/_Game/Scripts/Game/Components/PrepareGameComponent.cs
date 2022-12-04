@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using _Game.Scripts.Base.Component;
+using _Game.Scripts.Game.Gameplay.Runner;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Components
@@ -12,11 +13,14 @@ namespace _Game.Scripts.Game.Components
 
         public event PrepareGameChangeDelegate OnGameLaunch;
 
+        [SerializeField] private AudioSourceController audioSourceControllerPrefab;
+
         public Action<string> SetLevelOnCanvas;
         public Action<string> DiamondChange;
         
         private InGameComponent inGameComponent;
         private DataComponent dataComponent;
+        private AudioSourceController audioSourceController;
  
         
         
@@ -26,7 +30,14 @@ namespace _Game.Scripts.Game.Components
         {
             inGameComponent = componentContainer.GetComponent("InGameComponent") as InGameComponent;
             dataComponent=componentContainer.GetComponent("DataComponent") as DataComponent;
+            
+            AudioSourceControllerInitialize();
             Debug.Log("<color=lime>" + gameObject.name + " initialized!</color>");
+        }
+
+        private void AudioSourceControllerInitialize()
+        {
+            audioSourceController = Instantiate(audioSourceControllerPrefab);
         }
 
         public void OnConstruct()

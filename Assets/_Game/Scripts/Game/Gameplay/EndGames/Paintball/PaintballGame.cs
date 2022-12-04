@@ -26,8 +26,9 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         [Space] [SerializeField] private MoveTarget target;
         [SerializeField] private Transform aimTarget;
 
-        [SerializeField] private CinemachineVirtualCamera
-            virtualCamera;
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
+
+        [SerializeField] private ParticleSystem confettiEffect;
 
 
         public override void LaunchEndGame()
@@ -68,6 +69,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         {
             yield return new WaitForSeconds(1f);
             paintballWeaponController.StopControl();
+            confettiEffect.Play();
             EndGameEnded?.Invoke();
         }
 

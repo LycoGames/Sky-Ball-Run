@@ -5,11 +5,9 @@ using _Game.Scripts.Game.Gameplay.EndGames;
 using _Game.Scripts.Game.Gameplay.Runner;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using _Game.Scripts.Game.Gameplay.Runner.LevelSystems;
-using _Game.Scripts.Game.Gameplay.Runner.Lines;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
 using _Game.Scripts.Game.ObjectPools;
 using Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Components

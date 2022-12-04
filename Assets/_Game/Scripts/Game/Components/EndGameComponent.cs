@@ -80,6 +80,7 @@ namespace _Game.Scripts.Game.Components
 
         private void ChangeDiamond(int value)
         {
+            PlayDiamondCollectedSound();
             GainedDiamond = value;
             DiamondChange?.Invoke((lastSavedDiamond + GainedDiamond).ToString());
         }
@@ -93,6 +94,10 @@ namespace _Game.Scripts.Game.Components
         {
             dataComponent.LevelData.currentLevel += 1;
             dataComponent.SaveLevelData();
+        }
+        private static void PlayDiamondCollectedSound()
+        {
+            AudioSourceController.Instance.PlaySoundType(SoundType.DiamondCollected);
         }
     }
 }

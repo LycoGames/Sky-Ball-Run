@@ -3,6 +3,7 @@ using _Game.Scripts.Base.Component;
 using _Game.Scripts.Base.State;
 using _Game.Scripts.Game.Components;
 using _Game.Scripts.Game.Enums;
+using _Game.Scripts.Game.Gameplay.Runner;
 using _Game.Scripts.Game.UserInterfaces.InGame;
 
 namespace _Game.Scripts.Game.States.InGame
@@ -59,6 +60,7 @@ namespace _Game.Scripts.Game.States.InGame
 
         private void RequestGameOver()
         {
+            AudioSourceController.Instance.PlaySoundType(SoundType.WinLevel);
             SendTrigger((int)StateTrigger.FinishEndGame);
         }
     }

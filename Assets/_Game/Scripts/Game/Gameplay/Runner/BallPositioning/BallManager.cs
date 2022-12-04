@@ -136,12 +136,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                         {
                             currentFloor = 0;
                             CheckFloorSizeAndMoveCam();
+                            PlayBallAddSound();
                             return;
                         }
                     }
                 }
             }
         }
+
+       
 
         public IEnumerator UpAdder(int size)
         {
@@ -165,6 +168,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
+            PlayBallAddSound();
             SetCameraPos();
         }
 
@@ -293,7 +297,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
-
+            PlayBallAddSound();
             headsOrganizer.SetPositions();
         }
 
@@ -319,7 +323,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
-
+            PlayBallAddSound();
             headsOrganizer.SetPositions();
         }
 
@@ -425,10 +429,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             if (rowFloorCount % currentRow > 0) currentFloor++;
             if (currentFloor >= maxFloor) currentFloor=maxFloor;
             if (currentFloor <= 0) currentFloor = 1;
-
+            
+            PlayReshapeSound();
             RepositioningWiderBall(repositionedBalls);
         }
 
+       
         public void ReshapeTaller(int newSize)
         {
             if (TotalBallCount <= 0) return;
@@ -446,7 +452,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
             currentRow = rowCount / currentColumn;
             if (rowCount % currentColumn > 0) currentRow++;
-
+            
+            PlayReshapeSound();
             RepositioningTallerBall(repositionedBalls);
         }
 
@@ -588,5 +595,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             // playerFollowerTarget.m_TrackedObjectOffset.y = stockCameraTrackingY + currentFloor * distance;
             // playerFollowerTarget.m_CameraDistance = stockCameraDistance + currentFloor * distance;
         }
+        private static void PlayBallAddSound()
+        {
+            AudioSourceController.Instance.PlaySoundType(SoundType.BallAdd);
+        }
+        private void PlayReshapeSound()
+        {
+            AudioSourceController.Instance.PlaySoundType(SoundType.ShapeChange);
+        }
+
     }
 }
