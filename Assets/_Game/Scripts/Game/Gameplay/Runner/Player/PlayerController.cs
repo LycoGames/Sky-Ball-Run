@@ -41,7 +41,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
 
         private void FixedUpdate()
         {
-            
                 Rotate();
                 Movement();
 
@@ -59,7 +58,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
 
         public void StopMove()
         {
+            newXPos = transform.position.x;
             canMove = false;
+            x.Pause();
         }
 
         public void ChangeBounds(float changeValue)
@@ -67,17 +68,19 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
             boundHorizontal = orginalBound - changeValue;
         }
 
+        private Tween x;
         private void Movement()
         {
             if (!canMove)
             {
-                newXPos = transform.position.z;
+                transform.DOMoveX(newXPos, horizontalSpeed);
                 return;
             } 
             newPos = transform.position;
             newPos.z += verticalSpeed*Time.deltaTime;
             transform.DOMoveX(newXPos, horizontalSpeed);
-            transform.DOMoveZ(newPos.z, 0);
+            x=transform.DOMoveZ(newPos.z, 0);
+            
         }
 
         private void Rotate()

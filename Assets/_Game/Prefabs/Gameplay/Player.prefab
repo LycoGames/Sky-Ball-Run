@@ -45,12 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd21e947bf1315a469557fd477ba54e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalSpeed: 50
+  verticalSpeed: 40
   horizontalSpeed: 1
-  rotationXSpeed: 30
+  rotationXSpeed: 20
   boundHorizontal: 12
   newXPos: 0
-  orginalBound: 0
 --- !u!54 &-4788587124391165463
 Rigidbody:
   m_ObjectHideFlags: 0
