@@ -8277,10 +8277,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoint
       objectReference: {fileID: 0}
-    - target: {fileID: 1750662237217849883, guid: bb603abcb51ac5943ab74a5172b8026a, type: 3}
-      propertyPath: removePercentage
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 2726381865010356220, guid: bb603abcb51ac5943ab74a5172b8026a, type: 3}
       propertyPath: m_RootOrder
       value: 0

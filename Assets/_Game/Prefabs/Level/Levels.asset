@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8fdabbd5a7a0be4ba18366c709a9e8a, type: 3}
   m_Name: Levels
   m_EditorClassIdentifier: 
-  levels:
-  - {fileID: 5066103876223209529, guid: ee847db5fe0ba9a4fa3577a8fbe80664, type: 3}
-  endGameControllerPrefab: {fileID: 254778847197471065, guid: 9cfd8995de3eedd4d8d68ba86a1e4e1b, type: 3}
+  levelSpecs:
+  - linesController: {fileID: 5066103876223209529, guid: ee847db5fe0ba9a4fa3577a8fbe80664, type: 3}
+    ballColors: {r: 0, g: 0, b: 0, a: 0}
+    column: 5
+    row: 5
+    floor: 5

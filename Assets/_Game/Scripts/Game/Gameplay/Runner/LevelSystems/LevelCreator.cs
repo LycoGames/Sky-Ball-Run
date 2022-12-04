@@ -11,28 +11,27 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
     {
         [SerializeField] private Level level;
 
-        private LinesController linesController;
+        private LevelSpecs levelSpecs;
+        private LinesController createdLinesController;
         private int currentLevel = 0;
         private int LevelCount;
         
         public EndGameController EndGameController { get; private set; }
-
-        private void Start()
-        {
-            LevelCount = level.GetLevelCount();
-        }
-
+        public LevelSpecs LevelSpecs() => levelSpecs;
+        
         public IEnumerator CreateLevel(int loadedLevel)
         {
+            LevelCount = level.GetLevelCount();
             if (loadedLevel >= LevelCount) loadedLevel %= LevelCount;
-            linesController = Instantiate(level.GetLevels()[loadedLevel]);
-            EndGameController = linesController.EndGameController;
-            yield return StartCoroutine(linesController.InitializeLines());
+            levelSpecs = level.GetLevels()[loadedLevel];
+            createdLinesController=Instantiate(levelSpecs.linesController);
+            EndGameController = createdLinesController.EndGameController;
+            yield return StartCoroutine(createdLinesController.InitializeLines());
         }
 
         public void DestroyLevel()
         {
-            Destroy(linesController.gameObject);
+            Destroy(createdLinesController.gameObject);
         }
     }
 }

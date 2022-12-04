@@ -65,8 +65,9 @@ namespace _Game.Scripts.Game.Components
             InitializePlayerFollowerCamera();
             InitializeLevelCreator();
 
-            yield return StartCoroutine(ballManager.InitializeBallManager(ballPool, playerController));
+            
             yield return StartCoroutine(levelCreator.CreateLevel(level));
+            yield return StartCoroutine(ballManager.InitializeBallManager(ballPool, playerController,levelCreator.LevelSpecs(),playerFollowerCamera));
 
             SetupEndGame();
         }

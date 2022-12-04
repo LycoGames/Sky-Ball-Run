@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue;
+using _Game.Scripts.Game.Gameplay.Runner.LevelSystems;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
 using _Game.Scripts.Game.ObjectPools;
+using Cinemachine;
 using DG.Tweening;
 using UnityEngine;
 
@@ -20,6 +22,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public int TotalBallCount { get; private set; }
 
         [SerializeField] private PlayerController playerController;
+        
         [SerializeField] private float distance = 0.5f;
         public int maxRow = 30;
         public int maxColumn = 38;
@@ -33,6 +36,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         [SerializeField] private HeadsOrganizer headsOrganizer;
         [SerializeField] private float waitForForwarding = 1.5f;
 
+        private CinemachineFramingTransposer playerFollowerTarget;
+        private float stockCameraTrackingY;
         private float currentWaitingTime;
         private Coroutine waitForwarding;
 
@@ -46,15 +51,17 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             headsOrganizer.destroyColumnHeads();
         }
 
-        public IEnumerator InitializeBallManager(BallPool _ballPool, PlayerController _playerController)
+        public IEnumerator InitializeBallManager(BallPool _ballPool, PlayerController _playerController,LevelSpecs levelSpecs,CinemachineVirtualCamera playerFollowerCamera)
         {
+            playerFollowerTarget = playerFollowerCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+            stockCameraTrackingY = playerFollowerTarget.m_TrackedObjectOffset.y;
             ballPool = _ballPool;
             ballPool.amountToPool = maxColumn * maxRow * maxFloor;
             playerController = _playerController;
             yield return StartCoroutine(ballPool.StartInstantiatePool());
             yield return StartCoroutine(
                 headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
-            yield return StartCoroutine(InstantiateStartBalls());
+            yield return StartCoroutine(InstantiateStartBalls(levelSpecs));
             yield return StartCoroutine(headsOrganizer.SetPositionsInstantly());
         }
 
@@ -91,7 +98,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                         if (ballCount == 0)
                         {
                             currentFloor = 0;
-                            CheckingCurrentFloor?.Invoke();
+                            CheckFloorSizeAndMoveCam();
                             yield break;
                         }
                     }
@@ -100,6 +107,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 }
             }
         }
+
+        
 
         public void AddBall(int ballCount)
         {
@@ -124,7 +133,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                         if (ballCount == 0)
                         {
                             currentFloor = 0;
-                            CheckingCurrentFloor?.Invoke();
+                            CheckFloorSizeAndMoveCam();
                             return;
                         }
                     }
@@ -187,7 +196,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             }
 
             currentFloor = 0;
-            CheckingCurrentFloor?.Invoke();
+            CheckFloorSizeAndMoveCam();
         }
 
         public IEnumerator RightRemover(int size)
@@ -222,7 +231,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
             headsOrganizer.SetPositions();
             currentFloor = 0;
-            CheckingCurrentFloor?.Invoke();
+            CheckFloorSizeAndMoveCam();
         }
 
         public IEnumerator LengthRemover(int size)
@@ -347,8 +356,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             waitForwarding = StartCoroutine(Forwarding());
         }
 
-        private IEnumerator InstantiateStartBalls()
+        private IEnumerator InstantiateStartBalls(LevelSpecs levelSpecs)
         {
+            currentColumn = levelSpecs.column;
+            currentFloor = levelSpecs.floor;
+            currentRow = levelSpecs.row;
             List<ColumnHead> columnHeads = headsOrganizer.ColumnHeads;
             ColumnHead columnHead;
             BallColumn ballColumn;
@@ -365,7 +377,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
-
+            SetCameraPos();
             yield return null;
         }
 
@@ -510,7 +522,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             currentFloor = 0;
             currentRow = 0;
             CheckingCurrentRow?.Invoke();
-            CheckingCurrentFloor?.Invoke();
+            CheckFloorSizeAndMoveCam();
             for (int i = 0; i < currentColumn; i++)
             {
                 for (int j = 0; j < currentRow; j++)
@@ -548,8 +560,18 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             currentFloor = 0;
             currentRow = 0;
             CheckingCurrentRow?.Invoke();
-            CheckingCurrentFloor?.Invoke();
+            CheckFloorSizeAndMoveCam();
             waitForwarding = null;
+        }
+        private void CheckFloorSizeAndMoveCam()
+        {
+            CheckingCurrentFloor?.Invoke();
+            SetCameraPos();
+        }
+
+        private void SetCameraPos()
+        {
+            playerFollowerTarget.m_TrackedObjectOffset.y = stockCameraTrackingY + currentFloor * distance;
         }
     }
 }
