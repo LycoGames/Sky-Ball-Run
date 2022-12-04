@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8376767500898857333
 MonoBehaviour:
@@ -45,14 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd21e947bf1315a469557fd477ba54e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 50
-  rotationYSpeed: 200
+  verticalSpeed: 50
+  horizontalSpeed: 1
   rotationXSpeed: 30
   boundHorizontal: 12
-  maxRotationDegree: 60
-  bounceAngle: 15
-  VerticalInput: 0
-  HorizontalInput: 0
+  newXPos: 0
+  orginalBound: 0
 --- !u!54 &-4788587124391165463
 Rigidbody:
   m_ObjectHideFlags: 0

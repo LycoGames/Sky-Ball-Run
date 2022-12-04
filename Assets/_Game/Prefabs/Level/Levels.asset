@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Levels
   m_EditorClassIdentifier: 
   levelSpecs:
-  - linesController: {fileID: 5066103876223209529, guid: ee847db5fe0ba9a4fa3577a8fbe80664, type: 3}
+  - linesController: {fileID: 5066103876223209529, guid: a28d4dadb89f1314faa20bd00a83620b, type: 3}
     ballColors: {r: 0, g: 0, b: 0, a: 0}
     column: 2
-    row: 5
-    floor: 2
+    row: 30
+    floor: 1

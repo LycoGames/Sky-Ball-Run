@@ -15,28 +15,26 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         {
             firstTouch = Vector3.zero;
         }
-        
+
         private void Update()
         {
             if (playerController == null) return;
-            if(canRotate) TouchHandler();
-            MovePlayer();
-            
+            if (canRotate) TouchHandler();
         }
 
         public void InitiliazeController(PlayerController _playerController) => playerController = _playerController;
         public void StartRotate() => canRotate = true;
-        public void StopRotate()
-        {
-            canRotate = false;
-            playerController.HorizontalInput = 0;
-        }
+        public void StopRotate() => canRotate = false;
 
         private void TouchHandler()
         {
             if (Input.GetMouseButton(0))
             {
-                if (isStillTouch) slipOnX = CalculateSliping().x;
+                if (isStillTouch)
+                {
+                    playerController.SetXPosition(CalculateSliping().x*sense*Time.deltaTime);
+                    firstTouch = Input.mousePosition;
+                }
                 else
                 {
                     firstTouch = Input.mousePosition;
@@ -48,18 +46,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
 
             isStillTouch = false;
             firstTouch = Vector3.zero;
-            slipOnX = 0;
         }
 
         private Vector3 CalculateSliping()
         {
             return new Vector3(firstTouch.x, firstTouch.y, 0)
                    - Input.mousePosition;
-        }
-
-        private void MovePlayer()
-        {
-            playerController.HorizontalInput = Mathf.Clamp(-slipOnX * sense, -1, 1);
         }
     }
 }
