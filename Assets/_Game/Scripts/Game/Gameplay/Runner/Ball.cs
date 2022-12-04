@@ -134,7 +134,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             Vector3 newPos = Vector3.zero;
             newPos.y = height;
-            while (Vector3.Distance(transform.localPosition, newPos) >= 0.02f)
+            while (Vector3.Distance(transform.localPosition, newPos) >= 0.1f)
             {
                 transform.localPosition = Vector3.MoveTowards(transform.localPosition, newPos, speed * Time.deltaTime);
                 yield return null;
@@ -147,12 +147,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             Vector3 newPos = transform.position;
             newPos.z = z;
-            while (Vector3.Distance(transform.position, newPos) >= 0.02f)
+            while (z-transform.position.z>=0.5f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, newPos, speed * Time.deltaTime);
                 yield return null;
             }
-            
             StartDroping();
             yield return null;
         }

@@ -8,6 +8,8 @@ namespace _Game.Scripts.Game.Gameplay.EndGames
     {
         public Action<int> GainedCoinDiamond;
         public Action EndGameEnded;
+        
+        [SerializeField] private ParticleSystem confettiEffect;
 
         protected PlayerController playerController;
         protected int GainedCoin { get; set; }
@@ -15,6 +17,13 @@ namespace _Game.Scripts.Game.Gameplay.EndGames
         public void Initialize(PlayerController _playerController)
         {
             playerController = _playerController;
+            EndGameEnded += PlayConfettiEfect;
+        }
+
+        private void PlayConfettiEfect()
+        {
+            confettiEffect.Play();
+            EndGameEnded -= PlayConfettiEfect;
         }
 
         public abstract void LaunchEndGame();

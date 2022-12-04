@@ -48,11 +48,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             StopCoroutine(checkSizeCoroutine);
             GameManager.Instance.StopMove();
             List<Ball> balls = ballManager.GetBalls(removeSize);
+            removeSize = balls.Count;
+            RemoveBalls(balls);
             foreach (var ball in balls)
             {
                 ball.StartMoveToPool(dropPosition.position.z);
                 ball.transform.parent = transform;
             }
+            ReshapingBalls();
             StartCoroutine(OnAllBallCollected(balls));
         }
         
@@ -61,17 +64,17 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             while (removeSize > collectedBallCount) yield return null;
             
-            OpenBarricades();
+            
             CloseHood();
             
             yield return new WaitForSeconds(coverCloseTime);
             ReturnAllBallToPool(balls);
             
             if(ballManager.TotalBallCount<=0)yield break;
+            OpenBarricades();
             PlaySound();
             PlayFireWork();
             StartPlayMove();
-            ReshapingBalls();
         }
 
         private void PlaySound()
@@ -122,6 +125,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner
                 ball.transform.localPosition = Vector3.zero;
             }
         }
+        private void RemoveBalls(List<Ball> balls)
+        {
+            foreach (var ball in balls)
+            {
+                ball.transform.parent = transform;
+                ball.UnregisterBall();
+            }
+        }
+
 
         private IEnumerator CheckSize()
         {

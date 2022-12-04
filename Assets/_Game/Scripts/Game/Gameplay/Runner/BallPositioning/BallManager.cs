@@ -338,7 +338,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             {
                 for (int j = 0; j < currentRow; j++)
                 {
-                    for (int k = 0; k < currentColumn && ballCount > 0; k++)
+                    for (int k = 0; k < currentColumn && ballCount > 0 && TotalBallCount>0; k++)
                     {
                         ballColumn = columnHeads[k].BallColumns[j];
                         ball = ballColumn.GetBall(i);
@@ -431,6 +431,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             if (currentFloor <= 0) currentFloor = 1;
             
             PlayReshapeSound();
+            SetCameraPos();
             RepositioningWiderBall(repositionedBalls);
         }
 
@@ -454,6 +455,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             if (rowCount % currentColumn > 0) currentRow++;
             
             PlayReshapeSound();
+            SetCameraPos();
             RepositioningTallerBall(repositionedBalls);
         }
 
