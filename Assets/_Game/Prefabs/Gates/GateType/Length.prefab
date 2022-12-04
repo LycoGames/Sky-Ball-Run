@@ -139,6 +139,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: GateBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 8242095668426484835, guid: 6fef62b8f1d60e34180fa3f08817cd3e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -6.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 8242095668426484835, guid: 6fef62b8f1d60e34180fa3f08817cd3e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011009769883441618, guid: 6fef62b8f1d60e34180fa3f08817cd3e, type: 3}
+      propertyPath: m_text
+      value: LENGTH
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011009769883441618, guid: 6fef62b8f1d60e34180fa3f08817cd3e, type: 3}
+      propertyPath: m_fontSize
+      value: 1.85
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fef62b8f1d60e34180fa3f08817cd3e, type: 3}
