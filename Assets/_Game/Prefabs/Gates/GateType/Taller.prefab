@@ -141,9 +141,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2526249534867866303, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
       propertyPath: m_text
-      value: 'Taller
-
-'
+      value: HEIGHT
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526249534867866303, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
+      propertyPath: m_fontSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3198485243730933518, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -6.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 3198485243730933518, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.22
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
