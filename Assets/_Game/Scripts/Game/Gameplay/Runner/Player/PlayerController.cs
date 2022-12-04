@@ -20,6 +20,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         public float VerticalInput;
         public float HorizontalInput;
         private bool canMove;
+
         private void OnEnable()
         {
             GetStartPosition();
@@ -33,7 +34,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
 
         private void FixedUpdate()
         {
-            if(canMove)Movement();
+            if (canMove) Movement();
             Rotate(VerticalInput, HorizontalInput);
         }
 
@@ -54,7 +55,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
 
         private void Movement()
         {
-            var pos = transform.position + transform.forward*movementSpeed*Time.deltaTime;
+            var pos = transform.position + transform.forward * movementSpeed * Time.deltaTime;
             pos.x = Mathf.Clamp(pos.x, -boundHorizontal, boundHorizontal);
             pos.y = Math.Clamp(pos.y, 0, 100);
             transform.position = pos;

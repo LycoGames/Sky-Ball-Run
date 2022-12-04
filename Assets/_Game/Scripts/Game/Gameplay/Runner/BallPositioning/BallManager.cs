@@ -589,7 +589,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         private void SetCameraPos()
         {
-            float endValue = stockCameraTrackingY + (float)currentFloor * 3 / 5;
+            float endValue = stockCameraTrackingY + (float)currentFloor * 2 / 3;
             DOTween.To(() => playerFollowerTarget.m_TrackedObjectOffset.y,
                 x => playerFollowerTarget.m_TrackedObjectOffset.y = x, endValue, .5f);
 
