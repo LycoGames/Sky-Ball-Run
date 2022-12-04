@@ -22,7 +22,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public int TotalBallCount { get; private set; }
 
         [SerializeField] private PlayerController playerController;
-        
+
         [SerializeField] private float distance = 0.5f;
         public int maxRow = 30;
         public int maxColumn = 38;
@@ -38,6 +38,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         private CinemachineFramingTransposer playerFollowerTarget;
         private float stockCameraTrackingY;
+        private float stockCameraDistance;
         private float currentWaitingTime;
         private Coroutine waitForwarding;
 
@@ -51,10 +52,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             headsOrganizer.destroyColumnHeads();
         }
 
-        public IEnumerator InitializeBallManager(BallPool _ballPool, PlayerController _playerController,LevelSpecs levelSpecs,CinemachineVirtualCamera playerFollowerCamera)
+        public IEnumerator InitializeBallManager(BallPool _ballPool, PlayerController _playerController,
+            LevelSpecs levelSpecs, CinemachineVirtualCamera playerFollowerCamera)
         {
             playerFollowerTarget = playerFollowerCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
             stockCameraTrackingY = playerFollowerTarget.m_TrackedObjectOffset.y;
+            stockCameraDistance = playerFollowerTarget.m_CameraDistance;
             ballPool = _ballPool;
             ballPool.amountToPool = maxColumn * maxRow * maxFloor;
             playerController = _playerController;
@@ -108,7 +111,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             }
         }
 
-        
 
         public void AddBall(int ballCount)
         {
@@ -377,6 +379,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
+
             SetCameraPos();
             yield return null;
         }
@@ -468,6 +471,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
+
             if (repositionedBalls.Any())
             {
                 Debug.LogError("Still got empty ball");
@@ -476,8 +480,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     newBall.RemoveBall();
                     newBall.transform.parent = ballPool.transform;
                 }
-                Debug.Log("<color=yellow>"+"Empty ball removed"+"</color>");
+
+                Debug.Log("<color=yellow>" + "Empty ball removed" + "</color>");
             }
+
             headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
         }
 
@@ -510,7 +516,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     newBall.RemoveBall();
                     newBall.transform.parent = ballPool.transform;
                 }
-                Debug.Log("<color=yellow>"+"Empty ball removed"+"</color>");
+
+                Debug.Log("<color=yellow>" + "Empty ball removed" + "</color>");
             }
 
             headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
@@ -563,6 +570,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             CheckFloorSizeAndMoveCam();
             waitForwarding = null;
         }
+
         private void CheckFloorSizeAndMoveCam()
         {
             CheckingCurrentFloor?.Invoke();
@@ -571,7 +579,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         private void SetCameraPos()
         {
-            playerFollowerTarget.m_TrackedObjectOffset.y = stockCameraTrackingY + currentFloor * distance;
+            float endValue = stockCameraTrackingY + currentFloor * distance;
+            DOTween.To(() => playerFollowerTarget.m_TrackedObjectOffset.y,
+                x => playerFollowerTarget.m_TrackedObjectOffset.y = x, endValue, .5f);
+            
+            endValue = stockCameraDistance + currentFloor * distance;
+            DOTween.To(() => playerFollowerTarget.m_CameraDistance,
+                x => playerFollowerTarget.m_CameraDistance = x, endValue, .5f);
+            // playerFollowerTarget.m_TrackedObjectOffset.y = stockCameraTrackingY + currentFloor * distance;
+            // playerFollowerTarget.m_CameraDistance = stockCameraDistance + currentFloor * distance;
         }
     }
 }
