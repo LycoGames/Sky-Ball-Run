@@ -82,7 +82,7 @@ MonoBehaviour:
   boxCollider: {fileID: 4319897389194661330}
   xPos: -4.7
   ballCountText: {fileID: 432363379113522687}
-  checkTime: 2
+  checkTime: 0.5
 --- !u!1001 &2697871940080144279
 PrefabInstance:
   m_ObjectHideFlags: 0

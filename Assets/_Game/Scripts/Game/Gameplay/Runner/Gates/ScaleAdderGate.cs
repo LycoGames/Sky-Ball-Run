@@ -71,15 +71,21 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                 {
                     case AdderType.RightAdder:
                         newRemoveSize = ballManager.currentColumn * ((float)selectedGate.addPercentage/100);
+                        addSize=(int)Math.Round(newRemoveSize);
+                        if (addSize+ballManager.currentColumn > ballManager.maxColumn) addSize = ballManager.maxColumn-ballManager.currentColumn;
                         break;
                     case AdderType.UpAdder:
                         newRemoveSize = ballManager.currentFloor * ((float)selectedGate.addPercentage/100);
+                        addSize=(int)Math.Round(newRemoveSize);
+                        if (addSize+ballManager.currentFloor > ballManager.maxFloor) addSize = ballManager.maxFloor-ballManager.currentFloor;
                         break;
                     case AdderType.LengthAdder:
                         newRemoveSize = ballManager.currentRow * ((float)selectedGate.addPercentage/100);
+                        addSize=(int)Math.Round(newRemoveSize);
+                        if (addSize+ballManager.currentRow > ballManager.maxRow) addSize = ballManager.maxRow-ballManager.currentRow;
                         break;
                 }
-                addSize=(int)Math.Round(newRemoveSize);
+                
                 if (addSize <= 0) addSize = 1;
                 ballCountText.text = "+" + addSize;
                 yield return wfsForCheckSize;

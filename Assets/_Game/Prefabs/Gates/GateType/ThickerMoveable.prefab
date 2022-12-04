@@ -83,7 +83,7 @@ MonoBehaviour:
   boxCollider: {fileID: 4319897389194661330}
   xPos: 4.7
   ballCountText: {fileID: 4108594642859096019}
-  checkTime: 2
+  checkTime: 0.5
 --- !u!95 &7255804854559204908
 Animator:
   serializedVersion: 4

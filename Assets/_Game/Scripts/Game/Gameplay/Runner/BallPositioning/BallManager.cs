@@ -165,6 +165,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
+            SetCameraPos();
         }
 
         public IEnumerator UpRemover(int size)
@@ -418,14 +419,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
             currentColumn = newSize;
 
-            int rowCount = TotalBallCount / currentColumn;
-            if (TotalBallCount % currentFloor > 0) rowCount++;
-
-            currentFloor = rowCount / maxRow;
-            if (rowCount % maxRow > 0) currentFloor++;
-
-            currentRow = rowCount / currentFloor;
-            if (rowCount % currentFloor > 0) currentRow++;
+            int rowFloorCount = TotalBallCount / currentColumn;
+            currentRow = maxRow;
+            currentFloor = rowFloorCount / currentRow;
+            if (rowFloorCount % currentRow > 0) currentFloor++;
+            if (currentFloor >= maxFloor) currentFloor=maxFloor;
+            if (currentFloor <= 0) currentFloor = 1;
 
             RepositioningWiderBall(repositionedBalls);
         }

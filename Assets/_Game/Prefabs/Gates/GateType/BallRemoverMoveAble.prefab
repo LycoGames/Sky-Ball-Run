@@ -100,7 +100,7 @@ MonoBehaviour:
   collider: {fileID: 4319897389194661330}
   removePercentage: 0
   ballCountText: {fileID: 8838791460109563026}
-  checkTime: 2
+  checkTime: 0.5
 --- !u!1001 &1160898193184182362
 PrefabInstance:
   m_ObjectHideFlags: 0

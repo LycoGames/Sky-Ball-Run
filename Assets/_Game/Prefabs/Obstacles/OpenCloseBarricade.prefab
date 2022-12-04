@@ -48,8 +48,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 27.554377, y: 30.386526, z: 1}
-  m_Center: {x: -0.4435587, y: 14.693263, z: 0}
+  m_Size: {x: 27.554377, y: 36.063324, z: 1}
+  m_Center: {x: -0.4435587, y: 11.854867, z: 0}
 --- !u!114 &6215291990963811656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,8 +63,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 8688316732723174197}
-  leftBarricade: {fileID: 4469352633292540987}
-  rightBarricade: {fileID: 9167070297176834082}
+  leftBarricade: {fileID: 173994671505184793}
+  rightBarricade: {fileID: 6992596874148607971}
   barricadeOpenTime: 2
 --- !u!54 &2565767006355713766
 Rigidbody:
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 1491429843315720023}
   m_Layer: 0
   m_Name: Handle
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -517,7 +517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6431701925078213569}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.15, z: -20}
+  m_LocalPosition: {x: 4.5, y: -0.15, z: -20}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -540,7 +540,7 @@ GameObject:
   - component: {fileID: 4140905924055839256}
   m_Layer: 0
   m_Name: Handle
-  m_TagString: Obstacle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

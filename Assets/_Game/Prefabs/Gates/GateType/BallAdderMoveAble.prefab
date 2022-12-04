@@ -80,7 +80,7 @@ MonoBehaviour:
   collider: {fileID: 4319897389194661330}
   addPercentage: 0
   ballCountText: {fileID: 7078638048738482944}
-  checkTime: 2
+  checkTime: 0.5
 --- !u!95 &3955082529213801334
 Animator:
   serializedVersion: 4
