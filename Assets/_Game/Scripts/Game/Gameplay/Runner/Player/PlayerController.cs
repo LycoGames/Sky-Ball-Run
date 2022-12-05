@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using DG.Tweening;
 using UnityEngine;
 
@@ -8,21 +9,18 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
     {
         [SerializeField] private float verticalSpeed = 80f;
         [SerializeField] private float horizontalSpeed=1f;
-        //[SerializeField] private float rotationYSpeed = 10;
         [SerializeField] private float rotationXSpeed = 10;
         [SerializeField] private float boundHorizontal = 9.6f;
-        //[SerializeField] private float maxRotationDegree = 20f;
-        //[SerializeField] private float bounceAngle = 15f;
         [SerializeField] private float newXPos;
+        
+        private Tween zMoveRef;
+        private Tween xMoveRef;
+        
         
         private float orginalBound;
 
         private Vector3 startPos;
-        private float xAngle; //Todo bunlardan kurtul
-        private float yAngle;
-
-        //public float VerticalInput;
-        //public float HorizontalInput;
+        
         private bool canMove;
 
         
@@ -48,6 +46,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
 
         public void SetXPosition(float value)
         {
+            if (!canMove) return;
             newXPos = Mathf.Clamp(newXPos - value, -boundHorizontal, boundHorizontal);
         }
 
@@ -60,7 +59,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         {
             newXPos = transform.position.x;
             canMove = false;
-            x.Pause();
+            xMoveRef.Pause();
+            zMoveRef.Pause();
         }
 
         public void ChangeBounds(float changeValue)
@@ -68,19 +68,17 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
             boundHorizontal = orginalBound - changeValue;
         }
 
-        private Tween x;
+        
         private void Movement()
         {
-            if (!canMove)
-            {
-                transform.DOMoveX(newXPos, horizontalSpeed);
-                return;
-            } 
+            if (!canMove) return;
             newPos = transform.position;
             newPos.z += verticalSpeed*Time.deltaTime;
-            transform.DOMoveX(newXPos, horizontalSpeed);
-            x=transform.DOMoveZ(newPos.z, 0);
-            
+            xMoveRef.Kill();
+            zMoveRef.Kill();
+            xMoveRef = transform.DOMoveX(newXPos, horizontalSpeed);
+            zMoveRef = transform.DOMoveZ(newPos.z, 0);
+
         }
 
         private void Rotate()
@@ -145,21 +143,21 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         //     return yAngle;
         // }
 
-        private float RotateToOriginal(float angle, float speed)
-        {
-            if (angle > 0)
-            {
-                angle -= speed * Time.deltaTime;
-                if (angle < 0) angle = 0;
-            }
-            else if (angle < 0)
-            {
-                angle += speed * Time.deltaTime;
-                if (angle > 0) angle = 0;
-            }
-
-            return angle;
-        }
+        // private float RotateToOriginal(float angle, float speed)
+        // {
+        //     if (angle > 0)
+        //     {
+        //         angle -= speed * Time.deltaTime;
+        //         if (angle < 0) angle = 0;
+        //     }
+        //     else if (angle < 0)
+        //     {
+        //         angle += speed * Time.deltaTime;
+        //         if (angle > 0) angle = 0;
+        //     }
+        //
+        //     return angle;
+        // }
 
         private void ResetStartPosition()
         {
