@@ -121,6 +121,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             ballColumn = null;
             gameObject.SetActive(false);
+            StopAllCoroutines();
             transform.parent = BallPool.Instance.transform;
         }
 

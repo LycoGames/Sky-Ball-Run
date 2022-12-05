@@ -20,6 +20,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public Action CheckingCurrentRow;
         public Action CheckingCurrentFloor;
         public Action<float> ChangeCameraYPos;
+        public Action<int> OnTotalBallCountChange;
+        public Action OnShapeChange;
         public int TotalBallCount { get; private set; }
 
         [SerializeField] private PlayerController playerController;
@@ -72,6 +74,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public void AddTotalBallCount(int count)
         {
             TotalBallCount += count;
+            OnTotalBallCountChange?.Invoke(TotalBallCount);
             if (TotalBallCount <= 0)
             {
                 GameManager.Instance.OnLoseGame();
@@ -436,6 +439,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             PlayReshapeSound();
             SetCameraPos();
             RepositioningWiderBall(repositionedBalls);
+            OnShapeChange?.Invoke();
         }
 
 
@@ -460,6 +464,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             PlayReshapeSound();
             SetCameraPos();
             RepositioningTallerBall(repositionedBalls);
+            OnShapeChange?.Invoke();
         }
 
         private void RepositioningTallerBall(List<Ball> repositionedBalls)

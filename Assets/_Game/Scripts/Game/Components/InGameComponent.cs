@@ -56,13 +56,13 @@ namespace _Game.Scripts.Game.Components
 
         public IEnumerator InitializeGame(int level)
         {
+            InitializeCamera();
             InitializePlayer();
             InitializeBallManager();
             InitializeBallPool();
             InitializeController();
             InitializeGameManager();
             InitializeCameraTarget();
-            InitializeCamera();
             InitializePlayerFollowerCamera();
             InitializeLevelCreator();
             
