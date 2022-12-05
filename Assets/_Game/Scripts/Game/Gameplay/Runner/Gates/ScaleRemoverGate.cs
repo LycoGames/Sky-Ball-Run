@@ -63,25 +63,38 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         private IEnumerator CheckSize()
         {
             float newRemoveSize=0;
+            int row;
+            int column;
+            int floor;
+            int totalCubicBallCount;
+            int writeSize=0;
             while (true)
             {
-                
+                row = ballManager.currentRow;
+                column = ballManager.currentColumn;
+                floor = ballManager.currentFloor;
+                totalCubicBallCount = row * column * floor;
                 switch (selectedGate.adderType)
                 {
                     case AdderType.RightRemover:
                         newRemoveSize = ballManager.currentColumn * ((float)selectedGate.removePercentage/100);
+                        if (newRemoveSize <= 1) newRemoveSize=1;
+                        writeSize = (int)Math.Round(newRemoveSize * row * floor);
                         break;
                     case AdderType.UpRemover:
                         newRemoveSize = ballManager.currentFloor * ((float)selectedGate.removePercentage/100);
+                        if (newRemoveSize <= 1) newRemoveSize=1;
+                        writeSize = (int)Math.Round(newRemoveSize * row * column);
                         break;
                     case AdderType.LengthRemover:
                         newRemoveSize = ballManager.currentRow * ((float)selectedGate.removePercentage/100);
+                        if (newRemoveSize <= 1) newRemoveSize=1;
+                        writeSize = (int)Math.Round(newRemoveSize * column * floor);
                         break;
                 }
-
+                writeSize -= totalCubicBallCount;
                 removeSize=(int)Math.Round(newRemoveSize);
-                if (removeSize <= 0) removeSize=1;
-                sizeText.text = "-" + removeSize;
+                sizeText.text = "-" + writeSize;
                 yield return wfsForCheckSize;
             }
         }

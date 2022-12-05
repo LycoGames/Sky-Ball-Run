@@ -47,7 +47,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         public void SetXPosition(float value)
         {
             if (!canMove) return;
-            newXPos = Mathf.Clamp(newXPos - value, -boundHorizontal, boundHorizontal);
+            newXPos = Mathf.Clamp(newXPos-value, -boundHorizontal, boundHorizontal);
         }
 
         public void StartMove()
@@ -75,6 +75,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
             
             //xMoveRef.Kill();
             //xMoveRef = transform.DOMoveX(newXPos, horizontalSpeed);
+            newXPos = Mathf.Clamp(newXPos, -boundHorizontal, boundHorizontal);
             newPos = transform.position;
             newPos.x = newXPos;
             transform.position = Vector3.Lerp(transform.position, newPos, horizontalSpeed * Time.deltaTime);

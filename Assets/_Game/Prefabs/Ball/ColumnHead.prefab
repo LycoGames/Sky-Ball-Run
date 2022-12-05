@@ -44,9 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb70a134b5354c449f05745608cd62f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 10
   rotateSpeed: 2.5
   rotateStartAngle: 5
   ballColumn: {fileID: 5377857087004858780, guid: 6f0286b7db1672e4b9a681d4526fdfe3, type: 3}
-  movementDelay: 0.25
-  distance: 0

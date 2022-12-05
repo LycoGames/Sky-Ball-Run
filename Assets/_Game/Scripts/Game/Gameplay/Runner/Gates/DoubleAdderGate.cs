@@ -14,6 +14,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         [SerializeField] private AdderGateSpecs leftGate;
         [SerializeField] private AdderGateSpecs rightGate;
 
+        private BallManager ballManager;
+        private int row, column, floor, totalCubicBallCount;
+        
         [Serializable]
         public struct AdderGateSpecs
         {
@@ -27,12 +30,36 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             UpAdder
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            leftCount.text = "+" + leftGate.addSize;
-            rightCount.text = "+" + rightGate.addSize;
+            ballManager=BallManager.Instance;
+            StartCoroutine(CheckSize());
         }
-        
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+        }
+
+        private IEnumerator CheckSize()
+        {
+            
+            while (true)
+            {
+                CheckBallSize();
+                GateTextWriter(leftCount, leftGate);
+                GateTextWriter(rightCount,rightGate);
+                yield return null;
+            }
+        }
+
+        private void CheckBallSize()
+        {
+            row = ballManager.currentRow;
+            column = ballManager.currentColumn;
+            floor = ballManager.currentFloor;
+            totalCubicBallCount = (row * column * floor)-ballManager.TotalBallCount;
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -48,9 +75,22 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                         BallManager.Instance.StartCoroutine(BallManager.Instance.UpAdder(selectedGate.addSize));
                         break;
                 }
+
                 gameObject.SetActive(false);
             }
         }
+
+        private void GateTextWriter(TextMeshProUGUI text, AdderGateSpecs specs)
+        {
+            switch (specs.adderType)
+            {
+                case AdderType.RightAdder:
+                    text.text = (specs.addSize * row * floor+totalCubicBallCount).ToString();
+                    break;
+                case AdderType.UpAdder:
+                    text.text = (specs.addSize * row * column+totalCubicBallCount).ToString();
+                    break;
+            }
+        }
     }
-    
 }

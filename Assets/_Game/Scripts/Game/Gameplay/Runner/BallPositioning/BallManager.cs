@@ -482,17 +482,16 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
-
+            //TODO top fazladan siliniyor.
             if (repositionedBalls.Any())
             {
-                Debug.LogError("Still got empty ball");
+                int removedBallCount = repositionedBalls.Count;
                 foreach (Ball newBall in repositionedBalls)
                 {
                     newBall.RemoveBall();
                     newBall.transform.parent = ballPool.transform;
                 }
-
-                Debug.Log("<color=yellow>" + "Empty ball removed" + "</color>");
+                AddBall(removedBallCount);
             }
 
             headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
@@ -521,14 +520,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
             if (repositionedBalls.Any())
             {
-                Debug.LogError("Still got empty ball");
+                int removedBallCount = repositionedBalls.Count;
                 foreach (Ball newBall in repositionedBalls)
                 {
                     newBall.RemoveBall();
                     newBall.transform.parent = ballPool.transform;
                 }
-
-                Debug.Log("<color=yellow>" + "Empty ball removed" + "</color>");
+                AddBall(removedBallCount);
             }
 
             headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
