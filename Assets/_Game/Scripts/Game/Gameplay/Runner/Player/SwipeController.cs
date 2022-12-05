@@ -16,17 +16,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         private void Start()
         {
             firstTouch = Vector3.zero;
-            StartCoroutine(Check());
+
         }
 
-        private IEnumerator Check()
+        private void FixedUpdate()
         {
-            while (true)
-            {
-                if (playerController == null) yield return null;
-                if (canRotate) TouchHandler();
-                yield return new WaitForEndOfFrame();
-            }
+            if (playerController == null) return;
+            if (canRotate) TouchHandler();
         }
 
         public void InitiliazeController(PlayerController _playerController) => playerController = _playerController;

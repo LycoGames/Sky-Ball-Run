@@ -15,15 +15,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
         [SerializeField] private float rotateSpeed = 1f;
         [SerializeField] private float rotateStartAngle = 20f;
         [SerializeField] private BallColumn ballColumn;
-        [SerializeField] private float movementDelay = 0.25f;
-        [SerializeField] private float distance;
         public List<BallColumn> BallColumns { get; private set; }
-        private int columnCount;
+
         private Vector3 follow;
 
         private void Start()
         {
-            columnCount = BallColumns.Count;
         }
 
         public void ClearAllColumns()
