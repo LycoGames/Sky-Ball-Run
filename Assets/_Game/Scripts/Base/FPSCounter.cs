@@ -9,11 +9,12 @@ namespace _Game.Scripts.Base
     {
         [SerializeField] private TextMeshProUGUI fpsText;
         [SerializeField] float refreshTime = 1f;
+        [SerializeField] private int fpsLimit = 60;
         private float fps;
         private WaitForSeconds wfsForRefreshFPS;
         void Start()
         {
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = fpsLimit;
             wfsForRefreshFPS = new WaitForSeconds(refreshTime);
             StartCoroutine(GetFps());
         }

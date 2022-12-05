@@ -72,12 +72,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         private void Movement()
         {
             if (!canMove) return;
+            
+            //xMoveRef.Kill();
+            //xMoveRef = transform.DOMoveX(newXPos, horizontalSpeed);
+            newPos = transform.position;
+            newPos.x = newXPos;
+            transform.position = Vector3.Lerp(transform.position, newPos, horizontalSpeed * Time.deltaTime);
             newPos = transform.position;
             newPos.z += verticalSpeed*Time.deltaTime;
-            xMoveRef.Kill();
-            zMoveRef.Kill();
-            xMoveRef = transform.DOMoveX(newXPos, horizontalSpeed);
-            zMoveRef = transform.DOMoveZ(newPos.z, 0);
+            transform.position = newPos;
 
         }
 

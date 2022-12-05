@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.191991, g: 0.5946723, b: 0.7773275, a: 1}
+  m_IndirectSpecularColor: {r: 0.19022748, g: 0.5924103, b: 0.7732436, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1212,10 +1212,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1795686375}
     m_Modifications:
-    - target: {fileID: 5166929759918439216, guid: 5b73ab18f8cd2bd4995e65b4ccaa6daa, type: 3}
-      propertyPath: audioSourceControllerPrefab
-      value: 
-      objectReference: {fileID: 525235985025334743, guid: ce93dfe8a3086f64a973c9fccd6c6381, type: 3}
     - target: {fileID: 5166929759918439218, guid: 5b73ab18f8cd2bd4995e65b4ccaa6daa, type: 3}
       propertyPath: m_Name
       value: PrepareGameComponent
@@ -1520,6 +1516,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 128562624}
     m_Modifications:
+    - target: {fileID: 5611206469865378291, guid: 8cc76ff090f90744a868cb46956cc885, type: 3}
+      propertyPath: fpsLimit
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 5611206469891340742, guid: 8cc76ff090f90744a868cb46956cc885, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1871,30 +1871,6 @@ PrefabInstance:
     - target: {fileID: 5811453710377156906, guid: 396228fb7a1c79b4888051dbe27293ce, type: 3}
       propertyPath: m_Name
       value: EndGameComponent
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811453710377156908, guid: 396228fb7a1c79b4888051dbe27293ce, type: 3}
-      propertyPath: waterfallBasketList.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811453710377156908, guid: 396228fb7a1c79b4888051dbe27293ce, type: 3}
-      propertyPath: waterfallBasketList.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811453710377156908, guid: 396228fb7a1c79b4888051dbe27293ce, type: 3}
-      propertyPath: waterfallBasketList.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811453710377156908, guid: 396228fb7a1c79b4888051dbe27293ce, type: 3}
-      propertyPath: waterfallBasketList.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811453710377156908, guid: 396228fb7a1c79b4888051dbe27293ce, type: 3}
-      propertyPath: waterfallBasketList.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5811453710377156908, guid: 396228fb7a1c79b4888051dbe27293ce, type: 3}
-      propertyPath: waterfallBasketList.Array.data[4]
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5811453710377156909, guid: 396228fb7a1c79b4888051dbe27293ce, type: 3}
       propertyPath: m_RootOrder

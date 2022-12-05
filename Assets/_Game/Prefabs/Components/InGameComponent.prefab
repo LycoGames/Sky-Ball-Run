@@ -48,6 +48,7 @@ MonoBehaviour:
   swipeControllerPrefab: {fileID: 3867289276033361962, guid: 56e6ab972d5dcc84598faa230a2ed1b3, type: 3}
   mainCameraPrefab: {fileID: 1165605069637887360, guid: 812825f40b0b4c14bb75dd43d7d47720, type: 3}
   playerFollowerCameraPrefab: {fileID: 2265998429650834380, guid: f11b9db7ee358464f8b49c9f9b028d51, type: 3}
+  cameraTargetPrefab: {fileID: 8577225192547659621, guid: b3fabd16c7e9f2b418986f1cba4c9e34, type: 3}
   playerControllerPrefab: {fileID: 8376767500898857333, guid: 45429aed5fde1a14d86d065d62f6af1f, type: 3}
   levelCreatorPrefab: {fileID: 4300698989546673973, guid: d5f66cdf7f1a58d43aed0db40692cbc8, type: 3}
   ballManagerPrefab: {fileID: 8376767500898857329, guid: 86fa8cabf93edc14eb27ecbf6677ea1b, type: 3}

@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Player
@@ -14,12 +16,17 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         private void Start()
         {
             firstTouch = Vector3.zero;
+            StartCoroutine(Check());
         }
 
-        private void Update()
+        private IEnumerator Check()
         {
-            if (playerController == null) return;
-            if (canRotate) TouchHandler();
+            while (true)
+            {
+                if (playerController == null) yield return null;
+                if (canRotate) TouchHandler();
+                yield return new WaitForEndOfFrame();
+            }
         }
 
         public void InitiliazeController(PlayerController _playerController) => playerController = _playerController;
@@ -32,7 +39,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
             {
                 if (isStillTouch)
                 {
-                    playerController.SetXPosition(CalculateSliping().x*sense*Time.deltaTime);
+                    playerController.SetXPosition(CalculateSliping().x * sense * Time.deltaTime);
                     firstTouch = Input.mousePosition;
                 }
                 else

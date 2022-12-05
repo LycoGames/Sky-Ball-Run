@@ -25,6 +25,7 @@ namespace _Game.Scripts.Game.Components
         [SerializeField] private SwipeController swipeControllerPrefab;
         [SerializeField] private GameObject mainCameraPrefab;
         [SerializeField] private CinemachineVirtualCamera playerFollowerCameraPrefab;
+        [SerializeField] private CameraTarget cameraTargetPrefab;
         [SerializeField] private PlayerController playerControllerPrefab;
         [SerializeField] private LevelCreator levelCreatorPrefab;
         [SerializeField] private BallManager ballManagerPrefab;
@@ -41,6 +42,7 @@ namespace _Game.Scripts.Game.Components
         private GameManager gameManager;
         private SwipeController swipeController;
         private EndGameComponent endGameComponent;
+        private CameraTarget cameraTarget;
 
 
         private int lastSavedDiamond;
@@ -59,16 +61,19 @@ namespace _Game.Scripts.Game.Components
             InitializeBallPool();
             InitializeController();
             InitializeGameManager();
+            InitializeCameraTarget();
             InitializeCamera();
             InitializePlayerFollowerCamera();
             InitializeLevelCreator();
-
+            
             
             yield return StartCoroutine(levelCreator.CreateLevel(level));
             yield return StartCoroutine(ballManager.InitializeBallManager(ballPool, playerController,levelCreator.LevelSpecs(),playerFollowerCamera));
 
             SetupEndGame();
         }
+
+     
         public void SetupDiamond(int value)
         {
             GainedDiamond = 0;
@@ -104,6 +109,7 @@ namespace _Game.Scripts.Game.Components
             DestroyLevelCreator();
             DestroyBallPool();
             DestroyBallManager();
+            DestroyCameraTarget();
             yield return null;
         }
 
@@ -116,6 +122,10 @@ namespace _Game.Scripts.Game.Components
             endGameComponent.PlayerController = playerController;
         }
 
+        private void DestroyCameraTarget()
+        {
+            Destroy(cameraTarget.gameObject);
+        }
         private void DestroyBallManager()
         {
             ballManager.DestroyBallManager();
@@ -168,6 +178,12 @@ namespace _Game.Scripts.Game.Components
         {
             OnLoseGame?.Invoke();
         }
+        private void InitializeCameraTarget()
+        {
+            cameraTarget = Instantiate(cameraTargetPrefab);
+            cameraTarget.InitiliazeCameraTarget(ballManager,playerController.transform);
+        }
+
 
         private void InitializeLevelCreator()
         {
@@ -182,7 +198,7 @@ namespace _Game.Scripts.Game.Components
         private void InitializePlayerFollowerCamera()
         {
             playerFollowerCamera = Instantiate(playerFollowerCameraPrefab);
-            playerFollowerCamera.Follow = playerController.transform;
+            playerFollowerCamera.Follow = cameraTarget.transform;
         }
 
         private void InitializeController()

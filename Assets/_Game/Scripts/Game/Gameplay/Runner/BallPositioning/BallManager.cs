@@ -19,6 +19,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public static BallManager Instance;
         public Action CheckingCurrentRow;
         public Action CheckingCurrentFloor;
+        public Action<float> ChangeCameraYPos;
         public int TotalBallCount { get; private set; }
 
         [SerializeField] private PlayerController playerController;
@@ -589,13 +590,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         private void SetCameraPos()
         {
-            float endValue = stockCameraTrackingY + (float)currentFloor * 2 / 3;
-            DOTween.To(() => playerFollowerTarget.m_TrackedObjectOffset.y,
-                x => playerFollowerTarget.m_TrackedObjectOffset.y = x, endValue, .5f);
-
-            endValue = stockCameraDistance + (float)currentFloor / 3;
-            DOTween.To(() => playerFollowerTarget.m_CameraDistance,
-                x => playerFollowerTarget.m_CameraDistance = x, endValue, .5f);
+            ChangeCameraYPos?.Invoke(currentFloor);
+            // float endValue = stockCameraTrackingY + (float)currentFloor * 2 / 3;
+            // DOTween.To(() => playerFollowerTarget.m_TrackedObjectOffset.y,
+            //     x => playerFollowerTarget.m_TrackedObjectOffset.y = x, endValue, .5f);
+            //
+            // endValue = stockCameraDistance + (float)currentFloor / 3;
+            // DOTween.To(() => playerFollowerTarget.m_CameraDistance,
+            //     x => playerFollowerTarget.m_CameraDistance = x, endValue, .5f);
             // playerFollowerTarget.m_TrackedObjectOffset.y = stockCameraTrackingY + currentFloor * distance;
             // playerFollowerTarget.m_CameraDistance = stockCameraDistance + currentFloor * distance;
         }

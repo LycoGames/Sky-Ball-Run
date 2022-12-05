@@ -15,7 +15,8 @@ namespace _Game.Scripts.Game.Components
 
         public event IntroChangeDelegate OnIntroAnimationComplete;
 
-        [SerializeField] private float _animationTime = 0.1f;
+        [SerializeField] private float animationTime = 0.1f;
+        [SerializeField] private float logoShowTime=0.5f;
 
         public void Initialize(ComponentContainer componentContainer)
         {
@@ -29,9 +30,11 @@ namespace _Game.Scripts.Game.Components
 
         private IEnumerator PlayAnimation()
         {
-            OnIntroAnimationStart?.Invoke(_animationTime);
+            yield return new WaitForSeconds(logoShowTime);
+            
+            OnIntroAnimationStart?.Invoke(animationTime);
 
-            yield return new WaitForSeconds(_animationTime);
+            yield return new WaitForSeconds(animationTime);
 
             OnIntroAnimationComplete?.Invoke();
         }
