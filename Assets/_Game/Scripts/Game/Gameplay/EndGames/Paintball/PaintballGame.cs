@@ -15,6 +15,8 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         [Space] [Header("PaintballWeapon")] [SerializeField]
         private PaintballWeapon paintballWeapon;
 
+        [SerializeField] private CountTextUI countTextUI;
+
         [SerializeField] private float bulletSpeed;
         [SerializeField] private float rateOfFire;
         [SerializeField] private float randomnessMinX;
@@ -27,8 +29,6 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         [SerializeField] private Transform aimTarget;
 
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
-
-        
 
 
         public override void LaunchEndGame()
@@ -49,15 +49,17 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
             yield return new WaitForSeconds(1f);
             SwitchToWeaponCamera();
             yield return new WaitForSeconds(1f);
+            ActivateBulletCountUI();
             paintballWeaponController.Launch();
             yield return new WaitForSeconds(.5f);
             paintballWeapon.Fire();
         }
 
+
         private void SetupWeapon()
         {
             paintballWeapon.Setup(bulletSpeed, rateOfFire, BallManager.Instance.TotalBallCount, randomnessMinX,
-                randomnessMaxX, randomnessMinY, randomnessMaxY, EndGameEnd);
+                randomnessMaxX, randomnessMinY, randomnessMaxY, countTextUI, EndGameEnd);
         }
 
         private void EndGameEnd()
@@ -102,6 +104,11 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         {
             GainedCoin += count;
             GainedCoinDiamond?.Invoke(GainedCoin);
+        }
+
+        private void ActivateBulletCountUI()
+        {
+            countTextUI.Activate();
         }
     }
 }

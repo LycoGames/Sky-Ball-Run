@@ -16,7 +16,7 @@ namespace _Game.Scripts.Game.Components
         public event IntroChangeDelegate OnIntroAnimationComplete;
 
         [SerializeField] private float animationTime = 0.1f;
-        [SerializeField] private float logoShowTime=1f;
+        [SerializeField] private float logoShowTime=0.5f;
 
         public void Initialize(ComponentContainer componentContainer)
         {
