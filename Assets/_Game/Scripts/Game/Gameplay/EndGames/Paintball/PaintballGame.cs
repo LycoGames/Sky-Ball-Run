@@ -88,7 +88,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
             foreach (var ball in BallPool.Instance.GetAllActiveBall())
             {
                 ball.transform.DOMove(paintballWeapon.MagazinePosition, 1f).SetEase(Ease.Linear)
-                    .OnComplete(() => ball.ReturnToPool());
+                    .OnComplete(() => ball.ReturnToPool()).SetAutoKill(true);
             }
         }
 

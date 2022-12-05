@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1891460681556944904, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 138be6b13811541409ad61d1767632f3, type: 2}
     - target: {fileID: 2307814742566669500, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
       propertyPath: m_Name
       value: BallAdder
@@ -155,6 +159,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 3.22
       objectReference: {fileID: 0}
+    - target: {fileID: 4807652948107512126, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0be29c9b0cdffc94483723effde14c5e, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}

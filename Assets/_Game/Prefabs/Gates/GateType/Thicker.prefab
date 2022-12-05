@@ -91,6 +91,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1138165245363398048}
     m_Modifications:
+    - target: {fileID: 2070166917343040083, guid: 6fef62b8f1d60e34180fa3f08817cd3e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 916760f2ddb3cb14aae0dcab8cf17fcf, type: 2}
     - target: {fileID: 2090395859513525554, guid: 6fef62b8f1d60e34180fa3f08817cd3e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -139,6 +143,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GateBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 4917176813263811429, guid: 6fef62b8f1d60e34180fa3f08817cd3e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7455ec1e0de516748ac527698eafee5a, type: 2}
     - target: {fileID: 8242095668426484835, guid: 6fef62b8f1d60e34180fa3f08817cd3e, type: 3}
       propertyPath: m_SizeDelta.y
       value: -6
