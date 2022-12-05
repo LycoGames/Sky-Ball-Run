@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7921843456886036231}
   - component: {fileID: 3550404735926659840}
   m_Layer: 0
-  m_Name: Taller
+  m_Name: Height
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 4672923442856569708}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4319897389194661330
 BoxCollider:
@@ -47,7 +47,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10.973669, y: 17.948368, z: 1}
-  m_Center: {x: -0.015414238, y: 4.338459, z: 0}
+  m_Center: {x: 0, y: 4.338459, z: 0}
 --- !u!54 &7921843456886036231
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -80,9 +80,8 @@ MonoBehaviour:
     adderType: 1
     addPercentage: 0
   boxCollider: {fileID: 4319897389194661330}
-  xPos: -4.7
   ballCountText: {fileID: 3629984193689219017}
-  checkTime: 0.5
+  checkTime: 1
 --- !u!1001 &5697647670166490828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -163,6 +162,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0be29c9b0cdffc94483723effde14c5e, type: 2}
+    - target: {fileID: 9039383309221355781, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
+      propertyPath: m_fontSize
+      value: 3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039383309221355781, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 9039383309221355781, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}

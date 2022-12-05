@@ -11,7 +11,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
     {
         [SerializeField] private AdderGateSpecs selectedGate;
         [SerializeField] private BoxCollider boxCollider;
-        [SerializeField] private float xPos;
         [SerializeField] private TextMeshProUGUI sizeText;
         [SerializeField] private float checkTime = 2f;
         private int removeSize=1;
@@ -31,11 +30,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void Start()
         {
+            print("bbb");
             wfsForCheckSize = new WaitForSeconds(checkTime);
-            Vector3 newPos = transform.position;
-            newPos.x = xPos;
-            transform.position = newPos;
-            sizeText.text = "-" + removeSize;
+            // sizeText.text = "-" + removeSize;
         }
 
         private void OnTriggerEnter(Collider other)

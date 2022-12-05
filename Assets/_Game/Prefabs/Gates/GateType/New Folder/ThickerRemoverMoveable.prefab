@@ -118,9 +118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2858263361834959358, guid: 62138b72ad186b94d94d1fe1adee0eff, type: 3}
       propertyPath: m_text
-      value: 'Thinner
-
-'
+      value: WIDTH
       objectReference: {fileID: 0}
     - target: {fileID: 4065683477617568514, guid: 62138b72ad186b94d94d1fe1adee0eff, type: 3}
       propertyPath: m_RootOrder

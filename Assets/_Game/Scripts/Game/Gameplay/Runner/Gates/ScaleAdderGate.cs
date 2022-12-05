@@ -11,7 +11,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
     {
         [SerializeField] private AdderGateSpecs selectedGate;
         [SerializeField] private BoxCollider boxCollider;
-        [SerializeField] private float xPos;
         [SerializeField] private TextMeshProUGUI ballCountText;
         [SerializeField] private float checkTime = 2f;
         private int addSize=1;
@@ -32,10 +31,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         private void Start()
         {
             wfsForCheckSize = new WaitForSeconds(checkTime);
-            Vector3 newPos = transform.position;
-            newPos.x = xPos;
-            transform.position = newPos;
-            ballCountText.text = "+" + addSize;
+            print("adderbbb");
+            // ballCountText.text = "+" + addSize;
         }
 
         private void OnTriggerEnter(Collider other)
