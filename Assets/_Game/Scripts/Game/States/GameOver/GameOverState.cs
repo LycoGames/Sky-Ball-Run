@@ -54,6 +54,11 @@ namespace _Game.Scripts.Game.States.GameOver
             gameOverComponent.GameOverComplete -= ReturnToMain;
         }
 
+        private void RequestReviving()
+        {
+            gameOverComponent.Reviving();
+        }
+
         private void RequestReturnToMain()
         {
             gameOverComponent.RemoveGame();

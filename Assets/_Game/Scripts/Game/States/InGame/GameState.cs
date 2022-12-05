@@ -34,6 +34,7 @@ namespace _Game.Scripts.Game.States.InGame
             AddTransition(inGameState, gameOverState, (int)StateTrigger.GoToGameOver);
             AddTransition(endGameState, gameOverState, (int)StateTrigger.FinishEndGame);
             AddTransition(gameOverState, prepareGameState, (int)StateTrigger.ReturnToPreparingGame);
+            AddTransition(gameOverState, inGameState, (int)StateTrigger.Revive);
         }
 
         protected override void OnEnter()

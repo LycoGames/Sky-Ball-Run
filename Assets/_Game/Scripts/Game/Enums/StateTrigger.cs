@@ -8,6 +8,7 @@ namespace _Game.Scripts.Game.Enums
         FinishGame,
         FinishEndGame,
         GoToGameOver,
-        ReturnToPreparingGame
+        ReturnToPreparingGame,
+        Revive
     }
 }

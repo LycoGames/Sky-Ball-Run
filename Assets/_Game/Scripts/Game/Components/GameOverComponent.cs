@@ -31,7 +31,12 @@ namespace _Game.Scripts.Game.Components
         {
             StartCoroutine(DestroyGame());
         }
-        
+
+        public void Reviving()
+        {
+            inGameComponent.Reviving();
+            
+        }
 
         private IEnumerator DestroyGame()
         {

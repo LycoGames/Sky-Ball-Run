@@ -35,6 +35,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public int currentColumn = 1;
         public int currentFloor = 1;
 
+        [SerializeField] private int reviveRow=3;
+        [SerializeField] private int reviveColumn=2;
+        [SerializeField] private int reviveFloor=2;
+
         private BallPool ballPool;
         [SerializeField] private HeadsOrganizer headsOrganizer;
         [SerializeField] private float waitForForwarding = 1.5f;
@@ -58,6 +62,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public IEnumerator InitializeBallManager(BallPool _ballPool, PlayerController _playerController,
             LevelSpecs levelSpecs, CinemachineVirtualCamera playerFollowerCamera)
         {
+            GameManager.Instance.OnRevive += SpawnRevievBalls;
             playerFollowerTarget = playerFollowerCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
             stockCameraTrackingY = playerFollowerTarget.m_TrackedObjectOffset.y;
             stockCameraDistance = playerFollowerTarget.m_CameraDistance;
@@ -67,7 +72,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             yield return StartCoroutine(ballPool.StartInstantiatePool());
             yield return StartCoroutine(
                 headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
-            yield return StartCoroutine(InstantiateStartBalls(levelSpecs));
+            yield return StartCoroutine(InstantiateStartBalls(levelSpecs.column,levelSpecs.floor,levelSpecs.row));
             yield return StartCoroutine(headsOrganizer.SetPositionsInstantly());
         }
 
@@ -369,11 +374,16 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             waitForwarding = StartCoroutine(Forwarding());
         }
 
-        private IEnumerator InstantiateStartBalls(LevelSpecs levelSpecs)
+        private void SpawnRevievBalls()
         {
-            currentColumn = levelSpecs.column;
-            currentFloor = levelSpecs.floor;
-            currentRow = levelSpecs.row;
+            StartCoroutine(InstantiateStartBalls(reviveColumn, reviveFloor, reviveRow));
+        }
+
+        private IEnumerator InstantiateStartBalls(int column,int floor,int row)
+        {
+            currentColumn = column;
+            currentFloor = floor;
+            currentRow = row;
             List<ColumnHead> columnHeads = headsOrganizer.ColumnHeads;
             ColumnHead columnHead;
             BallColumn ballColumn;

@@ -21,9 +21,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         public event OnArriveEndLineDelegate ArriveEndLine;
 
         public Action<int> OnGainDiamond;
+        public Action OnRevive;
 
         public event OnLoseGameDelegate LoseGame;
         public static GameManager Instance;
+
+        [SerializeField] private float reviveTime=3;
 
         private PlayerController playerController;
         private SwipeController swipeController;
@@ -33,6 +36,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             Instance = this;
         }
 
+        public void Reviving()
+        {
+            playerController.Reset();
+            OnRevive?.Invoke();
+        }
         public int GetBallCount()
         {
             return BallPool.Instance.GetAllActiveBall().Count;

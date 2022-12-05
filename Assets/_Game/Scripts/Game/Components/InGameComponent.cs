@@ -113,6 +113,10 @@ namespace _Game.Scripts.Game.Components
             yield return null;
         }
 
+        public void Reviving()
+        {
+            gameManager.Reviving();
+        }
 
         private void SetupEndGame()
         {

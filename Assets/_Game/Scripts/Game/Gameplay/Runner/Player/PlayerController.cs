@@ -11,7 +11,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         [SerializeField] private float horizontalSpeed=1f;
         [SerializeField] private float rotationXSpeed = 10;
         [SerializeField] private float boundHorizontal = 9.6f;
-        [SerializeField] private float newXPos;
+        private float newXPos;
         
         private Tween zMoveRef;
         private Tween xMoveRef;
@@ -42,6 +42,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
                 Rotate();
                 Movement();
 
+        }
+
+        public void Reset()
+        {
+            Vector3 newPos = transform.position;
+            newXPos = 0;
+            newPos.x = 0;
+            transform.position = newPos;
+            transform.rotation=Quaternion.Euler(0,0,0);
         }
 
         public void SetXPosition(float value)

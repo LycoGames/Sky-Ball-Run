@@ -69,8 +69,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             
             yield return new WaitForSeconds(coverCloseTime);
             ReturnAllBallToPool(balls);
-            
-            if(ballManager.TotalBallCount<=0)yield break;
+
+            if (ballManager.TotalBallCount <= 0)
+            {
+                GameManager.Instance.OnRevive += OpenBarricades;
+                yield break;
+            }
             OpenBarricades();
             PlaySound();
             PlayFireWork();
@@ -105,6 +109,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         private void OpenBarricades()
         {
+            GameManager.Instance.OnRevive -= OpenBarricades;
             checkpointBarricade.OpenGates();
         }
 
