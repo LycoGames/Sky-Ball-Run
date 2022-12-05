@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using _Game.Scripts.Game.ObjectPools;
@@ -16,6 +17,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         private PaintballWeapon paintballWeapon;
 
         [SerializeField] private CountTextUI countTextUI;
+        [SerializeField] private ImageOverUIMoverCanvas crosshairUI;
 
         [SerializeField] private float bulletSpeed;
         [SerializeField] private float rateOfFire;
@@ -30,7 +32,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
 
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
-
+        private Camera cam;
         public override void LaunchEndGame()
         {
             StartCoroutine(Launch());
@@ -38,10 +40,12 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
 
         public void Setup()
         {
+            cam = Camera.main;
             SetupWeapon();
             SetupTarget();
             SetupWeaponController();
         }
+
 
         private IEnumerator Launch()
         {
@@ -49,7 +53,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
             yield return new WaitForSeconds(1f);
             SwitchToWeaponCamera();
             yield return new WaitForSeconds(1f);
-            ActivateBulletCountUI();
+            ActivateWeaponUIs();
             paintballWeaponController.Launch();
             yield return new WaitForSeconds(.5f);
             paintballWeapon.Fire();
@@ -76,7 +80,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
 
         private void SetupWeaponController()
         {
-            paintballWeaponController.Setup(weaponSensitivity, aimTarget);
+            paintballWeaponController.Setup(weaponSensitivity, aimTarget, crosshairUI, cam);
         }
 
         private void SetupTarget()
@@ -106,8 +110,15 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
             GainedCoinDiamond?.Invoke(GainedCoin);
         }
 
-        private void ActivateBulletCountUI()
+        private void DeactivateUIs()
         {
+            countTextUI.Deactivate();
+            crosshairUI.Deactivate();
+        }
+
+        private void ActivateWeaponUIs()
+        {
+            crosshairUI.Activate();
             countTextUI.Activate();
         }
     }

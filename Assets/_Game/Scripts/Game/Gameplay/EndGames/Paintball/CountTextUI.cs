@@ -26,7 +26,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
             countText.text = value.ToString();
         }
 
-        private void Deactivate()
+        public void Deactivate()
         {
             canvas.enabled = false;
         }

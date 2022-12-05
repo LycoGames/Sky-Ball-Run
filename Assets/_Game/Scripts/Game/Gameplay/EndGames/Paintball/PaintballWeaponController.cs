@@ -8,17 +8,23 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
     {
         [SerializeField] LayerMask layerMask;
         [SerializeField] private Transform moveTarget;
-        private float sensitivity;
+
         private Transform aimTarget;
-        private const float Range = 70f;
+        private ImageOverUIMoverCanvas crosshairUI;
         private Camera cam;
+
+        private float sensitivity;
+        private const float Range = 70f;
         private bool setupCompleted;
 
-        public void Setup(float _sensitivity, Transform _aimTarget)
+        public void Setup(float _sensitivity, Transform _aimTarget, ImageOverUIMoverCanvas _crosshairUI, Camera _cam)
         {
             sensitivity = _sensitivity;
             aimTarget = _aimTarget;
-            cam = Camera.main;
+            crosshairUI = _crosshairUI;
+            cam = _cam;
+            crosshairUI.Setup(cam);
+            crosshairUI.ChangeImagePosition(aimTarget.position);
         }
 
         public void Launch()
@@ -44,6 +50,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
                     if (Physics.Raycast(ray, out hit, Range, layerMask))
                     {
                         aimTarget.position = hit.point;
+                        crosshairUI.ChangeImagePosition(aimTarget.position);
                     }
                 }
 
