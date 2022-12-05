@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Runtime.InteropServices;
 using DG.Tweening;
 using UnityEngine;
@@ -8,16 +9,18 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private float verticalSpeed = 80f;
+        [SerializeField] private float speedUp = 5f;
         [SerializeField] private float horizontalSpeed=1f;
         [SerializeField] private float rotationXSpeed = 10;
         [SerializeField] private float boundHorizontal = 9.6f;
+        [SerializeField] private float revivingBackward = 10f;
         private float newXPos;
         
         private Tween zMoveRef;
         private Tween xMoveRef;
-        
-        
-        private float orginalBound;
+
+        private float originalSpeed;
+        private float originalBound;
 
         private Vector3 startPos;
         
@@ -29,7 +32,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         private void OnEnable()
         {
             GetStartPosition();
-            orginalBound = boundHorizontal;
+            originalBound = boundHorizontal;
         }
 
         private void OnDisable()
@@ -44,13 +47,17 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
 
         }
 
-        public void Reset()
+        public void ReviveSpeedSet()
         {
-            Vector3 newPos = transform.position;
-            newXPos = 0;
-            newPos.x = 0;
+            StopAllCoroutines();
+            newPos = transform.position;
+            newPos.z -= revivingBackward;
             transform.position = newPos;
-            transform.rotation=Quaternion.Euler(0,0,0);
+            newXPos = newPos.x;
+            originalSpeed = verticalSpeed;
+            verticalSpeed = 0;
+            StartCoroutine(SpeedUp());
+
         }
 
         public void SetXPosition(float value)
@@ -74,7 +81,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
 
         public void ChangeBounds(float changeValue)
         {
-            boundHorizontal = orginalBound - changeValue;
+            boundHorizontal = originalBound - changeValue;
         }
 
         
@@ -106,6 +113,17 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
             lookRotate.z = transform.position.z + rotationXSpeed;
             lookRotate.y = 0;
             transform.LookAt(lookRotate);
+        }
+
+        private IEnumerator SpeedUp()
+        {
+            while (verticalSpeed<originalSpeed)
+            {
+                verticalSpeed += speedUp * Time.deltaTime;
+                yield return null;
+            }
+
+            verticalSpeed = originalSpeed;
         }
 
         // private void OLDRotate(float rotateXTo, float rotateYTo)

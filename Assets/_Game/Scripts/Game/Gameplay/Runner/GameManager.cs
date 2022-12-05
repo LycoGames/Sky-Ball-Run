@@ -38,7 +38,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         public void Reviving()
         {
-            playerController.Reset();
+            playerController.ReviveSpeedSet();
             OnRevive?.Invoke();
         }
         public int GetBallCount()

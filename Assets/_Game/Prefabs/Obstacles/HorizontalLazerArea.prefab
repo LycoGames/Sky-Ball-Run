@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 5768799414428920404}
   - component: {fileID: 4686705136773495662}
   - component: {fileID: 635543233401494503}
+  - component: {fileID: 2697543278401910267}
   m_Layer: 0
   m_Name: HorizontalLazerArea
   m_TagString: Obstacle
@@ -98,6 +99,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20.123978, y: 16.001442, z: 2.6592636}
   m_Center: {x: -0.0572567, y: 19.639294, z: 0.41481584}
+--- !u!114 &2697543278401910267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671207832682160484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06e8f2b8f01eb14099409fa2b58075b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyedTransform: {fileID: 5768799414428920404}
 --- !u!1 &6094450397130665808
 GameObject:
   m_ObjectHideFlags: 0

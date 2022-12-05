@@ -46,10 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalSpeed: 40
+  speedUp: 25
   horizontalSpeed: 5
   rotationXSpeed: 17
   boundHorizontal: 12
-  newXPos: 0
+  revivingBackward: 2
 --- !u!54 &-4788587124391165463
 Rigidbody:
   m_ObjectHideFlags: 0

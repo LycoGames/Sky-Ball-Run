@@ -43,15 +43,19 @@ namespace _Game.Scripts.Game.States.GameOver
 
         public void SubscribeToCanvasRequestDelegates()
         {
+            gameOverCanvas.OnReviveRequest += RequestReviving;
             gameOverCanvas.OnReturnToMainRequest += RequestReturnToMain;
             gameOverComponent.GameOverComplete += ReturnToMain;
+            gameOverComponent.ReviveComplete += RequestReturnToGame;
         }
 
 
         public void UnsubscribeToCanvasRequestDelegates()
         {
+            gameOverCanvas.OnReviveRequest -= RequestReviving;
             gameOverCanvas.OnReturnToMainRequest -= RequestReturnToMain;
             gameOverComponent.GameOverComplete -= ReturnToMain;
+            gameOverComponent.ReviveComplete -= RequestReturnToGame;
         }
 
         private void RequestReviving()
@@ -59,6 +63,10 @@ namespace _Game.Scripts.Game.States.GameOver
             gameOverComponent.Reviving();
         }
 
+        private void RequestReturnToGame()
+        {
+            SendTrigger((int)StateTrigger.Revive);
+        }
         private void RequestReturnToMain()
         {
             gameOverComponent.RemoveGame();

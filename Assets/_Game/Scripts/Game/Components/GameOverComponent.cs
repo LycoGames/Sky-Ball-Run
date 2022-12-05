@@ -9,6 +9,7 @@ namespace _Game.Scripts.Game.Components
         public delegate void GameOverChangeDelegate();
 
         public event GameOverChangeDelegate GameOverComplete;
+        public event GameOverChangeDelegate ReviveComplete;
 
         private InGameComponent inGameComponent;
 
@@ -35,6 +36,7 @@ namespace _Game.Scripts.Game.Components
         public void Reviving()
         {
             inGameComponent.Reviving();
+            ReviveComplete?.Invoke();
             
         }
 

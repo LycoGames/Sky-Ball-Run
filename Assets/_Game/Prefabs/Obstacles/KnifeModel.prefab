@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 105011997345794726}
   - component: {fileID: 3442209465346663576}
   - component: {fileID: 170247647737847425}
+  - component: {fileID: 7393573186096381655}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Obstacle
@@ -287,6 +288,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7393573186096381655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5218708278715363140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06e8f2b8f01eb14099409fa2b58075b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyedTransform: {fileID: 7603665408852465314}
 --- !u!1 &7119757579401808920
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +333,7 @@ Transform:
   - {fileID: 8626906177138286947}
   - {fileID: 6213443582242845596}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!54 &164957370932458605
 Rigidbody:

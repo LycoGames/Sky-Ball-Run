@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -9,6 +10,20 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Obstacles.OpenCloseBarricade
         [SerializeField] private Transform leftBarricade;
         [SerializeField] private Transform rightBarricade;
         [SerializeField] private float barricadeOpenTime=2f;
+        private bool isFirstTouch = true;
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Ball")&&isFirstTouch)
+            {
+                isFirstTouch = false;
+                GameManager.Instance.OnRevive += OpenBarricade;
+            }
+        }
+
+        public void OnDisable()
+        {
+            GameManager.Instance.OnRevive -= OpenBarricade;
+        }
 
         public void OnButtonPress()
         {

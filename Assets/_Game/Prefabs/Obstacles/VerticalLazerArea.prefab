@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 4637135778970156811}
   - component: {fileID: 5863136484313312817}
   - component: {fileID: 1766934809525735096}
+  - component: {fileID: 433570766711406146}
   m_Layer: 0
   m_Name: VerticalLazerArea
   m_TagString: Obstacle
@@ -231,6 +232,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.140869, y: 28.342724, z: 2.6592636}
   m_Center: {x: -5.472309, y: 13.468653, z: 0.4148159}
+--- !u!114 &433570766711406146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533074331528311867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06e8f2b8f01eb14099409fa2b58075b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyedTransform: {fileID: 4637135778970156811}
 --- !u!1 &602173314434109839
 GameObject:
   m_ObjectHideFlags: 0
