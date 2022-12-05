@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalSpeed: 40
-  horizontalSpeed: 1
-  rotationXSpeed: 20
+  horizontalSpeed: 0.25
+  rotationXSpeed: 17
   boundHorizontal: 12
   newXPos: 0
 --- !u!54 &-4788587124391165463
