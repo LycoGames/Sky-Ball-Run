@@ -15,7 +15,8 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
             if (!other.TryGetComponent(out Ball ball)) return;
 
             GoldCollected?.Invoke(pointMultiplier);
-            ball.ReturnToPool();
+            // ball.ReturnToPool();
+            other.GetComponent<MeshRenderer>().enabled = false;
             other.GetComponent<AudioSource>().Play();
         }
     }

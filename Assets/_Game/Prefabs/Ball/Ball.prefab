@@ -14555,7 +14555,6 @@ MonoBehaviour:
   moveForwardSpeed: 35
   waitForRemove: 0.25
   effect: {fileID: 856340783862310505}
-  audioSource: {fileID: 1902039052495114700}
   meshRenderer: {fileID: 4544383669042015663}
   distance: 1
   spawmPositionZ: 7
@@ -14572,13 +14571,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cfc9b8a297058e74592cb1b5d7a43dd2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

@@ -94,7 +94,7 @@ namespace _Game.Scripts.Game.Components
 
         private static void PlayDiamondCollectedSound()
         {
-            AudioSourceController.Instance.PlaySoundType(SoundType.DiamondCollected);
+            //AudioSourceController.Instance.PlaySoundType(SoundType.DiamondCollected);
         }
     }
 }
