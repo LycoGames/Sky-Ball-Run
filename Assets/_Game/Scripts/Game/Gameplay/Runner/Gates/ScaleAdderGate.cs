@@ -11,12 +11,18 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         [SerializeField] private AdderType adderType;
         [Range(0, 100)] [SerializeField] private int maxAddPercentage;
         [SerializeField] private TextMeshProUGUI ballCountText;
+        [SerializeField] private Gate ReverseGatePrefab;
         private int addSize = 1;
         private BallManager ballManager;
         private int currentAddPercentage;
+        private Gate reverseGate;
 
         private void Start()
         {
+            reverseGate = Instantiate(ReverseGatePrefab);
+            reverseGate.transform.position = transform.position;
+            reverseGate.transform.parent = transform.parent;
+            reverseGate.gameObject.SetActive(false);
             OnEnterGate += AddScale;
         }
 
@@ -54,7 +60,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void StartChecking()
         {
-            Invoke("CheckSize", .1f);
+            Invoke("CheckSize", 1);
         }
 
         private void CheckSize()
@@ -75,6 +81,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize + ballManager.currentColumn > ballManager.maxColumn)
                         addSize = ballManager.maxColumn - ballManager.currentColumn;
                     if (addSize <= 0) addSize = 1;
+                    if(addSize+column>=ballManager.maxColumn)SwapGate();
                     writeSize = addSize;
                     writeSize *= floor * row;
                     break;
@@ -84,6 +91,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize + ballManager.currentFloor > ballManager.maxFloor)
                         addSize = ballManager.maxFloor - ballManager.currentFloor;
                     if (addSize <= 0) addSize = 1;
+                    if(addSize+floor>=ballManager.maxFloor)SwapGate();
                     writeSize = addSize;
                     writeSize *= row * column;
                     break;
@@ -93,6 +101,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize + ballManager.currentRow > ballManager.maxRow)
                         addSize = ballManager.maxRow - ballManager.currentRow;
                     if (addSize <= 0) addSize = 1;
+                    if(addSize+row>=ballManager.maxRow)SwapGate();
                     writeSize = addSize;
                     writeSize *= floor * column;
                     break;
@@ -102,6 +111,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             ballCountText.text = "+" + writeSize;
         }
 
+        private void SwapGate()
+        {
+            reverseGate.gameObject.SetActive(true);
+            myDoubleGate.SwapGate(this,reverseGate);
+            gameObject.SetActive(false);
+        }
 
         public enum AdderType
         {

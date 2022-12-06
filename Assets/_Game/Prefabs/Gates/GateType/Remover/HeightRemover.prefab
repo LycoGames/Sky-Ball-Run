@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myCollider: {fileID: 4319897389194661330}
   adderType: 1
-  maxRemovePercentage: 0
+  maxRemovePercentage: 50
   sizeText: {fileID: 8827365138728727457}
 --- !u!1001 &1167836458390869865
 PrefabInstance:

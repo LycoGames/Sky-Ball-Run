@@ -81,6 +81,7 @@ MonoBehaviour:
   adderType: 2
   maxAddPercentage: 0
   ballCountText: {fileID: 432363379113522687}
+  ReverseGatePrefab: {fileID: -90982233190667553, guid: 96a557cce3990d84299f13d257082be1, type: 3}
 --- !u!95 &-7448599438427262842
 Animator:
   serializedVersion: 4

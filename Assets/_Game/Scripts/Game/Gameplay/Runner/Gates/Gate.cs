@@ -7,7 +7,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
     {
 
         [SerializeField ]private Collider myCollider;
-        private DoubleGate myDoubleGate;
+        protected DoubleGate myDoubleGate;
         protected Action OnEnterGate;
 
        

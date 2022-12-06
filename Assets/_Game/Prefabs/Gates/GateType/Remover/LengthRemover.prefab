@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myCollider: {fileID: 4319897389194661330}
   adderType: 2
-  maxRemovePercentage: 0
+  maxRemovePercentage: 50
   sizeText: {fileID: 508200544267676527}
 --- !u!95 &3955082529213801334
 Animator:

@@ -26,7 +26,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             ballManager = BallManager.Instance;
             ballManager.OnGateCountCheck += StartChecking;
 
-            StartChecking();
+            CheckSize();
         }
 
         private void OnDisable()
@@ -37,7 +37,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void StartChecking()
         {
-            Invoke("CheckSize", .1f);
+            Invoke("CheckSize", .8f);
         }
 
         private void RemoveScale()
