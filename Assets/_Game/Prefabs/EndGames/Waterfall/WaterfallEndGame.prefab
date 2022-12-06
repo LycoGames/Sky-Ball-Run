@@ -1837,6 +1837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zMinPoint: {fileID: 8983364534242986305}
   zMaxPoint: {fileID: 3404921177110557181}
+  clip: {fileID: 8300000, guid: a6addb2ffb9e13a4eafd503563ddfa7d, type: 3}
 --- !u!1 &6071715895225762862
 GameObject:
   m_ObjectHideFlags: 0

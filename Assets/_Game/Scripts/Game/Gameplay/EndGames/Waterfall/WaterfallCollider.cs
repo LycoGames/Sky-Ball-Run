@@ -7,11 +7,14 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
     {
         [SerializeField] private Transform zMinPoint;
         [SerializeField] private Transform zMaxPoint;
+        [SerializeField] private AudioClip clip;
+
         public bool GameStarted { get; set; } = false;
 
         private void OnTriggerEnter(Collider other)
         {
             if (!GameStarted || !other.CompareTag("Ball")) return;
+            other.GetComponent<AudioSource>().clip = clip;
             Rigidbody rb;
             rb = other.TryGetComponent(out Rigidbody rigidbody)
                 ? rigidbody

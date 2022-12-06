@@ -7,7 +7,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
     public class AudioSourceController : MonoBehaviour
     {
         public static AudioSourceController Instance;
-        
+
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip ballExplode;
         [SerializeField] private AudioClip ballAdd;
@@ -47,6 +47,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         }
     }
 }
+
 public enum SoundType
 {
     BallExplode,
@@ -55,5 +56,4 @@ public enum SoundType
     WinLevel,
     DiamondCollected,
     ShapeChange
-    
 }

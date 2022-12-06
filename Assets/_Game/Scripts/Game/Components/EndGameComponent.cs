@@ -47,8 +47,7 @@ namespace _Game.Scripts.Game.Components
             SaveDiamondData();
             SaveLevel();
         }
-        
-        
+
 
         private void SetupEndGame()
         {
@@ -84,9 +83,10 @@ namespace _Game.Scripts.Game.Components
             GainedDiamond = value;
             DiamondChange?.Invoke((lastSavedDiamond + GainedDiamond).ToString());
         }
+
         private void SaveDiamondData()
         {
-            dataComponent.InventoryData.ownedDiamond = GainedDiamond+lastSavedDiamond;
+            dataComponent.InventoryData.ownedDiamond = GainedDiamond + lastSavedDiamond;
             dataComponent.SaveInventoryData();
         }
 
@@ -95,6 +95,7 @@ namespace _Game.Scripts.Game.Components
             dataComponent.LevelData.currentLevel += 1;
             dataComponent.SaveLevelData();
         }
+
         private static void PlayDiamondCollectedSound()
         {
             AudioSourceController.Instance.PlaySoundType(SoundType.DiamondCollected);
