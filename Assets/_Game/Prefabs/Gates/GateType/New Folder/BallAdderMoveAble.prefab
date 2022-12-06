@@ -77,10 +77,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73285e33d181d5043b5b594d71053f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 4319897389194661330}
+  myCollider: {fileID: 4319897389194661330}
   addPercentage: 0
   ballCountText: {fileID: 7078638048738482944}
-  checkTime: 0.5
 --- !u!95 &3955082529213801334
 Animator:
   serializedVersion: 4

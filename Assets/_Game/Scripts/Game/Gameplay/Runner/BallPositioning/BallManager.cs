@@ -212,6 +212,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             CheckFloorSizeAndMoveCam();
         }
 
+        public int GetBallCountOnRemovedFloor(int value)
+        {
+            if (value <= currentFloor) return TotalBallCount;
+            return headsOrganizer.GetBallCountOnRemovedFloor(currentFloor - value);
+        }
+
         public IEnumerator RightRemover(int size)
         {
             currentColumn -= size;
@@ -222,10 +228,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
             BallColumn ballColumn;
             ColumnHead columnHead;
-            Ball ball;
+            Ball ball; 
+            int startIndex = 1+(BallManager.Instance.currentColumn - size) / 2;
             for (int i = currentFloor - 1; i >= 0; i--)
             {
-                for (int j = currentColumn + size - 1; j >= currentColumn; j--)
+                for (int j = startIndex; j < startIndex+size; j++)
                 {
                     columnHead = headsOrganizer.ColumnHeads[j];
                     for (int k = currentRow - 1; k >= 0; k--)
@@ -245,6 +252,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             headsOrganizer.SetPositions();
             currentFloor = 0;
             CheckFloorSizeAndMoveCam();
+        }
+
+        public int GetBallCountOnRemovedColumn(int value)
+        {
+            if (value <= currentColumn) return TotalBallCount;
+            return headsOrganizer.GetBallCountOnRemovedColumn(value);
         }
 
         public IEnumerator LengthRemover(int size)
@@ -280,6 +293,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             currentFloor = 0;
             CheckingCurrentRow?.Invoke();
         }
+
+        public int GetBallCountOnRemovedRow(int value)
+        {
+            if (value <= currentRow) return TotalBallCount;
+            return headsOrganizer.GetBallCountOnRemovedRow(currentRow - value);
+        }
+        
 
         public IEnumerator RightAdder(int size)
         {

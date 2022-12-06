@@ -14558,7 +14558,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 4544383669042015663}
   distance: 1
   spawmPositionZ: 7
-  collider: {fileID: 4544383669042015662}
+  myCollider: {fileID: 4544383669042015662}
 --- !u!82 &1902039052495114700
 AudioSource:
   m_ObjectHideFlags: 0

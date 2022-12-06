@@ -40,7 +40,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                 boxCollider.enabled = false;
                 switch (selectedGate.adderType)
                 {
-                    case AdderType.RightRemover:
+                    case AdderType.ThickerRemover:
                         BallManager.Instance.StartCoroutine(BallManager.Instance.RightRemover(removeSize));
                         break;
                     case AdderType.UpRemover:
@@ -56,36 +56,30 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         
         private void CheckSize()
         {
-            float newRemoveSize=0;
+            float newRemoveSize;
             int writeSize=0;
-        
-                int row = ballManager.currentRow;
-                int column = ballManager.currentColumn;
-                int floor = ballManager.currentFloor;
-                int totalCubicBallCount = row * column * floor;
-                int totalBallCount = ballManager.TotalBallCount;
+            
                 switch (selectedGate.adderType)
                 {
-                    case AdderType.RightRemover:
+                    case AdderType.ThickerRemover:
                         newRemoveSize = ballManager.currentColumn * ((float)selectedGate.removePercentage/100);
                         if (newRemoveSize <= 1) newRemoveSize=1;
                         removeSize=(int)Math.Round(newRemoveSize);
-                        writeSize = removeSize * row * floor;
+                        writeSize = ballManager.GetBallCountOnRemovedColumn(removeSize);
                         break;
                     case AdderType.UpRemover:
                         newRemoveSize = ballManager.currentFloor * ((float)selectedGate.removePercentage/100);
                         if (newRemoveSize <= 1) newRemoveSize=1;
                         removeSize=(int)Math.Round(newRemoveSize);
-                        writeSize = removeSize * row * column;
+                        writeSize = ballManager.GetBallCountOnRemovedFloor(removeSize);
                         break;
                     case AdderType.LengthRemover:
                         newRemoveSize = ballManager.currentRow * ((float)selectedGate.removePercentage/100);
                         if (newRemoveSize <= 1) newRemoveSize=1;
-                        writeSize = removeSize * column * floor;
+                        writeSize = ballManager.GetBallCountOnRemovedRow(removeSize);
                         break;
                 }
-                writeSize -= totalCubicBallCount-totalBallCount;
-            
+
                 sizeText.text = "-" + writeSize;
 
         }
@@ -98,7 +92,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         public enum AdderType
         {
-            RightRemover,
+            ThickerRemover,
             UpRemover,
             LengthRemover
         }

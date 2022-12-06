@@ -17,12 +17,16 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
         
         public EndGameController EndGameController { get; private set; }
         public LevelSpecs LevelSpecs() => levelSpecs;
-        
-        public IEnumerator CreateLevel(int loadedLevel)
+
+        public void OnInstantiate(int loadedLevel)
         {
             LevelCount = level.GetLevelCount();
             if (loadedLevel >= LevelCount) loadedLevel %= LevelCount;
             levelSpecs = level.GetLevels()[loadedLevel];
+        }
+
+        public IEnumerator CreateLevel()
+        {
             createdLinesController=Instantiate(levelSpecs.linesController);
             EndGameController = createdLinesController.EndGameController;
             yield return StartCoroutine(createdLinesController.InitializeLines());

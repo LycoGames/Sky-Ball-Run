@@ -97,10 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9286f6e1019ed804eb20d360fbc04ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 4319897389194661330}
+  myCollider: {fileID: 4319897389194661330}
   removePercentage: 0
   ballCountText: {fileID: 8838791460109563026}
-  checkTime: 0.5
 --- !u!1001 &1160898193184182362
 PrefabInstance:
   m_ObjectHideFlags: 0

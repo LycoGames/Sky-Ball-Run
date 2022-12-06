@@ -25,7 +25,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         private void OnEnable()
         {
-            myCollider.isTrigger = true;//
+            myCollider.isTrigger = true;
         }
 
         private void OnDisable()

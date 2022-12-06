@@ -35,7 +35,7 @@ Transform:
   - {fileID: 9167070297176834082}
   - {fileID: 4469352633292540987}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8688316732723174197
 BoxCollider:
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae4b549b09ee4cf41ac121d7b764ad3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 8688316732723174197}
+  myCollider: {fileID: 8688316732723174197}
   leftBarricade: {fileID: 173994671505184793}
   rightBarricade: {fileID: 6992596874148607971}
   barricadeOpenTime: 2
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbce898ec914a5e46a4bbfb50723a3eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 6254772327126857160}
+  myCollider: {fileID: 6254772327126857160}
   pressTime: 0.5
   openCloseBarricade: {fileID: 6215291990963811656}
 --- !u!1 &1199105710970434730

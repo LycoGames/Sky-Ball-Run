@@ -66,12 +66,13 @@ namespace _Game.Scripts.Game.Components
             InitializeGameManager();
             InitializeCameraTarget();
             InitializePlayerFollowerCamera();
-            InitializeLevelCreator();
+            InitializeLevelCreator(level);
             InitializeBallCountCanvas();
             
-            yield return StartCoroutine(levelCreator.CreateLevel(level));
+            
             yield return StartCoroutine(ballManager.InitializeBallManager(ballPool, playerController,levelCreator.LevelSpecs(),playerFollowerCamera));
-
+            yield return StartCoroutine(levelCreator.CreateLevel());
+            
             SetupEndGame();
         }
 
@@ -206,9 +207,10 @@ namespace _Game.Scripts.Game.Components
         }
 
 
-        private void InitializeLevelCreator()
+        private void InitializeLevelCreator(int level)
         {
             levelCreator = Instantiate(levelCreatorPrefab);
+            levelCreator.OnInstantiate(level);
         }
 
         private void InitializeCamera()

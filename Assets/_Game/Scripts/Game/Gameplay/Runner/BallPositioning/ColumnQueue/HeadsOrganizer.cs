@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -31,6 +33,50 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
             {
                 columnHead.ClearAllColumns();
             }
+        }
+
+        public int GetBallCountOnRemovedFloor(int aboveFloor)
+        {
+            int count=0;
+            foreach (ColumnHead columnHead in ColumnHeads)
+            {
+                foreach (BallColumn ballColumn in columnHead.BallColumns)
+                {
+                    count+=Mathf.Clamp(ballColumn.BallCount()-aboveFloor,0,Int32.MaxValue);
+                }
+            }
+
+            return count;
+        }
+
+        public int GetBallCountOnRemovedRow(int aboveRow)
+        {
+            int count=0;
+            foreach (ColumnHead columnHead in ColumnHeads)
+            {
+                for (int i=BallManager.Instance.currentRow-1;i>=aboveRow;i--)
+                {
+                    count += columnHead.BallColumns[i].BallCount();
+                }
+            }
+
+            return count;
+        }
+
+        public int GetBallCountOnRemovedColumn(int value)
+        {
+            int count=0;
+            int startIndex = 1+(BallManager.Instance.currentColumn - value) / 2;
+            ColumnHead columnHead;
+                for (int i=startIndex;i<startIndex+value;i++)
+                {
+                    columnHead = ColumnHeads[i];
+                    foreach (BallColumn ballColumn in columnHead.BallColumns)
+                    {
+                        count += ballColumn.BallCount();
+                    }
+                }
+                return count;
         }
 
         public IEnumerator InitializeHeadsOrganizer(int maxColumn, float _distance, PlayerController _playerController,

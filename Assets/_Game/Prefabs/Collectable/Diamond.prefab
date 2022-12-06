@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ab3d65b2a12ff40a64f37c11e68a34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collider: {fileID: 9129419584551067767}
+  myCollider: {fileID: 9129419584551067767}
   value: 15
 --- !u!1001 &4003620266657866795
 PrefabInstance:
