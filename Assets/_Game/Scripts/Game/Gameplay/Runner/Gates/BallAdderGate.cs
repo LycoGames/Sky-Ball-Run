@@ -9,13 +9,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
     public class BallAdderGate : MonoBehaviour
     {
         [SerializeField] private Collider myCollider;
-        [SerializeField] private int addPercentage;
+        [Range(0,100)][SerializeField] private int maxAddPercentage;
         [SerializeField] private TextMeshProUGUI ballCountText;
         private int addSize = 1;
         private BallManager ballManager;
+        private int currentAddPercentage;
 
         private void OnEnable()
         {
+            currentAddPercentage = UnityEngine.Random.Range(0,maxAddPercentage + 1);
             ballManager = BallManager.Instance;
             ballManager.OnTotalBallCountChange += CheckSize;
             CheckSize(0);
@@ -38,7 +40,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void CheckSize(int x)
         {
-            float newAddSize = ballManager.TotalBallCount * ((float)addPercentage / 100);
+            float newAddSize = ballManager.TotalBallCount * ((float)currentAddPercentage / 100);
             addSize = (int)Math.Round(newAddSize);
             if (addSize <= 0) addSize = 1;
             ballCountText.text = "+" + addSize;

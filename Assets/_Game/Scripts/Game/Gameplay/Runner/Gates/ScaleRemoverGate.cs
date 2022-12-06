@@ -1,24 +1,27 @@
 using System;
-using System.Collections;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
+
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 {
     public class ScaleRemoverGate : MonoBehaviour
     {
-        [SerializeField] private AdderGateSpecs selectedGate;
+        [SerializeField] public AdderType adderType;
+        [Range(0,100)][SerializeField] private int maxRemovePercentage;
         [SerializeField] private BoxCollider boxCollider;
         [SerializeField] private TextMeshProUGUI sizeText;
+        private int currentRemovePercentage;
         private int removeSize=1;
         private BallManager ballManager;
 
         private void OnEnable()
         {
+            currentRemovePercentage = UnityEngine.Random.Range(0, maxRemovePercentage+1);
             ballManager=BallManager.Instance;
             ballManager.OnGateCountCheck += StartChecking;
+            
             StartChecking();
         }
 
@@ -38,7 +41,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             if (other.CompareTag("Ball"))
             {
                 boxCollider.enabled = false;
-                switch (selectedGate.adderType)
+                switch (adderType)
                 {
                     case AdderType.ThickerRemover:
                         BallManager.Instance.StartCoroutine(BallManager.Instance.RightRemover(removeSize));
@@ -59,22 +62,22 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             float newRemoveSize;
             int writeSize=0;
             
-                switch (selectedGate.adderType)
+                switch (adderType)
                 {
                     case AdderType.ThickerRemover:
-                        newRemoveSize = ballManager.currentColumn * ((float)selectedGate.removePercentage/100);
+                        newRemoveSize = ballManager.currentColumn * ((float)currentRemovePercentage/100);
                         if (newRemoveSize <= 1) newRemoveSize=1;
                         removeSize=(int)Math.Round(newRemoveSize);
                         writeSize = ballManager.GetBallCountOnRemovedColumn(removeSize);
                         break;
                     case AdderType.UpRemover:
-                        newRemoveSize = ballManager.currentFloor * ((float)selectedGate.removePercentage/100);
+                        newRemoveSize = ballManager.currentFloor * ((float)currentRemovePercentage/100);
                         if (newRemoveSize <= 1) newRemoveSize=1;
                         removeSize=(int)Math.Round(newRemoveSize);
                         writeSize = ballManager.GetBallCountOnRemovedFloor(removeSize);
                         break;
                     case AdderType.LengthRemover:
-                        newRemoveSize = ballManager.currentRow * ((float)selectedGate.removePercentage/100);
+                        newRemoveSize = ballManager.currentRow * ((float)currentRemovePercentage/100);
                         if (newRemoveSize <= 1) newRemoveSize=1;
                         writeSize = ballManager.GetBallCountOnRemovedRow(removeSize);
                         break;
@@ -83,12 +86,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                 sizeText.text = "-" + writeSize;
 
         }
-        [Serializable]
-        public struct AdderGateSpecs
-        {
-            public AdderType adderType;
-            public int removePercentage;
-        }
+
 
         public enum AdderType
         {

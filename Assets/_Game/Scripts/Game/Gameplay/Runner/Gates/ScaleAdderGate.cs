@@ -1,22 +1,24 @@
 using System;
-using System.Collections;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
+
+
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 {
     public class ScaleAdderGate : MonoBehaviour
     {
-        [SerializeField] private AdderGateSpecs selectedGate;
+        [SerializeField] private AdderType adderType;
+        [Range(0,100)][SerializeField] private int maxAddPercentage;
         [SerializeField] private BoxCollider boxCollider;
         [SerializeField] private TextMeshProUGUI ballCountText;
         private int addSize = 1;
         private BallManager ballManager;
-
+        private int currentAddPercentage;
         private void OnEnable()
         {
+            currentAddPercentage = UnityEngine.Random.Range(0, maxAddPercentage+1);
             ballManager = BallManager.Instance;
             ballManager.OnGateCountCheck += StartChecking;
             StartChecking();
@@ -33,7 +35,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             {
                 StopAllCoroutines();
                 boxCollider.enabled = false;
-                switch (selectedGate.adderType)
+                switch (adderType)
                 {
                     case AdderType.RightAdder:
                         BallManager.Instance.StartCoroutine(BallManager.Instance.RightAdder(addSize));
@@ -65,10 +67,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             int floor = ballManager.currentFloor;
             int totalCubicBallCount = row * column * floor;
 
-            switch (selectedGate.adderType)
+            switch (adderType)
             {
                 case AdderType.RightAdder:
-                    newRemoveSize = ballManager.currentColumn * ((float)selectedGate.addPercentage / 100);
+                    newRemoveSize = ballManager.currentColumn * ((float)currentAddPercentage / 100);
                     addSize = (int)Math.Round(newRemoveSize);
                     if (addSize + ballManager.currentColumn > ballManager.maxColumn)
                         addSize = ballManager.maxColumn - ballManager.currentColumn;
@@ -77,7 +79,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     writeSize *= floor * row;
                     break;
                 case AdderType.UpAdder:
-                    newRemoveSize = ballManager.currentFloor * ((float)selectedGate.addPercentage / 100);
+                    newRemoveSize = ballManager.currentFloor * ((float)currentAddPercentage / 100);
                     addSize = (int)Math.Round(newRemoveSize);
                     if (addSize + ballManager.currentFloor > ballManager.maxFloor)
                         addSize = ballManager.maxFloor - ballManager.currentFloor;
@@ -86,7 +88,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     writeSize *= row * column;
                     break;
                 case AdderType.LengthAdder:
-                    newRemoveSize = ballManager.currentRow * ((float)selectedGate.addPercentage / 100);
+                    newRemoveSize = ballManager.currentRow * ((float)currentAddPercentage / 100);
                     addSize = (int)Math.Round(newRemoveSize);
                     if (addSize + ballManager.currentRow > ballManager.maxRow)
                         addSize = ballManager.maxRow - ballManager.currentRow;
@@ -100,12 +102,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             ballCountText.text = "+" + writeSize;
         }
 
-        [Serializable]
-        public struct AdderGateSpecs
-        {
-            public AdderType adderType;
-            public int addPercentage;
-        }
 
         public enum AdderType
         {

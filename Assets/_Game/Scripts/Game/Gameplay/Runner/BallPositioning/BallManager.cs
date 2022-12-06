@@ -27,6 +27,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         [SerializeField] private PlayerController playerController;
 
         [SerializeField] private float distance = 0.5f;
+        public int MaxBallCount { get; private set; }
+        
         public int maxRow = 30;
         public int maxColumn = 38;
         public int maxFloor = 20;
@@ -63,7 +65,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         {
             GameManager.Instance.OnRevive += SpawnRevievBalls;
             ballPool = _ballPool;
-            ballPool.amountToPool = maxColumn * maxRow * maxFloor;
+            MaxBallCount = maxColumn * maxRow * maxFloor;
+            ballPool.amountToPool = MaxBallCount;
             playerController = _playerController;
             yield return StartCoroutine(ballPool.StartInstantiatePool());
             yield return StartCoroutine(
