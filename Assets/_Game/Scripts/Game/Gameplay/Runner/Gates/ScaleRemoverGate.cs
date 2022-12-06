@@ -63,6 +63,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                 int column = ballManager.currentColumn;
                 int floor = ballManager.currentFloor;
                 int totalCubicBallCount = row * column * floor;
+                int totalBallCount = ballManager.TotalBallCount;
                 switch (selectedGate.adderType)
                 {
                     case AdderType.RightRemover:
@@ -81,7 +82,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                         writeSize = (int)Math.Round(newRemoveSize * column * floor);
                         break;
                 }
-                writeSize -= totalCubicBallCount;
+                writeSize -= totalCubicBallCount-totalBallCount;
                 removeSize=(int)Math.Round(newRemoveSize);
                 sizeText.text = "-" + writeSize;
 
