@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _Game.Scripts.Base.ObjectPooling;
 using _Game.Scripts.Game.Gameplay.Runner;
+using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.ObjectPools
@@ -30,6 +31,16 @@ namespace _Game.Scripts.Game.ObjectPools
                 }
             }
             return balls;
+        }
+
+        public void ReturnAllBallToPool()
+        {
+            List<Ball> activeBall = GetAllActiveBall();
+            foreach (Ball ball in activeBall)
+            {
+                ball.ReturnToPool();
+            }
+            BallManager.Instance.ClearAllColumns();
         }
         protected override IEnumerator FillThePool()
         {

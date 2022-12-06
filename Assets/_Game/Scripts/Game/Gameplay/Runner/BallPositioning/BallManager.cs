@@ -56,6 +56,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             headsOrganizer.destroyColumnHeads();
         }
 
+        public void ClearAllColumns() => headsOrganizer.ClearAllColumns();
+
         public IEnumerator InitializeBallManager(BallPool _ballPool, PlayerController _playerController,
             LevelSpecs levelSpecs, CinemachineVirtualCamera playerFollowerCamera)
         {
