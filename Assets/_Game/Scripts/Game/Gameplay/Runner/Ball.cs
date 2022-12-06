@@ -37,6 +37,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             if (other.CompareTag("Obstacle") && meshRenderer.enabled)
             {
+                
                 RemoveBallWithAnimation();
             }
         }
@@ -60,6 +61,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         public void RemoveBallWithAnimation()
         {
+            if (meshRenderer.enabled == false) return;
             effect.Play();
             AudioSourceController.Instance.PlaySoundType(SoundType.BallExplode);
             meshRenderer.enabled = false;

@@ -98,7 +98,6 @@ namespace _Game.Scripts.Game.Components
             gameManager.LoseGame += LoseGame;
             gameManager.StartMove();
             swipeController.StartRotate();
-            ballCountCanvas.SetActive(true);
         }
 
         public void OnDestruct()
@@ -133,6 +132,7 @@ namespace _Game.Scripts.Game.Components
 
         public void Reviving()
         {
+            ballCountCanvas.SetActive(true);
             gameManager.Reviving();
         }
 

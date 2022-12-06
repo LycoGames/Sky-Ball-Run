@@ -423,6 +423,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
             SetCameraPos();
             headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
+            OnGateCountCheck?.Invoke();
             yield return null;
         }
 

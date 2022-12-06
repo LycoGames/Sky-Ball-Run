@@ -67,10 +67,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
         {
             int count=0;
             int startIndex = 1+(BallManager.Instance.currentColumn - value) / 2;
+            List<ColumnHead> columnHeads = GetActiveList();
             ColumnHead columnHead;
                 for (int i=startIndex;i<startIndex+value;i++)
                 {
-                    columnHead = ColumnHeads[i];
+                    columnHead = columnHeads[i];
                     foreach (BallColumn ballColumn in columnHead.BallColumns)
                     {
                         count += ballColumn.BallCount();
@@ -143,6 +144,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                 yield return null;
             }
             playerController.ChangeBounds(currentDistance + distance);
+            
             yield return null;
         }
 

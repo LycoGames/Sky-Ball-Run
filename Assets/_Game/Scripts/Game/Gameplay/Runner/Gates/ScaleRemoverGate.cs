@@ -67,19 +67,20 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             {
                 case AdderType.WidthRemover:
                     newRemoveSize = ballManager.currentColumn * ((float)currentRemovePercentage / 100);
-                    if (newRemoveSize <= 1) newRemoveSize = 1;
+                    if (newRemoveSize < 1) newRemoveSize = 1;
                     removeSize = (int)Math.Round(newRemoveSize);
                     writeSize = ballManager.GetBallCountOnRemovedColumn(removeSize);
                     break;
                 case AdderType.HeightRemover:
                     newRemoveSize = ballManager.currentFloor * ((float)currentRemovePercentage / 100);
-                    if (newRemoveSize <= 1) newRemoveSize = 1;
+                    if (newRemoveSize < 1) newRemoveSize = 1;
                     removeSize = (int)Math.Round(newRemoveSize);
                     writeSize = ballManager.GetBallCountOnRemovedFloor(removeSize);
                     break;
                 case AdderType.LengthRemover:
                     newRemoveSize = ballManager.currentRow * ((float)currentRemovePercentage / 100);
-                    if (newRemoveSize <= 1) newRemoveSize = 1;
+                    if (newRemoveSize < 1) newRemoveSize = 1;
+                    removeSize = (int)Math.Round(newRemoveSize);
                     writeSize = ballManager.GetBallCountOnRemovedRow(removeSize);
                     break;
             }
