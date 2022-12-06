@@ -40,6 +40,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
                 
                 RemoveBallWithAnimation();
             }
+            
         }
 
         public IEnumerator MoveToForward(float speed, Vector3 randomRecoil)

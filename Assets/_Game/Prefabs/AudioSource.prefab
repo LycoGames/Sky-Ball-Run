@@ -146,5 +146,5 @@ MonoBehaviour:
   ballAdd: {fileID: 8300000, guid: 41ac08008b893674699dc2403382b08a, type: 3}
   passCheckpoint: {fileID: 8300000, guid: 9285a27174fcac74b80295ad40fa50d3, type: 3}
   winLevel: {fileID: 8300000, guid: e54dbdfe67229e54880c4fd5a266cdcf, type: 3}
-  diamondCollected: {fileID: 8300000, guid: a6addb2ffb9e13a4eafd503563ddfa7d, type: 3}
+  diamondCollected: {fileID: 8300000, guid: 0278ce93ff413d54bab89268ac3efd48, type: 3}
   shapeChange: {fileID: 8300000, guid: 9740db453d0ee3d439a57d502f32cdc4, type: 3}
