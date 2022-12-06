@@ -4,21 +4,25 @@ using TMPro;
 using UnityEngine;
 
 
-
 namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 {
-    public class ScaleAdderGate : MonoBehaviour
+    public class ScaleAdderGate : Gate
     {
         [SerializeField] private AdderType adderType;
-        [Range(0,100)][SerializeField] private int maxAddPercentage;
-        [SerializeField] private BoxCollider boxCollider;
+        [Range(0, 100)] [SerializeField] private int maxAddPercentage;
         [SerializeField] private TextMeshProUGUI ballCountText;
         private int addSize = 1;
         private BallManager ballManager;
         private int currentAddPercentage;
+
+        private void Start()
+        {
+            OnEnterGate += AddScale;
+        }
+
         private void OnEnable()
         {
-            currentAddPercentage = UnityEngine.Random.Range(0, maxAddPercentage+1);
+            currentAddPercentage = UnityEngine.Random.Range(0, maxAddPercentage + 1);
             ballManager = BallManager.Instance;
             ballManager.OnGateCountCheck += StartChecking;
             StartChecking();
@@ -28,28 +32,24 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         {
             ballManager.OnGateCountCheck -= StartChecking;
         }
-        
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Ball"))
-            {
-                StopAllCoroutines();
-                boxCollider.enabled = false;
-                switch (adderType)
-                {
-                    case AdderType.RightAdder:
-                        BallManager.Instance.StartCoroutine(BallManager.Instance.RightAdder(addSize));
-                        break;
-                    case AdderType.UpAdder:
-                        BallManager.Instance.StartCoroutine(BallManager.Instance.UpAdder(addSize));
-                        break;
-                    case AdderType.LengthAdder:
-                        BallManager.Instance.StartCoroutine(BallManager.Instance.LengthAdder(addSize));
-                        break;
-                }
 
-                gameObject.SetActive(false);
+        private void AddScale()
+        {
+            StopAllCoroutines();
+            switch (adderType)
+            {
+                case AdderType.RightAdder:
+                    BallManager.Instance.StartCoroutine(BallManager.Instance.RightAdder(addSize));
+                    break;
+                case AdderType.UpAdder:
+                    BallManager.Instance.StartCoroutine(BallManager.Instance.UpAdder(addSize));
+                    break;
+                case AdderType.LengthAdder:
+                    BallManager.Instance.StartCoroutine(BallManager.Instance.LengthAdder(addSize));
+                    break;
             }
+
+            gameObject.SetActive(false);
         }
 
         private void StartChecking()

@@ -18,8 +18,3 @@ MonoBehaviour:
     column: 3
     row: 8
     floor: 8
-  - linesController: {fileID: 5066103876223209529, guid: 927a8c030f5eab54eaadc5006624eef0, type: 3}
-    ballColors: {r: 0, g: 0, b: 0, a: 0}
-    column: 3
-    row: 8
-    floor: 8

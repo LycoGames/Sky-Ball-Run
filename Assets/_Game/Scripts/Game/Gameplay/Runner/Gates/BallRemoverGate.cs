@@ -6,14 +6,18 @@ using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 {
-    public class BallRemoverGate : MonoBehaviour
+    public class BallRemoverGate : Gate
     {
-        [SerializeField] private Collider myCollider;
         [Range(0,100)][SerializeField] private int maxRemovePercentage;
         [SerializeField] private TextMeshProUGUI ballCountText;
         private int removeSize = 1;
         private BallManager ballManager;
         private int currentRemovePercentage;
+
+        private void Start()
+        {
+            OnEnterGate += RemoveBall;
+        }
         private void OnEnable()
         {
             currentRemovePercentage = UnityEngine.Random.Range(0,maxRemovePercentage + 1);
@@ -27,14 +31,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             ballManager.OnTotalBallCountChange -= CheckSize;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void RemoveBall()
         {
-            if (other.CompareTag("Ball"))
-            {
-                myCollider.enabled = false;
                 BallManager.Instance.StartCoroutine(BallManager.Instance.RemoveBall(removeSize));
                 gameObject.SetActive(false);
-            }
         }
 
         private void CheckSize(int x)

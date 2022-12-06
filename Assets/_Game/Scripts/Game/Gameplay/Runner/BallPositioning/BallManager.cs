@@ -217,7 +217,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         public int GetBallCountOnRemovedFloor(int value)
         {
-            if (value <= currentFloor) return TotalBallCount;
+            if (value >= currentFloor) return TotalBallCount;
             return headsOrganizer.GetBallCountOnRemovedFloor(currentFloor - value);
         }
 
@@ -259,7 +259,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         public int GetBallCountOnRemovedColumn(int value)
         {
-            if (value <= currentColumn) return TotalBallCount;
+            if (value >= currentColumn) return TotalBallCount;
             return headsOrganizer.GetBallCountOnRemovedColumn(value);
         }
 
@@ -299,7 +299,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         public int GetBallCountOnRemovedRow(int value)
         {
-            if (value <= currentRow) return TotalBallCount;
+            if (value >= currentRow) return TotalBallCount;
             return headsOrganizer.GetBallCountOnRemovedRow(currentRow - value);
         }
         
