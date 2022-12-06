@@ -12,29 +12,26 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         [SerializeField] private AdderGateSpecs selectedGate;
         [SerializeField] private BoxCollider boxCollider;
         [SerializeField] private TextMeshProUGUI sizeText;
-        [SerializeField] private float checkTime = 2f;
         private int removeSize=1;
         private BallManager ballManager;
-        private WaitForSeconds wfsForCheckSize;
 
         private void OnEnable()
         {
             ballManager=BallManager.Instance;
-            StartCoroutine(CheckSize());
+            ballManager.OnTotalBallCountChange += StartChecking;
+            StartChecking(0);
         }
 
         private void OnDisable()
         {
-            StopAllCoroutines();
+            ballManager.OnTotalBallCountChange -= StartChecking;
         }
+        
 
-        private void Start()
+        private void StartChecking(int x)
         {
-            print("bbb");
-            wfsForCheckSize = new WaitForSeconds(checkTime);
-            // sizeText.text = "-" + removeSize;
+            Invoke("CheckSize", .1f);
         }
-
         private void OnTriggerEnter(Collider other)
         {
         
@@ -57,20 +54,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             }
         }
         
-        private IEnumerator CheckSize()
+        private void CheckSize()
         {
             float newRemoveSize=0;
-            int row;
-            int column;
-            int floor;
-            int totalCubicBallCount;
             int writeSize=0;
-            while (true)
-            {
-                row = ballManager.currentRow;
-                column = ballManager.currentColumn;
-                floor = ballManager.currentFloor;
-                totalCubicBallCount = row * column * floor;
+        
+                int row = ballManager.currentRow;
+                int column = ballManager.currentColumn;
+                int floor = ballManager.currentFloor;
+                int totalCubicBallCount = row * column * floor;
                 switch (selectedGate.adderType)
                 {
                     case AdderType.RightRemover:
@@ -92,8 +84,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                 writeSize -= totalCubicBallCount;
                 removeSize=(int)Math.Round(newRemoveSize);
                 sizeText.text = "-" + writeSize;
-                yield return wfsForCheckSize;
-            }
+
         }
         [Serializable]
         public struct AdderGateSpecs

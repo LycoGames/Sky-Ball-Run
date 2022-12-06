@@ -12,32 +12,24 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         [SerializeField] private AdderGateSpecs selectedGate;
         [SerializeField] private BoxCollider boxCollider;
         [SerializeField] private TextMeshProUGUI ballCountText;
-        [SerializeField] private float checkTime = 2f;
-        private int addSize=1;
+        private int addSize = 1;
         private BallManager ballManager;
         private WaitForSeconds wfsForCheckSize;
 
         private void OnEnable()
         {
-            ballManager=BallManager.Instance;
-            StartCoroutine(CheckSize());
+            ballManager = BallManager.Instance;
+            ballManager.OnTotalBallCountChange += StartChecking;
+            StartChecking(0);
         }
 
         private void OnDisable()
         {
-            StopAllCoroutines();
+            ballManager.OnTotalBallCountChange -= StartChecking;
         }
-
-        private void Start()
-        {
-            wfsForCheckSize = new WaitForSeconds(checkTime);
-            print("adderbbb");
-            // ballCountText.text = "+" + addSize;
-        }
-
+        
         private void OnTriggerEnter(Collider other)
         {
-        
             if (other.CompareTag("Ball"))
             {
                 StopAllCoroutines();
@@ -54,57 +46,61 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                         BallManager.Instance.StartCoroutine(BallManager.Instance.LengthAdder(addSize));
                         break;
                 }
+
                 gameObject.SetActive(false);
             }
         }
 
-        private IEnumerator CheckSize()
+        private void StartChecking(int x)
         {
-            float newRemoveSize=0;
-            int row;
-            int column;
-            int floor;
-            int totalCubicBallCount;
-            int writeSize=0;
-            while (true)
-            {
-                row = ballManager.currentRow;
-                column = ballManager.currentColumn;
-                floor = ballManager.currentFloor;
-                totalCubicBallCount = row * column * floor;
-                
-                switch (selectedGate.adderType)
-                {
-                    case AdderType.RightAdder:
-                        newRemoveSize = ballManager.currentColumn * ((float)selectedGate.addPercentage/100);
-                        addSize=(int)Math.Round(newRemoveSize);
-                        if (addSize+ballManager.currentColumn > ballManager.maxColumn) addSize = ballManager.maxColumn-ballManager.currentColumn;
-                        if (addSize <= 0) addSize = 1;
-                        writeSize = addSize;
-                        writeSize *= floor*row;
-                        break;
-                    case AdderType.UpAdder:
-                        newRemoveSize = ballManager.currentFloor * ((float)selectedGate.addPercentage/100);
-                        addSize=(int)Math.Round(newRemoveSize);
-                        if (addSize+ballManager.currentFloor > ballManager.maxFloor) addSize = ballManager.maxFloor-ballManager.currentFloor;
-                        if (addSize <= 0) addSize = 1;
-                        writeSize = addSize;
-                        writeSize *= row*column;
-                        break;
-                    case AdderType.LengthAdder:
-                        newRemoveSize = ballManager.currentRow * ((float)selectedGate.addPercentage/100);
-                        addSize=(int)Math.Round(newRemoveSize);
-                        if (addSize+ballManager.currentRow > ballManager.maxRow) addSize = ballManager.maxRow-ballManager.currentRow;
-                        if (addSize <= 0) addSize = 1;
-                        writeSize = addSize;
-                        writeSize *= floor*column;
-                        break;
-                }
-                writeSize += totalCubicBallCount-ballManager.TotalBallCount;
-                ballCountText.text = "+" + writeSize;
-                yield return wfsForCheckSize;
-            }
+            Invoke("CheckSize", .1f);
         }
+
+        private void CheckSize()
+        {
+            float newRemoveSize = 0;
+            int writeSize = 0;
+
+            int row = ballManager.currentRow;
+            int column = ballManager.currentColumn;
+            int floor = ballManager.currentFloor;
+            int totalCubicBallCount = row * column * floor;
+
+            switch (selectedGate.adderType)
+            {
+                case AdderType.RightAdder:
+                    newRemoveSize = ballManager.currentColumn * ((float)selectedGate.addPercentage / 100);
+                    addSize = (int)Math.Round(newRemoveSize);
+                    if (addSize + ballManager.currentColumn > ballManager.maxColumn)
+                        addSize = ballManager.maxColumn - ballManager.currentColumn;
+                    if (addSize <= 0) addSize = 1;
+                    writeSize = addSize;
+                    writeSize *= floor * row;
+                    break;
+                case AdderType.UpAdder:
+                    newRemoveSize = ballManager.currentFloor * ((float)selectedGate.addPercentage / 100);
+                    addSize = (int)Math.Round(newRemoveSize);
+                    if (addSize + ballManager.currentFloor > ballManager.maxFloor)
+                        addSize = ballManager.maxFloor - ballManager.currentFloor;
+                    if (addSize <= 0) addSize = 1;
+                    writeSize = addSize;
+                    writeSize *= row * column;
+                    break;
+                case AdderType.LengthAdder:
+                    newRemoveSize = ballManager.currentRow * ((float)selectedGate.addPercentage / 100);
+                    addSize = (int)Math.Round(newRemoveSize);
+                    if (addSize + ballManager.currentRow > ballManager.maxRow)
+                        addSize = ballManager.maxRow - ballManager.currentRow;
+                    if (addSize <= 0) addSize = 1;
+                    writeSize = addSize;
+                    writeSize *= floor * column;
+                    break;
+            }
+
+            writeSize += totalCubicBallCount - ballManager.TotalBallCount;
+            ballCountText.text = "+" + writeSize;
+        }
+
         [Serializable]
         public struct AdderGateSpecs
         {
