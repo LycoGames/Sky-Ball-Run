@@ -11,22 +11,21 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         [SerializeField] private Collider collider;
         [SerializeField] private int removePercentage;
         [SerializeField] private TextMeshProUGUI ballCountText;
-        [SerializeField] private float checkTime = 2f;
         private int removeSize = 1;
         private BallManager ballManager;
-        private WaitForSeconds wfsForCheckSize;
 
         private void OnEnable()
         {
-            wfsForCheckSize = new WaitForSeconds(checkTime);
             ballManager = BallManager.Instance;
-            StartCoroutine(CheckSize());
+            ballManager.OnTotalBallCountChange += CheckSize;
+            CheckSize(0);
         }
+
         private void OnDisable()
         {
-            StopAllCoroutines();
+            ballManager.OnTotalBallCountChange -= CheckSize;
         }
-        
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Ball"))
@@ -36,17 +35,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                 gameObject.SetActive(false);
             }
         }
-        private IEnumerator CheckSize()
+
+        private void CheckSize(int x)
         {
-            float newRemoveSize = 0;
-            while (true)
-            {
-                newRemoveSize = ballManager.TotalBallCount * ((float)removePercentage / 100);
-                removeSize = (int)Math.Round(newRemoveSize);
-                if (removeSize <= 0) removeSize = 1;
-                ballCountText.text = "-" + removeSize;
-                yield return wfsForCheckSize;
-            }
+            float newRemoveSize = ballManager.TotalBallCount * ((float)removePercentage / 100);
+            removeSize = (int)Math.Round(newRemoveSize);
+            if (removeSize <= 0) removeSize = 1;
+            ballCountText.text = "-" + removeSize;
         }
     }
 }

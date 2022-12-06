@@ -42,10 +42,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         private BallPool ballPool;
         [SerializeField] private HeadsOrganizer headsOrganizer;
         [SerializeField] private float waitForForwarding = 1.5f;
-
-        private CinemachineFramingTransposer playerFollowerTarget;
-        private float stockCameraTrackingY;
-        private float stockCameraDistance;
+        
         private float currentWaitingTime;
         private Coroutine waitForwarding;
 
@@ -63,9 +60,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             LevelSpecs levelSpecs, CinemachineVirtualCamera playerFollowerCamera)
         {
             GameManager.Instance.OnRevive += SpawnRevievBalls;
-            playerFollowerTarget = playerFollowerCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
-            stockCameraTrackingY = playerFollowerTarget.m_TrackedObjectOffset.y;
-            stockCameraDistance = playerFollowerTarget.m_CameraDistance;
             ballPool = _ballPool;
             ballPool.amountToPool = maxColumn * maxRow * maxFloor;
             playerController = _playerController;

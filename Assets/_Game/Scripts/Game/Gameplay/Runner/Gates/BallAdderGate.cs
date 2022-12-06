@@ -11,20 +11,19 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         [SerializeField] private Collider collider;
         [SerializeField] private int addPercentage;
         [SerializeField] private TextMeshProUGUI ballCountText;
-        [SerializeField] private float checkTime = 2f;
         private int addSize = 1;
         private BallManager ballManager;
-        private WaitForSeconds wfsForCheckSize;
 
         private void OnEnable()
         {
-            wfsForCheckSize = new WaitForSeconds(checkTime);
             ballManager = BallManager.Instance;
-            StartCoroutine(CheckSize());
+            ballManager.OnTotalBallCountChange += CheckSize;
+            CheckSize(0);
         }
+
         private void OnDisable()
         {
-            StopAllCoroutines();
+            ballManager.OnTotalBallCountChange -= CheckSize;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -37,17 +36,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             }
         }
 
-        private IEnumerator CheckSize()
+        private void CheckSize(int x)
         {
-            float newAddSize = 0;
-            while (true)
-            {
-                newAddSize = ballManager.TotalBallCount * ((float)addPercentage / 100);
-                addSize = (int)Math.Round(newAddSize);
-                if (addSize <= 0) addSize = 1;
-                ballCountText.text = "+" + addSize;
-                yield return wfsForCheckSize;
-            }
+            float newAddSize = ballManager.TotalBallCount * ((float)addPercentage / 100);
+            addSize = (int)Math.Round(newAddSize);
+            if (addSize <= 0) addSize = 1;
+            ballCountText.text = "+" + addSize;
         }
     }
 }
