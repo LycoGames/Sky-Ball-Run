@@ -30,6 +30,7 @@ namespace _Game.Scripts.Game.Components
         [SerializeField] private LevelCreator levelCreatorPrefab;
         [SerializeField] private BallManager ballManagerPrefab;
         [SerializeField] private BallPool ballPoolPrefab;
+        [SerializeField] private GameObject ballCountCanvasPrefab;
 
         public int GainedDiamond { get; private set; }
 
@@ -43,6 +44,7 @@ namespace _Game.Scripts.Game.Components
         private SwipeController swipeController;
         private EndGameComponent endGameComponent;
         private CameraTarget cameraTarget;
+        private GameObject ballCountCanvas;
 
 
         private int lastSavedDiamond;
@@ -65,7 +67,7 @@ namespace _Game.Scripts.Game.Components
             InitializeCameraTarget();
             InitializePlayerFollowerCamera();
             InitializeLevelCreator();
-            
+            InitializeBallCountCanvas();
             
             yield return StartCoroutine(levelCreator.CreateLevel(level));
             yield return StartCoroutine(ballManager.InitializeBallManager(ballPool, playerController,levelCreator.LevelSpecs(),playerFollowerCamera));
@@ -73,7 +75,14 @@ namespace _Game.Scripts.Game.Components
             SetupEndGame();
         }
 
-     
+        private void InitializeBallCountCanvas()
+        {
+            ballCountCanvas = Instantiate(ballCountCanvasPrefab);
+            ballCountCanvas.transform.parent = ballManager.transform;
+            ballCountCanvas.transform.localPosition = Vector3.zero;
+        }
+
+
         public void SetupDiamond(int value)
         {
             GainedDiamond = 0;
@@ -88,6 +97,7 @@ namespace _Game.Scripts.Game.Components
             gameManager.LoseGame += LoseGame;
             gameManager.StartMove();
             swipeController.StartRotate();
+            ballCountCanvas.SetActive(true);
         }
 
         public void OnDestruct()
@@ -97,6 +107,7 @@ namespace _Game.Scripts.Game.Components
             gameManager.LoseGame -= LoseGame;
             gameManager.StopMove();
             swipeController.StopRotate();
+            ballCountCanvas.SetActive(false);
         }
 
         public IEnumerator DestroyGame()
@@ -110,7 +121,13 @@ namespace _Game.Scripts.Game.Components
             DestroyBallPool();
             DestroyBallManager();
             DestroyCameraTarget();
+            DestroyBallCountCanvas();
             yield return null;
+        }
+
+        private void DestroyBallCountCanvas()
+        {
+            Destroy(ballCountCanvas.gameObject);
         }
 
         public void Reviving()

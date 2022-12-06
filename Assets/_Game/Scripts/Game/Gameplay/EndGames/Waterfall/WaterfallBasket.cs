@@ -16,6 +16,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
 
             GoldCollected?.Invoke(pointMultiplier);
             ball.ReturnToPool();
+            AudioSourceController.Instance.PlaySoundType(SoundType.BallExplode);
         }
     }
 }

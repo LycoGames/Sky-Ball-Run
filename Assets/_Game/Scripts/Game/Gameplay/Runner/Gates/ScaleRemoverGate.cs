@@ -85,11 +85,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                         break;
                 }
                 writeSize -= totalCubicBallCount-totalBallCount;
-                if (selectedGate.adderType == AdderType.UpRemover)
-                {
-                    Debug.Break();
-                    Debug.Log(writeSize);
-                }
+            
                 sizeText.text = "-" + writeSize;
 
         }
