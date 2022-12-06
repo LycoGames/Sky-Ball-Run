@@ -18,13 +18,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         private void OnEnable()
         {
             ballManager = BallManager.Instance;
-            ballManager.OnTotalBallCountChange += StartChecking;
-            StartChecking(0);
+            ballManager.OnGateCountCheck += StartChecking;
+            StartChecking();
         }
 
         private void OnDisable()
         {
-            ballManager.OnTotalBallCountChange -= StartChecking;
+            ballManager.OnGateCountCheck -= StartChecking;
         }
         
         private void OnTriggerEnter(Collider other)
@@ -50,7 +50,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             }
         }
 
-        private void StartChecking(int x)
+        private void StartChecking()
         {
             Invoke("CheckSize", .1f);
         }

@@ -18,7 +18,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
         private int totalBallCount;
         private int collectedBallCount;
 
-        private PlayerController playerController;
+        //private PlayerController playerController;
 
         public void Setup(PlayerController _playerController)
         {

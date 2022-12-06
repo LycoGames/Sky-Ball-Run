@@ -1,4 +1,4 @@
-   using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,6 @@ using _Game.Scripts.Game.Gameplay.Runner.LevelSystems;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
 using _Game.Scripts.Game.ObjectPools;
 using Cinemachine;
-using DG.Tweening;
 using UnityEngine;
 
 
@@ -21,6 +20,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public Action CheckingCurrentFloor;
         public Action<float> ChangeCameraYPos;
         public Action<int> OnTotalBallCountChange;
+        public Action OnGateCountCheck;
         public Action OnShapeChange;
         public int TotalBallCount { get; private set; }
 
@@ -76,6 +76,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         {
             TotalBallCount += count;
             OnTotalBallCountChange?.Invoke(TotalBallCount);
+            OnGateCountCheck?.Invoke();
             if (TotalBallCount <= 0)
             {
                 GameManager.Instance.OnLoseGame();
@@ -443,6 +444,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             if (currentFloor >= maxFloor) currentFloor = maxFloor;
             if (currentFloor <= 0) currentFloor = 1;
 
+            OnGateCountCheck?.Invoke();
             PlayReshapeSound();
             SetCameraPos();
             RepositioningWiderBall(repositionedBalls);
@@ -468,6 +470,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             currentRow = rowCount / currentColumn;
             if (rowCount % currentColumn > 0) currentRow++;
 
+            OnGateCountCheck?.Invoke();
             PlayReshapeSound();
             SetCameraPos();
             RepositioningTallerBall(repositionedBalls);

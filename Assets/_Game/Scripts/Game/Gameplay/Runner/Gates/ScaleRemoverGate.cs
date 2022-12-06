@@ -18,17 +18,17 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         private void OnEnable()
         {
             ballManager=BallManager.Instance;
-            ballManager.OnTotalBallCountChange += StartChecking;
-            StartChecking(0);
+            ballManager.OnGateCountCheck += StartChecking;
+            StartChecking();
         }
 
         private void OnDisable()
         {
-            ballManager.OnTotalBallCountChange -= StartChecking;
+            ballManager.OnGateCountCheck -= StartChecking;
         }
         
 
-        private void StartChecking(int x)
+        private void StartChecking()
         {
             Invoke("CheckSize", .1f);
         }
@@ -69,21 +69,27 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     case AdderType.RightRemover:
                         newRemoveSize = ballManager.currentColumn * ((float)selectedGate.removePercentage/100);
                         if (newRemoveSize <= 1) newRemoveSize=1;
-                        writeSize = (int)Math.Round(newRemoveSize * row * floor);
+                        removeSize=(int)Math.Round(newRemoveSize);
+                        writeSize = removeSize * row * floor;
                         break;
                     case AdderType.UpRemover:
                         newRemoveSize = ballManager.currentFloor * ((float)selectedGate.removePercentage/100);
                         if (newRemoveSize <= 1) newRemoveSize=1;
-                        writeSize = (int)Math.Round(newRemoveSize * row * column);
+                        removeSize=(int)Math.Round(newRemoveSize);
+                        writeSize = removeSize * row * column;
                         break;
                     case AdderType.LengthRemover:
                         newRemoveSize = ballManager.currentRow * ((float)selectedGate.removePercentage/100);
                         if (newRemoveSize <= 1) newRemoveSize=1;
-                        writeSize = (int)Math.Round(newRemoveSize * column * floor);
+                        writeSize = removeSize * column * floor;
                         break;
                 }
                 writeSize -= totalCubicBallCount-totalBallCount;
-                removeSize=(int)Math.Round(newRemoveSize);
+                if (selectedGate.adderType == AdderType.UpRemover)
+                {
+                    Debug.Break();
+                    Debug.Log(writeSize);
+                }
                 sizeText.text = "-" + writeSize;
 
         }
