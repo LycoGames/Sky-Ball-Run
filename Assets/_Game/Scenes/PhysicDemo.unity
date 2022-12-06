@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.52876043, g: 0.52876043, b: 0.52876043, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientSkyColor: {r: 0, g: 0.590619, b: 0.9559735, a: 1}
+  m_AmbientEquatorColor: {r: 0.30054384, g: 0.63075733, b: 0.70837605, a: 1}
+  m_AmbientGroundColor: {r: 0.25415218, g: 0.34191445, b: 0.49693304, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 3
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 617d9be015db68348a623b01ea51a8c5, type: 2}
   m_HaloStrength: 0.5
@@ -38,7 +38,11 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
+<<<<<<< Updated upstream
   m_IndirectSpecularColor: {r: 0.19023135, g: 0.59241045, b: 0.7722749, a: 1}
+=======
+  m_IndirectSpecularColor: {r: 0.19199282, g: 0.59425765, b: 0.77366954, a: 1}
+>>>>>>> Stashed changes
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +101,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 85e074de8af9747af830bb7d553a3806, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 542d2b44424bd0842949cb0f1e58b1d7, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -702,6 +706,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 128562624}
     m_Modifications:
+    - target: {fileID: 4764261141117317036, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00012207031
+      objectReference: {fileID: 0}
     - target: {fileID: 6107315062078082793, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
@@ -969,6 +977,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3680165416233938548, guid: 90d12809ca791414ca78eca5fa063835, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3680165416233938548, guid: 90d12809ca791414ca78eca5fa063835, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3680165416233938548, guid: 90d12809ca791414ca78eca5fa063835, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3680165416233938548, guid: 90d12809ca791414ca78eca5fa063835, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3680165416233938548, guid: 90d12809ca791414ca78eca5fa063835, type: 3}
@@ -1755,6 +1775,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8482048089055042293, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00012207031
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
@@ -1977,6 +2001,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6556838348912758240, guid: 4b36a77e19db64246a78dfad4966eae8, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556838348912758240, guid: 4b36a77e19db64246a78dfad4966eae8, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556838348912758240, guid: 4b36a77e19db64246a78dfad4966eae8, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556838348912758240, guid: 4b36a77e19db64246a78dfad4966eae8, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6556838348912758240, guid: 4b36a77e19db64246a78dfad4966eae8, type: 3}
