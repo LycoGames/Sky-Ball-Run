@@ -41,13 +41,13 @@ namespace _Game.Scripts.Game.UserInterfaces.InGame
         private void LoseState()
         { 
             endText.text = "You Lose";
-            nextLevelButtonText.text = "Reset";
+            nextLevelButtonText.text = "Retry";
             reviveButton.SetActive(true);
         }
         private void NextLevelState()
         {
             endText.text = "You Win";
-            nextLevelButtonText.text = "Next";
+            nextLevelButtonText.text = "Next>";
             reviveButton.SetActive(false);
         }
 
