@@ -25,8 +25,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         public event OnLoseGameDelegate LoseGame;
         public static GameManager Instance;
-
-        [SerializeField] private float reviveTime=3;
+        
 
         private PlayerController playerController;
         private SwipeController swipeController;

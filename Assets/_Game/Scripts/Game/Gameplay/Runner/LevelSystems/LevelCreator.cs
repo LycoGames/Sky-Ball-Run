@@ -13,7 +13,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
 
         private LevelSpecs levelSpecs;
         private LinesController createdLinesController;
-        private int currentLevel = 0;
         private int LevelCount;
         
         public EndGameController EndGameController { get; private set; }

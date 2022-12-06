@@ -8,7 +8,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 {
     public class BallAdderGate : MonoBehaviour
     {
-        [SerializeField] private Collider collider;
+        [SerializeField] private Collider myCollider;
         [SerializeField] private int addPercentage;
         [SerializeField] private TextMeshProUGUI ballCountText;
         private int addSize = 1;
@@ -30,7 +30,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         {
             if (other.CompareTag("Ball"))
             {
-                collider.enabled = false;
+                myCollider.enabled = false;
                 BallManager.Instance.AddBall(addSize);
                 gameObject.SetActive(false);
             }

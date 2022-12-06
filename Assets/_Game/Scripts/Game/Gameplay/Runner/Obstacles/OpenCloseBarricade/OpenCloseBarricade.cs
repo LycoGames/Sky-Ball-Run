@@ -6,7 +6,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Obstacles.OpenCloseBarricade
 {
     public class OpenCloseBarricade : MonoBehaviour
     {
-        [SerializeField] private Collider collider;
+        [SerializeField] private Collider myCollider;
         [SerializeField] private Transform leftBarricade;
         [SerializeField] private Transform rightBarricade;
         [SerializeField] private float barricadeOpenTime=2f;
@@ -27,7 +27,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Obstacles.OpenCloseBarricade
 
         public void OnButtonPress()
         {
-            collider.enabled = false;
+            myCollider.enabled = false;
             OpenBarricade();
         }
 

@@ -5,7 +5,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Obstacles.OpenCloseBarricade
 {
     public class BarricadeButton : MonoBehaviour
     {
-        [SerializeField] private Collider collider;
+        [SerializeField] private Collider myCollider;
         [SerializeField] private float pressTime = 0.5f;
         [SerializeField] private OpenCloseBarricade openCloseBarricade;
 
@@ -13,7 +13,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Obstacles.OpenCloseBarricade
         {
             if (other.CompareTag("Ball"))
             {
-                collider.enabled = false;
+                myCollider.enabled = false;
                 transform.DOLocalMove(Vector3.zero, pressTime);
                 openCloseBarricade.OnButtonPress();
             }

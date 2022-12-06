@@ -11,11 +11,7 @@ namespace _Game.Scripts.Game.Components
 {
     public class EndGameComponent : MonoBehaviour, IComponent, IConstructable, IDestructible
     {
-        public delegate void EndGameChangeDelegate();
-
-        public event EndGameChangeDelegate OnSuccess;
-        public event EndGameChangeDelegate OnFail;
-
+        
         public Action<string> DiamondChange;
         public Action OnEndGameEnded;
 

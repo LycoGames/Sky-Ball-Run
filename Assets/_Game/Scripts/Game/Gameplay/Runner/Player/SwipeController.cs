@@ -7,10 +7,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
     public class SwipeController : MonoBehaviour
     {
         [SerializeField] private float sense = 5f;
-        private bool isStillTouch = false;
+        private bool isStillTouch;
         private Vector3 firstTouch;
         private PlayerController playerController;
-        private float slipOnX = 0;
         private bool canRotate;
 
         private void Start()

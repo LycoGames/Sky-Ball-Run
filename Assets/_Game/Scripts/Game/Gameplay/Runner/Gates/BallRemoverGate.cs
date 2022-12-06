@@ -8,7 +8,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 {
     public class BallRemoverGate : MonoBehaviour
     {
-        [SerializeField] private Collider collider;
+        [SerializeField] private Collider myCollider;
         [SerializeField] private int removePercentage;
         [SerializeField] private TextMeshProUGUI ballCountText;
         private int removeSize = 1;
@@ -30,7 +30,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         {
             if (other.CompareTag("Ball"))
             {
-                collider.enabled = false;
+                myCollider.enabled = false;
                 BallManager.Instance.StartCoroutine(BallManager.Instance.RemoveBall(removeSize));
                 gameObject.SetActive(false);
             }

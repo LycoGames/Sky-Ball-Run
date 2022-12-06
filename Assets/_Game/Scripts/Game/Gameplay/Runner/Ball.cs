@@ -19,13 +19,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private float distance;
         [SerializeField] private float spawmPositionZ = 10f;
-        [SerializeField] private Collider collider;
+        [SerializeField] private Collider myCollider;
         private BallColumn ballColumn;
         private Rigidbody myRigidbody;
 
         private void OnEnable()
         {
-            collider.isTrigger = true;
+            myCollider.isTrigger = true;//
         }
 
         private void OnDisable()
@@ -55,7 +55,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             StopAllCoroutines();
             meshRenderer.enabled = false;
             effect.Play();
-            collider.enabled = false;
+            myCollider.enabled = false;
         }
 
         public void RemoveBallWithAnimation()
@@ -162,7 +162,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         private void StartDroping()
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
-            collider.isTrigger = false;
+            myCollider.isTrigger = false;
             myRigidbody = gameObject.AddComponent<Rigidbody>();
             myRigidbody.mass = 10;
             myRigidbody.velocity = Vector3.forward * moveForwardSpeed;
