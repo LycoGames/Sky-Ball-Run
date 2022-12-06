@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7921843456886036231}
   - component: {fileID: 3550404735926659840}
   m_Layer: 0
-  m_Name: Height
+  m_Name: HeightAdder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,6 @@ MonoBehaviour:
     addPercentage: 0
   boxCollider: {fileID: 4319897389194661330}
   ballCountText: {fileID: 3629984193689219017}
-  checkTime: 1
 --- !u!1001 &5697647670166490828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,17 +163,18 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0be29c9b0cdffc94483723effde14c5e, type: 2}
     - target: {fileID: 9039383309221355781, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
       propertyPath: m_fontSize
-      value: 3.7
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 9039383309221355781, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      objectReference: {fileID: 11400000, guid: bc72971d6057d8a4dbdc4962495d1a63, type: 2}
     - target: {fileID: 9039383309221355781, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    m_RemovedComponents: []
+      objectReference: {fileID: -2155391113682136992, guid: bc72971d6057d8a4dbdc4962495d1a63, type: 2}
+    m_RemovedComponents:
+    - {fileID: 3856410627044113796, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
 --- !u!114 &3629984193689219017 stripped

@@ -14,7 +14,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         [SerializeField] private TextMeshProUGUI ballCountText;
         private int addSize = 1;
         private BallManager ballManager;
-        private WaitForSeconds wfsForCheckSize;
 
         private void OnEnable()
         {

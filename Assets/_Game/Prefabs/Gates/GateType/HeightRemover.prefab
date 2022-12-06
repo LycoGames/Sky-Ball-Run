@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 4672923442856569708}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4319897389194661330
 BoxCollider:
@@ -81,7 +81,6 @@ MonoBehaviour:
     removePercentage: 20
   boxCollider: {fileID: 4319897389194661330}
   sizeText: {fileID: 3629984193689219017}
-  checkTime: 2
 --- !u!1001 &5697647670166490828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -170,7 +169,16 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 3.6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9039383309221355781, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: bc72971d6057d8a4dbdc4962495d1a63, type: 2}
+    - target: {fileID: 9039383309221355781, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2155391113682136992, guid: bc72971d6057d8a4dbdc4962495d1a63, type: 2}
+    m_RemovedComponents:
+    - {fileID: 3856410627044113796, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0006831efbba95842b9c0b652c8fe7bb, type: 3}
 --- !u!114 &3629984193689219017 stripped
