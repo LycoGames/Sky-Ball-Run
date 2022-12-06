@@ -15,7 +15,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         [SerializeField] private float moveForwardSpeed = 1;
         [SerializeField] private float waitForRemove = 1.5f;
         [SerializeField] private ParticleSystem effect;
-        
+
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private float distance;
         [SerializeField] private float spawmPositionZ = 10f;
@@ -69,10 +69,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         public void StartMoveToPool(float dropPosZ)
         {
-            StartCoroutine( MoveToForward(dropPosZ));
+            StartCoroutine(MoveToForward(dropPosZ));
         }
 
-     
 
         public void SetHeight(float position)
         {
@@ -108,6 +107,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         public void RemoveBall()
         {
             UnregisterBall();
+            meshRenderer.enabled = true;
             ReturnToPool();
             BallManager.Instance.AddTotalBallCount(-1);
         }
@@ -144,18 +144,21 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             transform.localPosition = newPos;
             yield return null;
         }
+
         private IEnumerator MoveToForward(float z)
         {
             Vector3 newPos = transform.position;
             newPos.z = z;
-            while (z-transform.position.z>=0.5f)
+            while (z - transform.position.z >= 0.5f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, newPos, speed * Time.deltaTime);
                 yield return null;
             }
+
             StartDroping();
             yield return null;
         }
+
         private void StartDroping()
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);

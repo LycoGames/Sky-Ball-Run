@@ -9,10 +9,10 @@ namespace _Game.Scripts.Base.ObjectPooling
         public List<GameObject> pooledObjects;
         public GameObject objectToPool;
         public int amountToPool;
-    
+
 
         protected abstract IEnumerator FillThePool();
-    
+
         public GameObject GetPooledObject()
         {
             for (int i = 0; i < amountToPool; i++)
@@ -22,8 +22,8 @@ namespace _Game.Scripts.Base.ObjectPooling
                     return pooledObjects[i];
                 }
             }
+
             return null;
         }
-
     }
 }

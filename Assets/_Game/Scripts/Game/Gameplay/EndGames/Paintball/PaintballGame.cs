@@ -33,6 +33,8 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
         private Camera cam;
+        private int ballCount;
+
         public override void LaunchEndGame()
         {
             StartCoroutine(Launch());
@@ -49,8 +51,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
 
         private IEnumerator Launch()
         {
-            ReloadPaintballWeapon();
-            yield return new WaitForSeconds(1f);
+            yield return ReloadPaintballWeapon();
             SwitchToWeaponCamera();
             yield return new WaitForSeconds(1f);
             ActivateWeaponUIs();
@@ -89,15 +90,19 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         }
 
 
-        private void ReloadPaintballWeapon()
+        private IEnumerator ReloadPaintballWeapon()
         {
             foreach (var ball in BallPool.Instance.GetAllActiveBall())
             {
                 ball.transform.DOMove(paintballWeapon.MagazinePosition, 1f).SetEase(Ease.Linear)
-                    .OnComplete(() => ball.ReturnToPool()).SetAutoKill(true);
+                    .OnComplete(() => { })
+                    .SetAutoKill(true);
+                
             }
-        }
 
+            yield return new WaitForSeconds(1f);
+            BallPool.Instance.ReturnAllBallToPool();
+        }
 
         private void SwitchToWeaponCamera()
         {

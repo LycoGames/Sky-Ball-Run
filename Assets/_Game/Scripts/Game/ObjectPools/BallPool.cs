@@ -12,14 +12,13 @@ namespace _Game.Scripts.Game.ObjectPools
     {
         public static BallPool Instance;
 
-    
 
         public IEnumerator StartInstantiatePool()
         {
             Instance = this;
             yield return StartCoroutine(FillThePool());
         }
-        
+
         public List<Ball> GetAllActiveBall()
         {
             List<Ball> balls = new List<Ball>();
@@ -30,6 +29,7 @@ namespace _Game.Scripts.Game.ObjectPools
                     balls.Add(pooledObjects[i].GetComponent<Ball>());
                 }
             }
+
             return balls;
         }
 
@@ -40,19 +40,22 @@ namespace _Game.Scripts.Game.ObjectPools
             {
                 ball.ReturnToPool();
             }
+
             BallManager.Instance.ClearAllColumns();
         }
+
         protected override IEnumerator FillThePool()
         {
             pooledObjects = new List<GameObject>();
             GameObject ball;
             for (int i = 0; i < amountToPool; i++)
             {
-                ball = Instantiate(objectToPool,transform);
+                ball = Instantiate(objectToPool, transform);
                 ball.gameObject.SetActive(false);
                 pooledObjects.Add(ball.gameObject);
                 if (i % 20 == 0) yield return null;
             }
+
             yield return null;
         }
     }
