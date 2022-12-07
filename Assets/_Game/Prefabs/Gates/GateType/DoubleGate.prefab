@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4959114485405086114}
   - component: {fileID: 3393548878121785871}
   m_Layer: 0
-  m_Name: DoubleAdder
+  m_Name: DoubleGate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
