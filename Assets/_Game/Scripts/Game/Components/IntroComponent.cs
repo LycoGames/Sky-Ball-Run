@@ -17,6 +17,7 @@ namespace _Game.Scripts.Game.Components
 
         [SerializeField] private float animationTime = 0.1f;
         [SerializeField] private float logoShowTime=0.5f;
+        [SerializeField] private int fpsLimit = 60;
 
         public void Initialize(ComponentContainer componentContainer)
         {
@@ -26,6 +27,8 @@ namespace _Game.Scripts.Game.Components
         public void OnConstruct()
         {
             StartCoroutine(PlayAnimation());
+            Application.targetFrameRate = fpsLimit;
+            Debug.Log("<color=yellow>" + "FPS limit set to " + fpsLimit + "</color>");
         }
 
         private IEnumerator PlayAnimation()
