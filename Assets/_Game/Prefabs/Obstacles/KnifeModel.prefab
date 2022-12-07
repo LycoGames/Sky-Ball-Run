@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7463690051055390949}
   m_Layer: 0
   m_Name: Razer
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,7 +333,7 @@ Transform:
   - {fileID: 8626906177138286947}
   - {fileID: 6213443582242845596}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!54 &164957370932458605
 Rigidbody:
