@@ -608,21 +608,9 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 128562624}
     m_Modifications:
-    - target: {fileID: 4764261141117317036, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.00012207031
-      objectReference: {fileID: 0}
-    - target: {fileID: 6107315062078082793, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8721263087127276814, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
       propertyPath: m_Name
       value: WealthCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8721263087127276814, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8721263087127276815, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
       propertyPath: m_Pivot.x
@@ -658,18 +646,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8721263087127276815, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8721263087127276815, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8721263087127276815, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8721263087127276815, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
-      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8721263087127276815, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
