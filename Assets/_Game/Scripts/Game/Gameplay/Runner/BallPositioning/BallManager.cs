@@ -28,7 +28,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         [SerializeField] private float distance = 0.5f;
         public int MaxBallCount { get; private set; }
-        
+
         public int maxRow = 30;
         public int maxColumn = 38;
         public int maxFloor = 20;
@@ -37,14 +37,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public int currentColumn = 1;
         public int currentFloor = 1;
 
-        [SerializeField] private int reviveRow=3;
-        [SerializeField] private int reviveColumn=2;
-        [SerializeField] private int reviveFloor=2;
+        [SerializeField] private int reviveRow = 3;
+        [SerializeField] private int reviveColumn = 2;
+        [SerializeField] private int reviveFloor = 2;
 
         private BallPool ballPool;
         [SerializeField] private HeadsOrganizer headsOrganizer;
         [SerializeField] private float waitForForwarding = 1.5f;
-        
+
         private float currentWaitingTime;
         private Coroutine waitForwarding;
 
@@ -71,7 +71,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             yield return StartCoroutine(ballPool.StartInstantiatePool());
             yield return StartCoroutine(
                 headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
-            yield return StartCoroutine(InstantiateStartBalls(levelSpecs.column,levelSpecs.floor,levelSpecs.row));
+            yield return StartCoroutine(InstantiateStartBalls(levelSpecs.column, levelSpecs.floor, levelSpecs.row));
             yield return StartCoroutine(headsOrganizer.SetPositionsInstantly());
         }
 
@@ -231,11 +231,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
             BallColumn ballColumn;
             ColumnHead columnHead;
-            Ball ball; 
-            int startIndex = 1+(currentColumn - size) / 2;
+            Ball ball;
+            int startIndex = 1 + (currentColumn - size) / 2;
             for (int i = currentFloor - 1; i >= 0; i--)
             {
-                for (int j = startIndex; j < startIndex+size; j++)
+                for (int j = startIndex; j < startIndex + size; j++)
                 {
                     columnHead = headsOrganizer.ColumnHeads[j];
                     for (int k = currentRow - 1; k >= 0; k--)
@@ -302,7 +302,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             if (value >= currentRow) return TotalBallCount;
             return headsOrganizer.GetBallCountOnRemovedRow(currentRow - value);
         }
-        
+
 
         public IEnumerator RightAdder(int size)
         {
@@ -399,7 +399,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             StartCoroutine(InstantiateStartBalls(reviveColumn, reviveFloor, reviveRow));
         }
 
-        private IEnumerator InstantiateStartBalls(int column,int floor,int row)
+        private IEnumerator InstantiateStartBalls(int column, int floor, int row)
         {
             currentColumn = column;
             currentFloor = floor;
@@ -468,7 +468,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             if (currentFloor >= maxFloor) currentFloor = maxFloor;
             if (currentFloor <= 0) currentFloor = 1;
 
-            
+
             PlayReshapeSound();
             SetCameraPos();
             RepositioningWiderBall(repositionedBalls);
@@ -522,6 +522,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
+
             headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
             //TODO top fazladan siliniyor.
             if (repositionedBalls.Any())
@@ -532,10 +533,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     newBall.RemoveBall();
                     newBall.transform.parent = ballPool.transform;
                 }
+
                 AddBall(removedBallCount);
             }
-
-            
         }
 
         private void RepositioningWiderBall(List<Ball> repositionedBalls)
@@ -560,7 +560,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             }
 
             headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
-            
+
             if (repositionedBalls.Any())
             {
                 int removedBallCount = repositionedBalls.Count;
@@ -569,10 +569,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     newBall.RemoveBall();
                     newBall.transform.parent = ballPool.transform;
                 }
+
                 AddBall(removedBallCount);
             }
-
-            
         }
 
 

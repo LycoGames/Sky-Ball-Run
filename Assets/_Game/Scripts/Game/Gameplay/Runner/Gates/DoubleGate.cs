@@ -28,6 +28,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     }
                         
                 }
+
                 selectedGate.EnterGate();
                 gates.Remove(selectedGate);
                 gates.First().gameObject.SetActive(false);

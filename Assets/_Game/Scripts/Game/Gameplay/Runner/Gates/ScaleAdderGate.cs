@@ -81,7 +81,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize + ballManager.currentColumn > ballManager.maxColumn)
                         addSize = ballManager.maxColumn - ballManager.currentColumn;
                     if (addSize <= 0) addSize = 1;
-                    if(addSize+column>=ballManager.maxColumn)SwapGate();
+                    if (addSize + column >= ballManager.maxColumn) SwapGate();
                     writeSize = addSize;
                     writeSize *= floor * row;
                     break;
@@ -91,7 +91,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize + ballManager.currentFloor > ballManager.maxFloor)
                         addSize = ballManager.maxFloor - ballManager.currentFloor;
                     if (addSize <= 0) addSize = 1;
-                    if(addSize+floor>=ballManager.maxFloor)SwapGate();
+                    if (addSize + floor >= ballManager.maxFloor) SwapGate();
                     writeSize = addSize;
                     writeSize *= row * column;
                     break;
@@ -101,7 +101,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize + ballManager.currentRow > ballManager.maxRow)
                         addSize = ballManager.maxRow - ballManager.currentRow;
                     if (addSize <= 0) addSize = 1;
-                    if(addSize+row>=ballManager.maxRow)SwapGate();
+                    if (addSize + row >= ballManager.maxRow) SwapGate();
                     writeSize = addSize;
                     writeSize *= floor * column;
                     break;
@@ -113,13 +113,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                 StartChecking();
                 return;
             }
+
             ballCountText.text = "+" + writeSize;
         }
 
         private void SwapGate()
         {
             reverseGate.gameObject.SetActive(true);
-            myDoubleGate.SwapGate(this,reverseGate);
+            myDoubleGate.SwapGate(this, reverseGate);
             gameObject.SetActive(false);
         }
 
