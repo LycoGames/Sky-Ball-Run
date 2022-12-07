@@ -15,11 +15,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         private int addSize = 1;
         private BallManager ballManager;
         private int currentAddPercentage;
-        private Gate reverseGate;
+        private GameObject reverseGate;
 
         private void Start()
         {
-            reverseGate = Instantiate(ReverseGatePrefab);
+            reverseGate = Instantiate(ReverseGatePrefab).gameObject;
             reverseGate.transform.position = transform.position;
             reverseGate.transform.parent = transform.parent;
             reverseGate.gameObject.SetActive(false);
@@ -81,7 +81,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize + ballManager.currentColumn > ballManager.maxColumn)
                         addSize = ballManager.maxColumn - ballManager.currentColumn;
                     if (addSize <= 0) addSize = 1;
-                    if (addSize + column >= ballManager.maxColumn) SwapGate();
+                    if (addSize + column >= ballManager.maxColumn)
+                    {
+                        SwapGate();
+                        return;
+                    }
+
                     writeSize = addSize;
                     writeSize *= floor * row;
                     break;
@@ -91,7 +96,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize + ballManager.currentFloor > ballManager.maxFloor)
                         addSize = ballManager.maxFloor - ballManager.currentFloor;
                     if (addSize <= 0) addSize = 1;
-                    if (addSize + floor >= ballManager.maxFloor) SwapGate();
+                    if (addSize + floor >= ballManager.maxFloor)
+                    {
+                        SwapGate();
+                        return;
+                    }
+
                     writeSize = addSize;
                     writeSize *= row * column;
                     break;
@@ -101,7 +111,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize + ballManager.currentRow > ballManager.maxRow)
                         addSize = ballManager.maxRow - ballManager.currentRow;
                     if (addSize <= 0) addSize = 1;
-                    if (addSize + row >= ballManager.maxRow) SwapGate();
+                    if (addSize + row >= ballManager.maxRow)
+                    {
+                        SwapGate();
+                        return;
+                    }
+
                     writeSize = addSize;
                     writeSize *= floor * column;
                     break;

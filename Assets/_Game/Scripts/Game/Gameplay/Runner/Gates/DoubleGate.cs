@@ -7,7 +7,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 {
     public class DoubleGate : MonoBehaviour
     {
-        private List<Gate> gates=new List<Gate>();
+        private List<Gate> gates = new List<Gate>();
         [SerializeField] private Collider myCollider;
 
         private void OnTriggerEnter(Collider other)
@@ -16,8 +16,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             {
                 myCollider.enabled = false;
                 float distance = int.MaxValue;
-                Gate selectedGate=gates[0];
-                float newDistance=0;
+                Gate selectedGate = gates[0];
+                float newDistance = 0;
                 foreach (var gate in gates)
                 {
                     newDistance = Vector3.Distance(other.transform.position, gate.transform.position);
@@ -26,13 +26,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                         distance = newDistance;
                         selectedGate = gate;
                     }
-                        
                 }
 
                 selectedGate.EnterGate();
                 gates.Remove(selectedGate);
                 gates.First().gameObject.SetActive(false);
-
             }
         }
 
@@ -42,11 +40,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             foreach (var gate in gates) gate.SetDoubleGate(this);
         }
 
-        public void SwapGate(Gate RemoveGate, Gate NewGate)
+        public void SwapGate(Gate RemoveGate, GameObject NewGate)
         {
+            var gate = NewGate.GetComponent<Gate>();
             gates.Remove(RemoveGate);
-            gates.Add(NewGate);
-            NewGate.SetDoubleGate(this);
+            gates.Add(gate);
+            gate.SetDoubleGate(this);
         }
     }
 }

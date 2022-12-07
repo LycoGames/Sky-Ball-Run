@@ -183,6 +183,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         public IEnumerator UpRemover(int size)
         {
+            currentFloor = 0;
+            CheckingCurrentFloor?.Invoke();
             currentFloor -= size;
             if (currentFloor < 0)
             {
@@ -265,6 +267,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         public IEnumerator LengthRemover(int size)
         {
+            currentRow = 0;
+            CheckingCurrentRow?.Invoke();
             currentRow -= size;
             if (currentRow < 0)
             {
@@ -472,6 +476,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             PlayReshapeSound();
             SetCameraPos();
             RepositioningWiderBall(repositionedBalls);
+            CheckCurrentSizes();
             OnGateCountCheck?.Invoke();
             OnShapeChange?.Invoke();
         }
@@ -498,9 +503,20 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             PlayReshapeSound();
             SetCameraPos();
             RepositioningTallerBall(repositionedBalls);
+            CheckCurrentSizes();
             OnGateCountCheck?.Invoke();
             OnShapeChange?.Invoke();
         }
+
+        private void CheckCurrentSizes()
+        {
+            currentFloor = 0;
+            currentRow = 0;
+
+            CheckingCurrentFloor?.Invoke();
+            CheckingCurrentRow?.Invoke();
+        }
+
 
         private void RepositioningTallerBall(List<Ball> repositionedBalls)
         {
