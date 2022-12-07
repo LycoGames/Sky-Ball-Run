@@ -121,7 +121,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9129457981139379770}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5337223398396057423}
+        m_TargetAssemblyTypeName: _Game.Scripts.Game.UserInterfaces.InGame.GameOverCanvas,
+          Assembly-CSharp
+        m_MethodName: RequestRevive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3124999364853338682
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +352,7 @@ RectTransform:
   m_Children:
   - {fileID: 5337223398240531163}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -544,7 +557,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5337223398942267579}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5337223398396057423}
+        m_TargetAssemblyTypeName: _Game.Scripts.Game.UserInterfaces.InGame.GameOverCanvas,
+          Assembly-CSharp
+        m_MethodName: RequestReturnToPreparingGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5337223399038184444
 GameObject:
   m_ObjectHideFlags: 0
