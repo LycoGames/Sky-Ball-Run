@@ -1049,14 +1049,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 5066103876223209528}
     m_Modifications:
-    - target: {fileID: 4114022598402099891, guid: 1c07b83c248de214ea2c49e53f53755c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4114022598402099891, guid: 1c07b83c248de214ea2c49e53f53755c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -40
-      objectReference: {fileID: 0}
     - target: {fileID: 6071715894985455593, guid: 1c07b83c248de214ea2c49e53f53755c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1104,10 +1096,6 @@ PrefabInstance:
     - target: {fileID: 6071715894985455598, guid: 1c07b83c248de214ea2c49e53f53755c, type: 3}
       propertyPath: m_Name
       value: WaterfallEndGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 6071715894985455598, guid: 1c07b83c248de214ea2c49e53f53755c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
