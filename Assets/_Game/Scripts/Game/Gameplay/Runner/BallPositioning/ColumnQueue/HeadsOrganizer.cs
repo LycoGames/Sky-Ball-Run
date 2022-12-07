@@ -34,25 +34,27 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                 columnHead.ClearAllColumns();
             }
         }
-
+        
         public int GetBallCountOnRemovedFloor(int aboveFloor)
         {
             int count=0;
-            foreach (ColumnHead columnHead in ColumnHeads)
+            List<ColumnHead> columnHeads= GetActiveList();
+            foreach (ColumnHead columnHead in columnHeads)
             {
                 foreach (BallColumn ballColumn in columnHead.BallColumns)
                 {
                     count+=Mathf.Clamp(ballColumn.BallCount()-aboveFloor,0,Int32.MaxValue);
                 }
             }
-
+            if(count==0)Debug.Break();
             return count;
         }
 
         public int GetBallCountOnRemovedRow(int aboveRow)
         {
             int count=0;
-            foreach (ColumnHead columnHead in ColumnHeads)
+            List<ColumnHead> columnHeads = GetActiveList();
+            foreach (ColumnHead columnHead in columnHeads)
             {
                 for (int i=BallManager.Instance.currentRow-1;i>=aboveRow;i--)
                 {

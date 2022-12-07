@@ -107,11 +107,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6190818579880480110}
   - component: {fileID: 3094311421707152999}
+  - component: {fileID: 3014990832680753932}
   - component: {fileID: 810771870013358148}
   - component: {fileID: 6755971773027458493}
-  - component: {fileID: 3024229141066321988}
   m_Layer: 0
-  m_Name: UpDownObstacle
+  m_Name: DownUpObstacle
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,6 +147,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.443468, y: 4.3195906, z: 1.2476364}
   m_Center: {x: -5.689351, y: 15.934711, z: 0.2795561}
+--- !u!95 &3014990832680753932
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8612278169385101766}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f15886ebde7f3048a12b36b7d016af2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!54 &810771870013358148
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -176,26 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyedTransform: {fileID: 6190818579880480110}
---- !u!95 &3024229141066321988
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8612278169385101766}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8627969b148c4214386c0c82e80ac1a5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4404189598742901898
 PrefabInstance:
   m_ObjectHideFlags: 0

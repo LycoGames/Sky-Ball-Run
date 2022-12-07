@@ -40,8 +40,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         private void SetHeight()
         {
+            int floor = ballManager.currentFloor;
+            //TODO Kritik hata olasılığı.
+            if (floor <= 0)
+            {
+                Invoke("SetHeight",.25f);
+                return;
+            }
             newPos = transform.position;
-            newPos.y = (ballManager.currentFloor + 1) * distance;
+            newPos.y = (floor + 1) * distance;
             transform.position = newPos;
         }
     }

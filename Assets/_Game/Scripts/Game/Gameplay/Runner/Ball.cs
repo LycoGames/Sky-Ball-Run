@@ -117,7 +117,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
 
         public void UnregisterBall()
         {
-            ballColumn.UnregisterColumn(this);
+            if(ballColumn!=null)ballColumn.UnregisterColumn(this);
         }
 
         public void ReturnToPool()

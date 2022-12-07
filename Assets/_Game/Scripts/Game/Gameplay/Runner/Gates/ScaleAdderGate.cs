@@ -60,7 +60,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void StartChecking()
         {
-            Invoke("CheckSize", 1);
+            Invoke("CheckSize", .25f);
         }
 
         private void CheckSize()
@@ -108,6 +108,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             }
 
             writeSize += totalCubicBallCount - ballManager.TotalBallCount;
+            if (writeSize < 0)
+            {
+                StartChecking();
+                return;
+            }
             ballCountText.text = "+" + writeSize;
         }
 

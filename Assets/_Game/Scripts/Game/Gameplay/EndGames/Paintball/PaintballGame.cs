@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using _Game.Scripts.Game.Gameplay.Runner;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using _Game.Scripts.Game.ObjectPools;
 using Cinemachine;
@@ -113,6 +114,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         {
             GainedCoin += count;
             GainedCoinDiamond?.Invoke(GainedCoin);
+            AudioSourceController.Instance.PlaySoundType(SoundType.DiamondCollected);
         }
 
         private void DeactivateUIs()

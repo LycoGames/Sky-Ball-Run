@@ -37,7 +37,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void StartChecking()
         {
-            Invoke("CheckSize", .8f);
+            Invoke("CheckSize", .25f);
         }
 
         private void RemoveScale()
@@ -84,7 +84,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     writeSize = ballManager.GetBallCountOnRemovedRow(removeSize);
                     break;
             }
-
+            if (writeSize <= 0)
+            {
+                StartChecking();
+                return;
+            }
             sizeText.text = "-" + writeSize;
         }
 

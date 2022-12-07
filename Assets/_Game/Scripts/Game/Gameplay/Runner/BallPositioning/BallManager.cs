@@ -468,10 +468,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             if (currentFloor >= maxFloor) currentFloor = maxFloor;
             if (currentFloor <= 0) currentFloor = 1;
 
-            OnGateCountCheck?.Invoke();
+            
             PlayReshapeSound();
             SetCameraPos();
             RepositioningWiderBall(repositionedBalls);
+            OnGateCountCheck?.Invoke();
             OnShapeChange?.Invoke();
         }
 
@@ -494,10 +495,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             currentRow = rowCount / currentColumn;
             if (rowCount % currentColumn > 0) currentRow++;
 
-            OnGateCountCheck?.Invoke();
             PlayReshapeSound();
             SetCameraPos();
             RepositioningTallerBall(repositionedBalls);
+            OnGateCountCheck?.Invoke();
             OnShapeChange?.Invoke();
         }
 
@@ -521,6 +522,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                     }
                 }
             }
+            headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
             //TODO top fazladan siliniyor.
             if (repositionedBalls.Any())
             {
@@ -533,7 +535,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 AddBall(removedBallCount);
             }
 
-            headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
+            
         }
 
         private void RepositioningWiderBall(List<Ball> repositionedBalls)
@@ -557,6 +559,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 }
             }
 
+            headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
+            
             if (repositionedBalls.Any())
             {
                 int removedBallCount = repositionedBalls.Count;
@@ -568,7 +572,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 AddBall(removedBallCount);
             }
 
-            headsOrganizer.StartCoroutine(headsOrganizer.SetPositionsInstantly());
+            
         }
 
 
