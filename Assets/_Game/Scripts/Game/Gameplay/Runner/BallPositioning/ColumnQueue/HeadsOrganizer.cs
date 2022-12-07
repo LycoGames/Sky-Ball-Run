@@ -67,7 +67,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
         public int GetBallCountOnRemovedColumn(int value)
         {
             int count=0;
-            int startIndex = 1+(BallManager.Instance.currentColumn - value) / 2;
+            int startIndex = (BallManager.Instance.currentColumn - value) / 2;
             List<ColumnHead> columnHeads = GetActiveList();
             ColumnHead columnHead;
                 for (int i=startIndex;i<startIndex+value;i++)
