@@ -15,11 +15,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         private int addSize = 1;
         private BallManager ballManager;
         private int currentAddPercentage;
-        private GameObject reverseGate;
+        private Gate reverseGate;
 
         private void Start()
         {
-            reverseGate = Instantiate(ReverseGatePrefab).gameObject;
+            reverseGate = Instantiate(ReverseGatePrefab);
             reverseGate.transform.position = transform.position;
             reverseGate.transform.parent = transform.parent;
             reverseGate.gameObject.SetActive(false);
@@ -31,7 +31,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             currentAddPercentage = UnityEngine.Random.Range(0, maxAddPercentage + 1);
             ballManager = BallManager.Instance;
             ballManager.OnGateCountCheck += StartChecking;
-            StartChecking();
+            Invoke("StartChecking",.25f);
         }
 
         private void OnDisable()
@@ -83,7 +83,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize <= 0) addSize = 1;
                     if (addSize + column >= ballManager.maxColumn)
                     {
-                        if (ballManager.maxColumn >= column)
+                        if (ballManager.maxColumn <= column)
                         {
                             SwapGate();
                             return;
@@ -103,7 +103,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize <= 0) addSize = 1;
                     if (addSize + floor >= ballManager.maxFloor)
                     {
-                        if (ballManager.maxFloor >= floor)
+                        if (ballManager.maxFloor <= floor)
                         {
                             SwapGate();
                             return;
@@ -123,7 +123,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize <= 0) addSize = 1;
                     if (addSize + row >= ballManager.maxRow)
                     {
-                        if (ballManager.maxRow >= row)
+                        if (ballManager.maxRow <= row)
                         {
                             SwapGate();
                             return;
@@ -150,7 +150,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         private void SwapGate()
         {
             reverseGate.gameObject.SetActive(true);
-            myDoubleGate.SwapGate(this, reverseGate);
+            if(myDoubleGate!=null)myDoubleGate.SwapGate(this, reverseGate);
+            if(myAnimator.enabled)reverseGate.EnableMyAnimator();
             gameObject.SetActive(false);
         }
 

@@ -6,6 +6,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
     public class Gate : MonoBehaviour
     {
         [SerializeField] private Collider myCollider;
+        [SerializeField] protected Animator myAnimator;
         protected DoubleGate myDoubleGate;
         protected Action OnEnterGate;
 
@@ -16,6 +17,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             DisableMyCollider();
         }
 
+        public void EnableMyAnimator() => myAnimator.enabled = true;
         public void EnterGate() => OnEnterGate?.Invoke();
         private void DisableMyCollider() => myCollider.enabled = false;
 

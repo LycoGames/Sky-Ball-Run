@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCollider: {fileID: 4319897389194661330}
+  myAnimator: {fileID: 7255804854559204908}
   adderType: 0
   maxAddPercentage: 0
   ballCountText: {fileID: 4108594642859096019}

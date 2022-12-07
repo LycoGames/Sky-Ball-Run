@@ -39,13 +39,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             gates.AddRange(transform.GetComponentsInChildren<Gate>());
             foreach (var gate in gates) gate.SetDoubleGate(this);
         }
-
-        public void SwapGate(Gate RemoveGate, GameObject NewGate)
+       
+        public void SwapGate(Gate RemoveGate, Gate NewGate)
         {
-            var gate = NewGate.GetComponent<Gate>();
             gates.Remove(RemoveGate);
-            gates.Add(gate);
-            gate.SetDoubleGate(this);
+            gates.Add(NewGate);
+            NewGate.SetDoubleGate(this);
         }
     }
 }
