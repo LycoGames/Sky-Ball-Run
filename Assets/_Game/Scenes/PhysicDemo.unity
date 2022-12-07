@@ -614,7 +614,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4764261141117317036, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50.019638
+      value: -50.01953
       objectReference: {fileID: 0}
     - target: {fileID: 8721263087127276814, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
       propertyPath: m_Name
@@ -1695,6 +1695,14 @@ PrefabInstance:
     - target: {fileID: 5722122536403709468, guid: 1e1a27260b38ba94aab302a1e65c32d8, type: 3}
       propertyPath: m_Name
       value: IntroComponent
+      objectReference: {fileID: 0}
+    - target: {fileID: 5722122536403709470, guid: 1e1a27260b38ba94aab302a1e65c32d8, type: 3}
+      propertyPath: logoShowTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5722122536403709470, guid: 1e1a27260b38ba94aab302a1e65c32d8, type: 3}
+      propertyPath: animationTime
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5722122536403709471, guid: 1e1a27260b38ba94aab302a1e65c32d8, type: 3}
       propertyPath: m_RootOrder
