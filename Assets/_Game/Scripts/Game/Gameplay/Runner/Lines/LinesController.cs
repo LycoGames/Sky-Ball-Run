@@ -41,6 +41,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
 
         private void SwapLine(int index)
         {
+            if(index>0)lineList[index-1].gameObject.SetActive(false);
             if (index + showedLineCount < lineList.Count) lineList[index + showedLineCount].gameObject.SetActive(true);
             else if(index + showedLineCount == lineList.Count)endGameController.gameObject.SetActive(true);
         }

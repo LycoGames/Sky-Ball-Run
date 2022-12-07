@@ -46,7 +46,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
                     count+=Mathf.Clamp(ballColumn.BallCount()-aboveFloor,0,Int32.MaxValue);
                 }
             }
-            if(count==0)Debug.Break();
             return count;
         }
 

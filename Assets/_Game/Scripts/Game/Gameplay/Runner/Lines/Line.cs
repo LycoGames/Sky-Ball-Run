@@ -22,7 +22,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
             if (other.CompareTag("Player"))
             {
                 onLinePassed?.Invoke(index);
-                gameObject.SetActive(false);
             }
         }
     }

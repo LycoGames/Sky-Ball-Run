@@ -232,7 +232,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             BallColumn ballColumn;
             ColumnHead columnHead;
             Ball ball; 
-            int startIndex = 1+(BallManager.Instance.currentColumn - size) / 2;
+            int startIndex = 1+(currentColumn - size) / 2;
             for (int i = currentFloor - 1; i >= 0; i--)
             {
                 for (int j = startIndex; j < startIndex+size; j++)
