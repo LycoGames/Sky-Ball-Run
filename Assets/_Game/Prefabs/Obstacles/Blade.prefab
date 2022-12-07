@@ -131,7 +131,7 @@ Transform:
   - {fileID: 1453942548567651591}
   - {fileID: 1864594701143988348}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5770817888387165469
 GameObject:
@@ -299,6 +299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: blade
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 280a2c6edf039124195724a3d48780eb, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 280a2c6edf039124195724a3d48780eb, type: 3}
@@ -312,26 +316,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 280a2c6edf039124195724a3d48780eb, type: 3}
   m_PrefabInstance: {fileID: 443471690400895917}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &6348977059029841842
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785577929550900988}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1f14d3d27b30d9a49ba7fa434c983025, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!54 &314719818933714336
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -362,6 +346,26 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5107447780114352187, guid: 280a2c6edf039124195724a3d48780eb, type: 3}
+--- !u!95 &6348977059029841842
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785577929550900988}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1f14d3d27b30d9a49ba7fa434c983025, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4769186686778307511
 PrefabInstance:
   m_ObjectHideFlags: 0
