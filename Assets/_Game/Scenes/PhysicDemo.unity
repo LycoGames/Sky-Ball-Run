@@ -608,6 +608,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 128562624}
     m_Modifications:
+    - target: {fileID: 4764261141117317036, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -149.96072
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764261141117317036, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -50.019638
+      objectReference: {fileID: 0}
     - target: {fileID: 8721263087127276814, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
       propertyPath: m_Name
       value: WealthCanvas
