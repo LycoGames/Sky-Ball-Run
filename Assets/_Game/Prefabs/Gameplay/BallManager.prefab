@@ -61,9 +61,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   distance: 1
-  maxRow: 10
+  maxRow: 16
   maxColumn: 8
-  maxFloor: 30
+  maxFloor: 50
   currentRow: 5
   currentColumn: 5
   currentFloor: 3
