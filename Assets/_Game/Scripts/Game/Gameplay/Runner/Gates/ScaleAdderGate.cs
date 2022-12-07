@@ -83,8 +83,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize <= 0) addSize = 1;
                     if (addSize + column >= ballManager.maxColumn)
                     {
-                        SwapGate();
-                        return;
+                        if (ballManager.maxColumn >= column)
+                        {
+                            SwapGate();
+                            return;
+                        }
+
+                        addSize = ballManager.maxColumn - column;
                     }
 
                     writeSize = addSize;
@@ -98,8 +103,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize <= 0) addSize = 1;
                     if (addSize + floor >= ballManager.maxFloor)
                     {
-                        SwapGate();
-                        return;
+                        if (ballManager.maxFloor >= floor)
+                        {
+                            SwapGate();
+                            return;
+                        }
+
+                        addSize = ballManager.maxFloor - floor;
                     }
 
                     writeSize = addSize;
@@ -113,8 +123,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize <= 0) addSize = 1;
                     if (addSize + row >= ballManager.maxRow)
                     {
-                        SwapGate();
-                        return;
+                        if (ballManager.maxRow >= row)
+                        {
+                            SwapGate();
+                            return;
+                        }
+
+                        addSize = ballManager.maxRow - row;
                     }
 
                     writeSize = addSize;
