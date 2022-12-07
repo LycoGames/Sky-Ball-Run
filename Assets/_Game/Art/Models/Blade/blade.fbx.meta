@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f962d313a19ab864aa36edd94c4b1a1b
+guid: 280a2c6edf039124195724a3d48780eb
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
@@ -7,13 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: BorderColor
-    second: {fileID: 2100000, guid: 8c5435f0b57acbb4da77004bcd682711, type: 2}
+      name: MainColor
+    second: {fileID: 2100000, guid: 066387660f2246d44867a5d0c412bfa5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: MainColor
-    second: {fileID: 2100000, guid: 241c7620c83371f4aac742be90c7ab65, type: 2}
+      name: Shaft
+    second: {fileID: 2100000, guid: ea4753517c69eb3479556d87d82240d3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -45,7 +45,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
