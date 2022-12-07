@@ -2502,7 +2502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8162107122840985641, guid: b673d340c59f9304db2b14f4d8a218d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.41
+      value: 8.71
       objectReference: {fileID: 0}
     - target: {fileID: 8162107122840985641, guid: b673d340c59f9304db2b14f4d8a218d7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3841,7 +3841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8162107122840985641, guid: b673d340c59f9304db2b14f4d8a218d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.2
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 8162107122840985641, guid: b673d340c59f9304db2b14f4d8a218d7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4713,6 +4713,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1750662237217849883, guid: bb603abcb51ac5943ab74a5172b8026a, type: 3}
+      propertyPath: minTakeBallCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1750662237217849883, guid: bb603abcb51ac5943ab74a5172b8026a, type: 3}
       propertyPath: removePercentage
       value: 68
       objectReference: {fileID: 0}
@@ -4986,7 +4990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8162107122840985641, guid: b673d340c59f9304db2b14f4d8a218d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.8199997
+      value: 2.12
       objectReference: {fileID: 0}
     - target: {fileID: 8162107122840985641, guid: b673d340c59f9304db2b14f4d8a218d7, type: 3}
       propertyPath: m_LocalPosition.z
