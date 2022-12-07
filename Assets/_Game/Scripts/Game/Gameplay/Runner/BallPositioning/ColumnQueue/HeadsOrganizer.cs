@@ -39,6 +39,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
         {
             int count=0;
             List<ColumnHead> columnHeads= GetActiveList();
+            if (ColumnHeads.Count <= 0) return 0;
             foreach (ColumnHead columnHead in columnHeads)
             {
                 foreach (BallColumn ballColumn in columnHead.BallColumns)
@@ -53,6 +54,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
         {
             int count=0;
             List<ColumnHead> columnHeads = GetActiveList();
+            if (ColumnHeads.Count <= 0) return 0;
             foreach (ColumnHead columnHead in columnHeads)
             {
                 for (int i=BallManager.Instance.currentRow-1;i>=aboveRow;i--)
@@ -67,8 +69,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
         public int GetBallCountOnRemovedColumn(int value)
         {
             int count=0;
-            int startIndex = (BallManager.Instance.currentColumn - value) / 2;
             List<ColumnHead> columnHeads = GetActiveList();
+            int startIndex =1 + (columnHeads.Count - value) / 2;
+            startIndex--;
+            if (ColumnHeads.Count <= 0) return 0;
             ColumnHead columnHead;
                 for (int i=startIndex;i<startIndex+value;i++)
                 {

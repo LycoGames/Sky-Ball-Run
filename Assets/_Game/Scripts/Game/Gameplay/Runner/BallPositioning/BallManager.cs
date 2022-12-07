@@ -178,7 +178,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             }
 
             PlayBallAddSound();
+            CheckCurrentSizes();
+            OnGateCountCheck?.Invoke();
+            OnShapeChange?.Invoke();
             SetCameraPos();
+            
         }
 
         public IEnumerator UpRemover(int size)
@@ -213,7 +217,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 yield return null;
             }
 
-            currentFloor = 0;
+            CheckCurrentSizes();
+            OnGateCountCheck?.Invoke();
+            OnShapeChange?.Invoke();
             CheckFloorSizeAndMoveCam();
         }
 
@@ -255,7 +261,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             }
 
             headsOrganizer.SetPositions();
-            currentFloor = 0;
+            CheckCurrentSizes();
+            OnGateCountCheck?.Invoke();
+            OnShapeChange?.Invoke();
             CheckFloorSizeAndMoveCam();
         }
 
@@ -297,8 +305,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 yield return null;
             }
 
-            currentFloor = 0;
-            CheckingCurrentRow?.Invoke();
+            CheckCurrentSizes();
+            OnGateCountCheck?.Invoke();
+            OnShapeChange?.Invoke();
         }
 
         public int GetBallCountOnRemovedRow(int value)
@@ -333,6 +342,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
             PlayBallAddSound();
             headsOrganizer.SetPositions();
+            CheckCurrentSizes();
+            OnGateCountCheck?.Invoke();
+            OnShapeChange?.Invoke();
         }
 
         public IEnumerator LengthAdder(int size)
@@ -360,6 +372,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
             PlayBallAddSound();
             headsOrganizer.SetPositions();
+            CheckCurrentSizes();
+            OnGateCountCheck?.Invoke();
+            OnShapeChange?.Invoke();
         }
 
         public List<Ball> GetBalls(int ballCount)

@@ -41,7 +41,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void AddScale()
         {
-            StopAllCoroutines();
             switch (adderType)
             {
                 case AdderType.RightAdder:
@@ -65,6 +64,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void CheckSize()
         {
+            if (ballManager.TotalBallCount <= 0) return;
             float newRemoveSize = 0;
             int writeSize = 0;
 

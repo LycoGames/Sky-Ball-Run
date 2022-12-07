@@ -60,9 +60,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void CheckSize()
         {
+            if (ballManager.TotalBallCount <= 0) return;
             float newRemoveSize;
             int writeSize = 0;
-
+            
             switch (adderType)
             {
                 case AdderType.WidthRemover:
