@@ -188,7 +188,7 @@ MonoBehaviour:
   countTextUI: {fileID: 7030344436760141252}
   crosshairUI: {fileID: 7800742349222152973}
   bulletSpeed: 175
-  rateOfFire: 0.15
+  rateOfFire: 0.1
   randomnessMinX: -2
   randomnessMaxX: 2
   randomnessMinY: -2
