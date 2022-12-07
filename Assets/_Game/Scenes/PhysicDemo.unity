@@ -763,6 +763,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2447897986541295468, guid: 2de604f23e780564e835e4c86e29e4dd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447897986541295468, guid: 2de604f23e780564e835e4c86e29e4dd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447897986541295468, guid: 2de604f23e780564e835e4c86e29e4dd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2447897986541295468, guid: 2de604f23e780564e835e4c86e29e4dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1214,6 +1226,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5337223398396057416, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337223398396057416, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337223398396057416, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337223398396057416, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1264,6 +1288,10 @@ PrefabInstance:
     - target: {fileID: 5337223398396057417, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
       propertyPath: m_Name
       value: GameOverCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337223398396057417, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5337223398942267572, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
       propertyPath: m_Enabled
@@ -1586,18 +1614,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5665635095971895382, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5665635095971895382, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5665635095971895382, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5665635095971895382, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1648,14 +1664,6 @@ PrefabInstance:
     - target: {fileID: 5665635095971895383, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
       propertyPath: m_Name
       value: InGameCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5665635095971895383, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8482048089055042293, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.00012207031
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
