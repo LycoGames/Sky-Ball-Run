@@ -612,6 +612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WealthCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8721263087127276814, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8721263087127276815, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -646,6 +650,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8721263087127276815, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721263087127276815, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721263087127276815, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721263087127276815, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8721263087127276815, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
@@ -1226,18 +1242,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5337223398396057416, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5337223398396057416, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5337223398396057416, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5337223398396057416, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1288,18 +1292,6 @@ PrefabInstance:
     - target: {fileID: 5337223398396057417, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
       propertyPath: m_Name
       value: GameOverCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 5337223398396057417, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5337223398942267572, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5337223398942267579, guid: 1c8bb3d9886cb454bb3d4cb7d9aeafb5, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -1614,6 +1606,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5665635095971895382, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665635095971895382, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665635095971895382, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665635095971895382, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1664,6 +1668,10 @@ PrefabInstance:
     - target: {fileID: 5665635095971895383, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
       propertyPath: m_Name
       value: InGameCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5665635095971895383, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

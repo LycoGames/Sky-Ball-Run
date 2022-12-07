@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8510129563266192230}
   - component: {fileID: 1368207669523108095}
   - component: {fileID: 9129457981139379770}
-  - component: {fileID: 139348765571894300}
+  - component: {fileID: 5337223397982807113}
   m_Layer: 5
   m_Name: Revive
   m_TagString: Untagged
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 58faf66432e72544ea37f2d70da031e9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e8e2ff71e50fcd0438056d13d7c7ce59, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &139348765571894300
+--- !u!114 &5337223397982807113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,10 +100,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.99167776, g: 0.41960788, b: 1, a: 1}
-    m_PressedColor: {r: 0.9937131, g: 0.28627455, b: 1, a: 1}
-    m_SelectedColor: {r: 0.5019608, g: 0, b: 0.479756, a: 1}
-    m_DisabledColor: {r: 0.5372549, g: 0.36078432, b: 0.5011972, a: 0.5019608}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -121,20 +121,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9129457981139379770}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5337223398396057423}
-        m_TargetAssemblyTypeName: _Game.Scripts.Game.UserInterfaces.InGame.GameOverCanvas,
-          Assembly-CSharp
-        m_MethodName: RequestRevive
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &3124999364853338682
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -15}
-  m_SizeDelta: {x: -80, y: -30}
+  m_AnchoredPosition: {x: 80, y: 0}
+  m_SizeDelta: {x: -220, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &549441214829802835
 CanvasRenderer:
@@ -228,7 +215,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 125.1
+  m_fontSize: 83.4
   m_fontSizeBase: 91.3
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -352,7 +339,7 @@ RectTransform:
   m_Children:
   - {fileID: 5337223398240531163}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -447,7 +434,7 @@ GameObject:
   - component: {fileID: 5337223398942267573}
   - component: {fileID: 5337223398942267578}
   - component: {fileID: 5337223398942267579}
-  - component: {fileID: 5337223398942267572}
+  - component: {fileID: 5337223397982807110}
   m_Layer: 5
   m_Name: NextLevelGame
   m_TagString: Untagged
@@ -504,7 +491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f91076e39691ab2498098b2cf2dc2163, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 83746f9334a35f04d93fd8367ff2a52c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -514,7 +501,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5337223398942267572
+--- !u!114 &5337223397982807110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -535,11 +522,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.58802605, g: 1, b: 0.5707547, a: 1}
-    m_HighlightedColor: {r: 0.4198113, g: 1, b: 0.44905144, a: 1}
-    m_PressedColor: {r: 0.2938241, g: 1, b: 0.28773582, a: 1}
-    m_SelectedColor: {r: 0.020650923, g: 0.5, b: 0, a: 1}
-    m_DisabledColor: {r: 0.36271802, g: 0.5377358, b: 0.364881, a: 0.5019608}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -557,20 +544,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5337223398942267579}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5337223398396057423}
-        m_TargetAssemblyTypeName: _Game.Scripts.Game.UserInterfaces.InGame.EndGameCanvas,
-          Assembly-CSharp
-        m_MethodName: RequestReturnToPreparingGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &5337223399038184444
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,12 +638,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 150
+  m_fontSize: 18
   m_fontSizeBase: 150
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 130.97
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -741,8 +715,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -15}
-  m_SizeDelta: {x: -80, y: -30}
+  m_AnchoredPosition: {x: 0, y: -12.5}
+  m_SizeDelta: {x: -120, y: -25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5337223399043958771
 CanvasRenderer:
@@ -799,7 +773,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 141.95
+  m_fontSize: 128.45
   m_fontSizeBase: 91.3
   m_fontWeight: 400
   m_enableAutoSizing: 1
