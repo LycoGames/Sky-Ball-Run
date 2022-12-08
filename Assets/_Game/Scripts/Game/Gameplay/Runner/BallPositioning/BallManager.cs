@@ -231,6 +231,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
 
         public IEnumerator RightRemover(int size)
         {
+            List<ColumnHead> columnHeads = headsOrganizer.GetActiveList();
+            currentColumn = columnHeads.Count;
             currentColumn -= size;
             if (currentColumn < 0)
             {
@@ -240,12 +242,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             BallColumn ballColumn;
             ColumnHead columnHead;
             Ball ball;
-            int startIndex = 1 + (currentColumn - size) / 2;
+            int startIndex = (currentColumn - size) / 2;
             for (int i = currentFloor - 1; i >= 0; i--)
             {
                 for (int j = startIndex; j < startIndex + size; j++)
                 {
-                    columnHead = headsOrganizer.ColumnHeads[j];
+                    columnHead = columnHeads[j];
                     for (int k = currentRow - 1; k >= 0; k--)
                     {
                         ballColumn = columnHead.BallColumns[k];
