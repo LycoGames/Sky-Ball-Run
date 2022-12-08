@@ -384,6 +384,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             List<Ball> balls = new List<Ball>();
             Ball ball;
             List<ColumnHead> columnHeads = headsOrganizer.GetActiveList();
+            currentColumn = columnHeads.Count;
             BallColumn ballColumn;
             for (int i = 0; i < currentFloor; i++)
 
