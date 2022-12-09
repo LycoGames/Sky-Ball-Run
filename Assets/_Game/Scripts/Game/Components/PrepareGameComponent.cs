@@ -49,7 +49,7 @@ namespace _Game.Scripts.Game.Components
         private IEnumerator PreparingGame()
         {
             var level = GetLevel();
-            SetLevelOnCanvas?.Invoke(level.ToString());
+            SetLevelOnCanvas?.Invoke((level+1).ToString());
             yield return inGameComponent.StartCoroutine(inGameComponent.InitializeGame(level));
             OnGameLaunch?.Invoke();
         }
