@@ -6,7 +6,7 @@ namespace _Game.Scripts.Base.ObjectPooling
 {
     public abstract class ObjectPool : MonoBehaviour
     {
-        public List<GameObject> pooledObjects;
+        public List<GameObject> pooledObjects=new List<GameObject>();
         public GameObject objectToPool;
         public int amountToPool;
 
@@ -23,7 +23,17 @@ namespace _Game.Scripts.Base.ObjectPooling
                 }
             }
 
-            return null;
+            amountToPool++;
+            return InstantiateObject();
+        }
+
+        public GameObject InstantiateObject()
+        {
+            GameObject ball;
+            ball = Instantiate(objectToPool, transform);
+            ball.gameObject.SetActive(false);
+            pooledObjects.Add(ball.gameObject);
+            return ball;
         }
     }
 }

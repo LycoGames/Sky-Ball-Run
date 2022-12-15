@@ -65,7 +65,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         {
             GameManager.Instance.OnRevive += SpawnRevievBalls;
             ballPool = _ballPool;
-            MaxBallCount = maxColumn * maxRow * maxFloor;
+            MaxBallCount = currentColumn * currentRow * currentFloor * 4;
             ballPool.amountToPool = MaxBallCount;
             playerController = _playerController;
             yield return StartCoroutine(ballPool.StartInstantiatePool());
