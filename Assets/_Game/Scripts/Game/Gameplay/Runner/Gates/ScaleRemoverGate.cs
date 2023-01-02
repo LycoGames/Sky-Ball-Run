@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using TMPro;
 using UnityEngine;
@@ -10,34 +11,47 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
     {
         [SerializeField] public AdderType adderType;
         [Range(0, 100)] [SerializeField] private int maxRemovePercentage;
-        [SerializeField] private TextMeshProUGUI sizeText;
+        [SerializeField] private TMP_Text ballCountText;
+        [SerializeField] private float distance=8f;
+        [SerializeField] private float checkTime=1f;
+        
+        private WaitForSeconds wfsCheckTime;
         private int currentRemovePercentage;
         private int removeSize = 1;
         private BallManager ballManager;
 
         private void Start()
         {
+            wfsCheckTime = new WaitForSeconds(checkTime);
             OnEnterGate += RemoveScale;
         }
 
         private void OnEnable()
         {
+            ballCountText.text = "";
             currentRemovePercentage = UnityEngine.Random.Range(0, maxRemovePercentage + 1);
             ballManager = BallManager.Instance;
-            ballManager.OnGateCountCheck += StartChecking;
-            CheckSize();
+            StartCoroutine(DistanceCheck());
+            //ballManager.OnGateCountCheck += StartChecking;
+            //CheckSize();
         }
 
         private void OnDisable()
         {
-            ballManager.OnGateCountCheck -= StartChecking;
+            StopAllCoroutines();
+            //ballManager.OnGateCountCheck -= StartChecking;
         }
 
-
-        private void StartChecking()
+        private IEnumerator DistanceCheck()
         {
-            Invoke("CheckSize", .25f);
+            while(Vector3.Distance(ballManager.transform.position,transform.position)>distance)yield return wfsCheckTime;
+            CheckSize();
         }
+
+        // private void StartChecking()
+        // {
+        //     Invoke("CheckSize", .25f);
+        // }
 
         private void RemoveScale()
         {
@@ -86,10 +100,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             }
             if (writeSize <= 0)
             {
-                StartChecking();
+                Invoke("CheckSize",.1f);
+                //StartChecking();
                 return;
             }
-            sizeText.text = "-" + writeSize;
+            ballCountText.text = "-" + writeSize;
         }
 
 

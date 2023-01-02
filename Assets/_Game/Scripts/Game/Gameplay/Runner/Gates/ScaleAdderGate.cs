@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -10,8 +12,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
     {
         [SerializeField] private AdderType adderType;
         [Range(0, 100)] [SerializeField] private int maxAddPercentage;
-        [SerializeField] private TextMeshProUGUI ballCountText;
+        [SerializeField] private TMP_Text ballCountText;
         [SerializeField] private Gate ReverseGatePrefab;
+        [SerializeField] private float distance=8f;
+        [SerializeField] private float checkTime=1f;
+        
+        private WaitForSeconds wfsCheckTime;
         private int addSize = 1;
         private BallManager ballManager;
         private int currentAddPercentage;
@@ -19,21 +25,25 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void Start()
         {
+            wfsCheckTime = new WaitForSeconds(checkTime);
             CreateReverseGate();
             OnEnterGate += AddScale;
         }
 
         private void OnEnable()
         {
+            ballCountText.text = "";
             currentAddPercentage = UnityEngine.Random.Range(0, maxAddPercentage + 1);
             ballManager = BallManager.Instance;
-            ballManager.OnGateCountCheck += StartChecking;
-            Invoke("StartChecking",.25f);
+            StartCoroutine(DistanceCheck());
+            //ballManager.OnGateCountCheck += StartChecking;
+            // Invoke("StartChecking",.25f);
         }
 
         private void OnDisable()
         {
-            ballManager.OnGateCountCheck -= StartChecking;
+            StopAllCoroutines();
+            //ballManager.OnGateCountCheck -= StartChecking;
         }
 
         private void AddScale()
@@ -54,10 +64,16 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             gameObject.SetActive(false);
         }
 
-        private void StartChecking()
+        private IEnumerator DistanceCheck()
         {
-            Invoke("CheckSize", .25f);
+            while(Vector3.Distance(ballManager.transform.position,transform.position)>distance)yield return wfsCheckTime;
+            CheckSize();
         }
+
+        // private void StartChecking()
+        // {
+        //     Invoke("CheckSize", .25f);
+        // }
 
         private void CheckSize()
         {
@@ -137,7 +153,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             writeSize += totalCubicBallCount - ballManager.TotalBallCount;
             if (writeSize < 0)
             {
-                StartChecking();
+                //StartChecking();
+                Invoke("CheckSize",.1f);
                 return;
             }
 
