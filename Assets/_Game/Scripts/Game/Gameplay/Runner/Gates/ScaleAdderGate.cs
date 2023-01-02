@@ -36,14 +36,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             currentAddPercentage = UnityEngine.Random.Range(0, maxAddPercentage + 1);
             ballManager = BallManager.Instance;
             StartCoroutine(DistanceCheck());
-            //ballManager.OnGateCountCheck += StartChecking;
-            // Invoke("StartChecking",.25f);
+            ballManager.OnGateCountCheck += StartChecking;
         }
 
         private void OnDisable()
         {
             StopAllCoroutines();
-            //ballManager.OnGateCountCheck -= StartChecking;
+            ballManager.OnGateCountCheck -= StartChecking;
         }
 
         private void AddScale()
@@ -70,14 +69,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             CheckSize();
         }
 
-        // private void StartChecking()
-        // {
-        //     Invoke("CheckSize", .25f);
-        // }
+        private void StartChecking()
+        {
+             Invoke("CheckSize", .25f);
+        }
 
         private void CheckSize()
         {
-            if (ballManager.TotalBallCount <= 0) return;
+            if (ballManager.TotalBallCount <= 0||!canCheckSize) return;
             float newRemoveSize = 0;
             int writeSize = 0;
 
@@ -153,7 +152,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             writeSize += totalCubicBallCount - ballManager.TotalBallCount;
             if (writeSize < 0)
             {
-                //StartChecking();
                 Invoke("CheckSize",.1f);
                 return;
             }

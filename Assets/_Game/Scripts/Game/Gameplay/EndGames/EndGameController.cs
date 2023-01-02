@@ -17,15 +17,19 @@ namespace _Game.Scripts.Game.Gameplay.EndGames
         public void Initialize(PlayerController _playerController)
         {
             playerController = _playerController;
-            EndGameEnded += PlayConfettiEfect;
+            EndGameEnded += PlayConfettiEffect;
         }
 
-        private void PlayConfettiEfect()
+        private void PlayConfettiEffect()
         {
             confettiEffect.Play();
-            EndGameEnded -= PlayConfettiEfect;
+            EndGameEnded -= PlayConfettiEffect;
         }
 
+        protected void SetConfettiPos(Vector3 pos)
+        {
+            confettiEffect.transform.position = pos;
+        }
         public abstract void LaunchEndGame();
     }
 }

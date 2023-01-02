@@ -31,21 +31,22 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         
         private void OnEnable()
         {
+            removeSize= Int32.MaxValue;
             ballManager=BallManager.Instance;
-            wfsForCheckSize = new WaitForSeconds(checkTime);
-            checkSizeCoroutine=StartCoroutine(CheckSize());
+            ballManager.OnGateCountCheck += CheckSize;
+            CheckSize();
         }
 
         private void OnDisable()
         {
-            StopAllCoroutines();
+            ballManager.OnGateCountCheck -= CheckSize;
         }
-        
+
 
         public void CollectBall() => collectedBallCount++;
         public void StartCollectingBalls()
         {
-            StopCoroutine(checkSizeCoroutine);
+            CheckSize();
             GameManager.Instance.StopMove();
             List<Ball> balls = ballManager.GetBalls(removeSize);
             removeSize = balls.Count;
@@ -140,17 +141,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         }
 
 
-        private IEnumerator CheckSize()
+        private void CheckSize()
         {
             float newRemoveSize = 0;
-            while (true)
-            {
-                newRemoveSize = ballManager.TotalBallCount * ((float)removePercentage / 100);
-                removeSize = (int)Math.Round(newRemoveSize);
-                if (removeSize <= minTakeBallCount) removeSize = minTakeBallCount;
-                removeSizeText.text = removeSize.ToString();
-                yield return wfsForCheckSize;
-            }
+            newRemoveSize = ballManager.TotalBallCount * ((float)removePercentage / 100);
+            if (removeSize < newRemoveSize) return;
+            removeSize = (int)Math.Round(newRemoveSize);
+            if (removeSize <= minTakeBallCount) removeSize = minTakeBallCount;
+            removeSizeText.text = removeSize.ToString();
         }
 
     }

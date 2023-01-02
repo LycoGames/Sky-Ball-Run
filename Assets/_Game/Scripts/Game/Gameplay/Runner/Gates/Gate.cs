@@ -9,12 +9,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         [SerializeField] protected Animator myAnimator;
         protected DoubleGate myDoubleGate;
         protected Action OnEnterGate;
+        protected bool canCheckSize = true;
 
         private void OnTriggerEnter(Collider other)
         {
             if (!myCollider.enabled || !other.CompareTag("Ball")) return;
             OnEnterGate?.Invoke();
             DisableMyCollider();
+            canCheckSize = false;
         }
 
         public void EnableMyAnimator() => myAnimator.enabled = true;

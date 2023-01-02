@@ -507,8 +507,8 @@ MonoBehaviour:
   maxAddPercentage: 0
   ballCountText: {fileID: 3629984193689219017}
   ReverseGatePrefab: {fileID: -90982233190667553, guid: 38f8b319d5f939b4aaa84418187c5ba6, type: 3}
-  distance: 60
-  checkTime: 0.35
+  distance: 120
+  checkTime: 0.5
 --- !u!95 &7894909848338496024
 Animator:
   serializedVersion: 5

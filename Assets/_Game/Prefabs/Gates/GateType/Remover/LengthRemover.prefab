@@ -101,8 +101,8 @@ MonoBehaviour:
   adderType: 2
   maxRemovePercentage: 50
   ballCountText: {fileID: 508200544267676527}
-  distance: 60
-  checkTime: 0.35
+  distance: 120
+  checkTime: 0.5
 --- !u!95 &3955082529213801334
 Animator:
   serializedVersion: 5

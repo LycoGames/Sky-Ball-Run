@@ -12,9 +12,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         [SerializeField] public AdderType adderType;
         [Range(0, 100)] [SerializeField] private int maxRemovePercentage;
         [SerializeField] private TMP_Text ballCountText;
-        [SerializeField] private float distance=8f;
-        [SerializeField] private float checkTime=1f;
-        
+        [SerializeField] private float distance = 8f;
+        [SerializeField] private float checkTime = 1f;
+
         private WaitForSeconds wfsCheckTime;
         private int currentRemovePercentage;
         private int removeSize = 1;
@@ -32,26 +32,26 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             currentRemovePercentage = UnityEngine.Random.Range(0, maxRemovePercentage + 1);
             ballManager = BallManager.Instance;
             StartCoroutine(DistanceCheck());
-            //ballManager.OnGateCountCheck += StartChecking;
-            //CheckSize();
+            ballManager.OnGateCountCheck += StartChecking;
         }
 
         private void OnDisable()
         {
             StopAllCoroutines();
-            //ballManager.OnGateCountCheck -= StartChecking;
+            ballManager.OnGateCountCheck -= StartChecking;
         }
 
         private IEnumerator DistanceCheck()
         {
-            while(Vector3.Distance(ballManager.transform.position,transform.position)>distance)yield return wfsCheckTime;
+            while (Vector3.Distance(ballManager.transform.position, transform.position) > distance)
+                yield return wfsCheckTime;
             CheckSize();
         }
 
-        // private void StartChecking()
-        // {
-        //     Invoke("CheckSize", .25f);
-        // }
+        private void StartChecking()
+        {
+            Invoke("CheckSize", .25f);
+        }
 
         private void RemoveScale()
         {
@@ -73,10 +73,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void CheckSize()
         {
-            if (ballManager.TotalBallCount <= 0) return;
+            if (ballManager.TotalBallCount <= 0||!canCheckSize) return;
             float newRemoveSize;
             int writeSize = 0;
-            
+
             switch (adderType)
             {
                 case AdderType.WidthRemover:
@@ -98,12 +98,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     writeSize = ballManager.GetBallCountOnRemovedRow(removeSize);
                     break;
             }
+
             if (writeSize <= 0)
             {
-                Invoke("CheckSize",.1f);
-                //StartChecking();
+                Invoke("CheckSize", .1f);
                 return;
             }
+
             ballCountText.text = "-" + writeSize;
         }
 
