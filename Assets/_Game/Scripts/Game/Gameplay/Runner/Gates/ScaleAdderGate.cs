@@ -19,10 +19,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void Start()
         {
-            reverseGate = Instantiate(ReverseGatePrefab);
-            reverseGate.transform.position = transform.position;
-            reverseGate.transform.parent = transform.parent;
-            reverseGate.gameObject.SetActive(false);
+            CreateReverseGate();
             OnEnterGate += AddScale;
         }
 
@@ -154,6 +151,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             if(myAnimator.enabled)reverseGate.EnableMyAnimator();
             gameObject.SetActive(false);
         }
+        private void CreateReverseGate()
+        {
+            reverseGate = Instantiate(ReverseGatePrefab);
+            reverseGate.transform.parent = transform.parent;
+            reverseGate.gameObject.SetActive(false);
+            reverseGate.transform.localPosition = transform.localPosition;
+        }
+
 
         public enum AdderType
         {

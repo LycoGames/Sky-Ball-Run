@@ -156,6 +156,7 @@ namespace _Game.Scripts.Game.Components
 
         private void DestroyBallPool()
         {
+            ballPool.ReturnAllBallToPool();
             Destroy(ballPool.gameObject);
         }
 

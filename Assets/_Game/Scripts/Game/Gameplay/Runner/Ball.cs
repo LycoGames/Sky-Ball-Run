@@ -37,7 +37,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         {
             if (other.CompareTag("Obstacle") && meshRenderer.enabled)
             {
-                
                 RemoveBallWithAnimation();
             }
             

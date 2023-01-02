@@ -25,7 +25,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             currentRemovePercentage = UnityEngine.Random.Range(0, maxRemovePercentage + 1);
             ballManager = BallManager.Instance;
             ballManager.OnGateCountCheck += StartChecking;
-
             CheckSize();
         }
 
