@@ -48,7 +48,7 @@ MonoBehaviour:
   verticalSpeed: 40
   speedUp: 30
   horizontalSpeed: 5
-  rotationXSpeed: 17
+  rotationXSpeed: 20
   boundHorizontal: 12
   revivingBackward: 2
 --- !u!54 &-4788587124391165463

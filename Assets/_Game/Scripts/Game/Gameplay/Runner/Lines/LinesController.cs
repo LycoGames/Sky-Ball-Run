@@ -21,7 +21,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
 
         public IEnumerator InitializeLines()
         {
-            yield return new WaitForSeconds(2f);
             int counter = showedLineCount;
             foreach (var line in lineList)
             {
@@ -32,6 +31,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
                     counter--;
                 }
             }
+
+            yield return null;
         }
 
         public Transform GetLastLine()

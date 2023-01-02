@@ -46,14 +46,11 @@ namespace _Game.Scripts.Game.ObjectPools
 
         protected override IEnumerator FillThePool()
         {
-            pooledObjects = new List<GameObject>();
-            GameObject ball;
+            
             for (int i = 0; i < amountToPool; i++)
             {
-                ball = Instantiate(objectToPool, transform);
-                ball.gameObject.SetActive(false);
-                pooledObjects.Add(ball.gameObject);
-                if (i % 20 == 0) yield return null;
+                InstantiateObject();
+                if (i % 50 == 0) yield return null;
             }
 
             yield return null;
