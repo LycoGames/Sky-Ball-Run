@@ -16,6 +16,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
     public class BallManager : MonoBehaviour
     {
         public static BallManager Instance;
+        public Action CheckingCurrentColumn;
         public Action CheckingCurrentRow;
         public Action CheckingCurrentFloor;
         public Action<float> ChangeCameraYPos;
@@ -182,7 +183,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
             OnGateCountCheck?.Invoke();
             OnShapeChange?.Invoke();
             SetCameraPos();
-            
         }
 
         public IEnumerator UpRemover(int size)
@@ -477,6 +477,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public void ReshapeWider(int newSize)
         {
             if (TotalBallCount <= 0) return;
+            if (TotalBallCount <= 1)
+            {
+                PlayReshapeSound();
+                return;
+            }
             List<Ball> repositionedBalls = new List<Ball>();
             repositionedBalls = ballPool.GetAllActiveBall();
             headsOrganizer.ClearAllColumns();
@@ -503,6 +508,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         public void ReshapeTaller(int newSize)
         {
             if (TotalBallCount <= 0) return;
+            if (TotalBallCount <= 1)
+            {
+                PlayReshapeSound();
+                return;
+            }
             List<Ball> repositionedBalls = new List<Ball>();
             repositionedBalls = ballPool.GetAllActiveBall();
             headsOrganizer.ClearAllColumns();
@@ -530,11 +540,74 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         {
             currentFloor = 0;
             currentRow = 0;
+            currentColumn = 0;
 
             CheckingCurrentFloor?.Invoke();
             CheckingCurrentRow?.Invoke();
+            CheckingCurrentColumn?.Invoke();
         }
 
+        public void ReshapeBalls(int newRow, int newColumn)
+        {
+            if (TotalBallCount <= 1) return;
+            int newfloor = TotalBallCount / (newRow * newColumn);
+            newfloor += TotalBallCount % (newRow * newColumn) > 0 ? 1 : 0;
+            while (newfloor > maxFloor)
+            {
+                if (newColumn <= maxColumn) newColumn++;
+                else if (newRow <= maxRow) newRow++;
+                newfloor = TotalBallCount / newRow * newColumn;
+                if (newColumn >= maxColumn && newRow >= maxRow) break;
+            }
+
+            Debug.Log("row: " + newRow + " column: " + newColumn + " floor: " + newfloor);
+            Debug.Break();
+            currentFloor = newfloor;
+            currentColumn = newColumn;
+            currentRow = newRow;
+            PlayReshapeSound();
+            SetCameraPos();
+            RepositioningBalls();
+            CheckCurrentSizes();
+            OnGateCountCheck?.Invoke();
+            OnShapeChange?.Invoke();
+        }
+
+        private void RepositioningBalls()
+        {
+            List<Ball> repositionedBalls = ballPool.GetAllActiveBall();
+            BallColumn ballColumn;
+            ColumnHead columnHead;
+            Ball ball;
+            if (currentColumn >= maxColumn) currentColumn = maxColumn;
+            for (int i = 0; i < currentColumn; i++)
+            {
+                columnHead = headsOrganizer.ColumnHeads[i];
+                for (int j = 0; j < currentFloor; j++)
+                {
+                    for (int k = 0; k < currentRow && repositionedBalls.Count > 0; k++)
+                    {
+                        ballColumn = columnHead.BallColumns[k];
+                        ball = repositionedBalls[0];
+                        ball.SwapColumn(ballColumn);
+                        repositionedBalls.RemoveAt(0);
+                    }
+                }
+            }
+
+            if (repositionedBalls.Any())
+            {
+                Debug.LogWarning("Error: Remind ball on reshaping");
+                int removedBallCount = repositionedBalls.Count;
+                foreach (Ball newBall in repositionedBalls)
+                {
+                    newBall.RemoveBall();
+                    newBall.transform.parent = ballPool.transform;
+                }
+
+                AddBall(removedBallCount);
+            }
+        }
 
         private void RepositioningTallerBall(List<Ball> repositionedBalls)
         {

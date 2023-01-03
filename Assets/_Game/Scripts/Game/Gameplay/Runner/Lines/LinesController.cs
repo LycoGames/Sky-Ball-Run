@@ -17,6 +17,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
 
         private EndGameController endGameController;
 
+        public void DisableAllLines()
+        {
+            foreach (var line in lineList)
+            {
+                line.gameObject.SetActive(false);
+            }
+        }
         public IEnumerator InitializeLines(EndGameController _endGameController)
         {
             endGameController = _endGameController;

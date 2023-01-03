@@ -10,6 +10,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
     public class ScaleRemoverGate : Gate
     {
         [SerializeField] public AdderType adderType;
+        [Range(0, 99)] [SerializeField] private int minRemovePercentage;
         [Range(0, 100)] [SerializeField] private int maxRemovePercentage;
         [SerializeField] private TMP_Text ballCountText;
         [SerializeField] private float distance = 8f;
@@ -28,8 +29,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void OnEnable()
         {
+            Debug.Log("Gate Activated");
             ballCountText.text = "";
-            currentRemovePercentage = UnityEngine.Random.Range(0, maxRemovePercentage + 1);
+            currentRemovePercentage = UnityEngine.Random.Range(minRemovePercentage, maxRemovePercentage + 1);
             ballManager = BallManager.Instance;
             StartCoroutine(DistanceCheck());
             ballManager.OnGateCountCheck += StartChecking;
@@ -37,6 +39,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void OnDisable()
         {
+            Debug.Log("Gate Deactivated");
             StopAllCoroutines();
             ballManager.OnGateCountCheck -= StartChecking;
         }

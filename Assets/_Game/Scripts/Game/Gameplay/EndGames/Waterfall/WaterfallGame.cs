@@ -58,9 +58,9 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
 
         private IEnumerator MoveDownwards()
         {
-            Vector3 newPos = transform.position;
-            newPos.y = 0;
-            playerController.transform.DOMove(newPos, 2f).SetEase(Ease.Linear);
+            //Vector3 newPos = transform.position;
+            //newPos.y = 0;
+            playerController.transform.DOMoveY(0, 2f).SetEase(Ease.Linear);
             yield return new WaitForSeconds(2f);
         }
 

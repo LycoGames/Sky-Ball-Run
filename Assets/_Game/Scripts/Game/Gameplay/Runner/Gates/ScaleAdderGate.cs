@@ -11,7 +11,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
     public class ScaleAdderGate : Gate
     {
         [SerializeField] private AdderType adderType;
-        [Range(0, 100)] [SerializeField] private int maxAddPercentage;
+        [Range(0, 99)] [SerializeField] private int minAddPercentage;
+        [Range(0, 300)] [SerializeField] private int maxAddPercentage;
         [SerializeField] private TMP_Text ballCountText;
         [SerializeField] private Gate ReverseGatePrefab;
         [SerializeField] private float distance=8f;
@@ -32,8 +33,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void OnEnable()
         {
+            Debug.Log("Gate Activated");
             ballCountText.text = "";
-            currentAddPercentage = UnityEngine.Random.Range(0, maxAddPercentage + 1);
+            currentAddPercentage = UnityEngine.Random.Range(minAddPercentage, maxAddPercentage + 1);
             ballManager = BallManager.Instance;
             StartCoroutine(DistanceCheck());
             ballManager.OnGateCountCheck += StartChecking;
@@ -41,6 +43,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void OnDisable()
         {
+            Debug.Log("Gate Deactivated");
             StopAllCoroutines();
             ballManager.OnGateCountCheck -= StartChecking;
         }

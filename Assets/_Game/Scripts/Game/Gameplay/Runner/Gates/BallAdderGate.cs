@@ -14,22 +14,23 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         private BallManager ballManager;
         private int currentAddPercentage;
 
-        private void Start()
-        {
-            OnEnterGate += AddBall;
-        }
+        
 
         private void OnEnable()
         {
+            //OnEnterGate += AddBall;
             currentAddPercentage = UnityEngine.Random.Range(0, maxAddPercentage + 1);
             ballManager = BallManager.Instance;
             ballManager.OnTotalBallCountChange += CheckSize;
             CheckSize(0);
+            Debug.Log("Gate Actived");
         }
 
         private void OnDisable()
         {
+            //OnEnterGate -= AddBall;
             ballManager.OnTotalBallCountChange -= CheckSize;
+            Debug.Log("Gate Disable");
         }
 
         private void AddBall()

@@ -25,6 +25,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
 
         public void destroyColumnHeads()
         {
+            BallManager.Instance.CheckingCurrentColumn -= CheckColumnSize;
             Destroy(columnHeadsParent.gameObject);
         }
         public void ClearAllColumns()
@@ -88,6 +89,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
         public IEnumerator InitializeHeadsOrganizer(int maxColumn, float _distance, PlayerController _playerController,
             int maxFloor, int maxRow)
         {
+            BallManager.Instance.CheckingCurrentColumn += CheckColumnSize;
             playerController = _playerController;
             distance = _distance;
             ColumnHeads = new List<ColumnHead>();
@@ -169,6 +171,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
             activeList = activeList.Distinct().ToList();
             ColumnHeads.Clear();
             ColumnHeads.AddRange(activeList);
+        }
+
+        private void CheckColumnSize()
+        {
+            BallManager.Instance.currentColumn = GetActiveList().Count;
         }
 
     }

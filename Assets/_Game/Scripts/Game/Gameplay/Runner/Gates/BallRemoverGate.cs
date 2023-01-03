@@ -16,19 +16,24 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void Start()
         {
-            OnEnterGate += RemoveBall;
+            
         }
+
         private void OnEnable()
         {
+            //OnEnterGate += RemoveBall;
             currentRemovePercentage = UnityEngine.Random.Range(0,maxRemovePercentage + 1);
             ballManager = BallManager.Instance;
             ballManager.OnTotalBallCountChange += CheckSize;
             CheckSize(0);
+            Debug.Log("Gate Actived");
         }
 
         private void OnDisable()
         {
+            //OnEnterGate -= RemoveBall;
             ballManager.OnTotalBallCountChange -= CheckSize;
+            Debug.Log("Gate Disable");
         }
 
         private void RemoveBall()

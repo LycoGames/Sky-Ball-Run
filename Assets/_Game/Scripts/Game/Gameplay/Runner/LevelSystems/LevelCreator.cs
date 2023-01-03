@@ -14,21 +14,22 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
 
         private LevelSpecs levelSpecs;
         private LinesController createdLinesController;
-        private int loadedLevel;
+        private int currentLevel;
 
         public EndGameController EndGameController { get; private set; }
         public LevelSpecs LevelSpecs() => levelSpecs;
 
-        public void OnInstantiate(int _loadedLevel)
+        public void OnInstantiate(int _currentLevel)
         {
-            loadedLevel = _loadedLevel;
-            int LevelCount = level.GetLevelCount();
-            if (loadedLevel >= LevelCount) loadedLevel %= LevelCount;
-            levelSpecs = level.GetLevels()[loadedLevel];
+            currentLevel = _currentLevel;
+            int levelCount = level.GetLevelCount();
+            levelSpecs = currentLevel >= levelCount ? level.GetLevels()[currentLevel % levelCount] : level.GetLevels()[currentLevel];
+            
         }
 
         public IEnumerator CreateLevel()
         {
+            levelSpecs.linesController.DisableAllLines();
             createdLinesController=Instantiate(levelSpecs.linesController);
             SetEndGame();
             yield return StartCoroutine(createdLinesController.InitializeLines(EndGameController));
@@ -42,7 +43,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
         private void SetEndGame()
         {
             List<EndGameController> endGames = level.GetEndGames();
-            int index = loadedLevel % endGames.Count;
+            int index = currentLevel % endGames.Count;
+            Debug.Break();
+            Debug.Log("Index: "+index+" Level: "+currentLevel+" Count: "+endGames.Count);
             EndGameController = Instantiate(endGames[index]);
         }
     }
