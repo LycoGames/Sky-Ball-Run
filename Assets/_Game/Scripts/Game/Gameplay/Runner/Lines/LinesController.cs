@@ -14,13 +14,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
 
         [SerializeField] private List<Line> lineList;
         private int currentLine;
-        
-        [SerializeField] private EndGameController endGameController;
 
-        public EndGameController EndGameController => endGameController;
+        private EndGameController endGameController;
 
-        public IEnumerator InitializeLines()
+        public IEnumerator InitializeLines(EndGameController _endGameController)
         {
+            endGameController = _endGameController;
+            SetEndGamePosition();
             int counter = showedLineCount;
             foreach (var line in lineList)
             {
@@ -31,13 +31,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
                     counter--;
                 }
             }
-
             yield return null;
         }
 
-        public Transform GetLastLine()
+        private void SetEndGamePosition()
         {
-            return lineList.Last().transform;
+            endGameController.transform.position = lineList.Last().transform.position;
+            endGameController.transform.rotation = lineList.Last().transform.rotation;
+            endGameController.transform.parent = transform;
+            endGameController.gameObject.SetActive(false);
         }
 
         private void SwapLine(int index)
