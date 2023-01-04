@@ -70,7 +70,7 @@ namespace _Game.Scripts.Game.Components
             InitializeBallCountCanvas();
             
             
-            yield return StartCoroutine(ballManager.InitializeBallManager(ballPool, playerController,levelCreator.LevelSpecs(),playerFollowerCamera));
+            yield return StartCoroutine(ballManager.InitializeBallManager(ballPool, playerController,levelCreator.BallSpecs(),playerFollowerCamera));
             yield return StartCoroutine(levelCreator.CreateLevel());
             
             SetupEndGame();

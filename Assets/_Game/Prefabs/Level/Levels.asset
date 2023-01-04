@@ -13,18 +13,9 @@ MonoBehaviour:
   m_Name: Levels
   m_EditorClassIdentifier: 
   levelSpecs:
-  - linesController: {fileID: 5066103876223209529, guid: ee847db5fe0ba9a4fa3577a8fbe80664, type: 3}
+  - linesController: {fileID: 5066103876223209529, guid: ecb5b0a43cc4e644f9d1857531b624e3, type: 3}
     ballColors: {r: 0, g: 0, b: 0, a: 0}
-    column: 3
-    row: 8
-    floor: 3
-  - linesController: {fileID: 5066103876223209529, guid: d8be7a51040701547bda51d3b552ce58, type: 3}
-    ballColors: {r: 0, g: 0, b: 0, a: 0}
-    column: 4
-    row: 9
-    floor: 4
-  - linesController: {fileID: 5066103876223209529, guid: 19d7a301754345c4ca6e5157d0701ce9, type: 3}
-    ballColors: {r: 0, g: 0, b: 0, a: 0}
-    column: 3
-    row: 7
-    floor: 2
+  endGames:
+  - {fileID: 5248557172779755024, guid: 9fd911e2ac4576744b0a79498b7a7570, type: 3}
+  - {fileID: 254778847197471065, guid: 9cfd8995de3eedd4d8d68ba86a1e4e1b, type: 3}
+  - {fileID: 891623664712054509, guid: 1c07b83c248de214ea2c49e53f53755c, type: 3}

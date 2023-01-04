@@ -10,12 +10,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
 {
     public class LinesController : MonoBehaviour
     {
-        [SerializeField] private int showedLineCount;
-
+        [SerializeField] private BallSpecs ballSpecs;
         [SerializeField] private List<Line> lineList;
+        
         private int currentLine;
-
+        private int showedLineCount;
         private EndGameController endGameController;
+
+        public BallSpecs GetBallSpecs() => ballSpecs;
+        
 
         public void DisableAllLines()
         {
@@ -24,8 +27,9 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
                 line.gameObject.SetActive(false);
             }
         }
-        public IEnumerator InitializeLines(EndGameController _endGameController)
+        public IEnumerator InitializeLines(EndGameController _endGameController,int _showedLineCount)
         {
+            showedLineCount = _showedLineCount;
             endGameController = _endGameController;
             SetEndGamePosition();
             int counter = showedLineCount;
@@ -55,5 +59,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
             if (index + showedLineCount < lineList.Count) lineList[index + showedLineCount].gameObject.SetActive(true);
             else if(index + showedLineCount == lineList.Count)endGameController.gameObject.SetActive(true);
         }
+    }
+    [Serializable]
+    public struct BallSpecs
+    {
+        public int column;
+        public int row;
+        public int floor;
     }
 }

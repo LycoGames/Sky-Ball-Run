@@ -20,8 +20,5 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
     {
         public LinesController linesController;
         public Color ballColors;
-        public int column;
-        public int row;
-        public int floor;
     }
 }

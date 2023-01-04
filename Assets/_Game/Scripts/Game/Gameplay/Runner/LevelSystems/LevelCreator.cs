@@ -11,13 +11,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
     public class LevelCreator : MonoBehaviour
     {
         [SerializeField] private Level level;
+        [SerializeField] private int showedLineCount;
 
         private LevelSpecs levelSpecs;
         private LinesController createdLinesController;
         private int currentLevel;
 
         public EndGameController EndGameController { get; private set; }
-        public LevelSpecs LevelSpecs() => levelSpecs;
+        public BallSpecs BallSpecs() => levelSpecs.linesController.GetBallSpecs();
 
         public void OnInstantiate(int _currentLevel)
         {
@@ -32,7 +33,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
             levelSpecs.linesController.DisableAllLines();
             createdLinesController=Instantiate(levelSpecs.linesController);
             SetEndGame();
-            yield return StartCoroutine(createdLinesController.InitializeLines(EndGameController));
+            yield return StartCoroutine(createdLinesController.InitializeLines(EndGameController,showedLineCount));
         }
 
         public void DestroyLevel()
@@ -44,8 +45,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
         {
             List<EndGameController> endGames = level.GetEndGames();
             int index = currentLevel % endGames.Count;
-            Debug.Break();
-            Debug.Log("Index: "+index+" Level: "+currentLevel+" Count: "+endGames.Count);
             EndGameController = Instantiate(endGames[index]);
         }
     }
