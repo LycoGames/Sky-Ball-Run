@@ -7,6 +7,7 @@ namespace _Game.Scripts.Base.ObjectPooling
     public abstract class ObjectPool : MonoBehaviour
     {
         public List<GameObject> pooledObjects=new List<GameObject>();
+        [SerializeField] private List<Material> ballMats;
         public GameObject objectToPool;
         public int amountToPool;
         protected Material ballMaterial;
@@ -32,7 +33,9 @@ namespace _Game.Scripts.Base.ObjectPooling
         {
             GameObject ball;
             ball = Instantiate(objectToPool, transform);
-            ball.GetComponent<MeshRenderer>().material = ballMaterial;
+            int random = Random.Range(0, ballMats.Count);
+            Material material = ballMats[random];
+            ball.GetComponent<MeshRenderer>().material = material;
             ball.gameObject.SetActive(false);
             pooledObjects.Add(ball.gameObject);
             return ball;
