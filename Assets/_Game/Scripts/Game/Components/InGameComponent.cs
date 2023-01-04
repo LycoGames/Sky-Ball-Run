@@ -68,9 +68,10 @@ namespace _Game.Scripts.Game.Components
             InitializePlayerFollowerCamera();
             InitializeLevelCreator(level);
             InitializeBallCountCanvas();
-            
-            
-            yield return StartCoroutine(ballManager.InitializeBallManager(ballPool, playerController,levelCreator.BallSpecs(),playerFollowerCamera));
+
+            ballPool.amountToPool = ballManager.GetMaxBallCount();
+            yield return StartCoroutine(ballPool.StartInstantiatePool(levelCreator.BallSpecs().ballColor));
+            yield return StartCoroutine(ballManager.InitializeBallManager(playerController,levelCreator.BallSpecs(),playerFollowerCamera));
             yield return StartCoroutine(levelCreator.CreateLevel());
             
             SetupEndGame();

@@ -9,6 +9,7 @@ namespace _Game.Scripts.Base.ObjectPooling
         public List<GameObject> pooledObjects=new List<GameObject>();
         public GameObject objectToPool;
         public int amountToPool;
+        protected Material ballMaterial;
 
 
         protected abstract IEnumerator FillThePool();
@@ -31,6 +32,7 @@ namespace _Game.Scripts.Base.ObjectPooling
         {
             GameObject ball;
             ball = Instantiate(objectToPool, transform);
+            ball.GetComponent<MeshRenderer>().material = ballMaterial;
             ball.gameObject.SetActive(false);
             pooledObjects.Add(ball.gameObject);
             return ball;

@@ -64,6 +64,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
     [Serializable]
     public struct BallSpecs
     {
+        public Material ballColor;
         public int column;
         public int row;
         public int floor;

@@ -61,18 +61,13 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         }
 
         public void ClearAllColumns() => headsOrganizer.ClearAllColumns();
-
-        public IEnumerator InitializeBallManager(BallPool _ballPool, PlayerController _playerController,
-            BallSpecs ballSpecs, CinemachineVirtualCamera playerFollowerCamera)
+        public int GetMaxBallCount() => maxColumn * maxFloor * maxRow;
+        public IEnumerator InitializeBallManager(PlayerController _playerController, BallSpecs ballSpecs, CinemachineVirtualCamera playerFollowerCamera)
         {
             GameManager.Instance.OnRevive += SpawnRevievBalls;
-            ballPool = _ballPool;
-            MaxBallCount = currentColumn * currentRow * currentFloor * 4;
-            ballPool.amountToPool = MaxBallCount;
+            ballPool=BallPool.Instance;
             playerController = _playerController;
-            yield return StartCoroutine(ballPool.StartInstantiatePool());
-            yield return StartCoroutine(
-                headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
+            yield return StartCoroutine(headsOrganizer.InitializeHeadsOrganizer(maxColumn, distance, playerController, maxFloor, maxRow));
             yield return StartCoroutine(InstantiateStartBalls(ballSpecs.column, ballSpecs.floor, ballSpecs.row));
             yield return StartCoroutine(headsOrganizer.SetPositionsInstantly());
         }
