@@ -31,6 +31,7 @@ namespace _Game.Scripts.Game.Components
         [SerializeField] private BallManager ballManagerPrefab;
         [SerializeField] private BallPool ballPoolPrefab;
         [SerializeField] private GameObject ballCountCanvasPrefab;
+        [SerializeField] private int ballAmountDivision=8;
 
         public int GainedDiamond { get; private set; }
 
@@ -69,7 +70,7 @@ namespace _Game.Scripts.Game.Components
             InitializeLevelCreator(level);
             InitializeBallCountCanvas();
 
-            ballPool.amountToPool = ballManager.GetMaxBallCount();
+            ballPool.amountToPool = ballManager.GetMaxBallCount() / ballAmountDivision;
             yield return StartCoroutine(ballPool.StartInstantiatePool(levelCreator.BallSpecs().ballColor,0==(level+1)%bonusLevel));
             yield return StartCoroutine(ballManager.InitializeBallManager(playerController,levelCreator.BallSpecs(),playerFollowerCamera));
             yield return StartCoroutine(levelCreator.CreateLevel());

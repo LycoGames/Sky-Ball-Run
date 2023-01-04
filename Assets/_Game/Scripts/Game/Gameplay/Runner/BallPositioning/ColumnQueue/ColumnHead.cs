@@ -37,10 +37,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.ColumnQueue
             GameObject emptyGO = new GameObject();
             emptyGO.name = gameObject.name + " List";
             emptyGO.transform.parent = GameObject.Find("Column Heads").transform;
-            yield return StartCoroutine(InstantiateBallColumns(emptyGO.transform, columnCount, distance, maxFloor));
+            yield return StartCoroutine(InstantiateBallColumns(emptyGO.transform, columnCount, maxFloor));
         }
 
-        public IEnumerator InstantiateBallColumns(Transform parent, int columnCount, float distance, int maxFloor)
+        public IEnumerator InstantiateBallColumns(Transform parent, int columnCount, int maxFloor)
         {
             BallColumns = new List<BallColumn>();
             for (int i = 0; i < columnCount; i++)
