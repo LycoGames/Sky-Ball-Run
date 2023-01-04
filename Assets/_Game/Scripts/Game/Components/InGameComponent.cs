@@ -103,6 +103,7 @@ namespace _Game.Scripts.Game.Components
 
         public void OnDestruct()
         {
+            endGameComponent.VirtualCamera = playerFollowerCamera;
             gameManager.OnGainDiamond -= ChangeDiamond;
             gameManager.ArriveEndLine -= ArriveEndLine;
             gameManager.LoseGame -= LoseGame;

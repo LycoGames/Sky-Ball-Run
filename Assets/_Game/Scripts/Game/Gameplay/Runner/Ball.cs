@@ -38,6 +38,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             if (other.CompareTag("Obstacle") && meshRenderer.enabled)
             {
                 RemoveBallWithAnimation();
+                Debug.Log("Ball Destroyed");
             }
             
         }
@@ -59,6 +60,16 @@ namespace _Game.Scripts.Game.Gameplay.Runner
             myCollider.enabled = false;
         }
 
+        public void DisableMyCollider() => Destroy(myCollider);
+
+        public void RemoveBallWithoutRemoveFromList()
+        {
+            if (meshRenderer.enabled == false) return;
+            DisableMyCollider();
+            effect.Play();
+            AudioSourceController.Instance.PlaySoundType(SoundType.BallExplode);
+            meshRenderer.enabled = false;
+        }
         public void RemoveBallWithAnimation()
         {
             if (meshRenderer.enabled == false) return;

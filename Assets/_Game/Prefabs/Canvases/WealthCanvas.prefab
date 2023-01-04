@@ -556,8 +556,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: 0}
-  m_SizeDelta: {x: -68.60693, y: -49.922607}
+  m_AnchoredPosition: {x: 0.00012207031, y: -50.01953}
+  m_SizeDelta: {x: -68.60693, y: -149.96072}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5981601117756283066
 CanvasRenderer:
@@ -581,7 +581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -889,3 +889,4 @@ MonoBehaviour:
   levelText: {fileID: 6162207273349471414}
   diamondSection: {fileID: 7972216099226814722}
   diamondText: {fileID: 1763740233453901055}
+  levelPanel: {fileID: 4835418771162767227}

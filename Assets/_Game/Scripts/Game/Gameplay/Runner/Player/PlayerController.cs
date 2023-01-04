@@ -89,8 +89,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
         {
             if (!canMove) return;
             
-            //xMoveRef.Kill();
-            //xMoveRef = transform.DOMoveX(newXPos, horizontalSpeed);
             newXPos = Mathf.Clamp(newXPos, -boundHorizontal, boundHorizontal);
             newPos = transform.position;
             newPos.x = newXPos;

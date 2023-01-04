@@ -7,10 +7,12 @@ namespace _Game.Scripts.Game.UserInterfaces.InGame
 {
     public class WealthCanvas : BaseCanvas, IStartable, IQuitable
     {
+        private const string bonusText = "Bonus";
         [SerializeField] private TMP_Text levelText;
         [SerializeField] private RectTransform diamondSection;
         [SerializeField] private TMP_Text diamondText;
-
+        [SerializeField] private GameObject levelPanel;
+        
         private readonly Vector3 sectionChangeScale = new(.5f, .5f, .5f);
 
         // eğer coin ile diamond aynı anda toplanma ihtimali var ise tweener her para birimine özel olmalıdır
@@ -30,7 +32,9 @@ namespace _Game.Scripts.Game.UserInterfaces.InGame
 
         public void SetupLevel(string value)
         {
+            levelPanel.SetActive(true);
             levelText.text = value;
+            if(bonusText==value)levelPanel.SetActive(false);
         }
 
         public void ChangeDiamond(string value)

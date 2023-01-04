@@ -2,11 +2,13 @@ using System;
 using _Game.Scripts.Base.Component;
 using _Game.Scripts.Game.Enums;
 using _Game.Scripts.Game.Gameplay.EndGames;
+using _Game.Scripts.Game.Gameplay.EndGames.FlooredEndGame;
 using _Game.Scripts.Game.Gameplay.EndGames.Paintball;
 using _Game.Scripts.Game.Gameplay.EndGames.Waterfall;
 using _Game.Scripts.Game.Gameplay.Runner;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
 using _Game.Scripts.Game.UserInterfaces.InGame;
+using Cinemachine;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Components
@@ -18,6 +20,8 @@ namespace _Game.Scripts.Game.Components
 
         public EndGameController EndGameController { get; set; }
         public PlayerController PlayerController { get; set; }
+        
+        public CinemachineVirtualCamera VirtualCamera { get; set; }
 
         public int GainedDiamond { get; private set; }
 
@@ -57,14 +61,29 @@ namespace _Game.Scripts.Game.Components
             EndGameController.GainedCoinDiamond += ChangeDiamond;
             EndGameController.EndGameEnded += EndGameEnded;
 
-            var waterfallGame = EndGameController as WaterfallGame;
-            if (waterfallGame != null)
-                waterfallGame.Setup(PlayerController, wealthCanvas.transform);
-            else
+            switch (EndGameController)
             {
-                var paintballGame = EndGameController as PaintballGame;
-                if (paintballGame != null) paintballGame.Setup(fixedJoystick);
+                case WaterfallGame:
+                    var waterfallGame = EndGameController as WaterfallGame;
+                    waterfallGame.Setup(PlayerController, wealthCanvas.transform);
+                    break;
+                case PaintballGame:
+                    var paintballGame = EndGameController as PaintballGame;
+                    paintballGame.Setup(fixedJoystick);
+                    break;
+                case FlooredEndGame:
+                    var flooredEndGame = EndGameController as FlooredEndGame;
+                    flooredEndGame.Setup(PlayerController,wealthCanvas.transform,VirtualCamera);
+                    break;
             }
+            // //var waterfallGame = EndGameController as WaterfallGame;
+            // if (waterfallGame != null)
+            //     waterfallGame.Setup(PlayerController, wealthCanvas.transform);
+            // else
+            // {
+            //     var paintballGame = EndGameController as PaintballGame;
+            //     if (paintballGame != null) paintballGame.Setup(fixedJoystick);
+            // }
 
             EndGameController.LaunchEndGame();
         }
