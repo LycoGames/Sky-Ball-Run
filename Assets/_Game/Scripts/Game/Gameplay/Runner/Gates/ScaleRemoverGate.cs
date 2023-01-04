@@ -25,12 +25,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         {
             wfsCheckTime = new WaitForSeconds(checkTime);
             OnEnterGate += RemoveScale;
+            OnDisableGate += RemoveChecking;
         }
 
         private void OnEnable()
         {
             Debug.Log("Gate Activated");
+            removeSize=Int32.MaxValue;
             ballCountText.text = "";
+            ballCountText.enabled = false;
             currentRemovePercentage = UnityEngine.Random.Range(minRemovePercentage, maxRemovePercentage + 1);
             ballManager = BallManager.Instance;
             StartCoroutine(DistanceCheck());
@@ -40,14 +43,15 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         private void OnDisable()
         {
             Debug.Log("Gate Deactivated");
+            RemoveChecking();
             StopAllCoroutines();
-            ballManager.OnGateCountCheck -= StartChecking;
         }
 
         private IEnumerator DistanceCheck()
         {
             while (Vector3.Distance(ballManager.transform.position, transform.position) > distance)
                 yield return wfsCheckTime;
+            ballCountText.enabled = true;
             CheckSize();
         }
 
@@ -58,6 +62,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private void RemoveScale()
         {
+            RemoveChecking();
             switch (adderType)
             {
                 case AdderType.WidthRemover:
@@ -70,8 +75,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     BallManager.Instance.StartCoroutine(BallManager.Instance.LengthRemover(removeSize));
                     break;
             }
-
             gameObject.SetActive(false);
+        }
+
+        private void RemoveChecking()
+        {
+            ballManager.OnGateCountCheck -= StartChecking;
         }
 
         private void CheckSize()
@@ -85,19 +94,19 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                 case AdderType.WidthRemover:
                     newRemoveSize = ballManager.currentColumn * ((float)currentRemovePercentage / 100);
                     if (newRemoveSize < 1) newRemoveSize = 1;
-                    removeSize = (int)Math.Round(newRemoveSize);
+                    SetRemoveSize(newRemoveSize);
                     writeSize = ballManager.GetBallCountOnRemovedColumn(removeSize);
                     break;
                 case AdderType.HeightRemover:
                     newRemoveSize = ballManager.currentFloor * ((float)currentRemovePercentage / 100);
                     if (newRemoveSize < 1) newRemoveSize = 1;
-                    removeSize = (int)Math.Round(newRemoveSize);
+                    SetRemoveSize(newRemoveSize);
                     writeSize = ballManager.GetBallCountOnRemovedFloor(removeSize);
                     break;
                 case AdderType.LengthRemover:
                     newRemoveSize = ballManager.currentRow * ((float)currentRemovePercentage / 100);
                     if (newRemoveSize < 1) newRemoveSize = 1;
-                    removeSize = (int)Math.Round(newRemoveSize);
+                    SetRemoveSize(newRemoveSize);
                     writeSize = ballManager.GetBallCountOnRemovedRow(removeSize);
                     break;
             }
@@ -109,6 +118,12 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             }
 
             ballCountText.text = "-" + writeSize;
+        }
+
+        private void SetRemoveSize(float newRemoveSize)
+        {
+            if (removeSize <= newRemoveSize) return;
+            removeSize = (int)Math.Round(newRemoveSize);
         }
 
 

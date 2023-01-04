@@ -20,6 +20,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                 float newDistance = 0;
                 foreach (var gate in gates)
                 {
+                    gate.DisableGate();
                     newDistance = Vector3.Distance(other.transform.position, gate.transform.position);
                     if (newDistance <= distance)
                     {
@@ -42,6 +43,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
        
         public void SwapGate(Gate RemoveGate, Gate NewGate)
         {
+            Debug.Log("swaped gate");
             gates.Remove(RemoveGate);
             gates.Add(NewGate);
             NewGate.SetDoubleGate(this);

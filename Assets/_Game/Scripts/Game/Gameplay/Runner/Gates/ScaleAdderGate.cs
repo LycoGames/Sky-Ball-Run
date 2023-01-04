@@ -29,12 +29,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             wfsCheckTime = new WaitForSeconds(checkTime);
             CreateReverseGate();
             OnEnterGate += AddScale;
+            OnDisableGate += RemoveChecking;
         }
 
         private void OnEnable()
         {
             Debug.Log("Gate Activated");
             ballCountText.text = "";
+            ballCountText.enabled = false;
             currentAddPercentage = UnityEngine.Random.Range(minAddPercentage, maxAddPercentage + 1);
             ballManager = BallManager.Instance;
             StartCoroutine(DistanceCheck());
@@ -44,12 +46,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         private void OnDisable()
         {
             Debug.Log("Gate Deactivated");
+            RemoveChecking();
             StopAllCoroutines();
-            ballManager.OnGateCountCheck -= StartChecking;
+            
         }
 
         private void AddScale()
         {
+            RemoveChecking();
             switch (adderType)
             {
                 case AdderType.RightAdder:
@@ -62,13 +66,18 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     BallManager.Instance.StartCoroutine(BallManager.Instance.LengthAdder(addSize));
                     break;
             }
-
             gameObject.SetActive(false);
+        }
+
+        private void RemoveChecking()
+        {
+            ballManager.OnGateCountCheck -= StartChecking;
         }
 
         private IEnumerator DistanceCheck()
         {
             while(Vector3.Distance(ballManager.transform.position,transform.position)>distance)yield return wfsCheckTime;
+            ballCountText.enabled = true;
             CheckSize();
         }
 

@@ -9,6 +9,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         [SerializeField] protected Animator myAnimator;
         protected DoubleGate myDoubleGate;
         protected Action OnEnterGate;
+        protected Action OnDisableGate;
         protected bool canCheckSize = true;
         
         private void OnTriggerEnter(Collider other)
@@ -20,6 +21,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         }
 
         public void EnableMyAnimator() => myAnimator.enabled = true;
+
+        public void DisableGate() => OnDisableGate?.Invoke();
         public void EnterGate() => OnEnterGate?.Invoke();
         private void DisableMyCollider() => myCollider.enabled = false;
 
