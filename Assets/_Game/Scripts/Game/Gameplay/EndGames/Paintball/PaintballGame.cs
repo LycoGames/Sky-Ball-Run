@@ -20,6 +20,8 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         [SerializeField] private CountTextUI countTextUI;
         [SerializeField] private ImageOverUIMoverCanvas crosshairUI;
 
+
+        [SerializeField] private int ballToBulletDivider = 10;
         [SerializeField] private float bulletSpeed;
         [SerializeField] private float rateOfFire;
         [SerializeField] private float randomnessMinX;
@@ -64,7 +66,8 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
 
         private void SetupWeapon()
         {
-            paintballWeapon.Setup(bulletSpeed, rateOfFire, BallManager.Instance.TotalBallCount, randomnessMinX,
+            var bulletCount = BallManager.Instance.TotalBallCount / ballToBulletDivider;
+            paintballWeapon.Setup(bulletSpeed, rateOfFire, bulletCount, randomnessMinX,
                 randomnessMaxX, randomnessMinY, randomnessMaxY, countTextUI, EndGameEnd);
         }
 
@@ -90,7 +93,6 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
             target.TargetHit += GainCoin;
         }
 
-
         private IEnumerator ReloadPaintballWeapon()
         {
             foreach (var ball in BallPool.Instance.GetAllActiveBall())
@@ -98,7 +100,6 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
                 ball.transform.DOMove(paintballWeapon.MagazinePosition, 1f).SetEase(Ease.Linear)
                     .OnComplete(() => { })
                     .SetAutoKill(true);
-                
             }
 
             yield return new WaitForSeconds(1f);

@@ -14,14 +14,20 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
         [SerializeField] private CinemachineVirtualCamera virtualCamera;
         [SerializeField] private Transform ballSetupTransform;
         [SerializeField] private WaterfallCollider waterfallCollider;
+        [SerializeField] private DiamondRewardVisualizer diamondRewardVisualizerPrefab;
+
+        private DiamondRewardVisualizer diamondRewardVisualizer;
 
         private int totalBallCount;
         private int collectedBallCount;
 
         //private PlayerController playerController;
 
-        public void Setup(PlayerController _playerController)
+        public void Setup(PlayerController _playerController, Transform parent)
         {
+            diamondRewardVisualizer = Instantiate(diamondRewardVisualizerPrefab);
+            diamondRewardVisualizer.DiamondCollected += IncreaseCoin;
+            diamondRewardVisualizer.Parent = parent;
             playerController = _playerController;
             SetupTotalBallCount();
             SetupBasketList();
@@ -95,7 +101,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
         {
             foreach (var basket in waterfallBasketList)
             {
-                basket.GoldCollected += IncreaseCoin;
+                basket.DiamondRewardVisualizer = diamondRewardVisualizer;
             }
         }
     }

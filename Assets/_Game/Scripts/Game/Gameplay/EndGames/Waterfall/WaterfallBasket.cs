@@ -7,10 +7,10 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
 {
     public class WaterfallBasket : MonoBehaviour
     {
-        public Action<int> GoldCollected;
-
         [SerializeField] private int pointMultiplier;
         [SerializeField] private TMP_Text multiplierText;
+
+        public DiamondRewardVisualizer DiamondRewardVisualizer { get; set; }
 
         private void OnEnable()
         {
@@ -21,8 +21,8 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
         {
             if (!other.TryGetComponent(out Ball ball)) return;
 
-            GoldCollected?.Invoke(pointMultiplier);
             // ball.ReturnToPool();
+            DiamondRewardVisualizer.DiamondRewardSequence(other.transform.position, pointMultiplier);
             other.GetComponent<MeshRenderer>().enabled = false;
             other.GetComponent<AudioSource>().Play();
         }

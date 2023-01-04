@@ -8,7 +8,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames
     {
         public Action<int> GainedCoinDiamond;
         public Action EndGameEnded;
-        
+
         [SerializeField] private ParticleSystem confettiEffect;
 
         protected PlayerController playerController;
@@ -30,6 +30,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames
         {
             confettiEffect.transform.position = pos;
         }
+
         public abstract void LaunchEndGame();
     }
 }

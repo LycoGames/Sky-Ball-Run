@@ -1763,6 +1763,7 @@ MonoBehaviour:
   virtualCamera: {fileID: 239411042813799781}
   ballSetupTransform: {fileID: 8114839905274321964}
   waterfallCollider: {fileID: 6071715895091892885}
+  diamondRewardVisualizerPrefab: {fileID: 3992102984554616852, guid: 426976c0607bb714cbb8644060d44bac, type: 3}
 --- !u!1 &6071715894998121472
 GameObject:
   m_ObjectHideFlags: 0

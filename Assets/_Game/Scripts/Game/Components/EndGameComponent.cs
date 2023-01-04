@@ -1,17 +1,18 @@
 using System;
 using _Game.Scripts.Base.Component;
+using _Game.Scripts.Game.Enums;
 using _Game.Scripts.Game.Gameplay.EndGames;
 using _Game.Scripts.Game.Gameplay.EndGames.Paintball;
 using _Game.Scripts.Game.Gameplay.EndGames.Waterfall;
 using _Game.Scripts.Game.Gameplay.Runner;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
+using _Game.Scripts.Game.UserInterfaces.InGame;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Components
 {
     public class EndGameComponent : MonoBehaviour, IComponent, IConstructable, IDestructible
     {
-        
         public Action<string> DiamondChange;
         public Action OnEndGameEnded;
 
@@ -21,6 +22,8 @@ namespace _Game.Scripts.Game.Components
         public int GainedDiamond { get; private set; }
 
         private DataComponent dataComponent;
+        private UIComponent uiComponent;
+        private WealthCanvas wealthCanvas;
 
         private int lastSavedDiamond;
 
@@ -28,6 +31,8 @@ namespace _Game.Scripts.Game.Components
         {
             Debug.Log("<color=lime>" + gameObject.name + " initialized!</color>");
             dataComponent = componentContainer.GetComponent("DataComponent") as DataComponent;
+            uiComponent = componentContainer.GetComponent("UIComponent") as UIComponent;
+            wealthCanvas = uiComponent.GetCanvas(CanvasTrigger.Wealth) as WealthCanvas;
         }
 
         public void OnConstruct()
@@ -52,7 +57,7 @@ namespace _Game.Scripts.Game.Components
 
             var waterfallGame = EndGameController as WaterfallGame;
             if (waterfallGame != null)
-                waterfallGame.Setup(PlayerController);
+                waterfallGame.Setup(PlayerController, wealthCanvas.transform);
             else
             {
                 var paintballGame = EndGameController as PaintballGame;
