@@ -12,10 +12,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
     {
         [SerializeField] private Level level;
         [SerializeField] private int showedLineCount;
-        [SerializeField] private int easyLevelPartEndIndex=6;
+        [SerializeField] private int easyLevelPartEnd=6;
 
         [Space][Header("BonusLevel")][Space]
-        [SerializeField] private int bonusLevelIndex = 6;
+        [SerializeField] private int bonusLevel = 6;
         [SerializeField] private EndGameController bonusLevelEndGame;
 
         private LevelSpecs levelSpecs;
@@ -32,10 +32,10 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
             int levelIndex = currentLevel;
             if (levelIndex >= levelCount)
             {
-                 levelIndex = currentLevel % levelCount + easyLevelPartEndIndex;
+                 levelIndex = currentLevel % levelCount + easyLevelPartEnd;
                  if (levelIndex >= levelCount)
                  {
-                     levelIndex = levelIndex % levelCount + easyLevelPartEndIndex;
+                     levelIndex = levelIndex % levelCount + easyLevelPartEnd;
                  }
             }
             levelSpecs = level.GetLevels()[levelIndex];
@@ -57,7 +57,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
 
         private void SetEndGame()
         {
-            if ((currentLevel + 1) % bonusLevelIndex == 0)
+            if ((currentLevel + 1) % bonusLevel == 0)
             {
                 EndGameController = Instantiate(bonusLevelEndGame);
                 return;
