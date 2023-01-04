@@ -42,6 +42,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Lines
                     counter--;
                 }
             }
+            if(counter>0)endGameController.gameObject.SetActive(true);
             yield return null;
         }
 
