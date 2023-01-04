@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourceControllerPrefab: {fileID: 525235985025334743, guid: ce93dfe8a3086f64a973c9fccd6c6381, type: 3}
+  bonusLevelIndex: 5

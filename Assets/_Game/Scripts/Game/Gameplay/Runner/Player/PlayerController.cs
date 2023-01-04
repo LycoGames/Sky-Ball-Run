@@ -47,6 +47,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Player
 
         }
 
+        public void SetSpeed(float speed)
+        {
+            verticalSpeed = speed;
+        }
+
         public void ReviveSpeedSet()
         {
             StopAllCoroutines();

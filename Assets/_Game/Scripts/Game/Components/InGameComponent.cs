@@ -56,7 +56,7 @@ namespace _Game.Scripts.Game.Components
             endGameComponent = componentContainer.GetComponent("EndGameComponent") as EndGameComponent;
         }
 
-        public IEnumerator InitializeGame(int level)
+        public IEnumerator InitializeGame(int level,int bonusLevel)
         {
             InitializeCamera();
             InitializePlayer();
@@ -70,7 +70,7 @@ namespace _Game.Scripts.Game.Components
             InitializeBallCountCanvas();
 
             ballPool.amountToPool = ballManager.GetMaxBallCount();
-            yield return StartCoroutine(ballPool.StartInstantiatePool(levelCreator.BallSpecs().ballColor));
+            yield return StartCoroutine(ballPool.StartInstantiatePool(levelCreator.BallSpecs().ballColor,0==(level+1)%bonusLevel));
             yield return StartCoroutine(ballManager.InitializeBallManager(playerController,levelCreator.BallSpecs(),playerFollowerCamera));
             yield return StartCoroutine(levelCreator.CreateLevel());
             

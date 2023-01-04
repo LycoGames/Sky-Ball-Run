@@ -23,7 +23,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.FlooredEndGame
                     OnFirstHit?.Invoke();
                 }
                 ball.RemoveBallWithoutRemoveFromList();
-                DiamondRewardVisualizer.DiamondRewardSequence(other.transform.position, pointMultiplier);
+                DiamondRewardVisualizer.DiamondRewardSequence(other.transform.position, 1);
                 OnBallHit?.Invoke(pointMultiplier);
             }
         }

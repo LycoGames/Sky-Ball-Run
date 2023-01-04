@@ -11,6 +11,7 @@ namespace _Game.Scripts.Base.ObjectPooling
         public GameObject objectToPool;
         public int amountToPool;
         protected Material ballMaterial;
+        protected bool isBonusLevel;
 
 
         protected abstract IEnumerator FillThePool();
@@ -33,12 +34,17 @@ namespace _Game.Scripts.Base.ObjectPooling
         {
             GameObject ball;
             ball = Instantiate(objectToPool, transform);
-            int random = Random.Range(0, ballMats.Count);
-            Material material = ballMats[random];
-            ball.GetComponent<MeshRenderer>().material = material;
+            if(isBonusLevel)RandomMaterial();
+            ball.GetComponent<MeshRenderer>().material = ballMaterial;
             ball.gameObject.SetActive(false);
             pooledObjects.Add(ball.gameObject);
             return ball;
+        }
+
+        private void RandomMaterial()
+        {
+            int random = Random.Range(0, ballMats.Count);
+            ballMaterial = ballMats[random];
         }
     }
 }

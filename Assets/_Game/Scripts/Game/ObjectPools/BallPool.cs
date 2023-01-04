@@ -12,9 +12,9 @@ namespace _Game.Scripts.Game.ObjectPools
     {
         public static BallPool Instance;
 
-
-        public IEnumerator StartInstantiatePool(Material _ballMaterial)
+        public IEnumerator StartInstantiatePool(Material _ballMaterial,bool _isBonusLevel)
         {
+            isBonusLevel = _isBonusLevel;
             Instance = this;
             ballMaterial = _ballMaterial;
             yield return StartCoroutine(FillThePool());

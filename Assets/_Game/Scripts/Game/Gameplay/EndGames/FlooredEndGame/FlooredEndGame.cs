@@ -20,6 +20,8 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.FlooredEndGame
         [SerializeField] private float cameraHeight=20f;
         [SerializeField] private float cameraRotateDuration=5f;
         [SerializeField] private float floorDistance = 7.75f;
+        [SerializeField] private float playerForwardSpeed=20f;
+        [SerializeField] private float waitForEndGame = 3f;
 
         private DiamondRewardVisualizer diamondRewardVisualizer;
         private CinemachineVirtualCamera virtualCamera;
@@ -50,6 +52,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.FlooredEndGame
 
         private void MoveTowardPlayerController()
         {
+            playerController.SetSpeed(playerForwardSpeed);
             playerController.StartMove();
             playerController.SetXPosition(playerController.transform.position.x);
         }
@@ -81,7 +84,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.FlooredEndGame
         {
             if (collectedBallCount == totalBallCount)
             {
-                Invoke("WaitForEnd",.25f);
+                Invoke("WaitForEnd",waitForEndGame);
             }
         }
 

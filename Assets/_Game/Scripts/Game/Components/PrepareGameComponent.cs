@@ -46,7 +46,7 @@ namespace _Game.Scripts.Game.Components
         private IEnumerator PreparingGame()
         {
             var level = SetLevel();
-            yield return inGameComponent.StartCoroutine(inGameComponent.InitializeGame(level));
+            yield return inGameComponent.StartCoroutine(inGameComponent.InitializeGame(level,bonusLevelIndex));
             OnGameLaunch?.Invoke();
         }
 
