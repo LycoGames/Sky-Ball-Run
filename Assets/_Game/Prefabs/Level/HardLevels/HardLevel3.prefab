@@ -680,6 +680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballSpecs:
+    ballColor: {fileID: 2100000, guid: 58dba9622c47fda46bf3b474b99e8ec6, type: 2}
     column: 3
     row: 5
     floor: 3

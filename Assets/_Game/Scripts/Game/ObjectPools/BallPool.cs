@@ -13,9 +13,10 @@ namespace _Game.Scripts.Game.ObjectPools
         public static BallPool Instance;
 
 
-        public IEnumerator StartInstantiatePool()
+        public IEnumerator StartInstantiatePool(Material _ballMaterial)
         {
             Instance = this;
+            ballMaterial = _ballMaterial;
             yield return StartCoroutine(FillThePool());
         }
 
@@ -50,7 +51,7 @@ namespace _Game.Scripts.Game.ObjectPools
             for (int i = 0; i < amountToPool; i++)
             {
                 InstantiateObject();
-                if (i % 50 == 0) yield return null;
+                if (i % 100 == 0) yield return null;
             }
 
             yield return null;
