@@ -18,31 +18,39 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         [SerializeField] private Transform hood;
         [SerializeField] private int removePercentage=1;
         [SerializeField] private float coverCloseTime = 2f;
-        [SerializeField] private TextMeshProUGUI removeSizeText;
-        [SerializeField] private float checkTime=1f;
+        [SerializeField] private TMP_Text removeSizeText;
+        [SerializeField] private float checkTime=.25f;
         [SerializeField] private List<ParticleSystem> fireworks;
         [SerializeField] private Transform dropPosition;
         [SerializeField] private int minTakeBallCount;
+        [SerializeField] private float enableDistance=90f;
         private int removeSize;
         private int collectedBallCount;
         private BallManager ballManager;
-        private WaitForSeconds wfsForCheckSize;
-        private Coroutine checkSizeCoroutine;
-        
+        private WaitForSeconds wfsForCheckDistance;
+
         private void OnEnable()
         {
+            wfsForCheckDistance = new WaitForSeconds(checkTime);
             removeSize= Int32.MaxValue;
             ballManager=BallManager.Instance;
-            ballManager.OnGateCountCheck += CheckSize;
-            CheckSize();
+            removeSizeText.text = "";
+            StartCoroutine(DistanceCheck());
         }
 
         private void OnDisable()
         {
             ballManager.OnGateCountCheck -= CheckSize;
+            StopAllCoroutines();
         }
 
-
+        private IEnumerator DistanceCheck()
+        {
+            while (Vector3.Distance(ballManager.transform.position, transform.position) > enableDistance)
+                yield return wfsForCheckDistance;
+            ballManager.OnGateCountCheck += CheckSize;
+            CheckSize();
+        }
         public void CollectBall() => collectedBallCount++;
         public void StartCollectingBalls()
         {

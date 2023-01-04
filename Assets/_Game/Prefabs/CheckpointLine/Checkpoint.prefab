@@ -446,12 +446,13 @@ MonoBehaviour:
   removePercentage: 50
   coverCloseTime: 0.2
   removeSizeText: {fileID: 2952440345280555188}
-  checkTime: 1
+  checkTime: 0.1
   fireworks:
   - {fileID: 6375965666882341281}
   - {fileID: 7747591271279568765}
   dropPosition: {fileID: 2087197270943149790}
   minTakeBallCount: 30
+  enableDistance: 90
 --- !u!1 &1875901783390043882
 GameObject:
   m_ObjectHideFlags: 0

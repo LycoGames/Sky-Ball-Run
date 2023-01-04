@@ -177,7 +177,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                         ball.SetBall(ballColumn);
                     }
                 }
-                yield return null;
             }
 
             PlayBallAddSound();
@@ -342,7 +341,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                         ball.SetBall(ballColumn);
                     }
                 }
-                yield return null;
             }
 
             PlayBallAddSound();
@@ -373,7 +371,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                         ball.SetBall(ballColumn);
                     }
                 }
-                yield return null;
             }
 
             PlayBallAddSound();
