@@ -19,11 +19,13 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
         public Transform Parent { get; set; }
 
         private Camera mainCam;
+        private float screenWidth;
 
         private void Start()
         {
             mainCam = Camera.main;
             diamondWealthPos = new Vector2(300, 680);
+            screenWidth = Screen.width;
         }
 
         public void DiamondRewardSequence(Vector3 position, int gold)
@@ -32,7 +34,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
             var instance = Instantiate(diamondUiPrefab, screenPos, Quaternion.identity, Parent);
             var targetPos = screenPos;
             targetPos.y = YTargetValue;
-            targetPos.x += GetRandomXOffset();
+            targetPos.x = Math.Clamp(targetPos.x + GetRandomXOffset(), 30, screenWidth - 30);
             var rewardSequence = DOTween.Sequence();
             var flyUpSequence = DOTween.Sequence();
             var punchSequence = DOTween.Sequence();
