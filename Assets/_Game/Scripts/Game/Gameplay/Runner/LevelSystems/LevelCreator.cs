@@ -12,6 +12,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
     {
         [SerializeField] private Level level;
         [SerializeField] private int showedLineCount;
+        [SerializeField] private int easyLevelPartEndIndex=6;
+
+        [Space][Header("BonusLevel")][Space]
+        [SerializeField] private int bonusLevelIndex = 6;
+        [SerializeField] private EndGameController bonusLevelEndGame;
 
         private LevelSpecs levelSpecs;
         private LinesController createdLinesController;
@@ -24,8 +29,17 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
         {
             currentLevel = _currentLevel;
             int levelCount = level.GetLevelCount();
-            levelSpecs = currentLevel >= levelCount ? level.GetLevels()[currentLevel % levelCount] : level.GetLevels()[currentLevel];
-            
+            int levelIndex = currentLevel;
+            if (levelIndex >= levelCount)
+            {
+                 levelIndex = currentLevel % levelCount + easyLevelPartEndIndex;
+                 if (levelIndex >= levelCount)
+                 {
+                     levelIndex = levelIndex % levelCount + easyLevelPartEndIndex;
+                 }
+            }
+            levelSpecs = level.GetLevels()[levelIndex];
+            Debug.Log("Loaded Index: "+levelIndex);
         }
 
         public IEnumerator CreateLevel()
@@ -43,6 +57,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
 
         private void SetEndGame()
         {
+            if ((currentLevel + 1) % bonusLevelIndex == 0)
+            {
+                EndGameController = Instantiate(bonusLevelEndGame);
+                return;
+            }
             List<EndGameController> endGames = level.GetEndGames();
             int index = currentLevel % endGames.Count;
             EndGameController = Instantiate(endGames[index]);

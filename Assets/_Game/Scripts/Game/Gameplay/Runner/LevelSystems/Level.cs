@@ -19,6 +19,5 @@ namespace _Game.Scripts.Game.Gameplay.Runner.LevelSystems
     public struct LevelSpecs
     {
         public LinesController linesController;
-        public Color ballColors;
     }
 }

@@ -46,3 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: {fileID: 11400000, guid: 175773d39e04ee74e9e4dfe81d145d42, type: 2}
   showedLineCount: 5
+  easyLevelPartEndIndex: 6
+  bonusLevelIndex: 6
+  bonusLevelEndGame: {fileID: 5248557172779755024, guid: 9fd911e2ac4576744b0a79498b7a7570, type: 3}
