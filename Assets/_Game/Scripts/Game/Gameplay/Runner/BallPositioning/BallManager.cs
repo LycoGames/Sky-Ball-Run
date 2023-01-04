@@ -478,6 +478,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 PlayReshapeSound();
                 return;
             }
+
             List<Ball> repositionedBalls = new List<Ball>();
             repositionedBalls = ballPool.GetAllActiveBall();
             headsOrganizer.ClearAllColumns();
@@ -509,6 +510,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
                 PlayReshapeSound();
                 return;
             }
+
             List<Ball> repositionedBalls = new List<Ball>();
             repositionedBalls = ballPool.GetAllActiveBall();
             headsOrganizer.ClearAllColumns();
