@@ -17,6 +17,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
         [SerializeField] private DiamondRewardVisualizer diamondRewardVisualizerPrefab;
 
         private DiamondRewardVisualizer diamondRewardVisualizer;
+        private Tweener playerMover;
 
         private int totalBallCount;
         private int collectedBallCount;
@@ -66,7 +67,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
         {
             //Vector3 newPos = transform.position;
             //newPos.y = 0;
-            playerController.transform.DOMoveY(0, 2f).SetEase(Ease.Linear);
+            playerMover = playerController.transform.DOMoveY(-50, 2f).SetEase(Ease.Linear);
             yield return new WaitForSeconds(2f);
         }
 
@@ -86,7 +87,10 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
         private void CheckWaterfallGameEnd()
         {
             if (collectedBallCount == totalBallCount)
+            {
+                if (playerMover is { active: true }) playerMover.Kill();
                 EndGameEnded?.Invoke();
+            }
         }
 
         // private void UnRegisterActions()

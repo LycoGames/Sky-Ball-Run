@@ -32,7 +32,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
         {
             Vector3 newPos = follow.position - (follow.forward * distance);
             newPos.x = Mathf.Clamp(newPos.x, minXPos, maxXPos);
-            newPos.y = Mathf.Clamp(newPos.y, 0.01f, 100);
+            newPos.y = Mathf.Clamp(newPos.y, -50f, 100);
             transform.position = newPos;
         }
     }
