@@ -19,6 +19,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
 
         [SerializeField] private CountTextUI countTextUI;
         [SerializeField] private ImageOverUIMoverCanvas crosshairUI;
+        [SerializeField] private DynamicJoystick dynamicJoystickPrefab;
 
 
         [SerializeField] private int ballToBulletDivider = 10;
@@ -37,18 +38,20 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
 
         private Camera cam;
         private int ballCount;
+        private FixedJoystick dynamicJoystick;
 
         public override void LaunchEndGame()
         {
             StartCoroutine(Launch());
         }
 
-        public void Setup()
+        public void Setup(FixedJoystick fixedJoystick)
         {
             cam = Camera.main;
             SetupWeapon();
             SetupTarget();
-            SetupWeaponController();
+            fixedJoystick.gameObject.SetActive(true);
+            SetupWeaponController(fixedJoystick);
         }
 
 
@@ -83,9 +86,9 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
             EndGameEnded?.Invoke();
         }
 
-        private void SetupWeaponController()
+        private void SetupWeaponController(FixedJoystick fixedJoystick)
         {
-            paintballWeaponController.Setup(weaponSensitivity, aimTarget, crosshairUI, cam);
+            paintballWeaponController.Setup(weaponSensitivity, aimTarget, crosshairUI, cam, fixedJoystick);
         }
 
         private void SetupTarget()

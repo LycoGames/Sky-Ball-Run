@@ -21,6 +21,8 @@ namespace _Game.Scripts.Game.Components
 
         public int GainedDiamond { get; private set; }
 
+        [SerializeField] private FixedJoystick fixedJoystick;
+
         private DataComponent dataComponent;
         private UIComponent uiComponent;
         private WealthCanvas wealthCanvas;
@@ -61,7 +63,7 @@ namespace _Game.Scripts.Game.Components
             else
             {
                 var paintballGame = EndGameController as PaintballGame;
-                if (paintballGame != null) paintballGame.Setup();
+                if (paintballGame != null) paintballGame.Setup(fixedJoystick);
             }
 
             EndGameController.LaunchEndGame();
