@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
@@ -11,9 +12,25 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning.Column
         [SerializeField] private float maxXPos = 8;
         public bool IsFollow { private get; set; }
 
+        private void OnEnable()
+        {
+            BallManager.Instance.OnChangeColumnFollowDistance+=SetDistance;
+        }
+
+        private void OnDisable()
+        {
+            BallManager.Instance.OnChangeColumnFollowDistance-=SetDistance;
+        }
+
         public void SetFollow(Transform _follow)
         {
             follow = _follow;
+        }
+
+        private void SetDistance(float _distance)
+        {
+            Debug.Log("Set distance: "+_distance);
+            distance = _distance;
         }
 
         void FixedUpdate()

@@ -17,6 +17,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
     public class BallManager : MonoBehaviour
     {
         public static BallManager Instance;
+        public Action<float> OnChangeColumnFollowDistance;
         public Action CheckingCurrentColumn;
         public Action CheckingCurrentRow;
         public Action CheckingCurrentFloor;
@@ -59,6 +60,8 @@ namespace _Game.Scripts.Game.Gameplay.Runner.BallPositioning
         {
             headsOrganizer.destroyColumnHeads();
         }
+
+        public void SetBallColumnDistance(float distance) => OnChangeColumnFollowDistance?.Invoke(distance);
 
         public void ClearAllColumns() => headsOrganizer.ClearAllColumns();
         public int GetMaxBallCount() => maxColumn * maxFloor * maxRow;

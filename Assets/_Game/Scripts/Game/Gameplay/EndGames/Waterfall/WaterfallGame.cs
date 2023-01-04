@@ -15,6 +15,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
         [SerializeField] private Transform ballSetupTransform;
         [SerializeField] private WaterfallCollider waterfallCollider;
         [SerializeField] private DiamondRewardVisualizer diamondRewardVisualizerPrefab;
+        [SerializeField] private float columnDistance = 0.1f;
 
         private DiamondRewardVisualizer diamondRewardVisualizer;
         private Tweener playerMover;
@@ -47,6 +48,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Waterfall
         private IEnumerator GameCoroutine()
         {
             SetupCamera();
+            BallManager.Instance.SetBallColumnDistance(columnDistance);
             yield return GetWaterfallForm();
             yield return MoveDownwards();
         }
