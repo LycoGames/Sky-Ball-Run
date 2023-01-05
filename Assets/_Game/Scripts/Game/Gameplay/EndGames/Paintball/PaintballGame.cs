@@ -37,20 +37,20 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
 
         private Camera cam;
         private int ballCount;
-        private DynamicJoystick dynamicJoystick;
+        private GameObject joystickPanel;
 
         public override void LaunchEndGame()
         {
             StartCoroutine(Launch());
         }
 
-        public void Setup(DynamicJoystick _dynamicJoystick)
+        public void Setup(GameObject _joystickPanel)
         {
             cam = Camera.main;
             SetupWeapon();
             SetupTarget();
-            dynamicJoystick = _dynamicJoystick;
-            dynamicJoystick.gameObject.SetActive(true);
+            joystickPanel = _joystickPanel;
+            joystickPanel.SetActive(true);
             SetupWeaponController();
         }
 
@@ -83,7 +83,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         {
             yield return new WaitForSeconds(1f);
             paintballWeaponController.StopControl();
-            dynamicJoystick.gameObject.SetActive(false);
+            joystickPanel.gameObject.SetActive(false);
             EndGameEnded?.Invoke();
         }
 

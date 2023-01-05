@@ -48,9 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballSpecs:
-    column: 4
-    row: 4
-    floor: 10
+    ballColor: {fileID: 2100000, guid: 4cb2105dce4e1c1469b97b8768217699, type: 2}
+    column: 8
+    row: 8
+    floor: 20
   lineList:
   - {fileID: 7505529699524469414}
   - {fileID: 2335774183324442901}

@@ -51,7 +51,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
                     if (Physics.Raycast(ray, out hit, Range, layerMask))
                     {
                         var targetPos = hit.point;
-                        targetPos.y = 11.5f;
+                        targetPos.y = 10.5f;
                         aimTarget.position = targetPos;
                         crosshairUI.ChangeImagePosition(aimTarget.position);
                     }

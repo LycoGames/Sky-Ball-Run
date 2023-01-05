@@ -25,7 +25,7 @@ namespace _Game.Scripts.Game.Components
 
         public int GainedDiamond { get; private set; }
 
-        [SerializeField] private DynamicJoystick dynamicJoystick;
+        [SerializeField] private GameObject joystickPanel;
 
         private DataComponent dataComponent;
         private UIComponent uiComponent;
@@ -69,7 +69,7 @@ namespace _Game.Scripts.Game.Components
                     break;
                 case PaintballGame:
                     var paintballGame = EndGameController as PaintballGame;
-                    paintballGame.Setup(dynamicJoystick);
+                    paintballGame.Setup(joystickPanel);
                     break;
                 case FlooredEndGame:
                     var flooredEndGame = EndGameController as FlooredEndGame;
