@@ -11,13 +11,14 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
     public class ScaleAdderGate : Gate
     {
         [SerializeField] private AdderType adderType;
-        [Range(0, 99)] [SerializeField] private int minAddPercentage;
-        [Range(0, 300)] [SerializeField] private int maxAddPercentage;
+        [Range(0, 399)] [SerializeField] private int minAddPercentage;
+        [Range(0, 400)] [SerializeField] private int maxAddPercentage;
         [SerializeField] private TMP_Text ballCountText;
         [SerializeField] private Gate ReverseGatePrefab;
-        [SerializeField] private float distance=8f;
-        [SerializeField] private float checkTime=1f;
-        
+        [SerializeField] private float distance = 8f;
+        [SerializeField] private float checkTime = 1f;
+        [SerializeField] private bool neverReturn;
+
         private WaitForSeconds wfsCheckTime;
         private int addSize = 1;
         private BallManager ballManager;
@@ -48,7 +49,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             Debug.Log("Gate Deactivated");
             RemoveChecking();
             StopAllCoroutines();
-            
         }
 
         private void AddScale()
@@ -66,6 +66,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     BallManager.Instance.StartCoroutine(BallManager.Instance.LengthAdder(addSize));
                     break;
             }
+
             gameObject.SetActive(false);
         }
 
@@ -76,19 +77,20 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
 
         private IEnumerator DistanceCheck()
         {
-            while(Vector3.Distance(ballManager.transform.position,transform.position)>distance)yield return wfsCheckTime;
+            while (Vector3.Distance(ballManager.transform.position, transform.position) > distance)
+                yield return wfsCheckTime;
             ballCountText.enabled = true;
             CheckSize();
         }
 
         private void StartChecking()
         {
-             Invoke("CheckSize", .25f);
+            Invoke("CheckSize", .25f);
         }
 
         private void CheckSize()
         {
-            if (ballManager.TotalBallCount <= 0||!canCheckSize) return;
+            if (ballManager.TotalBallCount <= 0 || !canCheckSize) return;
             float newRemoveSize = 0;
             int writeSize = 0;
 
@@ -107,7 +109,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize <= 0) addSize = 1;
                     if (addSize + column >= ballManager.maxColumn)
                     {
-                        if (ballManager.maxColumn <= column)
+                        if (ballManager.maxColumn <= column && !neverReturn)
                         {
                             SwapGate();
                             return;
@@ -127,7 +129,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize <= 0) addSize = 1;
                     if (addSize + floor >= ballManager.maxFloor)
                     {
-                        if (ballManager.maxFloor <= floor)
+                        if (ballManager.maxFloor <= floor && !neverReturn)
                         {
                             SwapGate();
                             return;
@@ -147,7 +149,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
                     if (addSize <= 0) addSize = 1;
                     if (addSize + row >= ballManager.maxRow)
                     {
-                        if (ballManager.maxRow <= row)
+                        if (ballManager.maxRow <= row && !neverReturn)
                         {
                             SwapGate();
                             return;
@@ -164,7 +166,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             writeSize += totalCubicBallCount - ballManager.TotalBallCount;
             if (writeSize < 0)
             {
-                Invoke("CheckSize",.1f);
+                Invoke("CheckSize", .1f);
                 return;
             }
 
@@ -174,10 +176,11 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
         private void SwapGate()
         {
             reverseGate.gameObject.SetActive(true);
-            if(myDoubleGate!=null)myDoubleGate.SwapGate(this, reverseGate);
-            if(myAnimator.enabled)reverseGate.EnableMyAnimator();
+            if (myDoubleGate != null) myDoubleGate.SwapGate(this, reverseGate);
+            if (myAnimator.enabled) reverseGate.EnableMyAnimator();
             gameObject.SetActive(false);
         }
+
         private void CreateReverseGate()
         {
             reverseGate = Instantiate(ReverseGatePrefab);
