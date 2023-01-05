@@ -5,18 +5,48 @@ using _Game.Scripts.Base.ObjectPooling;
 using _Game.Scripts.Game.Gameplay.Runner;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace _Game.Scripts.Game.ObjectPools
 {
-    public class BallPool : ObjectPool
+    public class BallPool : MonoBehaviour
     {
         public static BallPool Instance;
+        public List<GameObject> pooledObjects=new List<GameObject>();
+        public GameObject objectToPool;
+        public int amountToPool;
 
-        public IEnumerator StartInstantiatePool(Material _ballMaterial,bool _isBonusLevel)
+        private int objectToPoolCount;
+        
+
+        public GameObject GetPooledObject()
         {
-            isBonusLevel = _isBonusLevel;
+            for (int i = 0; i < amountToPool; i++)
+            {
+                if (!pooledObjects[i].activeInHierarchy)
+                {
+                    return pooledObjects[i];
+                }
+            }
+
+            amountToPool++;
+            return InstantiateObject();
+        }
+
+        public GameObject InstantiateObject()
+        {
+            GameObject ball;
+            ball = Instantiate(objectToPool, transform);
+            ball.gameObject.SetActive(false);
+            pooledObjects.Add(ball.gameObject);
+            return ball;
+        }
+        
+
+        public IEnumerator StartInstantiatePool(GameObject _objectToPool)
+        {
+            objectToPool = _objectToPool;
             Instance = this;
-            ballMaterial = _ballMaterial;
             yield return StartCoroutine(FillThePool());
         }
 
@@ -45,7 +75,7 @@ namespace _Game.Scripts.Game.ObjectPools
             BallManager.Instance.ClearAllColumns();
         }
 
-        protected override IEnumerator FillThePool()
+        protected IEnumerator FillThePool()
         {
             
             for (int i = 0; i < amountToPool; i++)

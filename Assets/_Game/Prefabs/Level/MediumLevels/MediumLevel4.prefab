@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballSpecs:
-    ballColor: {fileID: 2100000, guid: 06478f6aa4da3c24cb0dce239944c51b, type: 2}
+    ball: {fileID: 4544383669042015659, guid: 869eb27b325bff44ebb9825f80847379, type: 3}
     column: 3
     row: 4
     floor: 5

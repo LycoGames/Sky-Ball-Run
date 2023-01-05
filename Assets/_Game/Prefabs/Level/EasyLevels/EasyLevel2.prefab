@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballSpecs:
-    ballColor: {fileID: 2100000, guid: 9856f4b5c8a5ffc49bf0bdfb3213ff87, type: 2}
+    ball: {fileID: 4544383669042015659, guid: 1f311c9ab4f89dc44ba527a8332b40be, type: 3}
     column: 3
     row: 6
     floor: 2
@@ -1774,6 +1774,10 @@ PrefabInstance:
     - target: {fileID: 3550404735926659840, guid: f32c650a0240bcb4a9d6ae38dea8444b, type: 3}
       propertyPath: minAddPercentage
       value: 303
+      objectReference: {fileID: 0}
+    - target: {fileID: 7255804854559204908, guid: f32c650a0240bcb4a9d6ae38dea8444b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

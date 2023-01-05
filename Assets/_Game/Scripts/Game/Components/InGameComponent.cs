@@ -71,7 +71,7 @@ namespace _Game.Scripts.Game.Components
             InitializeBallCountCanvas();
 
             ballPool.amountToPool = ballManager.GetMaxBallCount() / ballAmountDivision;
-            yield return StartCoroutine(ballPool.StartInstantiatePool(levelCreator.BallSpecs().ballColor,0==(level+1)%bonusLevel));
+            yield return StartCoroutine(ballPool.StartInstantiatePool(levelCreator.BallSpecs().ball));
             yield return StartCoroutine(ballManager.InitializeBallManager(playerController,levelCreator.BallSpecs(),playerFollowerCamera));
             yield return StartCoroutine(levelCreator.CreateLevel());
             
