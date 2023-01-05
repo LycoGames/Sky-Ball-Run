@@ -1764,6 +1764,7 @@ MonoBehaviour:
   ballSetupTransform: {fileID: 8114839905274321964}
   waterfallCollider: {fileID: 6071715895091892885}
   diamondRewardVisualizerPrefab: {fileID: 3992102984554616852, guid: 426976c0607bb714cbb8644060d44bac, type: 3}
+  columnDistance: 0.1
 --- !u!1 &6071715894998121472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1933,8 +1934,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8393415, y: 4.7548766, z: 36.489334}
-  m_Center: {x: -0.0075939284, y: 1.8774369, z: 8.080699}
+  m_Size: {x: 0.8393415, y: 17.440548, z: 36.489334}
+  m_Center: {x: -0.0075939284, y: -4.465399, z: 8.0807}
 --- !u!54 &6071715895091892890
 Rigidbody:
   m_ObjectHideFlags: 0
