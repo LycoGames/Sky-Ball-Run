@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitForRemove: 0.5
-  autoKillTime: 0
+  autoKillTime: 4
 --- !u!1 &2760739550678560844
 GameObject:
   m_ObjectHideFlags: 0
