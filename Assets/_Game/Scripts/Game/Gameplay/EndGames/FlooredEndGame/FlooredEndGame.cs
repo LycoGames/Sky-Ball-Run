@@ -22,7 +22,8 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.FlooredEndGame
         [SerializeField] private float floorDistance = 7.75f;
         [SerializeField] private float playerForwardSpeed=20f;
         [SerializeField] private float waitForEndGame = 3f;
-
+        [SerializeField] private Transform cameraStopPos;
+        
         private DiamondRewardVisualizer diamondRewardVisualizer;
         private CinemachineVirtualCamera virtualCamera;
         private Transform cameraTarget;
@@ -67,8 +68,17 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.FlooredEndGame
             virtualCamera.Follow = cameraTarget;
             virtualCamera.transform.DORotate(camRotation,cameraRotateDuration);
             cameraTarget.transform.DOLocalMoveX(xOffset, cameraRotateDuration);
+            StartCoroutine(CameraChecker());
         }
 
+        private IEnumerator CameraChecker()
+        {
+            while (cameraTarget.position.z<cameraStopPos.position.z)
+            {
+                yield return null;
+            }
+            cameraTarget.parent = transform;
+        }
         private void IncreaseCoin(int coin)
         {
             GainedCoin += coin;
@@ -91,6 +101,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.FlooredEndGame
         private void WaitForEnd()
         {
             playerController.StopMove();
+            StopAllCoroutines();
             EndGameEnded?.Invoke();
         }
 

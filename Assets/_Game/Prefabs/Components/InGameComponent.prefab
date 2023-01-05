@@ -54,4 +54,4 @@ MonoBehaviour:
   ballManagerPrefab: {fileID: 8376767500898857329, guid: 86fa8cabf93edc14eb27ecbf6677ea1b, type: 3}
   ballPoolPrefab: {fileID: 3801894025843496801, guid: 1cd81462333a6bd4996cade52b4f3ab4, type: 3}
   ballCountCanvasPrefab: {fileID: 5603552363581855805, guid: 2c4f95efa8635ce459123bbb44a9f890, type: 3}
-  ballAmountDivision: 32
+  ballAmountDivision: 16

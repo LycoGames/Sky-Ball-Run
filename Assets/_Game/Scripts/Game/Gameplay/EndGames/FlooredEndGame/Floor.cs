@@ -8,6 +8,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.FlooredEndGame
     public class Floor : MonoBehaviour
     {
         [SerializeField] private int pointMultiplier;
+        [SerializeField] private bool isLastFloor;
         public Action<int> OnBallHit;
         public Action OnFirstHit;
         private bool isFirstHit=true;
@@ -17,7 +18,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.FlooredEndGame
         {
             if (other.TryGetComponent(out Ball ball))
             {
-                if (isFirstHit)
+                if (isFirstHit&&!isLastFloor)
                 {
                     isFirstHit = false;
                     OnFirstHit?.Invoke();
