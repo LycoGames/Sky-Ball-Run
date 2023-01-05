@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.19025129, g: 0.5924006, b: 0.7717396, a: 1}
+  m_IndirectSpecularColor: {r: 0.19024794, g: 0.59240067, b: 0.7727873, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -988,6 +988,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: InGameComponent
       objectReference: {fileID: 0}
+    - target: {fileID: 1349702981406621379, guid: c461156b70a2e424d9ed3c70c231d225, type: 3}
+      propertyPath: inGameTutorialPrefab
+      value: 
+      objectReference: {fileID: 9154656734549969796, guid: f77483d4e130f0d4999fea5866f93537, type: 3}
+    - target: {fileID: 1349702981406621379, guid: c461156b70a2e424d9ed3c70c231d225, type: 3}
+      propertyPath: paintballTutorialPrefab
+      value: 
+      objectReference: {fileID: 6150677905776348121, guid: 88ba150708817bf4db06348ab767e1c5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

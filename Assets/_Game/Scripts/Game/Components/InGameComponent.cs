@@ -6,6 +6,7 @@ using _Game.Scripts.Game.Gameplay.Runner;
 using _Game.Scripts.Game.Gameplay.Runner.BallPositioning;
 using _Game.Scripts.Game.Gameplay.Runner.LevelSystems;
 using _Game.Scripts.Game.Gameplay.Runner.Player;
+using _Game.Scripts.Game.Gameplay.Runner.Tutorials;
 using _Game.Scripts.Game.ObjectPools;
 using Cinemachine;
 using UnityEngine;
@@ -32,7 +33,10 @@ namespace _Game.Scripts.Game.Components
         [SerializeField] private BallPool ballPoolPrefab;
         [SerializeField] private GameObject ballCountCanvasPrefab;
         [SerializeField] private int ballAmountDivision=8;
-
+        [SerializeField] private TutorialCanvas inGameTutorialPrefab;
+        [SerializeField] private TutorialCanvas paintballTutorialPrefab;
+        
+        
         public int GainedDiamond { get; private set; }
 
         private BallPool ballPool;
@@ -49,6 +53,7 @@ namespace _Game.Scripts.Game.Components
 
 
         private int lastSavedDiamond;
+        private int level;
         
 
         public void Initialize(ComponentContainer componentContainer)
@@ -57,8 +62,9 @@ namespace _Game.Scripts.Game.Components
             endGameComponent = componentContainer.GetComponent("EndGameComponent") as EndGameComponent;
         }
 
-        public IEnumerator InitializeGame(int level,int bonusLevel)
+        public IEnumerator InitializeGame(int _level,int bonusLevel)
         {
+            level = _level;
             InitializeCamera();
             InitializePlayer();
             InitializeBallManager();
@@ -100,6 +106,7 @@ namespace _Game.Scripts.Game.Components
             gameManager.LoseGame += LoseGame;
             gameManager.StartMove();
             swipeController.StartRotate();
+            if(level<=0)Instantiate(inGameTutorialPrefab);
         }
 
         public void OnDestruct()
@@ -196,6 +203,7 @@ namespace _Game.Scripts.Game.Components
 
         private void ArriveEndLine()
         {
+            if(level<=0)Instantiate(paintballTutorialPrefab);
             endGameComponent.SetupDiamond(GainedDiamond+lastSavedDiamond);
             OnInGameComplete?.Invoke();
         }
