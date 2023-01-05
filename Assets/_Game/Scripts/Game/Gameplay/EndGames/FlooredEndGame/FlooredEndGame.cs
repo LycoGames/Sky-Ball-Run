@@ -15,7 +15,6 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.FlooredEndGame
         
         [SerializeField] private DiamondRewardVisualizer diamondRewardVisualizerPrefab;
         [SerializeField] private List<Floor> floorList;
-        [SerializeField] private Vector3 camRotation;
         [SerializeField] private float xOffset = -10f;
         [SerializeField] private float cameraHeight=20f;
         [SerializeField] private float cameraRotateDuration=5f;
@@ -23,18 +22,18 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.FlooredEndGame
         [SerializeField] private float playerForwardSpeed=20f;
         [SerializeField] private float waitForEndGame = 3f;
         [SerializeField] private Transform cameraStopPos;
+        [SerializeField] private Transform cameraTarget;
+        [SerializeField] private CinemachineVirtualCamera virtualCamera;
         
         private DiamondRewardVisualizer diamondRewardVisualizer;
-        private CinemachineVirtualCamera virtualCamera;
-        private Transform cameraTarget;
+       
         private Tweener cameraUpper;
         
         private int totalBallCount;
         private int collectedBallCount;
         private float nextCamYPos;
-        public void Setup(PlayerController _playerController,Transform parent,CinemachineVirtualCamera _virtualCamera)
+        public void Setup(PlayerController _playerController,Transform parent)
         {
-            virtualCamera=_virtualCamera;
             diamondRewardVisualizer = Instantiate(diamondRewardVisualizerPrefab);
             diamondRewardVisualizer.DiamondCollected += IncreaseCoin;
             diamondRewardVisualizer.Parent = parent;
@@ -61,13 +60,10 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.FlooredEndGame
         private void SetupCamera()
         {
             Debug.Log("Call Setup Camera");
-            cameraTarget = new GameObject("CameraTarget").transform;
             cameraTarget.parent = playerController.transform;
-            nextCamYPos = cameraHeight;
-            cameraTarget.transform.localPosition = new Vector3(0, cameraHeight, 0);
-            virtualCamera.Follow = cameraTarget;
-            virtualCamera.transform.DORotate(camRotation,cameraRotateDuration);
-            cameraTarget.transform.DOLocalMoveX(xOffset, cameraRotateDuration);
+            cameraTarget.localPosition = new Vector3(xOffset, cameraHeight, 0);
+            cameraTarget.localRotation=Quaternion.Euler(0,0,0);
+            virtualCamera.Priority = 15;
             StartCoroutine(CameraChecker());
         }
 

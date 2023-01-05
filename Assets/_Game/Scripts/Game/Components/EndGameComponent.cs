@@ -73,7 +73,7 @@ namespace _Game.Scripts.Game.Components
                     break;
                 case FlooredEndGame:
                     var flooredEndGame = EndGameController as FlooredEndGame;
-                    flooredEndGame.Setup(PlayerController, wealthCanvas.transform, VirtualCamera);
+                    flooredEndGame.Setup(PlayerController, wealthCanvas.transform);
                     break;
             }
             // //var waterfallGame = EndGameController as WaterfallGame;
