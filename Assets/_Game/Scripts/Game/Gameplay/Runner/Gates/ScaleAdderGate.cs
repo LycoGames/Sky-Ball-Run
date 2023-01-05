@@ -188,16 +188,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             reverseGate.transform.localPosition = transform.localPosition;
         }
 
-
-        private void CreateReverseGate()
-        {
-            reverseGate = Instantiate(ReverseGatePrefab);
-            reverseGate.transform.parent = transform.parent;
-            reverseGate.gameObject.SetActive(false);
-            reverseGate.transform.localPosition = transform.localPosition;
-        }
-
-
         public enum AdderType
         {
             RightAdder,
