@@ -37,21 +37,21 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
 
         private Camera cam;
         private int ballCount;
-        private FixedJoystick fixedJoystick;
+        private DynamicJoystick dynamicJoystick;
 
         public override void LaunchEndGame()
         {
             StartCoroutine(Launch());
         }
 
-        public void Setup(FixedJoystick _fixedJoystick)
+        public void Setup(DynamicJoystick _dynamicJoystick)
         {
             cam = Camera.main;
             SetupWeapon();
             SetupTarget();
-            fixedJoystick = _fixedJoystick;
-            fixedJoystick.gameObject.SetActive(true);
-            SetupWeaponController(fixedJoystick);
+            dynamicJoystick = _dynamicJoystick;
+            dynamicJoystick.gameObject.SetActive(true);
+            SetupWeaponController();
         }
 
 
@@ -83,13 +83,13 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         {
             yield return new WaitForSeconds(1f);
             paintballWeaponController.StopControl();
-            fixedJoystick.gameObject.SetActive(false);
+            dynamicJoystick.gameObject.SetActive(false);
             EndGameEnded?.Invoke();
         }
 
-        private void SetupWeaponController(FixedJoystick fixedJoystick)
+        private void SetupWeaponController()
         {
-            paintballWeaponController.Setup(weaponSensitivity, aimTarget, crosshairUI, cam, fixedJoystick);
+            paintballWeaponController.Setup(weaponSensitivity, aimTarget, crosshairUI, cam);
         }
 
         private void SetupTarget()

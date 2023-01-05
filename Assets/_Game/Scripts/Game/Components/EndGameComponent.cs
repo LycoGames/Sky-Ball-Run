@@ -20,12 +20,12 @@ namespace _Game.Scripts.Game.Components
 
         public EndGameController EndGameController { get; set; }
         public PlayerController PlayerController { get; set; }
-        
+
         public CinemachineVirtualCamera VirtualCamera { get; set; }
 
         public int GainedDiamond { get; private set; }
 
-        [SerializeField] private FixedJoystick fixedJoystick;
+        [SerializeField] private DynamicJoystick dynamicJoystick;
 
         private DataComponent dataComponent;
         private UIComponent uiComponent;
@@ -69,11 +69,11 @@ namespace _Game.Scripts.Game.Components
                     break;
                 case PaintballGame:
                     var paintballGame = EndGameController as PaintballGame;
-                    paintballGame.Setup(fixedJoystick);
+                    paintballGame.Setup(dynamicJoystick);
                     break;
                 case FlooredEndGame:
                     var flooredEndGame = EndGameController as FlooredEndGame;
-                    flooredEndGame.Setup(PlayerController,wealthCanvas.transform,VirtualCamera);
+                    flooredEndGame.Setup(PlayerController, wealthCanvas.transform, VirtualCamera);
                     break;
             }
             // //var waterfallGame = EndGameController as WaterfallGame;
