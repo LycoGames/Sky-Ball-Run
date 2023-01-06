@@ -186,7 +186,7 @@ MonoBehaviour:
   paintballWeapon: {fileID: 3502235232164339360}
   countTextUI: {fileID: 7030344436760141252}
   crosshairUI: {fileID: 7800742349222152973}
-  ballToBulletDivider: 10
+  ballToBulletDivider: 4
   bulletSpeed: 175
   rateOfFire: 0.1
   randomnessMinX: -2

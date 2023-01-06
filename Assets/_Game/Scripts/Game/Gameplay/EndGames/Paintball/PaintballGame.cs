@@ -70,6 +70,7 @@ namespace _Game.Scripts.Game.Gameplay.EndGames.Paintball
         private void SetupWeapon()
         {
             var bulletCount = BallManager.Instance.TotalBallCount / ballToBulletDivider;
+            bulletCount = bulletCount <= 0 ? 1 : bulletCount;
             paintballWeapon.Setup(bulletSpeed, rateOfFire, bulletCount, randomnessMinX,
                 randomnessMaxX, randomnessMinY, randomnessMaxY, countTextUI, EndGameEnd);
         }
