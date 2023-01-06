@@ -180,7 +180,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             if (myAnimator.enabled) reverseGate.EnableMyAnimator();
             gameObject.SetActive(false);
         }
-
         private void CreateReverseGate()
         {
             reverseGate = Instantiate(ReverseGatePrefab);
@@ -188,7 +187,6 @@ namespace _Game.Scripts.Game.Gameplay.Runner.Gates
             reverseGate.gameObject.SetActive(false);
             reverseGate.transform.localPosition = transform.localPosition;
         }
-
 
         public enum AdderType
         {
