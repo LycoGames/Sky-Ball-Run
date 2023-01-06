@@ -37,7 +37,6 @@ namespace _Game.Scripts.Game.Components
         {
             inGameComponent.Reviving();
             ReviveComplete?.Invoke();
-            
         }
 
         private IEnumerator DestroyGame()
