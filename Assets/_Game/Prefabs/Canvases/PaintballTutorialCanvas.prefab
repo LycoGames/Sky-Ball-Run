@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Swipe for aiming weapon
+  m_text: Swipe to Aim
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fc67bdfaa451b2b4b844ca528127f19d, type: 2}
   m_sharedMaterial: {fileID: 8111283547644066773, guid: fc67bdfaa451b2b4b844ca528127f19d, type: 2}
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 122.25
+  m_fontSize: 173.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -508,7 +508,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -720}
+  m_AnchoredPosition: {x: 0, y: -840}
   m_SizeDelta: {x: 1012, y: 349.0526}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2767358612731813467

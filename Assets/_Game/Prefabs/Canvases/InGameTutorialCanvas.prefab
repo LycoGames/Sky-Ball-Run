@@ -255,7 +255,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Swipe for control
+  m_text: Swipe
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fc67bdfaa451b2b4b844ca528127f19d, type: 2}
   m_sharedMaterial: {fileID: 8111283547644066773, guid: fc67bdfaa451b2b4b844ca528127f19d, type: 2}
@@ -436,7 +436,7 @@ RectTransform:
   m_Children:
   - {fileID: 4908350876704377144}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
