@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.19025129, g: 0.5924006, b: 0.7717396, a: 1}
+  m_IndirectSpecularColor: {r: 0.19024794, g: 0.59240067, b: 0.7727873, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -260,7 +260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8135886326569738822, guid: 56fae09712773584fb63896d473a98ee, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8135886326569738822, guid: 56fae09712773584fb63896d473a98ee, type: 3}
       propertyPath: m_AnchorMin.x
@@ -276,7 +276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8135886326569738822, guid: 56fae09712773584fb63896d473a98ee, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 60
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 8135886326569738822, guid: 56fae09712773584fb63896d473a98ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -559,9 +559,9 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 540, y: 200}
-  m_SizeDelta: {x: 1080, y: 150}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 200}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1549968608 stripped
 RectTransform:
@@ -757,9 +757,9 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: -200, y: 30}
+  m_SizeDelta: {x: -200, y: -120}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1865218456
 MonoBehaviour:
@@ -1055,6 +1055,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 128562624}
     m_Modifications:
+    - target: {fileID: 4764261141117317036, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764261141117317036, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -50.01953
+      objectReference: {fileID: 0}
+    - target: {fileID: 7972216099226814722, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -168.75977
+      objectReference: {fileID: 0}
     - target: {fileID: 8721263087127276814, guid: 217ac5b17ddfd7f4a8a5f11e824c04fe, type: 3}
       propertyPath: m_Name
       value: WealthCanvas
@@ -2148,6 +2160,10 @@ PrefabInstance:
     - target: {fileID: 5665635095971895383, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482048089055042293, guid: 49f6093702bcb784fa2cbedd0e003169, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
