@@ -42,7 +42,7 @@ namespace _Game.Scripts.Game.Gameplay.Runner
         }
         public int GetBallCount()
         {
-            return BallPool.Instance.GetAllActiveBall().Count;
+            return BallManager.Instance.TotalBallCount;
         }
 
         public void GainedDiamond(int value)
